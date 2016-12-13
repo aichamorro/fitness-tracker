@@ -6,6 +6,8 @@ target 'FitnessTracker' do
   use_frameworks!
 
   # Pods for FitnessTracker
+  pod 'RxSwift'
+  pod 'RxCocoa'
   
   target 'FitnessTrackerTests' do
     pod 'Quick'

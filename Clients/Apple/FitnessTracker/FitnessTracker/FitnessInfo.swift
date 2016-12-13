@@ -8,7 +8,7 @@
 
 import Foundation
 
-typealias Weight = UInt
+typealias Weight = Double
 typealias Height = UInt
 
 public struct FitnessInfo {

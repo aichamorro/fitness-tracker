@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		200323D51E00166200B1C33A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200323D41E00166200B1C33A /* AppDelegate.swift */; };
-		200323D71E00166200B1C33A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200323D61E00166200B1C33A /* ViewController.swift */; };
+		200323D71E00166200B1C33A /* DayLogInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200323D61E00166200B1C33A /* DayLogInputViewController.swift */; };
 		200323DA1E00166200B1C33A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 200323D81E00166200B1C33A /* Main.storyboard */; };
 		200323DC1E00166200B1C33A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 200323DB1E00166200B1C33A /* Assets.xcassets */; };
 		200323DF1E00166200B1C33A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 200323DD1E00166200B1C33A /* LaunchScreen.storyboard */; };
@@ -31,7 +31,7 @@
 /* Begin PBXFileReference section */
 		200323D11E00166200B1C33A /* FitnessTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FitnessTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		200323D41E00166200B1C33A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		200323D61E00166200B1C33A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		200323D61E00166200B1C33A /* DayLogInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayLogInputViewController.swift; sourceTree = "<group>"; };
 		200323D91E00166200B1C33A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		200323DB1E00166200B1C33A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		200323DE1E00166200B1C33A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -92,7 +92,7 @@
 			isa = PBXGroup;
 			children = (
 				200323D41E00166200B1C33A /* AppDelegate.swift */,
-				200323D61E00166200B1C33A /* ViewController.swift */,
+				200323D61E00166200B1C33A /* DayLogInputViewController.swift */,
 				200323D81E00166200B1C33A /* Main.storyboard */,
 				200323DB1E00166200B1C33A /* Assets.xcassets */,
 				200323DD1E00166200B1C33A /* LaunchScreen.storyboard */,
@@ -336,7 +336,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				200323F51E0038B300B1C33A /* FitnessInfo.swift in Sources */,
-				200323D71E00166200B1C33A /* ViewController.swift in Sources */,
+				200323D71E00166200B1C33A /* DayLogInputViewController.swift in Sources */,
 				200323D51E00166200B1C33A /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
