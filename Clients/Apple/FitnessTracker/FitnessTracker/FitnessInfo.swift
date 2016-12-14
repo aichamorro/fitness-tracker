@@ -11,11 +11,18 @@ import Foundation
 typealias Weight = Double
 typealias Height = UInt
 
-public struct FitnessInfo {
-    let weight: Weight
-    let height: Height
-    let bodyFatPercentage: Double
-    let musclePercentage: Double
+public protocol IFitnessInfo {
+    var weight: Double { get }
+    var height: UInt { get }
+    var bodyFatPercentage: Double { get }
+    var musclePercentage: Double { get }
+}
+
+public struct FitnessInfo: IFitnessInfo {
+    public let weight: Double
+    public let height: UInt
+    public let bodyFatPercentage: Double
+    public let musclePercentage: Double
 }
 
 public extension FitnessInfo {
@@ -39,6 +46,17 @@ public extension FitnessInfo {
     }    
 }
 
+func ==(lhs: IFitnessInfo, rhs: IFitnessInfo) -> Bool {
+    if lhs.height != rhs.height { return false }
+    if lhs.weight != rhs.weight { return false }
+    
+    let errorTolerance = 0.000001
+    if abs(lhs.bodyFatPercentage - rhs.bodyFatPercentage) >= errorTolerance { return false }
+    if abs(lhs.musclePercentage - rhs.musclePercentage) >= errorTolerance { return false }
+    
+    return true
+}
+
 public enum BMIRating {
     case underweight
     case healthyweight
@@ -54,7 +72,6 @@ public extension BMIRating {
         return DefaultBMIClassification(bmi)
     }
 }
-
 
 fileprivate typealias BMIClassification = (Double) -> BMIRating
 fileprivate let DefaultBMIClassification: BMIClassification = { bmi in

@@ -18,11 +18,6 @@ final class DayLogInputViewController: UIViewController {
     @IBOutlet fileprivate var musclePercentageTextField: UITextField!
     @IBOutlet fileprivate var tapOnViewGestureRecognizer: UITapGestureRecognizer!
     
-    @IBOutlet fileprivate var bmiLabel: UILabel!
-    @IBOutlet fileprivate var bodyFatWeight: UILabel!
-    @IBOutlet fileprivate var waterWeight: UILabel!
-    @IBOutlet fileprivate var muscleWeight: UILabel!
-
     private let viewModel = RxViewModel()
     private let disposeBag = DisposeBag()
     
@@ -33,6 +28,11 @@ final class DayLogInputViewController: UIViewController {
             self?.view.endEditing(false)
         }).addDisposableTo(disposeBag)
         
+        weightTextField.delegate = self
+        heightTextField.delegate = self
+        bodyFatPercentageTextField.delegate = self
+        musclePercentageTextField.delegate = self
+
         weightTextField.rx.text.asObservable()
             .flatMap(flatMapToDouble)
             .filter(filterInvalidValues)
@@ -59,26 +59,41 @@ final class DayLogInputViewController: UIViewController {
         
         viewModel.validatesModel.filter { $0 == true } .bindNext { [weak self] _ in
             guard let `self` = self else { return }
-            
-            let info = self.viewModel.build()
-            self.bmiLabel.text = textForLabel(.bmi, .none, String(format: "%.2f", info.bmi))
-            self.muscleWeight.text = textForLabel(.muscle, .kg, String(format: "%.2f", info.muscleWeight))
-            self.waterWeight.text = textForLabel(.bodyWater, .kg, "???")
-            self.bodyFatWeight.text = textForLabel(.bodyFat, .kg, String(format: "%.2f", info.bodyFatWeight))
+//
+//            let info = self.viewModel.build()
+//            self.bmiLabel.text = textForLabel(.bmi, .none, String(format: "%.2f", info.bmi))
+//            self.muscleWeight.text = textForLabel(.muscle, .kg, String(format: "%.2f", info.muscleWeight))
+//            self.waterWeight.text = textForLabel(.bodyWater, .kg, "???")
+//            self.bodyFatWeight.text = textForLabel(.bodyFat, .kg, String(format: "%.2f", info.bodyFatWeight))
         }.addDisposableTo(disposeBag)
     }
 }
 
-private let flatMapToDouble: (String?) -> Observable<Double?> = {
-    return $0 != nil ? Observable.just(Double($0!)) : Observable.just(nil)
-}
-
-private let flatMapToInt: (String?) -> Observable<UInt?> = {
-    return $0 != nil ? Observable.just(UInt($0!)) : Observable.just(nil)
-}
-
-private let filterInvalidValues: (Any?) -> Bool = {
-    return $0 != nil
+extension DayLogInputViewController: UITextFieldDelegate {
+    private func measure(for textField: UITextField) -> String {
+        switch textField {
+        case weightTextField: return "kg"
+        case heightTextField: return "cm"
+        case bodyFatPercentageTextField: fallthrough
+        case musclePercentageTextField: return "%"
+        default:
+            fatalError("Not Handled")
+        }
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField, reason: UITextFieldDidEndEditingReason) {
+        textField.text = "\(textField.text ?? "") \(measure(for: textField))"
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        if let value = textField.text {
+            guard value.characters.count > 0 else { return }
+            
+            let index = value.index(value.endIndex, offsetBy: -(measure(for: textField).characters.count))
+            
+            textField.text = textField.text!.substring(to: index)
+        }
+    }
 }
 
 private extension DayLogInputViewController {
@@ -97,6 +112,18 @@ private extension DayLogInputViewController {
     var rx_musclePercentage: Observable<String?> {
         return musclePercentageTextField.rx.text.asObservable()
     }
+}
+
+private let flatMapToDouble: (String?) -> Observable<Double?> = {
+    return $0 != nil ? Observable.just(Double($0!)) : Observable.just(nil)
+}
+
+private let flatMapToInt: (String?) -> Observable<UInt?> = {
+    return $0 != nil ? Observable.just(UInt($0!)) : Observable.just(nil)
+}
+
+private let filterInvalidValues: (Any?) -> Bool = {
+    return $0 != nil
 }
 
 private struct RxViewModel {

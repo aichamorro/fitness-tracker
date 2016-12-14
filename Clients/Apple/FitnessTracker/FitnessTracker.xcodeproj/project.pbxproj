@@ -14,6 +14,8 @@
 		200323DF1E00166200B1C33A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 200323DD1E00166200B1C33A /* LaunchScreen.storyboard */; };
 		200323ED1E0018A500B1C33A /* FitnessTrackerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200323EC1E0018A500B1C33A /* FitnessTrackerTests.swift */; };
 		200323F51E0038B300B1C33A /* FitnessInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200323F41E0038B300B1C33A /* FitnessInfo.swift */; };
+		205212F71E01A63F00F9A9E7 /* LogRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205212F61E01A63F00F9A9E7 /* LogRepositoryTests.swift */; };
+		205212F91E01AE6200F9A9E7 /* FitnessLogRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205212F81E01AE6200F9A9E7 /* FitnessLogRepository.swift */; };
 		45AA81FD1D29B16082BA4BBA /* Pods_FitnessTracker_FitnessTrackerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95868793967C2540BD298442 /* Pods_FitnessTracker_FitnessTrackerTests.framework */; };
 		60DCC2D4BE7EC6D04AACF7B5 /* Pods_FitnessTracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 243E297E8C331F616EE9C451 /* Pods_FitnessTracker.framework */; };
 /* End PBXBuildFile section */
@@ -40,6 +42,8 @@
 		200323EC1E0018A500B1C33A /* FitnessTrackerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FitnessTrackerTests.swift; sourceTree = "<group>"; };
 		200323EE1E0018A500B1C33A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		200323F41E0038B300B1C33A /* FitnessInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FitnessInfo.swift; sourceTree = "<group>"; };
+		205212F61E01A63F00F9A9E7 /* LogRepositoryTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogRepositoryTests.swift; sourceTree = "<group>"; };
+		205212F81E01AE6200F9A9E7 /* FitnessLogRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FitnessLogRepository.swift; sourceTree = "<group>"; };
 		243E297E8C331F616EE9C451 /* Pods_FitnessTracker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FitnessTracker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		95868793967C2540BD298442 /* Pods_FitnessTracker_FitnessTrackerTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FitnessTracker_FitnessTrackerTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF97CF9401854D9B0C19B13A /* Pods-FitnessTracker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FitnessTracker.release.xcconfig"; path = "Pods/Target Support Files/Pods-FitnessTracker/Pods-FitnessTracker.release.xcconfig"; sourceTree = "<group>"; };
@@ -98,6 +102,7 @@
 				200323DD1E00166200B1C33A /* LaunchScreen.storyboard */,
 				200323E01E00166200B1C33A /* Info.plist */,
 				200323F41E0038B300B1C33A /* FitnessInfo.swift */,
+				205212F81E01AE6200F9A9E7 /* FitnessLogRepository.swift */,
 			);
 			path = FitnessTracker;
 			sourceTree = "<group>";
@@ -107,6 +112,7 @@
 			children = (
 				200323EC1E0018A500B1C33A /* FitnessTrackerTests.swift */,
 				200323EE1E0018A500B1C33A /* Info.plist */,
+				205212F61E01A63F00F9A9E7 /* LogRepositoryTests.swift */,
 			);
 			path = FitnessTrackerTests;
 			sourceTree = "<group>";
@@ -338,6 +344,7 @@
 				200323F51E0038B300B1C33A /* FitnessInfo.swift in Sources */,
 				200323D71E00166200B1C33A /* DayLogInputViewController.swift in Sources */,
 				200323D51E00166200B1C33A /* AppDelegate.swift in Sources */,
+				205212F91E01AE6200F9A9E7 /* FitnessLogRepository.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -345,6 +352,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				205212F71E01A63F00F9A9E7 /* LogRepositoryTests.swift in Sources */,
 				200323ED1E0018A500B1C33A /* FitnessTrackerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
