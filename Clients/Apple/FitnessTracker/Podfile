@@ -12,5 +12,6 @@ target 'FitnessTracker' do
   target 'FitnessTrackerTests' do
     pod 'Quick'
     pod 'Nimble'
+    pod 'RxTest'
   end
 end
