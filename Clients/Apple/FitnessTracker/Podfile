@@ -8,6 +8,7 @@ target 'FitnessTracker' do
   # Pods for FitnessTracker
   pod 'RxSwift'
   pod 'RxCocoa'
+  pod 'URLRouter', git: 'https://github.com/aichamorro/URLRouter.git'
   
   target 'FitnessTrackerTests' do
     pod 'Quick'

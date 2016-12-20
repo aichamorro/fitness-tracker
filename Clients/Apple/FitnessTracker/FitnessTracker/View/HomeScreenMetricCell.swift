@@ -1,0 +1,16 @@
+//
+//  HomeScreenMetricCell.swift
+//  FitnessTracker
+//
+//  Created by Alberto Chamorro - Personal on 20/12/2016.
+//  Copyright © 2016 OnsetBits. All rights reserved.
+//
+
+import UIKit
+
+class HomeScreenMetricCell: UITableViewCell {
+    @IBOutlet var name: UILabel!
+    @IBOutlet var value: UILabel!
+    @IBOutlet var metric: UILabel!
+    @IBOutlet var date: UILabel!
+}

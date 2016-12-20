@@ -21,6 +21,8 @@
 		20FA50FE1E09575E002E536A /* FitnessInfoRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FA50FD1E09575E002E536A /* FitnessInfoRepository.swift */; };
 		20FA51011E09579F002E536A /* HomeScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FA51001E09579F002E536A /* HomeScreenView.swift */; };
 		20FA51031E0957C2002E536A /* HomeScreenPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FA51021E0957C2002E536A /* HomeScreenPresenter.swift */; };
+		20FA51051E095947002E536A /* HomeScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FA51041E095947002E536A /* HomeScreenViewController.swift */; };
+		20FA51071E0976D1002E536A /* HomeScreenMetricCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FA51061E0976D1002E536A /* HomeScreenMetricCell.swift */; };
 		45AA81FD1D29B16082BA4BBA /* Pods_FitnessTracker_FitnessTrackerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95868793967C2540BD298442 /* Pods_FitnessTracker_FitnessTrackerTests.framework */; };
 		60DCC2D4BE7EC6D04AACF7B5 /* Pods_FitnessTracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 243E297E8C331F616EE9C451 /* Pods_FitnessTracker.framework */; };
 /* End PBXBuildFile section */
@@ -54,6 +56,8 @@
 		20FA50FD1E09575E002E536A /* FitnessInfoRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FitnessInfoRepository.swift; sourceTree = "<group>"; };
 		20FA51001E09579F002E536A /* HomeScreenView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeScreenView.swift; sourceTree = "<group>"; };
 		20FA51021E0957C2002E536A /* HomeScreenPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeScreenPresenter.swift; sourceTree = "<group>"; };
+		20FA51041E095947002E536A /* HomeScreenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeScreenViewController.swift; sourceTree = "<group>"; };
+		20FA51061E0976D1002E536A /* HomeScreenMetricCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeScreenMetricCell.swift; sourceTree = "<group>"; };
 		243E297E8C331F616EE9C451 /* Pods_FitnessTracker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FitnessTracker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		95868793967C2540BD298442 /* Pods_FitnessTracker_FitnessTrackerTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FitnessTracker_FitnessTrackerTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF97CF9401854D9B0C19B13A /* Pods-FitnessTracker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FitnessTracker.release.xcconfig"; path = "Pods/Target Support Files/Pods-FitnessTracker/Pods-FitnessTracker.release.xcconfig"; sourceTree = "<group>"; };
@@ -152,6 +156,8 @@
 			children = (
 				20FA51001E09579F002E536A /* HomeScreenView.swift */,
 				20FA51021E0957C2002E536A /* HomeScreenPresenter.swift */,
+				20FA51041E095947002E536A /* HomeScreenViewController.swift */,
+				20FA51061E0976D1002E536A /* HomeScreenMetricCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -385,6 +391,8 @@
 				200323D71E00166200B1C33A /* DayLogInputViewController.swift in Sources */,
 				20FA50FB1E095712002E536A /* HomeScreenInteractor.swift in Sources */,
 				200323D51E00166200B1C33A /* AppDelegate.swift in Sources */,
+				20FA51051E095947002E536A /* HomeScreenViewController.swift in Sources */,
+				20FA51071E0976D1002E536A /* HomeScreenMetricCell.swift in Sources */,
 				20FA51031E0957C2002E536A /* HomeScreenPresenter.swift in Sources */,
 				20FA51011E09579F002E536A /* HomeScreenView.swift in Sources */,
 				205212F91E01AE6200F9A9E7 /* FitnessLogRepository.swift in Sources */,

@@ -11,3 +11,12 @@ import Foundation
 protocol IFitnessInfoRepository {
     func getLastRecord(success: (IFitnessInfo) -> Void, error: (Error) -> Void)
 }
+
+struct MockFitnessInfoRepository: IFitnessInfoRepository {
+    let mockLastRecord: IFitnessInfo
+    
+    func getLastRecord(success: (IFitnessInfo) -> Void, error: (Error) -> Void) {
+        success(mockLastRecord)
+    }
+}
+

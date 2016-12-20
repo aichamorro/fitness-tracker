@@ -9,26 +9,51 @@
 import Foundation
 import RxSwift
 
-protocol IHomeScreenView {
-    var rx_weight: AnyObserver<Double> { get }
-    var rx_height: AnyObserver<UInt> { get }
-    var rx_bodyFatPercentage: AnyObserver<Double> { get }
-    var rx_musclePercentage: AnyObserver<Double> { get }
+struct HomeScreenViewModel {
+    let weight: Double
+    let height: UInt
+    let bodyFat: Double
+    let muscle: Double
+    
+    static func empty() -> HomeScreenViewModel {
+        return HomeScreenViewModel(weight: 0, height: 0, bodyFat: 0, muscle: 0)
+    }
+}
+
+protocol IHomeScreenView: class {
+    var viewModel: HomeScreenViewModel { get set }
     var rx_viewDidLoad: Observable<Void> { get }
+
+    func viewDidLoad()
 }
 
-struct HomeScreenView {
-    let weight = PublishSubject<Double>()
-    let height = PublishSubject<UInt>()
-    let bodyFatPercentage = PublishSubject<Double>()
-    let musclePercentage = PublishSubject<Double>()
-    let viewDidLoad = PublishSubject<Void>()
+extension IHomeScreenView {
+    var rx_viewModel: AnyObserver<HomeScreenViewModel> {
+        return AnyObserver() { event in
+            switch event {
+            case .next(let element): self.viewModel = HomeScreenViewModel(weight: element.weight,
+                                                                          height: element.height,
+                                                                          bodyFat: element.bodyFat,
+                                                                          muscle: element.muscle)
+            default: break
+            }
+        }
+    }
 }
 
-extension HomeScreenView: IHomeScreenView {
-    var rx_weight: AnyObserver<Double> { return weight.asObserver() }
-    var rx_height: AnyObserver<UInt> { return height.asObserver() }
-    var rx_bodyFatPercentage: AnyObserver<Double> { return bodyFatPercentage.asObserver() }
-    var rx_musclePercentage: AnyObserver<Double> { return musclePercentage.asObserver() }
-    var rx_viewDidLoad: Observable<Void> { return viewDidLoad.asObservable() }
+class HomeScreenView: IHomeScreenView {
+    var viewModelVariable = Variable<HomeScreenViewModel>(HomeScreenViewModel.empty())
+    var viewModel: HomeScreenViewModel {
+        get { return viewModelVariable.value }
+        set { viewModelVariable.value = newValue }
+    }
+    
+    var viewDidLoadSubject = PublishSubject<Void>()
+    var rx_viewDidLoad: Observable<Void> {
+        return viewDidLoadSubject.asObservable()
+    }
+    
+    func viewDidLoad() {
+        viewDidLoadSubject.asObserver().onNext()
+    }
 }

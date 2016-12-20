@@ -9,17 +9,18 @@
 import Foundation
 import RxSwift
 
-typealias IHomeScreenPresenter = (IHomeScreenInteractor, HomeScreenView, DisposeBag) -> Void
+typealias IHomeScreenPresenter = (IHomeScreenInteractor, IHomeScreenView, DisposeBag) -> Void
 let HomeScreenPresenter: IHomeScreenPresenter = { interactor, view, disposeBag in
     view.rx_viewDidLoad
-        .bindNext { interactor.loadLastRecord() }
-        .addDisposableTo(disposeBag)
+        .bindNext {
+            interactor.loadLastRecord()
+        }.addDisposableTo(disposeBag)
     
     interactor.rx_currentRecord
-        .bindNext { fitnessInfo in
-            view.rx_weight.onNext(fitnessInfo.weight)
-            view.rx_height.onNext(fitnessInfo.height)
-            view.rx_bodyFatPercentage.onNext(fitnessInfo.bodyFatPercentage)
-            view.rx_musclePercentage.onNext(fitnessInfo.musclePercentage)
-        }.addDisposableTo(disposeBag)
+        .map { HomeScreenViewModel(weight: $0.weight,
+                                   height: $0.height,
+                                   bodyFat: $0.bodyFatPercentage,
+                                   muscle: $0.musclePercentage) }
+        .bindTo(view.rx_viewModel)
+        .addDisposableTo(disposeBag)
 }
