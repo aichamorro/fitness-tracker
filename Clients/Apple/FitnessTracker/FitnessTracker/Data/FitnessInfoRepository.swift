@@ -7,15 +7,27 @@
 //
 
 import Foundation
+import RxSwift
 
 protocol IFitnessInfoRepository {
     func getLastRecord(success: (IFitnessInfo) -> Void, error: (Error) -> Void)
+    mutating func storeRecord(record: IFitnessInfo, success: (IFitnessInfo) -> Void, error: (Error) -> Void)
+}
+
+protocol IRxFitnessInfoRepository: IFitnessLogRepository {
+    var rx_lastRecord: Observable<IFitnessInfo> { get }
 }
 
 struct MockFitnessInfoRepository: IFitnessInfoRepository {
-    let mockLastRecord: IFitnessInfo
+    var mockLastRecord: IFitnessInfo
     
     func getLastRecord(success: (IFitnessInfo) -> Void, error: (Error) -> Void) {
+        success(mockLastRecord)
+    }
+    
+    mutating func storeRecord(record: IFitnessInfo, success: (IFitnessInfo) -> Void, error: (Error) -> Void) {
+        mockLastRecord = record
+        
         success(mockLastRecord)
     }
 }

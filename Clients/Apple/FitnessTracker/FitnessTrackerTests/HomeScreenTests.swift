@@ -56,16 +56,3 @@ class HomeScreenTests: QuickSpec {
         }
     }
 }
-
-func createObserverAndSubscribe<T>(to observable: Observable<T>, scheduler: TestScheduler, disposeBag: DisposeBag, expect: (T) -> Void, action: @escaping (()->Void)) {
-    let observer = scheduler.createObserver(T.self)
-    
-    waitUntil { done in
-        observable.subscribe(onNext: {_ in done() }).addDisposableTo(disposeBag)
-        observable.subscribe(observer).addDisposableTo(disposeBag)
-        action()
-    }
-    
-    let actual = observer.events.first!.value.element!
-    expect(actual)
-}

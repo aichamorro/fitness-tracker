@@ -17,7 +17,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var router: URLRouter!
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        let entry = URLRouterEntryFactory.with(pattern: "app://records") { _,_ in
+        
+        window = UIWindow(frame: UIScreen.main.bounds)
+        window?.makeKeyAndVisible()
+        
+        router = URLRouterFactory.with(entries: urlEntries())
+        _ = router(URL(string: "app://records")!) { controller in
+            guard let viewController = controller as? UIViewController else { fatalError() }
+            viewController.title = NSLocalizedString("Last measurement", comment: "Last measurement")
+            let rootController = UINavigationController(rootViewController: viewController)
+            
+            self.window?.rootViewController = rootController
+        }
+        
+        // Override point for customization after application launch.
+        return true
+    }
+    
+    func urlEntries() -> [URLRouterEntry] {
+        let currentRecordURLPattern = URLRouterEntryFactory.with(pattern: "app://records") { _,_ in
             let record = FitnessInfo(weight: 59.20, height: 154, bodyFatPercentage: 26.6, musclePercentage: 31.1)
             let repository = MockFitnessInfoRepository(mockLastRecord: record)
             let interactor = HomeScreenInteractor(repository: repository)
@@ -31,26 +49,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             viewController.interactor = interactor
             viewController.disposeBag = disposeBag
             viewController.homeScreenView = view
+            viewController.router = self.router
             
             HomeScreenPresenter(interactor, view, disposeBag)
-
+            
             return viewController
         }
         
-        window = UIWindow(frame: UIScreen.main.bounds)
-        window?.makeKeyAndVisible()
-        
-        router = URLRouterFactory.with(entries: [entry])
-        _ = router(URL(string: "app://records")!) { controller in
-            guard let viewController = controller as? UIViewController else { fatalError() }
-            viewController.title = NSLocalizedString("Last measurement", comment: "Last measurement")
-            let rootController = UINavigationController(rootViewController: viewController)
+        let createRecordURLPattern = URLRouterEntryFactory.with(pattern: "app://records/new") { _,_ in
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let viewController = storyboard.instantiateViewController(withIdentifier: "InsertBodyMeasurementRecordViewController") as? InsertBodyMeasurementRecordViewController
+            guard viewController != nil else { fatalError() }
             
-            self.window?.rootViewController = rootController
+            return viewController
         }
         
-        // Override point for customization after application launch.
-        return true
+        return [currentRecordURLPattern, createRecordURLPattern]
     }
 
 }
