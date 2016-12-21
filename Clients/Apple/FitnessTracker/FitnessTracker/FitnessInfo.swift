@@ -25,9 +25,9 @@ public struct FitnessInfo: IFitnessInfo {
     public let musclePercentage: Double
 }
 
-public extension FitnessInfo {
+public extension IFitnessInfo {
     var bodyFatWeight: Double {
-        return Double(weight) * bodyFatPercentage
+        return Double(weight) * (bodyFatPercentage/100)
     }
     
     var leanBodyWeight: Double {
@@ -35,7 +35,7 @@ public extension FitnessInfo {
     }
     
     var muscleWeight: Double {
-        return Double(weight) * musclePercentage
+        return Double(weight) * (musclePercentage/100)
     }
     
     var bmi: Double {
@@ -57,14 +57,14 @@ func ==(lhs: IFitnessInfo, rhs: IFitnessInfo) -> Bool {
     return true
 }
 
-public enum BMIRating {
-    case underweight
-    case healthyweight
-    case overweight
-    case obese
-    case severelyObese
-    case morbidlyObese
-    case superObese
+public enum BMIRating: String {
+    case underweight = "Underweight"
+    case healthyweight = "Healthy weight"
+    case overweight = "Overweight"
+    case obese = "Obese"
+    case severelyObese = "Severy obese"
+    case morbidlyObese = "Morbidly obese"
+    case superObese = "Super obese"
 }
 
 public extension BMIRating {

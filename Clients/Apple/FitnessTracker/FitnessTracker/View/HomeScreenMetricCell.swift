@@ -9,6 +9,7 @@
 import UIKit
 
 class HomeScreenMetricCell: UITableViewCell {
+    @IBOutlet var container: UIView!
     @IBOutlet var name: UILabel!
     @IBOutlet var value: UILabel!
     @IBOutlet var metric: UILabel!

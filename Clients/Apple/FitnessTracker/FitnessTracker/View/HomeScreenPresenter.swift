@@ -17,10 +17,7 @@ let HomeScreenPresenter: IHomeScreenPresenter = { interactor, view, disposeBag i
         }.addDisposableTo(disposeBag)
     
     interactor.rx_currentRecord
-        .map { HomeScreenViewModel(weight: $0.weight,
-                                   height: $0.height,
-                                   bodyFat: $0.bodyFatPercentage,
-                                   muscle: $0.musclePercentage) }
+        .map { HomeScreenViewModel.from(fitnessInfo: $0) }
         .bindTo(view.rx_viewModel)
         .addDisposableTo(disposeBag)
 }

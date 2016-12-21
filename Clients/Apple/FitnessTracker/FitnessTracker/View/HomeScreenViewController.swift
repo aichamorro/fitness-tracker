@@ -29,7 +29,7 @@ class HomeScreenViewController: UITableViewController {
 
 extension HomeScreenViewController {
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return 2
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -42,10 +42,20 @@ extension HomeScreenViewController {
         }
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "BodyMeasurementMetricCell", for: indexPath) as! HomeScreenMetricCell
-        cell.date.text = "Today, 13:30"
+        if indexPath.section == 0 {
+            configureCellForRowInFirstSection(cell: cell, row: indexPath.row/2)
+        } else {
+            configureCellForRowInSecondSection(cell: cell, row: indexPath.row/2)
+        }
         
+        return cell
+    }
+    
+    func configureCellForRowInFirstSection(cell: HomeScreenMetricCell, row: Int) {
+        cell.date.text = "Today, 13:30"
         var cellText: (name: String, value: String, metric: String)!
-        switch indexPath.row/2 {
+        
+        switch row {
         case 0: cellText = ("Height", String(format: "%d", homeScreenView.viewModel.height), "cm")
         case 1: cellText = ("Weight", String(format: "%.1f", homeScreenView.viewModel.weight), "kg")
         case 2: cellText = ("Body Fat", String(format: "%.1f", homeScreenView.viewModel.bodyFat), "%")
@@ -56,8 +66,26 @@ extension HomeScreenViewController {
         cell.metric.text = cellText.metric
         cell.name.text = cellText.name
         cell.value.text = cellText.value
+    }
+    
+    func configureCellForRowInSecondSection(cell: HomeScreenMetricCell, row: Int) {
+        cell.container.backgroundColor = UIColor(red: 0.529, green: 0.176, blue: 0.384, alpha: 1.0)
+        cell.date.text = ""
+        var cellText: (name: String, value: String, metric: String)!
         
-        return cell
+        switch row {
+        case 0: cellText = ("Body Fat Weight", String(format: "%.1f", homeScreenView.viewModel.bodyFatWeight), "kg")
+        case 1: cellText = ("Muscle Weight", String(format: "%.1f", homeScreenView.viewModel.muscleWeight), "kg")
+        case 2: cellText = ("Lean Body Weight", String(format: "%.1f", homeScreenView.viewModel.leanBodyWeight), "kg")
+        case 3:
+            cellText = ("BMI", String(format: "%.1f", homeScreenView.viewModel.bmi), "")
+            cell.date.text = BMIRating.for(bmi: homeScreenView.viewModel.bmi).rawValue
+        default: fatalError()
+        }
+        
+        cell.metric.text = cellText.metric
+        cell.name.text = cellText.name
+        cell.value.text = cellText.value
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

@@ -80,6 +80,7 @@
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="container" destination="l3f-OM-oyD" id="bry-JD-XkZ"/>
                                     <outlet property="date" destination="h5V-Xd-jvE" id="OlT-5E-h6s"/>
                                     <outlet property="metric" destination="p9O-6n-eMg" id="he9-Ir-mE9"/>
                                     <outlet property="name" destination="rgo-EF-NeY" id="sMi-3D-tpB"/>

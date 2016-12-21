@@ -18,7 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         let entry = URLRouterEntryFactory.with(pattern: "app://records") { _,_ in
-            let record = FitnessInfo(weight: 66.7, height: 171, bodyFatPercentage: 30.0, musclePercentage: 30.0)
+            let record = FitnessInfo(weight: 59.20, height: 154, bodyFatPercentage: 26.6, musclePercentage: 31.1)
             let repository = MockFitnessInfoRepository(mockLastRecord: record)
             let interactor = HomeScreenInteractor(repository: repository)
             let view = HomeScreenView()
@@ -42,7 +42,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         router = URLRouterFactory.with(entries: [entry])
         _ = router(URL(string: "app://records")!) { controller in
-            self.window?.rootViewController = controller as? UIViewController
+            guard let viewController = controller as? UIViewController else { fatalError() }
+            viewController.title = NSLocalizedString("Last measurement", comment: "Last measurement")
+            let rootController = UINavigationController(rootViewController: viewController)
+            
+            self.window?.rootViewController = rootController
         }
         
         // Override point for customization after application launch.
