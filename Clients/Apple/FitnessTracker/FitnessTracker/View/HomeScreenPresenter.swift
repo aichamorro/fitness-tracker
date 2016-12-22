@@ -13,7 +13,7 @@ typealias IHomeScreenPresenter = (IHomeScreenInteractor, IHomeScreenView, Dispos
 let HomeScreenPresenter: IHomeScreenPresenter = { interactor, view, disposeBag in
     view.rx_viewDidLoad
         .bindNext {
-            interactor.loadLastRecord()
+            interactor.loadLatest()
         }.addDisposableTo(disposeBag)
     
     interactor.rx_currentRecord

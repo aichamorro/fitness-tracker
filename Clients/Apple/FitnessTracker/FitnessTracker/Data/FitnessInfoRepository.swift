@@ -10,25 +10,33 @@ import Foundation
 import RxSwift
 
 protocol IFitnessInfoRepository {
-    func getLastRecord(success: (IFitnessInfo) -> Void, error: (Error) -> Void)
-    mutating func storeRecord(record: IFitnessInfo, success: (IFitnessInfo) -> Void, error: (Error) -> Void)
-}
-
-protocol IRxFitnessInfoRepository: IFitnessLogRepository {
-    var rx_lastRecord: Observable<IFitnessInfo> { get }
-}
-
-struct MockFitnessInfoRepository: IFitnessInfoRepository {
-    var mockLastRecord: IFitnessInfo
+    var rx_latest: Observable<IFitnessInfo> { get }
     
-    func getLastRecord(success: (IFitnessInfo) -> Void, error: (Error) -> Void) {
-        success(mockLastRecord)
+    func loadLatest()
+    func save(record: IFitnessInfo) -> Observable<IFitnessInfo>
+}
+
+class MockFitnessInfoRepository: IFitnessInfoRepository {
+    private let rx_latestSubject = PublishSubject<IFitnessInfo>()
+    
+    var mockLastRecord: IFitnessInfo!
+
+    init(mockLastRecord: IFitnessInfo) {
+        self.mockLastRecord = mockLastRecord
     }
     
-    mutating func storeRecord(record: IFitnessInfo, success: (IFitnessInfo) -> Void, error: (Error) -> Void) {
+    var rx_latest: Observable<IFitnessInfo> {
+        return rx_latestSubject.asObservable()
+    }
+    
+    func loadLatest() {
+        rx_latestSubject.onNext(mockLastRecord)
+    }
+    
+    func save(record: IFitnessInfo) -> Observable<IFitnessInfo> {
         mockLastRecord = record
-        
-        success(mockLastRecord)
+     
+        return Observable.just(mockLastRecord)
     }
 }
 

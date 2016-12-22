@@ -12,7 +12,7 @@ import RxSwift
 protocol IHomeScreenInteractor {
     var rx_currentRecord: Observable<IFitnessInfo> { get }
     
-    func loadLastRecord()
+    func loadLatest()
 }
 
 struct HomeScreenInteractor: IHomeScreenInteractor {
@@ -20,16 +20,10 @@ struct HomeScreenInteractor: IHomeScreenInteractor {
     let currentRecord = PublishSubject<IFitnessInfo>()
     
     var rx_currentRecord: Observable<IFitnessInfo> {
-        return currentRecord.asObservable()
+        return repository.rx_latest
     }
     
-    func loadLastRecord() {
-        repository.getLastRecord(
-            success: {
-                currentRecord.onNext($0)
-        },
-            error: {
-                currentRecord.onError($0)
-        })
+    func loadLatest() {
+        repository.loadLatest()
     }
 }

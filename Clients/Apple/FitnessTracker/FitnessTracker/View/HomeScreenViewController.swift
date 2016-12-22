@@ -71,12 +71,12 @@ extension HomeScreenViewController {
     func cellTextConfiguration(for indexPath: IndexPath) -> (String, String, String, String) {
         switch (indexPath.section, indexPath.row/2) {
             case (0, 0): return ("Height", String(format: "%d", homeScreenView.viewModel.height), "cm", "Today, 13:30")
-            case (0, 1): return ("Weight", String(format: "%.1f", homeScreenView.viewModel.weight), "kg", "Today, 13:30")
-            case (0, 2): return ("Body Fat", String(format: "%.1f", homeScreenView.viewModel.bodyFat), "%", "Today, 13:30")
-            case (0, 3): return ("Muscle", String(format: "%.1f", homeScreenView.viewModel.muscle), "%", "Today, 13:30")
-            case (1, 0): return ("Body Fat Weight", String(format: "%.1f", homeScreenView.viewModel.bodyFatWeight), "kg", "")
-            case (1, 1): return ("Muscle Weight", String(format: "%.1f", homeScreenView.viewModel.muscleWeight), "kg", "")
-            case (1, 2): return ("Lean Body Weight", String(format: "%.1f", homeScreenView.viewModel.leanBodyWeight), "kg", "")
+            case (0, 1): return ("Weight", String(format: "%.2f", homeScreenView.viewModel.weight), "kg", "Today, 13:30")
+            case (0, 2): return ("Body Fat", String(format: "%.2f", homeScreenView.viewModel.bodyFat), "%", "Today, 13:30")
+            case (0, 3): return ("Muscle", String(format: "%.2f", homeScreenView.viewModel.muscle), "%", "Today, 13:30")
+            case (1, 0): return ("Body Fat Weight", String(format: "%.2f", homeScreenView.viewModel.bodyFatWeight), "kg", "")
+            case (1, 1): return ("Muscle Weight", String(format: "%.2f", homeScreenView.viewModel.muscleWeight), "kg", "")
+            case (1, 2): return ("Lean Body Weight", String(format: "%.2f", homeScreenView.viewModel.leanBodyWeight), "kg", "")
             case (1, 3):
                 return ("BMI", String(format: "%.1f", homeScreenView.viewModel.bmi), "", BMIRating.for(bmi: homeScreenView.viewModel.bmi).rawValue)
 

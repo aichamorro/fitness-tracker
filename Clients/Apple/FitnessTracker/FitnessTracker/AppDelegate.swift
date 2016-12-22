@@ -10,16 +10,27 @@ import UIKit
 import URLRouter
 import RxSwift
 
+class AppServiceLocator {
+    var fitnessInfoRepository: IFitnessInfoRepository!
+    var router: URLRouter!
+}
+
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+final class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     var router: URLRouter!
+    var serviceLocator: AppServiceLocator!
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
+        
+        serviceLocator = AppServiceLocator()
+        
+        let record = FitnessInfo(weight: 67.4975, height: 171, bodyFatPercentage: 19.5, musclePercentage: 33.8)
+        serviceLocator.fitnessInfoRepository = MockFitnessInfoRepository(mockLastRecord: record)
         
         router = URLRouterFactory.with(entries: urlEntries())
         _ = router(URL(string: "app://records")!) { controller in
@@ -30,15 +41,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             self.window?.rootViewController = rootController
         }
         
+        serviceLocator.router = router
+        
         // Override point for customization after application launch.
         return true
     }
     
-    func urlEntries() -> [URLRouterEntry] {
-        let currentRecordURLPattern = URLRouterEntryFactory.with(pattern: "app://records") { _,_ in
-            let record = FitnessInfo(weight: 59.20, height: 154, bodyFatPercentage: 26.6, musclePercentage: 31.1)
-            let repository = MockFitnessInfoRepository(mockLastRecord: record)
-            let interactor = HomeScreenInteractor(repository: repository)
+    private func urlEntries() -> [URLRouterEntry] {
+        let serviceLocator = self.serviceLocator!
+        
+        let currentRecordURLPattern = URLRouterEntryFactory.with(pattern: "app://records") { [weak self] _,_ in
+            let interactor = HomeScreenInteractor(repository: serviceLocator.fitnessInfoRepository)
             let view = HomeScreenView()
             let disposeBag = DisposeBag()
             
@@ -49,7 +62,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             viewController.interactor = interactor
             viewController.disposeBag = disposeBag
             viewController.homeScreenView = view
-            viewController.router = self.router
+            viewController.router = self?.router
             
             HomeScreenPresenter(interactor, view, disposeBag)
             
@@ -58,8 +71,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let createRecordURLPattern = URLRouterEntryFactory.with(pattern: "app://records/new") { _,_ in
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let viewController = storyboard.instantiateViewController(withIdentifier: "InsertBodyMeasurementRecordViewController") as? InsertBodyMeasurementRecordViewController
+            let viewController = storyboard.instantiateViewController(withIdentifier: "NewRecordViewController") as? NewRecordViewController
             guard viewController != nil else { fatalError() }
+            
+            let seeLatestRecordInteractor = HomeScreenInteractor(repository: serviceLocator.fitnessInfoRepository)
+            let insertNewRecordInteractor = NewRecordInteractor(repository: serviceLocator.fitnessInfoRepository)
+            let disposeBag = DisposeBag()
+            
+            viewController!.interactors = [seeLatestRecordInteractor, insertNewRecordInteractor]
+            viewController!.disposeBag = disposeBag
+            NewRecordPresenter(seeLatestRecordInteractor, insertNewRecordInteractor, viewController!, disposeBag)
             
             return viewController
         }

@@ -25,7 +25,10 @@
 		20FA51071E0976D1002E536A /* HomeScreenMetricCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FA51061E0976D1002E536A /* HomeScreenMetricCell.swift */; };
 		20FA51091E0AE359002E536A /* InsertDataScreenTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FA51081E0AE359002E536A /* InsertDataScreenTests.swift */; };
 		20FA510B1E0AE4D0002E536A /* CommonUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FA510A1E0AE4D0002E536A /* CommonUtils.swift */; };
-		20FA510D1E0AFCED002E536A /* InsertBodyMeasurementRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FA510C1E0AFCED002E536A /* InsertBodyMeasurementRecordViewController.swift */; };
+		20FA510D1E0AFCED002E536A /* NewRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FA510C1E0AFCED002E536A /* NewRecordViewController.swift */; };
+		20FA510F1E0B1B05002E536A /* NewRecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FA510E1E0B1B05002E536A /* NewRecordView.swift */; };
+		20FA51111E0B1D74002E536A /* NewRecordPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FA51101E0B1D74002E536A /* NewRecordPresenter.swift */; };
+		20FA51131E0B1DDF002E536A /* NewRecordInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FA51121E0B1DDF002E536A /* NewRecordInteractor.swift */; };
 		45AA81FD1D29B16082BA4BBA /* Pods_FitnessTracker_FitnessTrackerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95868793967C2540BD298442 /* Pods_FitnessTracker_FitnessTrackerTests.framework */; };
 		60DCC2D4BE7EC6D04AACF7B5 /* Pods_FitnessTracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 243E297E8C331F616EE9C451 /* Pods_FitnessTracker.framework */; };
 /* End PBXBuildFile section */
@@ -42,7 +45,7 @@
 
 /* Begin PBXFileReference section */
 		200323D11E00166200B1C33A /* FitnessTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FitnessTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		200323D41E00166200B1C33A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		200323D41E00166200B1C33A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AppDelegate.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		200323D61E00166200B1C33A /* DayLogInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayLogInputViewController.swift; sourceTree = "<group>"; };
 		200323D91E00166200B1C33A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		200323DB1E00166200B1C33A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -63,7 +66,10 @@
 		20FA51061E0976D1002E536A /* HomeScreenMetricCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeScreenMetricCell.swift; sourceTree = "<group>"; };
 		20FA51081E0AE359002E536A /* InsertDataScreenTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InsertDataScreenTests.swift; sourceTree = "<group>"; };
 		20FA510A1E0AE4D0002E536A /* CommonUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonUtils.swift; sourceTree = "<group>"; };
-		20FA510C1E0AFCED002E536A /* InsertBodyMeasurementRecordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InsertBodyMeasurementRecordViewController.swift; sourceTree = "<group>"; };
+		20FA510C1E0AFCED002E536A /* NewRecordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = NewRecordViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		20FA510E1E0B1B05002E536A /* NewRecordView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = NewRecordView.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		20FA51101E0B1D74002E536A /* NewRecordPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = NewRecordPresenter.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		20FA51121E0B1DDF002E536A /* NewRecordInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = NewRecordInteractor.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		243E297E8C331F616EE9C451 /* Pods_FitnessTracker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FitnessTracker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		95868793967C2540BD298442 /* Pods_FitnessTracker_FitnessTrackerTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FitnessTracker_FitnessTrackerTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF97CF9401854D9B0C19B13A /* Pods-FitnessTracker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FitnessTracker.release.xcconfig"; path = "Pods/Target Support Files/Pods-FitnessTracker/Pods-FitnessTracker.release.xcconfig"; sourceTree = "<group>"; };
@@ -166,7 +172,10 @@
 				20FA51021E0957C2002E536A /* HomeScreenPresenter.swift */,
 				20FA51041E095947002E536A /* HomeScreenViewController.swift */,
 				20FA51061E0976D1002E536A /* HomeScreenMetricCell.swift */,
-				20FA510C1E0AFCED002E536A /* InsertBodyMeasurementRecordViewController.swift */,
+				20FA510C1E0AFCED002E536A /* NewRecordViewController.swift */,
+				20FA510E1E0B1B05002E536A /* NewRecordView.swift */,
+				20FA51101E0B1D74002E536A /* NewRecordPresenter.swift */,
+				20FA51121E0B1DDF002E536A /* NewRecordInteractor.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -396,16 +405,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				20FA50FE1E09575E002E536A /* FitnessInfoRepository.swift in Sources */,
-				20FA510D1E0AFCED002E536A /* InsertBodyMeasurementRecordViewController.swift in Sources */,
+				20FA510D1E0AFCED002E536A /* NewRecordViewController.swift in Sources */,
 				200323F51E0038B300B1C33A /* FitnessInfo.swift in Sources */,
 				200323D71E00166200B1C33A /* DayLogInputViewController.swift in Sources */,
+				20FA51111E0B1D74002E536A /* NewRecordPresenter.swift in Sources */,
 				20FA50FB1E095712002E536A /* HomeScreenInteractor.swift in Sources */,
 				200323D51E00166200B1C33A /* AppDelegate.swift in Sources */,
 				20FA51051E095947002E536A /* HomeScreenViewController.swift in Sources */,
 				20FA51071E0976D1002E536A /* HomeScreenMetricCell.swift in Sources */,
+				20FA51131E0B1DDF002E536A /* NewRecordInteractor.swift in Sources */,
 				20FA51031E0957C2002E536A /* HomeScreenPresenter.swift in Sources */,
 				20FA51011E09579F002E536A /* HomeScreenView.swift in Sources */,
 				205212F91E01AE6200F9A9E7 /* FitnessLogRepository.swift in Sources */,
+				20FA510F1E0B1B05002E536A /* NewRecordView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

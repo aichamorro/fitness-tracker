@@ -99,10 +99,10 @@
             </objects>
             <point key="canvasLocation" x="100" y="-71.514242878560722"/>
         </scene>
-        <!--Insert Body Measurement Record View Controller-->
+        <!--New Record View Controller-->
         <scene sceneID="Nny-bn-3fT">
             <objects>
-                <viewController storyboardIdentifier="InsertBodyMeasurementRecordViewController" id="IdY-KO-rib" customClass="InsertBodyMeasurementRecordViewController" customModule="FitnessTracker" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="NewRecordViewController" id="IdY-KO-rib" customClass="NewRecordViewController" customModule="FitnessTracker" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="C6W-rm-Wb1"/>
                         <viewControllerLayoutGuide type="bottom" id="8Qh-WQ-hvC"/>
@@ -130,13 +130,13 @@
                                         <rect key="frame" x="0.0" y="0.0" width="343" height="50"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="bottom" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="cm" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B3I-06-Opf">
-                                                <rect key="frame" x="317.5" y="27.5" width="17.5" height="14.5"/>
+                                                <rect key="frame" x="317" y="28" width="18" height="15"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="0.79670724690000005" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Height" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zII-5P-oAx">
-                                                <rect key="frame" x="8" y="11.5" width="49.5" height="18"/>
+                                                <rect key="frame" x="8" y="12" width="50" height="18"/>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -175,13 +175,13 @@
                                         <rect key="frame" x="0.0" y="62" width="343" height="50"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="bottom" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="kg" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="49R-0v-uMQ">
-                                                <rect key="frame" x="317" y="28" width="18" height="14.5"/>
+                                                <rect key="frame" x="317" y="28" width="18" height="15"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="0.79670724690000005" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Weight" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8tE-0S-d6L">
-                                                <rect key="frame" x="8" y="11.5" width="52" height="18"/>
+                                                <rect key="frame" x="8" y="12" width="52" height="18"/>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -217,13 +217,13 @@
                                         <rect key="frame" x="0.0" y="124" width="343" height="50"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="bottom" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="%" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3ZO-bM-hPK">
-                                                <rect key="frame" x="317" y="28.5" width="18.5" height="14.5"/>
+                                                <rect key="frame" x="317" y="28" width="19" height="15"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="0.79670724690000005" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Body Fat" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rZI-Oc-UtD">
-                                                <rect key="frame" x="8" y="11.5" width="64.5" height="18"/>
+                                                <rect key="frame" x="8" y="12" width="65" height="18"/>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -259,13 +259,13 @@
                                         <rect key="frame" x="0.0" y="186" width="343" height="50"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="bottom" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="%" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AmT-91-oSa">
-                                                <rect key="frame" x="317" y="28" width="18" height="14.5"/>
+                                                <rect key="frame" x="317" y="28" width="18" height="15"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="0.79670724690000005" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Muscle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tpn-N6-Umh">
-                                                <rect key="frame" x="8" y="11.5" width="52.5" height="18"/>
+                                                <rect key="frame" x="8" y="12" width="53" height="18"/>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -304,9 +304,6 @@
                                         <state key="normal" title="Save">
                                             <color key="titleColor" red="0.95437883932483281" green="0.96354389121711637" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
-                                        <connections>
-                                            <action selector="actionSaveWithSender:" destination="IdY-KO-rib" eventType="touchUpInside" id="Twm-Sm-nQO"/>
-                                        </connections>
                                     </button>
                                 </subviews>
                                 <constraints>
@@ -333,6 +330,7 @@
                         <outlet property="bodyFatTextField" destination="wVK-Z5-HPL" id="VKh-Zu-igD"/>
                         <outlet property="heightTextField" destination="UDR-cK-wlW" id="Dvt-Wl-MKP"/>
                         <outlet property="muscleTextField" destination="s1m-Db-7EI" id="FfH-fc-8qc"/>
+                        <outlet property="saveButton" destination="BfC-51-zDd" id="RDn-8k-3Cf"/>
                         <outlet property="weightTextField" destination="WA5-YQ-jRa" id="Muj-iX-IsG"/>
                     </connections>
                 </viewController>
