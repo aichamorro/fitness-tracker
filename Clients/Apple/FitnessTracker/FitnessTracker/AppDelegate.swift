@@ -29,8 +29,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         
         serviceLocator = AppServiceLocator()
         
-        let record = FitnessInfo(weight: 67.4975, height: 171, bodyFatPercentage: 19.5, musclePercentage: 33.8)
-        serviceLocator.fitnessInfoRepository = MockFitnessInfoRepository(mockLastRecord: record)
+        serviceLocator.fitnessInfoRepository = CoreDataInfoRepository()
         
         router = URLRouterFactory.with(entries: urlEntries())
         _ = router(URL(string: "app://records")!) { controller in

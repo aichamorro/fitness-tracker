@@ -16,6 +16,7 @@ public protocol IFitnessInfo {
     var height: UInt { get }
     var bodyFatPercentage: Double { get }
     var musclePercentage: Double { get }
+    var date: NSDate? { get }
 }
 
 public struct FitnessInfo: IFitnessInfo {
@@ -23,6 +24,7 @@ public struct FitnessInfo: IFitnessInfo {
     public let height: UInt
     public let bodyFatPercentage: Double
     public let musclePercentage: Double
+    public let date: NSDate? = nil
 }
 
 public extension IFitnessInfo {

@@ -8,14 +8,16 @@
 
 /* Begin PBXBuildFile section */
 		200323D51E00166200B1C33A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200323D41E00166200B1C33A /* AppDelegate.swift */; };
-		200323D71E00166200B1C33A /* DayLogInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200323D61E00166200B1C33A /* DayLogInputViewController.swift */; };
 		200323DA1E00166200B1C33A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 200323D81E00166200B1C33A /* Main.storyboard */; };
 		200323DC1E00166200B1C33A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 200323DB1E00166200B1C33A /* Assets.xcassets */; };
 		200323DF1E00166200B1C33A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 200323DD1E00166200B1C33A /* LaunchScreen.storyboard */; };
 		200323ED1E0018A500B1C33A /* FitnessTrackerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200323EC1E0018A500B1C33A /* FitnessTrackerTests.swift */; };
 		200323F51E0038B300B1C33A /* FitnessInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200323F41E0038B300B1C33A /* FitnessInfo.swift */; };
+		202142081E0D23F800BAF444 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 202142071E0D23F800BAF444 /* CoreData.framework */; };
+		2021420B1E0D248900BAF444 /* CoreDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 202142091E0D248900BAF444 /* CoreDataModel.xcdatamodeld */; };
+		2021420F1E0D27FD00BAF444 /* CoreDataFitnessInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2021420E1E0D27FD00BAF444 /* CoreDataFitnessInfo.swift */; };
+		202142111E0D57C200BAF444 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 202142101E0D57C200BAF444 /* CoreDataStack.swift */; };
 		205212F71E01A63F00F9A9E7 /* LogRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205212F61E01A63F00F9A9E7 /* LogRepositoryTests.swift */; };
-		205212F91E01AE6200F9A9E7 /* FitnessLogRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205212F81E01AE6200F9A9E7 /* FitnessLogRepository.swift */; };
 		205212FB1E01D3AD00F9A9E7 /* HomeScreenTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205212FA1E01D3AD00F9A9E7 /* HomeScreenTests.swift */; };
 		20FA50FB1E095712002E536A /* HomeScreenInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FA50FA1E095712002E536A /* HomeScreenInteractor.swift */; };
 		20FA50FE1E09575E002E536A /* FitnessInfoRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FA50FD1E09575E002E536A /* FitnessInfoRepository.swift */; };
@@ -46,7 +48,6 @@
 /* Begin PBXFileReference section */
 		200323D11E00166200B1C33A /* FitnessTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FitnessTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		200323D41E00166200B1C33A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AppDelegate.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		200323D61E00166200B1C33A /* DayLogInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayLogInputViewController.swift; sourceTree = "<group>"; };
 		200323D91E00166200B1C33A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		200323DB1E00166200B1C33A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		200323DE1E00166200B1C33A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -55,8 +56,11 @@
 		200323EC1E0018A500B1C33A /* FitnessTrackerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FitnessTrackerTests.swift; sourceTree = "<group>"; };
 		200323EE1E0018A500B1C33A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		200323F41E0038B300B1C33A /* FitnessInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FitnessInfo.swift; sourceTree = "<group>"; };
+		202142071E0D23F800BAF444 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		2021420A1E0D248900BAF444 /* CoreDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreDataModel.xcdatamodel; sourceTree = "<group>"; };
+		2021420E1E0D27FD00BAF444 /* CoreDataFitnessInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataFitnessInfo.swift; sourceTree = "<group>"; };
+		202142101E0D57C200BAF444 /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		205212F61E01A63F00F9A9E7 /* LogRepositoryTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogRepositoryTests.swift; sourceTree = "<group>"; };
-		205212F81E01AE6200F9A9E7 /* FitnessLogRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FitnessLogRepository.swift; sourceTree = "<group>"; };
 		205212FA1E01D3AD00F9A9E7 /* HomeScreenTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeScreenTests.swift; sourceTree = "<group>"; };
 		20FA50FA1E095712002E536A /* HomeScreenInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeScreenInteractor.swift; sourceTree = "<group>"; };
 		20FA50FD1E09575E002E536A /* FitnessInfoRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FitnessInfoRepository.swift; sourceTree = "<group>"; };
@@ -83,6 +87,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				202142081E0D23F800BAF444 /* CoreData.framework in Frameworks */,
 				60DCC2D4BE7EC6D04AACF7B5 /* Pods_FitnessTracker.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -125,13 +130,11 @@
 				20FA50FC1E095749002E536A /* Data */,
 				20FA50F91E0956F9002E536A /* Domain */,
 				200323D41E00166200B1C33A /* AppDelegate.swift */,
-				200323D61E00166200B1C33A /* DayLogInputViewController.swift */,
 				200323D81E00166200B1C33A /* Main.storyboard */,
 				200323DB1E00166200B1C33A /* Assets.xcassets */,
 				200323DD1E00166200B1C33A /* LaunchScreen.storyboard */,
 				200323E01E00166200B1C33A /* Info.plist */,
 				200323F41E0038B300B1C33A /* FitnessInfo.swift */,
-				205212F81E01AE6200F9A9E7 /* FitnessLogRepository.swift */,
 			);
 			path = FitnessTracker;
 			sourceTree = "<group>";
@@ -161,6 +164,9 @@
 			isa = PBXGroup;
 			children = (
 				20FA50FD1E09575E002E536A /* FitnessInfoRepository.swift */,
+				202142091E0D248900BAF444 /* CoreDataModel.xcdatamodeld */,
+				2021420E1E0D27FD00BAF444 /* CoreDataFitnessInfo.swift */,
+				202142101E0D57C200BAF444 /* CoreDataStack.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -194,6 +200,7 @@
 		D7B064FACE09BB897B8FE4CB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				202142071E0D23F800BAF444 /* CoreData.framework */,
 				243E297E8C331F616EE9C451 /* Pods_FitnessTracker.framework */,
 				95868793967C2540BD298442 /* Pods_FitnessTracker_FitnessTrackerTests.framework */,
 			);
@@ -404,10 +411,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				202142111E0D57C200BAF444 /* CoreDataStack.swift in Sources */,
 				20FA50FE1E09575E002E536A /* FitnessInfoRepository.swift in Sources */,
 				20FA510D1E0AFCED002E536A /* NewRecordViewController.swift in Sources */,
 				200323F51E0038B300B1C33A /* FitnessInfo.swift in Sources */,
-				200323D71E00166200B1C33A /* DayLogInputViewController.swift in Sources */,
 				20FA51111E0B1D74002E536A /* NewRecordPresenter.swift in Sources */,
 				20FA50FB1E095712002E536A /* HomeScreenInteractor.swift in Sources */,
 				200323D51E00166200B1C33A /* AppDelegate.swift in Sources */,
@@ -416,8 +423,9 @@
 				20FA51131E0B1DDF002E536A /* NewRecordInteractor.swift in Sources */,
 				20FA51031E0957C2002E536A /* HomeScreenPresenter.swift in Sources */,
 				20FA51011E09579F002E536A /* HomeScreenView.swift in Sources */,
-				205212F91E01AE6200F9A9E7 /* FitnessLogRepository.swift in Sources */,
 				20FA510F1E0B1B05002E536A /* NewRecordView.swift in Sources */,
+				2021420B1E0D248900BAF444 /* CoreDataModel.xcdatamodeld in Sources */,
+				2021420F1E0D27FD00BAF444 /* CoreDataFitnessInfo.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -643,6 +651,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		202142091E0D248900BAF444 /* CoreDataModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				2021420A1E0D248900BAF444 /* CoreDataModel.xcdatamodel */,
+			);
+			currentVersion = 2021420A1E0D248900BAF444 /* CoreDataModel.xcdatamodel */;
+			path = CoreDataModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 200323C91E00166200B1C33A /* Project object */;
 }
