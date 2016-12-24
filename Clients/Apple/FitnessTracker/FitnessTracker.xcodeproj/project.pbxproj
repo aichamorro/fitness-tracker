@@ -19,6 +19,8 @@
 		202142111E0D57C200BAF444 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 202142101E0D57C200BAF444 /* CoreDataStack.swift */; };
 		205212F71E01A63F00F9A9E7 /* LogRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205212F61E01A63F00F9A9E7 /* LogRepositoryTests.swift */; };
 		205212FB1E01D3AD00F9A9E7 /* HomeScreenTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205212FA1E01D3AD00F9A9E7 /* HomeScreenTests.swift */; };
+		20D76F1F1E0D8E5C00FDD122 /* LatestResultsComparison.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20D76F1E1E0D8E5C00FDD122 /* LatestResultsComparison.swift */; };
+		20D76F211E0DA8DA00FDD122 /* FitnessInfo+Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20D76F201E0DA8DA00FDD122 /* FitnessInfo+Operators.swift */; };
 		20FA50FB1E095712002E536A /* HomeScreenInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FA50FA1E095712002E536A /* HomeScreenInteractor.swift */; };
 		20FA50FE1E09575E002E536A /* FitnessInfoRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FA50FD1E09575E002E536A /* FitnessInfoRepository.swift */; };
 		20FA51011E09579F002E536A /* HomeScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FA51001E09579F002E536A /* HomeScreenView.swift */; };
@@ -55,13 +57,15 @@
 		200323EA1E0018A500B1C33A /* FitnessTrackerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FitnessTrackerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		200323EC1E0018A500B1C33A /* FitnessTrackerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FitnessTrackerTests.swift; sourceTree = "<group>"; };
 		200323EE1E0018A500B1C33A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		200323F41E0038B300B1C33A /* FitnessInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FitnessInfo.swift; sourceTree = "<group>"; };
+		200323F41E0038B300B1C33A /* FitnessInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FitnessInfo.swift; path = ../FitnessInfo.swift; sourceTree = "<group>"; };
 		202142071E0D23F800BAF444 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		2021420A1E0D248900BAF444 /* CoreDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreDataModel.xcdatamodel; sourceTree = "<group>"; };
 		2021420E1E0D27FD00BAF444 /* CoreDataFitnessInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataFitnessInfo.swift; sourceTree = "<group>"; };
 		202142101E0D57C200BAF444 /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		205212F61E01A63F00F9A9E7 /* LogRepositoryTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogRepositoryTests.swift; sourceTree = "<group>"; };
 		205212FA1E01D3AD00F9A9E7 /* HomeScreenTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeScreenTests.swift; sourceTree = "<group>"; };
+		20D76F1E1E0D8E5C00FDD122 /* LatestResultsComparison.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LatestResultsComparison.swift; sourceTree = "<group>"; };
+		20D76F201E0DA8DA00FDD122 /* FitnessInfo+Operators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FitnessInfo+Operators.swift"; sourceTree = "<group>"; };
 		20FA50FA1E095712002E536A /* HomeScreenInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeScreenInteractor.swift; sourceTree = "<group>"; };
 		20FA50FD1E09575E002E536A /* FitnessInfoRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FitnessInfoRepository.swift; sourceTree = "<group>"; };
 		20FA51001E09579F002E536A /* HomeScreenView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeScreenView.swift; sourceTree = "<group>"; };
@@ -134,7 +138,6 @@
 				200323DB1E00166200B1C33A /* Assets.xcassets */,
 				200323DD1E00166200B1C33A /* LaunchScreen.storyboard */,
 				200323E01E00166200B1C33A /* Info.plist */,
-				200323F41E0038B300B1C33A /* FitnessInfo.swift */,
 			);
 			path = FitnessTracker;
 			sourceTree = "<group>";
@@ -163,10 +166,12 @@
 		20FA50FC1E095749002E536A /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				200323F41E0038B300B1C33A /* FitnessInfo.swift */,
 				20FA50FD1E09575E002E536A /* FitnessInfoRepository.swift */,
 				202142091E0D248900BAF444 /* CoreDataModel.xcdatamodeld */,
 				2021420E1E0D27FD00BAF444 /* CoreDataFitnessInfo.swift */,
 				202142101E0D57C200BAF444 /* CoreDataStack.swift */,
+				20D76F201E0DA8DA00FDD122 /* FitnessInfo+Operators.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -182,6 +187,7 @@
 				20FA510E1E0B1B05002E536A /* NewRecordView.swift */,
 				20FA51101E0B1D74002E536A /* NewRecordPresenter.swift */,
 				20FA51121E0B1DDF002E536A /* NewRecordInteractor.swift */,
+				20D76F1E1E0D8E5C00FDD122 /* LatestResultsComparison.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -413,6 +419,8 @@
 			files = (
 				202142111E0D57C200BAF444 /* CoreDataStack.swift in Sources */,
 				20FA50FE1E09575E002E536A /* FitnessInfoRepository.swift in Sources */,
+				20D76F211E0DA8DA00FDD122 /* FitnessInfo+Operators.swift in Sources */,
+				20D76F1F1E0D8E5C00FDD122 /* LatestResultsComparison.swift in Sources */,
 				20FA510D1E0AFCED002E536A /* NewRecordViewController.swift in Sources */,
 				200323F51E0038B300B1C33A /* FitnessInfo.swift in Sources */,
 				20FA51111E0B1D74002E536A /* NewRecordPresenter.swift in Sources */,

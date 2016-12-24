@@ -21,7 +21,7 @@ struct HomeScreenViewModel {
 }
 
 extension HomeScreenViewModel {
-    static func empty() -> HomeScreenViewModel {
+    static var empty: HomeScreenViewModel = {
         return HomeScreenViewModel(weight: 0,
                                    height: 0,
                                    bodyFat: 0,
@@ -30,7 +30,7 @@ extension HomeScreenViewModel {
                                    muscleWeight: 0,
                                    leanBodyWeight: 0,
                                    bmi: 0)
-    }
+    }()
 
     static func from(fitnessInfo: IFitnessInfo) -> HomeScreenViewModel {
         return HomeScreenViewModel(weight: fitnessInfo.weight,
@@ -63,7 +63,7 @@ extension IHomeScreenView {
 }
 
 class HomeScreenView: IHomeScreenView {
-    var viewModelVariable = Variable<HomeScreenViewModel>(HomeScreenViewModel.empty())
+    var viewModelVariable = Variable<HomeScreenViewModel>(HomeScreenViewModel.empty)
     var viewModel: HomeScreenViewModel {
         get { return viewModelVariable.value }
         set { viewModelVariable.value = newValue }

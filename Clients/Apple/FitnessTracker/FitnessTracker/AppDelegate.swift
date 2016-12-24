@@ -21,6 +21,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     var router: URLRouter!
     var serviceLocator: AppServiceLocator!
+    var disposeBag = DisposeBag()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
@@ -29,8 +30,18 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         
         serviceLocator = AppServiceLocator()
         
-        serviceLocator.fitnessInfoRepository = CoreDataInfoRepository()
-        
+        CoreDataStackInitializer()
+            .subscribeOn(MainScheduler.instance)
+            .do(onNext: { _ in NSLog("Core Data Stack initialized correctly")},
+                onError: { error in NSLog("Failure while initializing Core Data Stack: \(error)") })
+            .subscribe(onNext: { [weak self] in
+                guard let `self` = self else { return }
+            
+                self.serviceLocator.fitnessInfoRepository = CoreDataInfoRepository(managedObjectContext: $0)
+            }, onError: { _ in
+                fatalError()
+            }).addDisposableTo(disposeBag)
+
         router = URLRouterFactory.with(entries: urlEntries())
         _ = router(URL(string: "app://records")!) { controller in
             guard let viewController = controller as? UIViewController else { fatalError() }
@@ -50,7 +61,9 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         let serviceLocator = self.serviceLocator!
         
         let currentRecordURLPattern = URLRouterEntryFactory.with(pattern: "app://records") { [weak self] _,_ in
-            let interactor = HomeScreenInteractor(repository: serviceLocator.fitnessInfoRepository)
+            let homeScreenInteractor = HomeScreenInteractor(repository: serviceLocator.fitnessInfoRepository)
+            let latestResultsComparisonInteractor = ShowPreviousLatestResultInteractor(repository: serviceLocator.fitnessInfoRepository)
+            
             let view = HomeScreenView()
             let disposeBag = DisposeBag()
             
@@ -58,12 +71,13 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
                 fatalError()
             }
             
-            viewController.interactor = interactor
+            viewController.interactors = [homeScreenInteractor, latestResultsComparisonInteractor]
             viewController.disposeBag = disposeBag
             viewController.homeScreenView = view
             viewController.router = self?.router
             
-            HomeScreenPresenter(interactor, view, disposeBag)
+            HomeScreenPresenter(homeScreenInteractor, view, disposeBag)
+            LatestResultsComparisonPresenter(latestResultsComparisonInteractor, viewController, disposeBag)
             
             return viewController
         }

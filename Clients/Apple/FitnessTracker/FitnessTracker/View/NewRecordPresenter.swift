@@ -16,25 +16,23 @@ typealias INewRecordPresenter =
     DisposeBag) -> Void
 
 let NewRecordPresenter: INewRecordPresenter = { homeScreenInteractor, insertNewRecordInteractor, view, disposeBag in
-    view.rx_viewDidLoad
-        .flatMap {
-            homeScreenInteractor.rx_currentRecord
-        }.bindNext(mapFitnessInfoToView(view: view))
-        .addDisposableTo(disposeBag)
+    let loadLatestResult: () -> Void = {
+        homeScreenInteractor
+            .rx_findLatest()
+            .bindNext(mapFitnessInfoToView(view: view))
+            .addDisposableTo(disposeBag)
+    }
     
     view.rx_viewDidLoad
-        .subscribe(onNext: { homeScreenInteractor.loadLatest() })
+        .subscribe(onNext: { loadLatestResult() })
         .addDisposableTo(disposeBag)
     
     view.rx_actionSave
         .flatMap(mapViewModelToFitnessInfo)
-        .flatMap {
-            insertNewRecordInteractor.rx_save(record: $0)
-        }.do(onNext: { _ in
-            homeScreenInteractor.loadLatest()
-        }).subscribe { _ in
-            view.dismiss()
-        }.addDisposableTo(disposeBag)
+        .flatMap { insertNewRecordInteractor.rx_save(record: $0) }
+        .do(onNext: { _ in loadLatestResult() })
+        .subscribe { _ in view.dismiss() }
+        .addDisposableTo(disposeBag)
 }
 
 // MARK: Maps

@@ -10,20 +10,31 @@ import Foundation
 import RxSwift
 
 protocol IHomeScreenInteractor {
-    var rx_currentRecord: Observable<IFitnessInfo> { get }
+    var rx_latestRecordUpdate: Observable<Void> { get }
     
-    func loadLatest()
+    func rx_findLatest() -> Observable<IFitnessInfo>
 }
 
-struct HomeScreenInteractor: IHomeScreenInteractor {
+final class HomeScreenInteractor: IHomeScreenInteractor {
     let repository: IFitnessInfoRepository
-    let currentRecord = PublishSubject<IFitnessInfo>()
     
-    var rx_currentRecord: Observable<IFitnessInfo> {
-        return repository.rx_latest
+    var rx_latestRecordUpdate: Observable<Void> {
+        return repository.rx_updated
     }
     
-    func loadLatest() {
-        repository.loadLatest()
+    init(repository: IFitnessInfoRepository) {
+        self.repository = repository
+    }
+    
+    func rx_findLatest() -> Observable<IFitnessInfo> {
+        let takeFirstResult: ([IFitnessInfo]) -> Observable<IFitnessInfo> = { result in
+            guard let latest = result.first else { return Observable.just(FitnessInfo.empty) }
+            
+            return Observable.just(latest)
+        }
+        
+        return repository
+            .findLatest(numberOfRecords: 1)
+            .flatMap(takeFirstResult)
     }
 }

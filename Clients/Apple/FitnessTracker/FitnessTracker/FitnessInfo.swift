@@ -27,6 +27,12 @@ public struct FitnessInfo: IFitnessInfo {
     public let date: NSDate? = nil
 }
 
+public extension FitnessInfo {
+    static var empty: IFitnessInfo = {
+        return FitnessInfo(weight: 0, height: 0, bodyFatPercentage: 0, musclePercentage: 0)
+    }()
+}
+
 public extension IFitnessInfo {
     var bodyFatWeight: Double {
         return Double(weight) * (bodyFatPercentage/100)
@@ -48,16 +54,6 @@ public extension IFitnessInfo {
     }    
 }
 
-func ==(lhs: IFitnessInfo, rhs: IFitnessInfo) -> Bool {
-    if lhs.height != rhs.height { return false }
-    if lhs.weight != rhs.weight { return false }
-    
-    let errorTolerance = 0.000001
-    if abs(lhs.bodyFatPercentage - rhs.bodyFatPercentage) >= errorTolerance { return false }
-    if abs(lhs.musclePercentage - rhs.musclePercentage) >= errorTolerance { return false }
-    
-    return true
-}
 
 public enum BMIRating: String {
     case underweight = "Underweight"

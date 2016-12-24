@@ -11,10 +11,13 @@ import RxSwift
 import URLRouter
 
 class HomeScreenViewController: UITableViewController {
-    var interactor: IHomeScreenInteractor!
+    var interactors: [Any]!
     var disposeBag: DisposeBag!
     var homeScreenView: HomeScreenView!
     var router: URLRouter!
+    
+    fileprivate let needsRefreshSubject = PublishSubject<Void>()
+    fileprivate let previousLatestResult = Variable<HomeScreenViewModel>(HomeScreenViewModel.empty)
 
     override func viewDidLoad() {
         self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "CellSeparator")
@@ -23,7 +26,9 @@ class HomeScreenViewController: UITableViewController {
         
         homeScreenView.viewModelVariable.asObservable()
             .skip(1)
-            .subscribe(onNext: { [weak self] _ in
+            .do(onNext: { [weak self] _ in
+                self?.needsRefreshSubject.onNext()
+            }).subscribe(onNext: { [weak self] _ in
                 self?.tableView.reloadData()
             }).addDisposableTo(disposeBag)
         
@@ -35,6 +40,26 @@ class HomeScreenViewController: UITableViewController {
             guard let viewController = viewController as? UIViewController else { fatalError() }
             
             self.present(viewController, animated: true, completion: nil)
+        }
+    }
+}
+
+extension HomeScreenViewController: IShowPreviousLatestResultView {
+    var rx_needsRefresh: Observable<Void> {
+        return needsRefreshSubject.asObservable()
+    }
+
+    var rx_comparisonViewModel: AnyObserver<HomeScreenViewModel> {
+        return AnyObserver { [weak self] event in
+            guard let `self` = self else { return }
+            
+            switch event {
+            case .next(let element):
+                self.previousLatestResult.value = element
+                self.tableView.reloadData()
+                
+            default: break
+            }
         }
     }
 }
@@ -70,13 +95,13 @@ extension HomeScreenViewController {
     
     func cellTextConfiguration(for indexPath: IndexPath) -> (String, String, String, String) {
         switch (indexPath.section, indexPath.row/2) {
-            case (0, 0): return ("Height", String(format: "%d", homeScreenView.viewModel.height), "cm", "Today, 13:30")
-            case (0, 1): return ("Weight", String(format: "%.2f", homeScreenView.viewModel.weight), "kg", "Today, 13:30")
-            case (0, 2): return ("Body Fat", String(format: "%.2f", homeScreenView.viewModel.bodyFat), "%", "Today, 13:30")
-            case (0, 3): return ("Muscle", String(format: "%.2f", homeScreenView.viewModel.muscle), "%", "Today, 13:30")
-            case (1, 0): return ("Body Fat Weight", String(format: "%.2f", homeScreenView.viewModel.bodyFatWeight), "kg", "")
-            case (1, 1): return ("Muscle Weight", String(format: "%.2f", homeScreenView.viewModel.muscleWeight), "kg", "")
-            case (1, 2): return ("Lean Body Weight", String(format: "%.2f", homeScreenView.viewModel.leanBodyWeight), "kg", "")
+            case (0, 0): return ("Height", String(format: "%d", homeScreenView.viewModel.height), "cm", "\(previousLatestResult.value.height) cm")
+            case (0, 1): return ("Weight", String(format: "%.2f", homeScreenView.viewModel.weight), "kg", String(format: "%.2f kg", previousLatestResult.value.weight))
+            case (0, 2): return ("Body Fat", String(format: "%.2f", homeScreenView.viewModel.bodyFat), "%", String(format: "%.2f %%", previousLatestResult.value.bodyFat))
+            case (0, 3): return ("Muscle", String(format: "%.2f", homeScreenView.viewModel.muscle), "%", String(format: "%.2f %%", previousLatestResult.value.muscle))
+            case (1, 0): return ("Body Fat Weight", String(format: "%.2f", homeScreenView.viewModel.bodyFatWeight), "kg", String(format: "%.2f kg",previousLatestResult.value.bodyFatWeight))
+            case (1, 1): return ("Muscle Weight", String(format: "%.2f", homeScreenView.viewModel.muscleWeight), "kg", String(format: "%.2f kg",previousLatestResult.value.muscleWeight))
+            case (1, 2): return ("Lean Body Weight", String(format: "%.2f", homeScreenView.viewModel.leanBodyWeight), "kg", String(format: "%.2f kg",previousLatestResult.value.leanBodyWeight))
             case (1, 3):
                 return ("BMI", String(format: "%.1f", homeScreenView.viewModel.bmi), "", BMIRating.for(bmi: homeScreenView.viewModel.bmi).rawValue)
 

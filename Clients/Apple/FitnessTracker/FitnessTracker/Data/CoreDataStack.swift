@@ -75,3 +75,41 @@ internal let CoreDataStackInitializer: ICoreDataStackInitializer = {
         .flatMap(managedObjectContext)
         .do(onNext: { initializePSC($0) })
 }
+
+struct CoreDataEngine {
+    let managedObjectContext: NSManagedObjectContext
+    
+    func execute(query: CoreDataQueryRequest) -> Observable<[Any]> {
+        return Observable.create { observer in
+            do {
+                let result = try self.managedObjectContext.fetch(query.fetchRequest)
+                
+                observer.onNext(result)
+                observer.onCompleted()
+            } catch {
+                observer.onError(error)
+            }
+            
+            return Disposables.create {
+                observer.onCompleted()
+            }
+        }
+    }
+    
+    func create(entityName: String, configuration: ((NSManagedObject) -> Void)?) -> Observable<NSManagedObject> {
+        let newObject = NSEntityDescription.insertNewObject(forEntityName: entityName, into: managedObjectContext)
+        
+        configuration?(newObject)
+        
+        do {
+            try managedObjectContext.save()
+            
+            return Observable.just(newObject)
+        } catch {
+            return Observable
+                .error(NSError(domain: "Core Data", code: -1, userInfo: nil))
+                .do(onNext: nil, onError: { error in NSLog("Failure when saving the context: \(error)") })
+        }
+    }
+}
+

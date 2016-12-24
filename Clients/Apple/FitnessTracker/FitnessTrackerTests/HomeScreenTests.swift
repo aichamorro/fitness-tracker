@@ -56,3 +56,33 @@ class HomeScreenTests: QuickSpec {
         }
     }
 }
+
+class MockFitnessInfoRepository: IFitnessInfoRepository {
+    
+    private let rx_latestSubject = PublishSubject<IFitnessInfo>()
+    
+    var mockLastRecord: IFitnessInfo!
+    
+    init(mockLastRecord: IFitnessInfo) {
+        self.mockLastRecord = mockLastRecord
+    }
+    
+    var rx_latest: Observable<IFitnessInfo> {
+        return rx_latestSubject.asObservable()
+    }
+    
+    func loadLatest() {
+        rx_latestSubject.onNext(mockLastRecord)
+    }
+    
+    func findLatest(numberOfRecords: Int) -> Observable<[IFitnessInfo]> {
+        return Observable.just([FitnessInfo.empty])
+    }
+    
+    func save(record: IFitnessInfo) -> Observable<IFitnessInfo> {
+        mockLastRecord = record
+        
+        return Observable.just(mockLastRecord)
+    }
+}
+

@@ -11,6 +11,7 @@ import Quick
 import Nimble
 @testable import FitnessTracker
 
+
 class LogRepositoryTests: QuickSpec {
     override func spec() {
         describe("So that I can keep track of my fitness data, as user I would like to be able to store a daily log with my fitness data") {
