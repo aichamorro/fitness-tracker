@@ -34,14 +34,14 @@ class ShowPreviousLatestResultInteractor: IShowPreviousLatestResultInteractor {
 
 protocol IShowPreviousLatestResultView {
     var rx_needsRefresh: Observable<Void> { get }
-    var rx_comparisonViewModel: AnyObserver<HomeScreenViewModel> { get }
+    var rx_comparisonViewModel: AnyObserver<LatestRecordViewModel> { get }
 }
 
 typealias IShowPreviousLatestResultPresenter = (IShowPreviousLatestResultInteractor, IShowPreviousLatestResultView, DisposeBag) -> Void
 let LatestResultsComparisonPresenter: IShowPreviousLatestResultPresenter = { interactor, view, disposeBag in
     view.rx_needsRefresh
         .flatMap { interactor.rx_previousLatestResult() }
-        .map { info in HomeScreenViewModel.from(fitnessInfo: info) }
+        .map { info in LatestRecordViewModel.from(fitnessInfo: info) }
         .bindTo(view.rx_comparisonViewModel)
         .addDisposableTo(disposeBag)
 }

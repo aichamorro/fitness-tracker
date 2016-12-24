@@ -1,5 +1,5 @@
 //
-//  HomeScreenPresenter.swift
+//  LatestRecordPresenter.swift
 //  FitnessTracker
 //
 //  Created by Alberto Chamorro - Personal on 20/12/2016.
@@ -9,17 +9,17 @@
 import Foundation
 import RxSwift
 
-typealias IHomeScreenPresenter = (IHomeScreenInteractor, IHomeScreenView, DisposeBag) -> Void
-let HomeScreenPresenter: IHomeScreenPresenter = { interactor, view, disposeBag in
+typealias ILatestRecordPresenter = (ILatestRecordInteractor, ILatestRecordView, DisposeBag) -> Void
+let LatestRecordPresenter: ILatestRecordPresenter = { interactor, view, disposeBag in
     view.rx_viewDidLoad
         .flatMap { interactor.rx_findLatest() }
-        .map { HomeScreenViewModel.from(fitnessInfo: $0) }
+        .map { LatestRecordViewModel.from(fitnessInfo: $0) }
         .bindTo(view.rx_viewModel)
         .addDisposableTo(disposeBag)
 
     interactor.rx_latestRecordUpdate
         .flatMap { interactor.rx_findLatest() }
-        .map { HomeScreenViewModel.from(fitnessInfo: $0) }
+        .map { LatestRecordViewModel.from(fitnessInfo: $0) }
         .bindTo(view.rx_viewModel)
         .addDisposableTo(disposeBag)
 }

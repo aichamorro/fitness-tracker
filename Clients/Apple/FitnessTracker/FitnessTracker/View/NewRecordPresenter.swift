@@ -10,14 +10,14 @@ import Foundation
 import RxSwift
 
 typealias INewRecordPresenter =
-    (IHomeScreenInteractor,
+    (ILatestRecordInteractor,
     INewRecordInteractor,
     INewRecordView,
     DisposeBag) -> Void
 
-let NewRecordPresenter: INewRecordPresenter = { homeScreenInteractor, insertNewRecordInteractor, view, disposeBag in
+let NewRecordPresenter: INewRecordPresenter = { latestRecordInteractor, insertNewRecordInteractor, view, disposeBag in
     let loadLatestResult: () -> Void = {
-        homeScreenInteractor
+        latestRecordInteractor
             .rx_findLatest()
             .bindNext(mapFitnessInfoToView(view: view))
             .addDisposableTo(disposeBag)

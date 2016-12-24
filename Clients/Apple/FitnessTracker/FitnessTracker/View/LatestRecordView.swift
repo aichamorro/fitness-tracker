@@ -1,5 +1,5 @@
 //
-//  HomeScreenView.swift
+//  LatestRecordView.swift
 //  FitnessTracker
 //
 //  Created by Alberto Chamorro - Personal on 20/12/2016.
@@ -9,7 +9,7 @@
 import Foundation
 import RxSwift
 
-struct HomeScreenViewModel {
+struct LatestRecordViewModel {
     let weight: Double
     let height: UInt
     let bodyFat: Double
@@ -20,9 +20,9 @@ struct HomeScreenViewModel {
     let bmi: Double
 }
 
-extension HomeScreenViewModel {
-    static var empty: HomeScreenViewModel = {
-        return HomeScreenViewModel(weight: 0,
+extension LatestRecordViewModel {
+    static var empty: LatestRecordViewModel = {
+        return LatestRecordViewModel(weight: 0,
                                    height: 0,
                                    bodyFat: 0,
                                    muscle: 0,
@@ -32,8 +32,8 @@ extension HomeScreenViewModel {
                                    bmi: 0)
     }()
 
-    static func from(fitnessInfo: IFitnessInfo) -> HomeScreenViewModel {
-        return HomeScreenViewModel(weight: fitnessInfo.weight,
+    static func from(fitnessInfo: IFitnessInfo) -> LatestRecordViewModel {
+        return LatestRecordViewModel(weight: fitnessInfo.weight,
                                    height: fitnessInfo.height,
                                    bodyFat: fitnessInfo.bodyFatPercentage,
                                    muscle: fitnessInfo.musclePercentage,
@@ -44,15 +44,15 @@ extension HomeScreenViewModel {
     }
 }
 
-protocol IHomeScreenView: class {
-    var viewModel: HomeScreenViewModel { get set }
+protocol ILatestRecordView: class {
+    var viewModel: LatestRecordViewModel { get set }
     var rx_viewDidLoad: Observable<Void> { get }
 
     func viewDidLoad()
 }
 
-extension IHomeScreenView {
-    var rx_viewModel: AnyObserver<HomeScreenViewModel> {
+extension ILatestRecordView {
+    var rx_viewModel: AnyObserver<LatestRecordViewModel> {
         return AnyObserver() { event in
             switch event {
             case .next(let element): self.viewModel = element
@@ -62,9 +62,9 @@ extension IHomeScreenView {
     }
 }
 
-class HomeScreenView: IHomeScreenView {
-    var viewModelVariable = Variable<HomeScreenViewModel>(HomeScreenViewModel.empty)
-    var viewModel: HomeScreenViewModel {
+class LatestRecordView: ILatestRecordView {
+    var viewModelVariable = Variable<LatestRecordViewModel>(LatestRecordViewModel.empty)
+    var viewModel: LatestRecordViewModel {
         get { return viewModelVariable.value }
         set { viewModelVariable.value = newValue }
     }

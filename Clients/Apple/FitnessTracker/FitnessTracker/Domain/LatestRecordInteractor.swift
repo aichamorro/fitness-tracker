@@ -1,5 +1,5 @@
 //
-//  HomeScreenInteractor.swift
+//  LatestRecordInteractor.swift
 //  FitnessTracker
 //
 //  Created by Alberto Chamorro - Personal on 20/12/2016.
@@ -9,13 +9,13 @@
 import Foundation
 import RxSwift
 
-protocol IHomeScreenInteractor {
+protocol ILatestRecordInteractor {
     var rx_latestRecordUpdate: Observable<Void> { get }
     
     func rx_findLatest() -> Observable<IFitnessInfo>
 }
 
-final class HomeScreenInteractor: IHomeScreenInteractor {
+final class LatestRecordInteractor: ILatestRecordInteractor {
     let repository: IFitnessInfoRepository
     
     var rx_latestRecordUpdate: Observable<Void> {

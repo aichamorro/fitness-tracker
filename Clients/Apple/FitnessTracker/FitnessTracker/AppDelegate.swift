@@ -61,22 +61,22 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         let serviceLocator = self.serviceLocator!
         
         let currentRecordURLPattern = URLRouterEntryFactory.with(pattern: "app://records") { [weak self] _,_ in
-            let homeScreenInteractor = HomeScreenInteractor(repository: serviceLocator.fitnessInfoRepository)
+            let latestRecordInteractor = LatestRecordInteractor(repository: serviceLocator.fitnessInfoRepository)
             let latestResultsComparisonInteractor = ShowPreviousLatestResultInteractor(repository: serviceLocator.fitnessInfoRepository)
             
-            let view = HomeScreenView()
+            let view = LatestRecordView()
             let disposeBag = DisposeBag()
             
-            guard let viewController = UIStoryboard(name: "Main", bundle: nil).instantiateInitialViewController() as? HomeScreenViewController else {
+            guard let viewController = UIStoryboard(name: "Main", bundle: nil).instantiateInitialViewController() as? LatestRecordViewController else {
                 fatalError()
             }
             
-            viewController.interactors = [homeScreenInteractor, latestResultsComparisonInteractor]
+            viewController.interactors = [latestRecordInteractor, latestResultsComparisonInteractor]
             viewController.disposeBag = disposeBag
-            viewController.homeScreenView = view
+            viewController.latestRecordView = view
             viewController.router = self?.router
             
-            HomeScreenPresenter(homeScreenInteractor, view, disposeBag)
+            LatestRecordPresenter(latestRecordInteractor, view, disposeBag)
             LatestResultsComparisonPresenter(latestResultsComparisonInteractor, viewController, disposeBag)
             
             return viewController
@@ -87,7 +87,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
             let viewController = storyboard.instantiateViewController(withIdentifier: "NewRecordViewController") as? NewRecordViewController
             guard viewController != nil else { fatalError() }
             
-            let seeLatestRecordInteractor = HomeScreenInteractor(repository: serviceLocator.fitnessInfoRepository)
+            let seeLatestRecordInteractor = LatestRecordInteractor(repository: serviceLocator.fitnessInfoRepository)
             let insertNewRecordInteractor = NewRecordInteractor(repository: serviceLocator.fitnessInfoRepository)
             let disposeBag = DisposeBag()
             

@@ -1,5 +1,5 @@
 //
-//  HomeScreenMetricCell.swift
+//  LatestRecordMetricCell.swift
 //  FitnessTracker
 //
 //  Created by Alberto Chamorro - Personal on 20/12/2016.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class HomeScreenMetricCell: UITableViewCell {
+class LatestRecordMetricCell: UITableViewCell {
     @IBOutlet var container: UIView!
     @IBOutlet var name: UILabel!
     @IBOutlet var value: UILabel!

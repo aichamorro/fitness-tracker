@@ -1,5 +1,5 @@
 //
-//  HomeScreenTests.swift
+//  LatestRecordTests.swift
 //  FitnessTracker
 //
 //  Created by Alberto Chamorro - Personal on 14/12/2016.
@@ -13,21 +13,21 @@ import RxSwift
 import RxTest
 @testable import FitnessTracker
 
-class HomeScreenTests: QuickSpec {
+class LatestRecordTests: QuickSpec {
     override func spec() {
         describe("So that I can see my fitness info at one glance, as user I would like to see the latest measurements") {
             context("Showing measurements") {
                 
-                var view: HomeScreenView!
+                var view: LatestRecordView!
                 var disposeBag: DisposeBag!
                 var scheduler: TestScheduler!
-                var presenter: IHomeScreenPresenter!
+                var presenter: ILatestRecordPresenter!
                 
                 beforeEach {
-                    view = HomeScreenView()
+                    view = LatestRecordView()
                     disposeBag = DisposeBag()
                     scheduler = TestScheduler(initialClock: 0)
-                    presenter = HomeScreenPresenter
+                    presenter = LatestRecordPresenter
                 }
                 
                 afterEach {
@@ -40,7 +40,7 @@ class HomeScreenTests: QuickSpec {
                 
                 it("Shows the latest record data") {
                     let mockRepository = MockFitnessInfoRepository(mockLastRecord: FitnessInfo(weight: 34.5, height: 171, bodyFatPercentage: 30.0, musclePercentage: 30.0))
-                    let interactor = HomeScreenInteractor(repository: mockRepository)
+                    let interactor = LatestRecordInteractor(repository: mockRepository)
                     presenter(interactor, view, disposeBag)
                     
                     createObserverAndSubscribe(to: view.viewModelVariable.asObservable().skip(1), scheduler: scheduler, disposeBag: disposeBag, expect: { viewModel in

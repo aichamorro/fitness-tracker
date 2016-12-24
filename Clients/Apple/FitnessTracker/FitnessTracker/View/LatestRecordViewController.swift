@@ -1,5 +1,5 @@
 //
-//  HomeScreenViewController.swift
+//  LatestRecordViewController.swift
 //  FitnessTracker
 //
 //  Created by Alberto Chamorro - Personal on 20/12/2016.
@@ -10,21 +10,21 @@ import UIKit
 import RxSwift
 import URLRouter
 
-class HomeScreenViewController: UITableViewController {
+class LatestRecordViewController: UITableViewController {
     var interactors: [Any]!
     var disposeBag: DisposeBag!
-    var homeScreenView: HomeScreenView!
+    var latestRecordView: LatestRecordView!
     var router: URLRouter!
     
     fileprivate let needsRefreshSubject = PublishSubject<Void>()
-    fileprivate let previousLatestResult = Variable<HomeScreenViewModel>(HomeScreenViewModel.empty)
+    fileprivate let previousLatestResult = Variable<LatestRecordViewModel>(LatestRecordViewModel.empty)
 
     override func viewDidLoad() {
         self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "CellSeparator")
 
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(createNewRecord(sender:)))
         
-        homeScreenView.viewModelVariable.asObservable()
+        latestRecordView.viewModelVariable.asObservable()
             .skip(1)
             .do(onNext: { [weak self] _ in
                 self?.needsRefreshSubject.onNext()
@@ -32,7 +32,7 @@ class HomeScreenViewController: UITableViewController {
                 self?.tableView.reloadData()
             }).addDisposableTo(disposeBag)
         
-        homeScreenView.viewDidLoad()
+        latestRecordView.viewDidLoad()
     }
     
     func createNewRecord(sender: Any?) {
@@ -44,12 +44,12 @@ class HomeScreenViewController: UITableViewController {
     }
 }
 
-extension HomeScreenViewController: IShowPreviousLatestResultView {
+extension LatestRecordViewController: IShowPreviousLatestResultView {
     var rx_needsRefresh: Observable<Void> {
         return needsRefreshSubject.asObservable()
     }
 
-    var rx_comparisonViewModel: AnyObserver<HomeScreenViewModel> {
+    var rx_comparisonViewModel: AnyObserver<LatestRecordViewModel> {
         return AnyObserver { [weak self] event in
             guard let `self` = self else { return }
             
@@ -64,7 +64,7 @@ extension HomeScreenViewController: IShowPreviousLatestResultView {
     }
 }
 
-extension HomeScreenViewController {
+extension LatestRecordViewController {
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 2
     }
@@ -78,7 +78,7 @@ extension HomeScreenViewController {
             return tableView.dequeueReusableCell(withIdentifier: "CellSeparator", for: indexPath)
         }
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "BodyMeasurementMetricCell", for: indexPath) as! HomeScreenMetricCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "BodyMeasurementMetricCell", for: indexPath) as! LatestRecordMetricCell
         let cellText = cellTextConfiguration(for: indexPath)
         
         cell.name.text = cellText.0
@@ -95,15 +95,15 @@ extension HomeScreenViewController {
     
     func cellTextConfiguration(for indexPath: IndexPath) -> (String, String, String, String) {
         switch (indexPath.section, indexPath.row/2) {
-            case (0, 0): return ("Height", String(format: "%d", homeScreenView.viewModel.height), "cm", "\(previousLatestResult.value.height) cm")
-            case (0, 1): return ("Weight", String(format: "%.2f", homeScreenView.viewModel.weight), "kg", String(format: "%.2f kg", previousLatestResult.value.weight))
-            case (0, 2): return ("Body Fat", String(format: "%.2f", homeScreenView.viewModel.bodyFat), "%", String(format: "%.2f %%", previousLatestResult.value.bodyFat))
-            case (0, 3): return ("Muscle", String(format: "%.2f", homeScreenView.viewModel.muscle), "%", String(format: "%.2f %%", previousLatestResult.value.muscle))
-            case (1, 0): return ("Body Fat Weight", String(format: "%.2f", homeScreenView.viewModel.bodyFatWeight), "kg", String(format: "%.2f kg",previousLatestResult.value.bodyFatWeight))
-            case (1, 1): return ("Muscle Weight", String(format: "%.2f", homeScreenView.viewModel.muscleWeight), "kg", String(format: "%.2f kg",previousLatestResult.value.muscleWeight))
-            case (1, 2): return ("Lean Body Weight", String(format: "%.2f", homeScreenView.viewModel.leanBodyWeight), "kg", String(format: "%.2f kg",previousLatestResult.value.leanBodyWeight))
+            case (0, 0): return ("Height", String(format: "%d", latestRecordView.viewModel.height), "cm", "\(previousLatestResult.value.height) cm")
+            case (0, 1): return ("Weight", String(format: "%.2f", latestRecordView.viewModel.weight), "kg", String(format: "%.2f kg", previousLatestResult.value.weight))
+            case (0, 2): return ("Body Fat", String(format: "%.2f", latestRecordView.viewModel.bodyFat), "%", String(format: "%.2f %%", previousLatestResult.value.bodyFat))
+            case (0, 3): return ("Muscle", String(format: "%.2f", latestRecordView.viewModel.muscle), "%", String(format: "%.2f %%", previousLatestResult.value.muscle))
+            case (1, 0): return ("Body Fat Weight", String(format: "%.2f", latestRecordView.viewModel.bodyFatWeight), "kg", String(format: "%.2f kg",previousLatestResult.value.bodyFatWeight))
+            case (1, 1): return ("Muscle Weight", String(format: "%.2f", latestRecordView.viewModel.muscleWeight), "kg", String(format: "%.2f kg",previousLatestResult.value.muscleWeight))
+            case (1, 2): return ("Lean Body Weight", String(format: "%.2f", latestRecordView.viewModel.leanBodyWeight), "kg", String(format: "%.2f kg",previousLatestResult.value.leanBodyWeight))
             case (1, 3):
-                return ("BMI", String(format: "%.1f", homeScreenView.viewModel.bmi), "", BMIRating.for(bmi: homeScreenView.viewModel.bmi).rawValue)
+                return ("BMI", String(format: "%.1f", latestRecordView.viewModel.bmi), "", BMIRating.for(bmi: latestRecordView.viewModel.bmi).rawValue)
 
             default: fatalError()
         }
