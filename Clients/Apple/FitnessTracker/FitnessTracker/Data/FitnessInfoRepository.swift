@@ -14,7 +14,8 @@ protocol IFitnessInfoRepository {
     var rx_updated: Observable<Void> { get }
     
     func findLatest(numberOfRecords: Int) -> Observable<[IFitnessInfo]>
-    func save(record: IFitnessInfo) -> Observable<IFitnessInfo>
+    
+    @discardableResult func save(record: IFitnessInfo) -> Observable<IFitnessInfo>
 }
 
 enum CoreDataEntity: String {
@@ -71,7 +72,7 @@ final class CoreDataInfoRepository: IFitnessInfoRepository {
             .flatMap { return Observable.just($0 as! [CoreDataFitnessInfo]) }
     }
     
-    func save(record: IFitnessInfo) -> Observable<IFitnessInfo> {
+    @discardableResult func save(record: IFitnessInfo) -> Observable<IFitnessInfo> {
         return coreDataEngine.create(entityName: CoreDataEntity.fitnessInfo.rawValue) { entity in
             guard let saved = entity as? CoreDataFitnessInfo else { fatalError() }
             

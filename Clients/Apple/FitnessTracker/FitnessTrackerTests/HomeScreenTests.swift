@@ -11,7 +11,24 @@ import Quick
 import Nimble
 import RxSwift
 import RxTest
+import CoreData
 @testable import FitnessTracker
+
+let SetUpInMemoryManagedObjectContext: () -> NSManagedObjectContext = {
+    let managedObjectModel = NSManagedObjectModel.mergedModel(from: [Bundle.main])!
+    let persistentStoreCoordinator = NSPersistentStoreCoordinator(managedObjectModel: managedObjectModel)
+    
+    do {
+        try persistentStoreCoordinator.addPersistentStore(ofType: NSInMemoryStoreType, configurationName: nil, at: nil, options: nil)
+    } catch {
+        fatalError("Couldn't initialize an in-memory data stack")
+    }
+    
+    let managedObjectContext = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
+    managedObjectContext.persistentStoreCoordinator = persistentStoreCoordinator
+    
+    return managedObjectContext
+}
 
 class LatestRecordTests: QuickSpec {
     override func spec() {
@@ -22,26 +39,36 @@ class LatestRecordTests: QuickSpec {
                 var disposeBag: DisposeBag!
                 var scheduler: TestScheduler!
                 var presenter: ILatestRecordPresenter!
+                var repository: CoreDataInfoRepository!
+                var managedObjectContext: NSManagedObjectContext!
+                var interactor: ILatestRecordInteractor!
+                
                 
                 beforeEach {
+                    managedObjectContext = SetUpInMemoryManagedObjectContext()
+                    repository = CoreDataInfoRepository(managedObjectContext: managedObjectContext)
                     view = LatestRecordView()
                     disposeBag = DisposeBag()
                     scheduler = TestScheduler(initialClock: 0)
                     presenter = LatestRecordPresenter
+                    interactor = LatestRecordInteractor(repository: repository)
+                    
+                    presenter(interactor, view, disposeBag)
                 }
                 
                 afterEach {
                     presenter = nil
                     view = nil
-                    
+                    managedObjectContext.reset()
+                    managedObjectContext = nil
+                    repository = nil
+                    interactor = nil
                     scheduler.stop()
                     scheduler = nil
                 }
                 
                 it("Shows the latest record data") {
-                    let mockRepository = MockFitnessInfoRepository(mockLastRecord: FitnessInfo(weight: 34.5, height: 171, bodyFatPercentage: 30.0, musclePercentage: 30.0))
-                    let interactor = LatestRecordInteractor(repository: mockRepository)
-                    presenter(interactor, view, disposeBag)
+                    repository.save(record: FitnessInfo(weight: 34.5, height: 171, bodyFatPercentage: 30.0, musclePercentage: 30.0))
                     
                     createObserverAndSubscribe(to: view.viewModelVariable.asObservable().skip(1), scheduler: scheduler, disposeBag: disposeBag, expect: { viewModel in
                         expect(viewModel.weight - 34.5 < 0.000001).to(beTrue())
@@ -52,37 +79,18 @@ class LatestRecordTests: QuickSpec {
                         view.viewDidLoad()
                     })
                 }
+                
+                it("Doesn't crash when there is no previous data recorded") {
+                    createObserverAndSubscribe(to: view.viewModelVariable.asObservable().skip(1), scheduler: scheduler, disposeBag: disposeBag, expect: { viewModel in
+                        expect(viewModel.weight).to(equal(0))
+                        expect(viewModel.height).to(equal(0))
+                        expect(viewModel.bodyFat).to(equal(0))
+                        expect(viewModel.muscle).to(equal(0))
+                    }, action: {
+                        view.viewDidLoad()
+                    })
+                }
             }
         }
     }
 }
-
-class MockFitnessInfoRepository: IFitnessInfoRepository {
-    
-    private let rx_latestSubject = PublishSubject<IFitnessInfo>()
-    
-    var mockLastRecord: IFitnessInfo!
-    
-    init(mockLastRecord: IFitnessInfo) {
-        self.mockLastRecord = mockLastRecord
-    }
-    
-    var rx_latest: Observable<IFitnessInfo> {
-        return rx_latestSubject.asObservable()
-    }
-    
-    func loadLatest() {
-        rx_latestSubject.onNext(mockLastRecord)
-    }
-    
-    func findLatest(numberOfRecords: Int) -> Observable<[IFitnessInfo]> {
-        return Observable.just([FitnessInfo.empty])
-    }
-    
-    func save(record: IFitnessInfo) -> Observable<IFitnessInfo> {
-        mockLastRecord = record
-        
-        return Observable.just(mockLastRecord)
-    }
-}
-
