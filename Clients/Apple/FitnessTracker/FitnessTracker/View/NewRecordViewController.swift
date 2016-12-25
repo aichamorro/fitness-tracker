@@ -10,6 +10,20 @@ import UIKit
 import RxSwift
 import RxCocoa
 
+extension String {
+    var doubleValue: Double? {
+        return Double(self.replacingOccurrences(of: ",", with: "."))
+    }
+}
+
+extension UITextField {
+    var textAsDouble: Double? {
+        guard let text = self.text, let value = text.doubleValue else { return nil }
+        
+        return value
+    }
+}
+
 typealias NewRecordViewModel = (height: UInt, weight: Double, muscle: Double, bodyFat: Double)
 
 final class NewRecordViewController: UIViewController {
@@ -55,17 +69,17 @@ extension NewRecordViewController: INewRecordView {
     }
     
     var weight: Double {
-        get { return weightTextField.text != nil ? Double(weightTextField.text!)! : 0 }
+        get { return weightTextField.text != nil ? weightTextField.textAsDouble! : 0 }
         set { weightTextField.text = String(format: "%.1f", newValue) }
     }
     
     var bodyFatPercentage: Double {
-        get { return bodyFatTextField.text != nil ? Double(bodyFatTextField.text!)! : 0 }
+        get { return bodyFatTextField.text != nil ? bodyFatTextField.textAsDouble! : 0 }
         set { bodyFatTextField.text = String(format: "%.1f", newValue) }
     }
 
     var musclePercentage: Double {
-        get { return muscleTextField.text != nil ? Double(muscleTextField.text!)! : 0 }
+        get { return muscleTextField.text != nil ? muscleTextField.textAsDouble! : 0 }
         set { muscleTextField.text = String(format: "%1.f", newValue) }
     }
     
