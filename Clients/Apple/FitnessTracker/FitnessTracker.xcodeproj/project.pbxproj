@@ -18,7 +18,7 @@
 		2021420F1E0D27FD00BAF444 /* CoreDataFitnessInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2021420E1E0D27FD00BAF444 /* CoreDataFitnessInfo.swift */; };
 		202142111E0D57C200BAF444 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 202142101E0D57C200BAF444 /* CoreDataStack.swift */; };
 		204C62141E0FFFC100B6CE47 /* NewRecordTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204C62131E0FFFC100B6CE47 /* NewRecordTests.swift */; };
-		205212FB1E01D3AD00F9A9E7 /* HomeScreenTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205212FA1E01D3AD00F9A9E7 /* HomeScreenTests.swift */; };
+		205212FB1E01D3AD00F9A9E7 /* LatestRecordTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205212FA1E01D3AD00F9A9E7 /* LatestRecordTests.swift */; };
 		20D76F1F1E0D8E5C00FDD122 /* LatestResultsComparison.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20D76F1E1E0D8E5C00FDD122 /* LatestResultsComparison.swift */; };
 		20D76F211E0DA8DA00FDD122 /* FitnessInfo+Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20D76F201E0DA8DA00FDD122 /* FitnessInfo+Operators.swift */; };
 		20FA50FB1E095712002E536A /* LatestRecordInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FA50FA1E095712002E536A /* LatestRecordInteractor.swift */; };
@@ -62,7 +62,7 @@
 		2021420E1E0D27FD00BAF444 /* CoreDataFitnessInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataFitnessInfo.swift; sourceTree = "<group>"; };
 		202142101E0D57C200BAF444 /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		204C62131E0FFFC100B6CE47 /* NewRecordTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewRecordTests.swift; sourceTree = "<group>"; };
-		205212FA1E01D3AD00F9A9E7 /* HomeScreenTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = HomeScreenTests.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		205212FA1E01D3AD00F9A9E7 /* LatestRecordTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = LatestRecordTests.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		20D76F1E1E0D8E5C00FDD122 /* LatestResultsComparison.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = LatestResultsComparison.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		20D76F201E0DA8DA00FDD122 /* FitnessInfo+Operators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FitnessInfo+Operators.swift"; sourceTree = "<group>"; };
 		20FA50FA1E095712002E536A /* LatestRecordInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = LatestRecordInteractor.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -145,7 +145,7 @@
 			children = (
 				200323EC1E0018A500B1C33A /* FitnessTrackerTests.swift */,
 				200323EE1E0018A500B1C33A /* Info.plist */,
-				205212FA1E01D3AD00F9A9E7 /* HomeScreenTests.swift */,
+				205212FA1E01D3AD00F9A9E7 /* LatestRecordTests.swift */,
 				20FA510A1E0AE4D0002E536A /* CommonUtils.swift */,
 				204C62131E0FFFC100B6CE47 /* NewRecordTests.swift */,
 			);
@@ -440,7 +440,7 @@
 			files = (
 				20FA510B1E0AE4D0002E536A /* CommonUtils.swift in Sources */,
 				204C62141E0FFFC100B6CE47 /* NewRecordTests.swift in Sources */,
-				205212FB1E01D3AD00F9A9E7 /* HomeScreenTests.swift in Sources */,
+				205212FB1E01D3AD00F9A9E7 /* LatestRecordTests.swift in Sources */,
 				200323ED1E0018A500B1C33A /* FitnessTrackerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
