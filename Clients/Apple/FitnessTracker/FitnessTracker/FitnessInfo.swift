@@ -8,19 +8,34 @@
 
 import Foundation
 
-typealias Weight = UInt
+typealias Weight = Double
 typealias Height = UInt
 
-public struct FitnessInfo {
-    let weight: Weight
-    let height: Height
-    let bodyFatPercentage: Double
-    let musclePercentage: Double
+public protocol IFitnessInfo {
+    var weight: Double { get }
+    var height: UInt { get }
+    var bodyFatPercentage: Double { get }
+    var musclePercentage: Double { get }
+    var date: NSDate? { get }
+}
+
+public struct FitnessInfo: IFitnessInfo {
+    public let weight: Double
+    public let height: UInt
+    public let bodyFatPercentage: Double
+    public let musclePercentage: Double
+    public let date: NSDate? = nil
 }
 
 public extension FitnessInfo {
+    static var empty: IFitnessInfo = {
+        return FitnessInfo(weight: 0, height: 0, bodyFatPercentage: 0, musclePercentage: 0)
+    }()
+}
+
+public extension IFitnessInfo {
     var bodyFatWeight: Double {
-        return Double(weight) * bodyFatPercentage
+        return Double(weight) * (bodyFatPercentage/100)
     }
     
     var leanBodyWeight: Double {
@@ -28,7 +43,7 @@ public extension FitnessInfo {
     }
     
     var muscleWeight: Double {
-        return Double(weight) * musclePercentage
+        return Double(weight) * (musclePercentage/100)
     }
     
     var bmi: Double {
@@ -39,14 +54,15 @@ public extension FitnessInfo {
     }    
 }
 
-public enum BMIRating {
-    case underweight
-    case healthyweight
-    case overweight
-    case obese
-    case severelyObese
-    case morbidlyObese
-    case superObese
+
+public enum BMIRating: String {
+    case underweight = "Underweight"
+    case healthyweight = "Healthy weight"
+    case overweight = "Overweight"
+    case obese = "Obese"
+    case severelyObese = "Severy obese"
+    case morbidlyObese = "Morbidly obese"
+    case superObese = "Super obese"
 }
 
 public extension BMIRating {
@@ -54,7 +70,6 @@ public extension BMIRating {
         return DefaultBMIClassification(bmi)
     }
 }
-
 
 fileprivate typealias BMIClassification = (Double) -> BMIRating
 fileprivate let DefaultBMIClassification: BMIClassification = { bmi in

@@ -1,15 +1,38 @@
 PODS:
   - Nimble (5.1.1)
   - Quick (1.0.0)
+  - RxCocoa (3.0.1):
+    - RxSwift (~> 3.0)
+  - RxSwift (3.0.1)
+  - RxTest (3.0.1):
+    - RxSwift (~> 3.0)
+  - URLRouter (1.2.0)
 
 DEPENDENCIES:
   - Nimble
   - Quick
+  - RxCocoa
+  - RxSwift
+  - RxTest
+  - URLRouter (from `https://github.com/aichamorro/URLRouter.git`)
+
+EXTERNAL SOURCES:
+  URLRouter:
+    :git: https://github.com/aichamorro/URLRouter.git
+
+CHECKOUT OPTIONS:
+  URLRouter:
+    :commit: 4462d86c31ebc89bdf2d96e9f01c032422f17d08
+    :git: https://github.com/aichamorro/URLRouter.git
 
 SPEC CHECKSUMS:
   Nimble: 415e3aa3267e7bc2c96b05fa814ddea7bb686a29
   Quick: 8024e4a47e6cc03a9d5245ef0948264fc6d27cff
+  RxCocoa: 15a52fc590dcc700cb4a690a633b5c5184ce3a78
+  RxSwift: af5680055c4ad04480189c52d28385b1029493a6
+  RxTest: 9867e6f3c435af30fbdb44b6d8ec30b78c40b515
+  URLRouter: ffa394dfda6d5014e9af70f4b1a9d4e28dff81db
 
-PODFILE CHECKSUM: 3a7fc72a6c66b620bbe39a2c8caff70071cb595b
+PODFILE CHECKSUM: 197c2f098971044dc24a905f9aa4de388b94b24d
 
 COCOAPODS: 1.1.1

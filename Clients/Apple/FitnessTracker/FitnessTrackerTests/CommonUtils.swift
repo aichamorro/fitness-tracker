@@ -1,0 +1,46 @@
+//
+//  CommonUtils.swift
+//  FitnessTracker
+//
+//  Created by Alberto Chamorro - Personal on 21/12/2016.
+//  Copyright © 2016 OnsetBits. All rights reserved.
+//
+
+import Foundation
+import RxSwift
+import RxTest
+import Quick
+import Nimble
+import CoreData
+
+func createObserverAndSubscribe<T>(to observable: Observable<T>, scheduler: TestScheduler, disposeBag: DisposeBag, expect: ((T) -> Void)?, action: @escaping (()->Void)) {
+    let observer = scheduler.createObserver(T.self)
+    
+    waitUntil { done in
+        observable.subscribe(onNext: {_ in done() }).addDisposableTo(disposeBag)
+        observable.subscribe(observer).addDisposableTo(disposeBag)
+        action()
+    }
+    
+    if T.self != Void.self {
+        let actual = observer.events.first!.value.element!
+        
+        expect?(actual)
+    }    
+}
+
+let SetUpInMemoryManagedObjectContext: () -> NSManagedObjectContext = {
+    let managedObjectModel = NSManagedObjectModel.mergedModel(from: [Bundle.main])!
+    let persistentStoreCoordinator = NSPersistentStoreCoordinator(managedObjectModel: managedObjectModel)
+    
+    do {
+        try persistentStoreCoordinator.addPersistentStore(ofType: NSInMemoryStoreType, configurationName: nil, at: nil, options: nil)
+    } catch {
+        fatalError("Couldn't initialize an in-memory data stack")
+    }
+    
+    let managedObjectContext = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
+    managedObjectContext.persistentStoreCoordinator = persistentStoreCoordinator
+    
+    return managedObjectContext
+}
