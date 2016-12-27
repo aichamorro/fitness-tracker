@@ -14,22 +14,6 @@ import RxTest
 import CoreData
 @testable import FitnessTracker
 
-let SetUpInMemoryManagedObjectContext: () -> NSManagedObjectContext = {
-    let managedObjectModel = NSManagedObjectModel.mergedModel(from: [Bundle.main])!
-    let persistentStoreCoordinator = NSPersistentStoreCoordinator(managedObjectModel: managedObjectModel)
-    
-    do {
-        try persistentStoreCoordinator.addPersistentStore(ofType: NSInMemoryStoreType, configurationName: nil, at: nil, options: nil)
-    } catch {
-        fatalError("Couldn't initialize an in-memory data stack")
-    }
-    
-    let managedObjectContext = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
-    managedObjectContext.persistentStoreCoordinator = persistentStoreCoordinator
-    
-    return managedObjectContext
-}
-
 class LatestRecordTests: QuickSpec {
     override func spec() {
         describe("So that I can see my fitness info at one glance, as user I would like to see the latest measurements") {
@@ -89,7 +73,7 @@ class LatestRecordTests: QuickSpec {
                     }, action: {
                         view.viewDidLoad()
                     })
-                }
+                }                
             }
         }
     }
