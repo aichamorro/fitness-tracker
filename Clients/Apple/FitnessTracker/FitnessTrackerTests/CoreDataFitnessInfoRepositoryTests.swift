@@ -93,19 +93,3 @@ class CoreDataFitnessInfoRepositoryTests: QuickSpec {
         }
     }
 }
-
-private extension IFitnessInfoRepository {
-    func save(many records: [IFitnessInfo]) -> Observable<[IFitnessInfo]> {
-        var result: [IFitnessInfo] = []
-        var error: Error?
-        let disposeBag = DisposeBag()
-        
-        for record in records {
-            self.save(record: record)
-                .subscribe(onNext: { result.append($0) }, onError: { error = $0 } )
-                .addDisposableTo(disposeBag)
-        }
-        
-        return error != nil ? Observable.error(error!) : Observable.just(result)
-    }
-}
