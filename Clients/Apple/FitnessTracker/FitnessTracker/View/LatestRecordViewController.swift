@@ -48,7 +48,7 @@ extension LatestRecordViewController: IShowPreviousLatestResultView {
     var rx_needsRefresh: Observable<Void> {
         return needsRefreshSubject.asObservable()
     }
-
+    
     var rx_comparisonViewModel: AnyObserver<LatestRecordViewModel> {
         return AnyObserver { [weak self] event in
             guard let `self` = self else { return }
@@ -94,18 +94,38 @@ extension LatestRecordViewController {
     }
     
     func cellTextConfiguration(for indexPath: IndexPath) -> (String, String, String, String) {
+        switch bodyMetric(from: indexPath) {
+        case .height:
+            return ("Height", String(format: "%d", latestRecordView.viewModel.height), "cm", "\(previousLatestResult.value.height) cm")
+        case .weight:
+            return ("Weight", String(format: "%.2f", latestRecordView.viewModel.weight), "kg", String(format: "%.2f kg", previousLatestResult.value.weight))
+        case .bodyFatPercentage:
+            return ("Body Fat", String(format: "%.2f", latestRecordView.viewModel.bodyFat), "%", String(format: "%.2f %%", previousLatestResult.value.bodyFat))
+        case .musclePercentage:
+            return ("Muscle", String(format: "%.2f", latestRecordView.viewModel.muscle), "%", String(format: "%.2f %%", previousLatestResult.value.muscle))
+        case .bodyFatWeight:
+            return ("Body Fat Weight", String(format: "%.2f", latestRecordView.viewModel.bodyFatWeight), "kg", String(format: "%.2f kg",previousLatestResult.value.bodyFatWeight))
+        case .muscleWeight:
+            return ("Muscle Weight", String(format: "%.2f", latestRecordView.viewModel.muscleWeight), "kg", String(format: "%.2f kg",previousLatestResult.value.muscleWeight))
+        case .leanBodyWeight:
+            return ("Lean Body Weight", String(format: "%.2f", latestRecordView.viewModel.leanBodyWeight), "kg", String(format: "%.2f kg",previousLatestResult.value.leanBodyWeight))
+        case .bmi:
+            return ("BMI", String(format: "%.1f", latestRecordView.viewModel.bmi), "", BMIRating.for(bmi: latestRecordView.viewModel.bmi).rawValue)
+        }
+    }
+    
+    private func bodyMetric(from indexPath: IndexPath) -> BodyMetric {
         switch (indexPath.section, indexPath.row/2) {
-            case (0, 0): return ("Height", String(format: "%d", latestRecordView.viewModel.height), "cm", "\(previousLatestResult.value.height) cm")
-            case (0, 1): return ("Weight", String(format: "%.2f", latestRecordView.viewModel.weight), "kg", String(format: "%.2f kg", previousLatestResult.value.weight))
-            case (0, 2): return ("Body Fat", String(format: "%.2f", latestRecordView.viewModel.bodyFat), "%", String(format: "%.2f %%", previousLatestResult.value.bodyFat))
-            case (0, 3): return ("Muscle", String(format: "%.2f", latestRecordView.viewModel.muscle), "%", String(format: "%.2f %%", previousLatestResult.value.muscle))
-            case (1, 0): return ("Body Fat Weight", String(format: "%.2f", latestRecordView.viewModel.bodyFatWeight), "kg", String(format: "%.2f kg",previousLatestResult.value.bodyFatWeight))
-            case (1, 1): return ("Muscle Weight", String(format: "%.2f", latestRecordView.viewModel.muscleWeight), "kg", String(format: "%.2f kg",previousLatestResult.value.muscleWeight))
-            case (1, 2): return ("Lean Body Weight", String(format: "%.2f", latestRecordView.viewModel.leanBodyWeight), "kg", String(format: "%.2f kg",previousLatestResult.value.leanBodyWeight))
-            case (1, 3):
-                return ("BMI", String(format: "%.1f", latestRecordView.viewModel.bmi), "", BMIRating.for(bmi: latestRecordView.viewModel.bmi).rawValue)
-
-            default: fatalError()
+        case (0, 0): return .height
+        case (0, 1): return .weight
+        case (0, 2): return .bodyFatPercentage
+        case (0, 3): return .musclePercentage
+        case (1, 0): return .bodyFatWeight
+        case (1, 1): return .muscleWeight
+        case (1, 2): return .leanBodyWeight
+        case (1, 3): return .bmi
+        
+        default: fatalError()
         }
     }
     
@@ -113,5 +133,11 @@ extension LatestRecordViewController {
         guard indexPath.row != 0 else { return 20 }
         
         return indexPath.row % 2 == 0 ? 10 : super.tableView(tableView, heightForRowAt: indexPath)
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        latestRecordView.didSelectMetricSubject.onNext(bodyMetric(from: indexPath))
     }
 }

@@ -14,8 +14,25 @@ protocol IFitnessInfoRepository {
     var rx_updated: Observable<Void> { get }
     
     func findLatest(numberOfRecords: Int) -> Observable<[IFitnessInfo]>
+    func findAll() -> Observable<[IFitnessInfo]>
     
     @discardableResult func save(record: IFitnessInfo) -> Observable<IFitnessInfo>
+}
+
+extension IFitnessInfoRepository {
+    func save(many records: [IFitnessInfo]) -> Observable<[IFitnessInfo]> {
+        var result: [IFitnessInfo] = []
+        var error: Error?
+        let disposeBag = DisposeBag()
+        
+        for record in records {
+            self.save(record: record)
+                .subscribe(onNext: { result.append($0) }, onError: { error = $0 } )
+                .addDisposableTo(disposeBag)
+        }
+        
+        return error != nil ? Observable.error(error!) : Observable.just(result)
+    }
 }
 
 enum CoreDataEntity: String {
@@ -25,6 +42,7 @@ enum CoreDataEntity: String {
 enum CoreDataQueryRequest {
     case findLatestRecords(limit: Int)
     case findLatest
+    case findAll
 }
 
 extension CoreDataQueryRequest {
@@ -39,12 +57,19 @@ extension CoreDataQueryRequest {
             fetchRequest.sortDescriptors = [NSSortDescriptor(key: "date", ascending: false)]
             
             return fetchRequest
+            
+        case .findAll:
+            let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: self.entity)
+            fetchRequest.sortDescriptors = [NSSortDescriptor(key: "date", ascending: false)]
+            
+            return fetchRequest
         }
     }
     
     var entity: String {
         switch self {
         case .findLatest: fallthrough
+        case .findAll: fallthrough
         case .findLatestRecords(_):
             return CoreDataEntity.fitnessInfo.rawValue
         }
@@ -66,9 +91,14 @@ final class CoreDataInfoRepository: IFitnessInfoRepository {
     }
     
     func findLatest(numberOfRecords: Int) -> Observable<[IFitnessInfo]> {
-        return coreDataEngine.execute(query: CoreDataQueryRequest.findLatestRecords(limit: numberOfRecords))
+        return coreDataEngine.execute(query: .findLatestRecords(limit: numberOfRecords))
             .do(onNext: nil, onError: { NSLog("Error: \($0)") })
             .catchErrorJustReturn([])
+            .flatMap { return Observable.just($0 as! [CoreDataFitnessInfo]) }
+    }
+    
+    func findAll() -> Observable<[IFitnessInfo]> {
+        return coreDataEngine.execute(query: .findAll)
             .flatMap { return Observable.just($0 as! [CoreDataFitnessInfo]) }
     }
     

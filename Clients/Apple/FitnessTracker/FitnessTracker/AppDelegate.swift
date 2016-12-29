@@ -15,6 +15,8 @@ class AppServiceLocator {
     var router: URLRouter!
 }
 
+typealias RetainerBag = [Any]
+
 @UIApplicationMain
 final class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -61,6 +63,8 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         let serviceLocator = self.serviceLocator!
         
         let currentRecordURLPattern = URLRouterEntryFactory.with(pattern: "app://records") { [weak self] _,_ in
+            guard let `self` = self else { return nil }
+            
             let latestRecordInteractor = LatestRecordInteractor(repository: serviceLocator.fitnessInfoRepository)
             let latestResultsComparisonInteractor = ShowPreviousLatestResultInteractor(repository: serviceLocator.fitnessInfoRepository)
             
@@ -74,9 +78,9 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
             viewController.interactors = [latestRecordInteractor, latestResultsComparisonInteractor]
             viewController.disposeBag = disposeBag
             viewController.latestRecordView = view
-            viewController.router = self?.router
+            viewController.router = self.router
             
-            LatestRecordPresenter(latestRecordInteractor, view, disposeBag)
+            LatestRecordPresenter(latestRecordInteractor, view, self.router!, disposeBag)
             LatestResultsComparisonPresenter(latestResultsComparisonInteractor, viewController, disposeBag)
             
             return viewController
@@ -98,7 +102,22 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
             return viewController
         }
         
-        return [currentRecordURLPattern, createRecordURLPattern]
+        let showMetricData = URLRouterEntryFactory.with(pattern: "app://records/history") { _, parameters -> Any? in
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let viewController = storyboard.instantiateViewController(withIdentifier: "ShowMetricHistoricalData") as? ShowMetricHistoricalDataViewController
+            guard viewController != nil else { fatalError() }
+            let disposeBag = DisposeBag()
+            
+            viewController!.selectedMetric = BodyMetric(rawValue: parameters["metric"]!)!
+            let historicDataInteractor = MetricHistoryInteractor(repository: serviceLocator.fitnessInfoRepository)
+            viewController!.bag = [historicDataInteractor, disposeBag]
+            
+            MetricHistoryPresenter(historicDataInteractor, viewController!, disposeBag)
+            
+            return viewController
+        }
+        
+        return [currentRecordURLPattern, createRecordURLPattern, showMetricData]
     }
 
 }

@@ -47,6 +47,7 @@ extension LatestRecordViewModel {
 protocol ILatestRecordView: class {
     var viewModel: LatestRecordViewModel { get set }
     var rx_viewDidLoad: Observable<Void> { get }
+    var rx_didSelectMetric: Observable<BodyMetric> { get }
 
     func viewDidLoad()
 }
@@ -72,6 +73,11 @@ class LatestRecordView: ILatestRecordView {
     var viewDidLoadSubject = PublishSubject<Void>()
     var rx_viewDidLoad: Observable<Void> {
         return viewDidLoadSubject.asObservable()
+    }
+    
+    var didSelectMetricSubject = PublishSubject<BodyMetric>()
+    var rx_didSelectMetric: Observable<BodyMetric> {
+        return didSelectMetricSubject.asObservable()
     }
     
     func viewDidLoad() {
