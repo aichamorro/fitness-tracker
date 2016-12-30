@@ -24,8 +24,6 @@ extension UITextField {
     }
 }
 
-typealias NewRecordViewModel = (height: UInt, weight: Double, muscle: Double, bodyFat: Double)
-
 final class NewRecordViewController: UIViewController {
     @IBOutlet fileprivate var heightTextField: UITextField!
     @IBOutlet fileprivate var weightTextField: UITextField!
@@ -83,7 +81,7 @@ extension NewRecordViewController: INewRecordView {
         return saveSubject.asObservable()
     }
     
-    var calibrationPercentage: Double {
+    var calibrationFix: Double {
         guard calibrationInfoSwitch.isOn else { return 1.0 }
         guard let actualReading = calibrationTextFieldActual.text?.doubleValue,
             let expectedReading = calibrationTextFieldExpected.text?.doubleValue else {
@@ -94,7 +92,7 @@ extension NewRecordViewController: INewRecordView {
     }
     
     var viewModel: NewRecordViewModel {
-        return (height: height, weight: weight * calibrationPercentage, muscle: musclePercentage, bodyFat: bodyFatPercentage)
+        return (height: height, weight: weight, muscle: musclePercentage, bodyFat: bodyFatPercentage)
     }
     
     var height: UInt {
