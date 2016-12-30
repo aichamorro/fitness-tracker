@@ -23,5 +23,6 @@ func -(lhs: IFitnessInfo, rhs: IFitnessInfo) -> IFitnessInfo {
     return FitnessInfo(weight: lhs.weight - rhs.weight,
                        height: lhs.height - lhs.height,
                        bodyFatPercentage: lhs.bodyFatPercentage - rhs.bodyFatPercentage,
-                       musclePercentage: lhs.musclePercentage - rhs.musclePercentage)
+                       musclePercentage: lhs.musclePercentage - rhs.musclePercentage,
+                       waterPercentage: lhs.waterPercentage - rhs.waterPercentage)
 }

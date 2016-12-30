@@ -60,10 +60,11 @@ internal let CoreDataStackInitializer: ICoreDataStackInitializer = {
             let urls = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
             let docURL = urls[urls.endIndex - 1]
             let storeURL = docURL.appendingPathComponent("FitnessTrackerDataModel.sqlite")
+            let options = [NSMigratePersistentStoresAutomaticallyOption: true, NSInferMappingModelAutomaticallyOption: true]
             
             do {
                 let psc = moc.persistentStoreCoordinator!
-                try psc.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: storeURL, options: nil)
+                try psc.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: storeURL, options: options)
             } catch {
                 fatalError("Error migrating store: \(error)")
             }

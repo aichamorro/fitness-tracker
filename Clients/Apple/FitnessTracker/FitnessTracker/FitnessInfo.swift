@@ -16,6 +16,7 @@ public protocol IFitnessInfo {
     var height: UInt { get }
     var bodyFatPercentage: Double { get }
     var musclePercentage: Double { get }
+    var waterPercentage: Double { get }
     var date: NSDate? { get }
 }
 
@@ -24,12 +25,13 @@ public struct FitnessInfo: IFitnessInfo {
     public let height: UInt
     public let bodyFatPercentage: Double
     public let musclePercentage: Double
+    public let waterPercentage: Double
     public let date: NSDate? = nil
 }
 
 public extension FitnessInfo {
     static var empty: IFitnessInfo = {
-        return FitnessInfo(weight: 0, height: 0, bodyFatPercentage: 0, musclePercentage: 0)
+        return FitnessInfo(weight: 0, height: 0, bodyFatPercentage: 0, musclePercentage: 0, waterPercentage: 0)
     }()
 }
 
@@ -44,6 +46,10 @@ public extension IFitnessInfo {
     
     var muscleWeight: Double {
         return Double(weight) * (musclePercentage/100)
+    }
+    
+    var waterWeight: Double {
+        return Double(weight) * (waterPercentage/100)
     }
     
     var bmi: Double {

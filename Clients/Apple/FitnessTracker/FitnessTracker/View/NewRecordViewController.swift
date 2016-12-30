@@ -29,6 +29,7 @@ final class NewRecordViewController: UIViewController {
     @IBOutlet fileprivate var weightTextField: UITextField!
     @IBOutlet fileprivate var muscleTextField: UITextField!
     @IBOutlet fileprivate var bodyFatTextField: UITextField!
+    @IBOutlet fileprivate var waterTextField: UITextField!
     @IBOutlet fileprivate var saveButton: UIButton!
     @IBOutlet fileprivate var calibrationInfoSwitch: UISwitch!
     @IBOutlet fileprivate var calibrationFields: UIStackView!
@@ -88,7 +89,7 @@ extension NewRecordViewController: INewRecordView {
     }
     
     var viewModel: NewRecordViewModel {
-        return (height: height, weight: weight, muscle: musclePercentage, bodyFat: bodyFatPercentage)
+        return (height: height, weight: weight, muscle: musclePercentage, bodyFat: bodyFatPercentage, water: waterPercentage)
     }
     
     var height: UInt {
@@ -108,7 +109,12 @@ extension NewRecordViewController: INewRecordView {
 
     var musclePercentage: Double {
         get { return muscleTextField.text != nil ? muscleTextField.textAsDouble! : 0 }
-        set { muscleTextField.text = String(format: "%1.f", newValue) }
+        set { muscleTextField.text = String(format: "%.1f", newValue) }
+    }
+    
+    var waterPercentage: Double {
+        get { return waterTextField.text != nil ? waterTextField.textAsDouble! : 0 }
+        set { waterTextField.text = String(format: "%.1f", newValue) }
     }
     
     func dismiss() {

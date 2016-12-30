@@ -110,6 +110,7 @@ final class CoreDataInfoRepository: IFitnessInfoRepository {
             saved.weight = record.weight
             saved.musclePercentage = record.musclePercentage
             saved.bodyFatPercentage = record.bodyFatPercentage
+            saved.waterPercentage = record.waterPercentage
             saved.date = NSDate()
         }.do(onNext: { [weak self] _ in
             self?.rx_updatedSubject.onNext()
