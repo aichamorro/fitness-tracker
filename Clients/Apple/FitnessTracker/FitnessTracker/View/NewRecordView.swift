@@ -17,6 +17,7 @@ protocol INewRecordView: class {
     
     var rx_viewDidLoad: Observable<Void> { get }
     var rx_actionSave: Observable<NewRecordViewModel> { get }
+    var calibrationFix: Double { get }
     
     func dismiss()
 }

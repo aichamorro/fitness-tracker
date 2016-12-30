@@ -9,6 +9,14 @@
 import Foundation
 import RxSwift
 
+typealias NewRecordViewModel = (height: UInt, weight: Double, muscle: Double, bodyFat: Double)
+private func record(applyingCalibration calibration: Double, to record: NewRecordViewModel) -> NewRecordViewModel {
+    return NewRecordViewModel(height: record.height,
+                              weight: record.weight * calibration,
+                              muscle: record.muscle,
+                              bodyFat: record.bodyFat)
+}
+
 typealias INewRecordPresenter =
     (ILatestRecordInteractor,
     INewRecordInteractor,
@@ -28,7 +36,9 @@ let NewRecordPresenter: INewRecordPresenter = { latestRecordInteractor, insertNe
         .addDisposableTo(disposeBag)
     
     view.rx_actionSave
-        .flatMap(mapViewModelToFitnessInfo)
+        .flatMap {
+            Observable.just(record(applyingCalibration: view.calibrationFix, to: $0))
+        }.flatMap(mapViewModelToFitnessInfo)
         .flatMap { insertNewRecordInteractor.rx_save(record: $0) }
         .do(onNext: { _ in loadLatestResult() })
         .subscribe { _ in view.dismiss() }

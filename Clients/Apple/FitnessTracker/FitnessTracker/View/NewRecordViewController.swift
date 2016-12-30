@@ -24,14 +24,16 @@ extension UITextField {
     }
 }
 
-typealias NewRecordViewModel = (height: UInt, weight: Double, muscle: Double, bodyFat: Double)
-
 final class NewRecordViewController: UIViewController {
     @IBOutlet fileprivate var heightTextField: UITextField!
     @IBOutlet fileprivate var weightTextField: UITextField!
     @IBOutlet fileprivate var muscleTextField: UITextField!
     @IBOutlet fileprivate var bodyFatTextField: UITextField!
     @IBOutlet fileprivate var saveButton: UIButton!
+    @IBOutlet fileprivate var calibrationInfoSwitch: UISwitch!
+    @IBOutlet fileprivate var calibrationFields: UIStackView!
+    @IBOutlet fileprivate var calibrationTextFieldExpected: UITextField!
+    @IBOutlet fileprivate var calibrationTextFieldActual: UITextField!
     
     fileprivate let viewDidLoadSubject = PublishSubject<Void>()
     fileprivate let saveSubject = PublishSubject<NewRecordViewModel>()
@@ -46,8 +48,24 @@ final class NewRecordViewController: UIViewController {
             self.saveSubject.asObserver().onNext(self.viewModel)
         }).addDisposableTo(disposeBag)
         
+        let toggleCalibrationsFieldsVisibility: (Bool) -> Void = { [weak self] in
+            guard let `self` = self else { return }
+            
+            let alpha = $0 ? 1 : 0
+            
+            UIView.animate(withDuration: 0.5, animations: {
+                self.calibrationFields.alpha = CGFloat(alpha)
+            })
+        }
+                    
+        calibrationInfoSwitch.rx.value.asObservable()
+            .do(onNext: toggleCalibrationsFieldsVisibility)
+            .flatMap { return Observable.just(!$0) }
+            .bindTo(calibrationFields.rx.isHidden)
+            .addDisposableTo(disposeBag)
+        
         viewDidLoadSubject.onNext()
-    }
+    }    
 }
 
 extension NewRecordViewController: INewRecordView {
@@ -57,6 +75,16 @@ extension NewRecordViewController: INewRecordView {
     
     var rx_actionSave: Observable<NewRecordViewModel> {
         return saveSubject.asObservable()
+    }
+    
+    var calibrationFix: Double {
+        guard calibrationInfoSwitch.isOn else { return 1.0 }
+        guard let actualReading = calibrationTextFieldActual.text?.doubleValue,
+            let expectedReading = calibrationTextFieldExpected.text?.doubleValue else {
+                return 1.0
+        }
+        
+        return expectedReading/actualReading
     }
     
     var viewModel: NewRecordViewModel {
@@ -92,9 +120,6 @@ extension NewRecordViewController: INewRecordView {
 extension NewRecordViewController {
     @IBAction fileprivate func actionClose(sender: Any?) {
         self.presentingViewController?.dismiss(animated: true, completion: nil)
-    }
-    
-    @IBAction private func actionSave(sender: Any?) {
     }
 }
 
