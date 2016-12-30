@@ -65,11 +65,7 @@ final class NewRecordViewController: UIViewController {
             .addDisposableTo(disposeBag)
         
         viewDidLoadSubject.onNext()
-    }
-    
-    func endEditing(_ gestureRecognizer: UIGestureRecognizer) {
-        self.setEditing(false, animated: true)
-    }
+    }    
 }
 
 extension NewRecordViewController: INewRecordView {
