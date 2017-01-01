@@ -18,7 +18,9 @@ private class FakeNewRecordView: INewRecordView {
     var weight: Double = 0
     var bodyFatPercentage: Double = 0
     var musclePercentage: Double = 0
+    var waterPercentage: Double = 0
     var isDismissed = false
+    var calibrationFix: Double = 0
     
     private let rx_viewDidLoadSubject = PublishSubject<Void>()
     var rx_viewDidLoad: Observable<Void> { return rx_viewDidLoadSubject.asObservable() }
@@ -31,7 +33,7 @@ private class FakeNewRecordView: INewRecordView {
     }
     
     func save() {
-        rx_actionSaveSubject.onNext((height: height, weight: weight, muscle: musclePercentage, bodyFat: bodyFatPercentage))
+        rx_actionSaveSubject.onNext((height: height, weight: weight, muscle: musclePercentage, bodyFat: bodyFatPercentage, water: waterPercentage))
     }
     
     func dismiss() {
@@ -74,7 +76,7 @@ class NewRecordTests: QuickSpec {
                 }
                 
                 it("Shows the previous reading when there is some previous data") {
-                    repository.save(record: FitnessInfo(weight: 65.0, height: 171, bodyFatPercentage: 30.0, musclePercentage: 40.0))
+                    repository.rx_save(record: FitnessInfo(weight: 65.0, height: 171, bodyFatPercentage: 30.0, musclePercentage: 40.0, waterPercentage: 40.0))
                     
                     view.viewDidLoad()
                     
@@ -82,6 +84,7 @@ class NewRecordTests: QuickSpec {
                     expect(view.weight).to(equal(65.0))
                     expect(view.bodyFatPercentage).to(equal(30.0))
                     expect(view.musclePercentage).to(equal(40.0))
+                    expect(view.waterPercentage).to(equal(40.0))
                 }
                 
                 it("Shows nothing when there are no previous readings") {
@@ -91,6 +94,7 @@ class NewRecordTests: QuickSpec {
                     expect(view.weight).to(equal(0))
                     expect(view.bodyFatPercentage).to(equal(0))
                     expect(view.musclePercentage).to(equal(0))
+                    expect(view.waterPercentage).to(equal(0))
                 }
                 
                 it("Can save new readings") {
@@ -98,6 +102,7 @@ class NewRecordTests: QuickSpec {
                     view.height = 171
                     view.bodyFatPercentage = 30.0
                     view.musclePercentage = 40.0
+                    view.waterPercentage = 34.0
                     
                     createObserverAndSubscribe(to: latestRecordInteractor.rx_latestRecordUpdate, scheduler: scheduler, disposeBag: disposeBag, expect: nil, action: {
                         view.save()
@@ -110,6 +115,7 @@ class NewRecordTests: QuickSpec {
                             expect(info.weight).to(equal(60.0))
                             expect(info.bodyFatPercentage).to(equal(30.0))
                             expect(info.musclePercentage).to(equal(40.0))
+                            expect(info.waterPercentage).to(equal(34.0))
                         }).addDisposableTo(disposeBag)
                 }
                 
@@ -118,6 +124,7 @@ class NewRecordTests: QuickSpec {
                     view.height = 171
                     view.bodyFatPercentage = 30.0
                     view.musclePercentage = 40.0
+                    view.waterPercentage = 34.0
                     
                     createObserverAndSubscribe(to: latestRecordInteractor.rx_latestRecordUpdate, scheduler: scheduler, disposeBag: disposeBag, expect: nil, action: {
                         view.save()
@@ -130,6 +137,7 @@ class NewRecordTests: QuickSpec {
                             expect(view.weight).to(equal(60.0))
                             expect(view.bodyFatPercentage).to(equal(30.0))
                             expect(view.musclePercentage).to(equal(40.0))
+                            expect(view.waterPercentage).to(equal(34.0))
                         }).addDisposableTo(disposeBag)
                 }
                 

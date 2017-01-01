@@ -34,7 +34,7 @@ final class LatestRecordInteractor: ILatestRecordInteractor {
         }
         
         return repository
-            .findLatest(numberOfRecords: 1)
+            .rx_findLatest(numberOfRecords: 1)
             .flatMap(takeFirstResult)
     }
 }

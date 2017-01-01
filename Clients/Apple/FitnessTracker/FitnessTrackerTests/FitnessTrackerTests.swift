@@ -13,13 +13,14 @@ import Nimble
 class WeightTrackerSpec: QuickSpec {
     override func spec() {
         describe("As user would like to be able to add my weight") {
-            let currentInfo = FitnessInfo(weight: 70, height: 171, bodyFatPercentage: 18.8, musclePercentage: 34.7)
+            let currentInfo = FitnessInfo(weight: 70, height: 171, bodyFatPercentage: 18.8, musclePercentage: 34.7, waterPercentage: 43.0)
 
             it("Can record the actual weight") {
                 expect(currentInfo.weight).to(equal(70))
                 expect(currentInfo.height).to(equal(171))
                 expect(currentInfo.bodyFatPercentage).to(equal(18.8))
                 expect(currentInfo.musclePercentage).to(equal(34.7))
+                expect(currentInfo.waterPercentage).to(equal(43.0))
             }
             
             context("Body stats") {
@@ -33,6 +34,10 @@ class WeightTrackerSpec: QuickSpec {
                 
                 it("Can calculate the muscle weight") {
                     expect(abs(currentInfo.muscleWeight - 24.29) < 0.0000001).to(beTrue())
+                }
+                
+                it("Can calculate the water weight") {
+                    expect(abs(currentInfo.waterWeight - 30.1) < 0.0000001).to(beTrue())
                 }
                 
                 it("Can calculate the BMI") {

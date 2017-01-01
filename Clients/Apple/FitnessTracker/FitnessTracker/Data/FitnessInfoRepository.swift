@@ -13,20 +13,20 @@ import CoreData
 protocol IFitnessInfoRepository {
     var rx_updated: Observable<Void> { get }
     
-    func findLatest(numberOfRecords: Int) -> Observable<[IFitnessInfo]>
-    func findAll() -> Observable<[IFitnessInfo]>
+    func rx_findLatest(numberOfRecords: Int) -> Observable<[IFitnessInfo]>
+    func rx_findAll() -> Observable<[IFitnessInfo]>
     
-    @discardableResult func save(record: IFitnessInfo) -> Observable<IFitnessInfo>
+    @discardableResult func rx_save(record: IFitnessInfo) -> Observable<IFitnessInfo>
 }
 
 extension IFitnessInfoRepository {
-    func save(many records: [IFitnessInfo]) -> Observable<[IFitnessInfo]> {
+    func rx_save(many records: [IFitnessInfo]) -> Observable<[IFitnessInfo]> {
         var result: [IFitnessInfo] = []
         var error: Error?
         let disposeBag = DisposeBag()
         
         for record in records {
-            self.save(record: record)
+            self.rx_save(record: record)
                 .subscribe(onNext: { result.append($0) }, onError: { error = $0 } )
                 .addDisposableTo(disposeBag)
         }
@@ -90,19 +90,19 @@ final class CoreDataInfoRepository: IFitnessInfoRepository {
         return rx_updatedSubject.asObservable()
     }
     
-    func findLatest(numberOfRecords: Int) -> Observable<[IFitnessInfo]> {
+    func rx_findLatest(numberOfRecords: Int) -> Observable<[IFitnessInfo]> {
         return coreDataEngine.execute(query: .findLatestRecords(limit: numberOfRecords))
             .do(onNext: nil, onError: { NSLog("Error: \($0)") })
             .catchErrorJustReturn([])
             .flatMap { return Observable.just($0 as! [CoreDataFitnessInfo]) }
     }
     
-    func findAll() -> Observable<[IFitnessInfo]> {
+    func rx_findAll() -> Observable<[IFitnessInfo]> {
         return coreDataEngine.execute(query: .findAll)
             .flatMap { return Observable.just($0 as! [CoreDataFitnessInfo]) }
     }
     
-    @discardableResult func save(record: IFitnessInfo) -> Observable<IFitnessInfo> {
+    @discardableResult func rx_save(record: IFitnessInfo) -> Observable<IFitnessInfo> {
         return coreDataEngine.create(entityName: CoreDataEntity.fitnessInfo.rawValue) { entity in
             guard let saved = entity as? CoreDataFitnessInfo else { fatalError() }
             

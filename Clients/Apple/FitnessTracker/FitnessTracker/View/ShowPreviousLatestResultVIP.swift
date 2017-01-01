@@ -21,7 +21,7 @@ class ShowPreviousLatestResultInteractor: IShowPreviousLatestResultInteractor {
     }
     
     func rx_previousLatestResult() -> Observable<IFitnessInfo> {
-        return repository.findLatest(numberOfRecords: 2).flatMap { info in
+        return repository.rx_findLatest(numberOfRecords: 2).flatMap { info in
             Observable.create { observer in
                 observer.onNext(info.count == 2 ? info[1] : FitnessInfo.empty)
                 observer.onCompleted()
