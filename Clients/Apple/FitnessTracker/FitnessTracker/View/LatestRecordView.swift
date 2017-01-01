@@ -14,8 +14,10 @@ struct LatestRecordViewModel {
     let height: UInt
     let bodyFat: Double
     let muscle: Double
+    let water: Double
     let bodyFatWeight: Double
     let muscleWeight: Double
+    let waterWeight: Double
     let leanBodyWeight: Double
     let bmi: Double
 }
@@ -26,8 +28,10 @@ extension LatestRecordViewModel {
                                    height: 0,
                                    bodyFat: 0,
                                    muscle: 0,
+                                   water: 0,
                                    bodyFatWeight: 0,
                                    muscleWeight: 0,
+                                   waterWeight: 0,
                                    leanBodyWeight: 0,
                                    bmi: 0)
     }()
@@ -37,8 +41,10 @@ extension LatestRecordViewModel {
                                    height: fitnessInfo.height,
                                    bodyFat: fitnessInfo.bodyFatPercentage,
                                    muscle: fitnessInfo.musclePercentage,
+                                   water: fitnessInfo.waterPercentage,
                                    bodyFatWeight: fitnessInfo.bodyFatWeight,
                                    muscleWeight: fitnessInfo.muscleWeight,
+                                   waterWeight: fitnessInfo.waterWeight,
                                    leanBodyWeight: fitnessInfo.leanBodyWeight,
                                    bmi: fitnessInfo.bmi)
     }

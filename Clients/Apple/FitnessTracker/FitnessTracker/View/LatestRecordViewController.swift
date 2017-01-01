@@ -70,7 +70,7 @@ extension LatestRecordViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 8
+        return 10
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -88,6 +88,8 @@ extension LatestRecordViewController {
         
         if indexPath.section == 1 {
             cell.container.backgroundColor = UIColor(red: 0.529, green: 0.176, blue: 0.384, alpha: 1.0)
+        } else {
+            cell.container.backgroundColor = UIColor(red: 0.99, green: 0.43, blue: 0.20, alpha: 1.0)
         }
         
         return cell
@@ -103,10 +105,14 @@ extension LatestRecordViewController {
             return ("Body Fat", String(format: "%.2f", latestRecordView.viewModel.bodyFat), "%", String(format: "%.2f %%", previousLatestResult.value.bodyFat))
         case .musclePercentage:
             return ("Muscle", String(format: "%.2f", latestRecordView.viewModel.muscle), "%", String(format: "%.2f %%", previousLatestResult.value.muscle))
+        case .waterPercentage:
+            return ("Water", String(format: "%.2f", latestRecordView.viewModel.water), "%", String(format: "%.2f %%", previousLatestResult.value.water))
         case .bodyFatWeight:
             return ("Body Fat Weight", String(format: "%.2f", latestRecordView.viewModel.bodyFatWeight), "kg", String(format: "%.2f kg",previousLatestResult.value.bodyFatWeight))
         case .muscleWeight:
             return ("Muscle Weight", String(format: "%.2f", latestRecordView.viewModel.muscleWeight), "kg", String(format: "%.2f kg",previousLatestResult.value.muscleWeight))
+        case .waterWeight:
+            return ("Water Weight", String(format: "%.2f", latestRecordView.viewModel.waterWeight), "kg", String(format: "%.2f kg", previousLatestResult.value.waterWeight))
         case .leanBodyWeight:
             return ("Lean Body Weight", String(format: "%.2f", latestRecordView.viewModel.leanBodyWeight), "kg", String(format: "%.2f kg",previousLatestResult.value.leanBodyWeight))
         case .bmi:
@@ -120,10 +126,12 @@ extension LatestRecordViewController {
         case (0, 1): return .weight
         case (0, 2): return .bodyFatPercentage
         case (0, 3): return .musclePercentage
+        case (0, 4): return .waterPercentage
         case (1, 0): return .bodyFatWeight
         case (1, 1): return .muscleWeight
-        case (1, 2): return .leanBodyWeight
-        case (1, 3): return .bmi
+        case (1, 2): return .waterWeight
+        case (1, 3): return .leanBodyWeight
+        case (1, 4): return .bmi
         
         default: fatalError()
         }

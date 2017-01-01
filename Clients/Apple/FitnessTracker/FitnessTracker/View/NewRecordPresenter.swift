@@ -9,12 +9,13 @@
 import Foundation
 import RxSwift
 
-typealias NewRecordViewModel = (height: UInt, weight: Double, muscle: Double, bodyFat: Double)
+typealias NewRecordViewModel = (height: UInt, weight: Double, muscle: Double, bodyFat: Double, water: Double)
 private func record(applyingCalibration calibration: Double, to record: NewRecordViewModel) -> NewRecordViewModel {
     return NewRecordViewModel(height: record.height,
                               weight: record.weight * calibration,
                               muscle: record.muscle,
-                              bodyFat: record.bodyFat)
+                              bodyFat: record.bodyFat,
+                              water: record.water)
 }
 
 typealias INewRecordPresenter =
@@ -53,6 +54,7 @@ func mapFitnessInfoToView(view: INewRecordView) -> (IFitnessInfo) -> Void {
         view.weight = info.weight
         view.bodyFatPercentage = info.bodyFatPercentage
         view.musclePercentage = info.musclePercentage
+        view.waterPercentage = info.waterPercentage
     }
 }
 
@@ -60,7 +62,8 @@ func mapViewModelToFitnessInfo(viewModel: NewRecordViewModel) -> Observable<IFit
     let fitnessInfo = FitnessInfo(weight: viewModel.weight,
                                   height: viewModel.height,
                                   bodyFatPercentage: viewModel.bodyFat,
-                                  musclePercentage: viewModel.muscle)
+                                  musclePercentage: viewModel.muscle,
+                                  waterPercentage: viewModel.water)
     
     return Observable.just(fitnessInfo)
 }

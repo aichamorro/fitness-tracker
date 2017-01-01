@@ -75,6 +75,7 @@
 		20E89E671E130C5C00F03644 /* ShowMetricHistoricalDataVIP.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowMetricHistoricalDataVIP.swift; sourceTree = "<group>"; };
 		20E89E691E130D3D00F03644 /* ShowMetricHistoricalDataViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowMetricHistoricalDataViewController.swift; sourceTree = "<group>"; };
 		20E89E6B1E130D6900F03644 /* MetricReadingTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MetricReadingTableViewCell.swift; sourceTree = "<group>"; };
+		20F0BC171E16E86E00695F2A /* CoreDataModel_v2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreDataModel_v2.xcdatamodel; sourceTree = "<group>"; };
 		20FA50FA1E095712002E536A /* LatestRecordInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = LatestRecordInteractor.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		20FA50FD1E09575E002E536A /* FitnessInfoRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FitnessInfoRepository.swift; sourceTree = "<group>"; };
 		20FA51001E09579F002E536A /* LatestRecordView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = LatestRecordView.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -696,9 +697,10 @@
 		202142091E0D248900BAF444 /* CoreDataModel.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				20F0BC171E16E86E00695F2A /* CoreDataModel_v2.xcdatamodel */,
 				2021420A1E0D248900BAF444 /* CoreDataModel.xcdatamodel */,
 			);
-			currentVersion = 2021420A1E0D248900BAF444 /* CoreDataModel.xcdatamodel */;
+			currentVersion = 20F0BC171E16E86E00695F2A /* CoreDataModel_v2.xcdatamodel */;
 			path = CoreDataModel.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
