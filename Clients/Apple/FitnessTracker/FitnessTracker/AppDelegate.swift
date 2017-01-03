@@ -12,7 +12,8 @@ import RxSwift
 
 class AppServiceLocator {
     var fitnessInfoRepository: IFitnessInfoRepository!
-    var router: URLRouter!
+    var router: AppRouter!
+    var mainStoryboard: UIStoryboard!
 }
 
 typealias RetainerBag = [Any]
@@ -21,7 +22,6 @@ typealias RetainerBag = [Any]
 final class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    var router: URLRouter!
     var serviceLocator: AppServiceLocator!
     var disposeBag = DisposeBag()
 
@@ -30,94 +30,39 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
         
-        serviceLocator = AppServiceLocator()
-        
-        CoreDataStackInitializer()
-            .subscribeOn(MainScheduler.instance)
-            .do(onNext: { _ in NSLog("Core Data Stack initialized correctly")},
-                onError: { error in NSLog("Failure while initializing Core Data Stack: \(error)") })
-            .subscribe(onNext: { [weak self] in
-                guard let `self` = self else { return }
-            
-                self.serviceLocator.fitnessInfoRepository = CoreDataInfoRepository(managedObjectContext: $0)
-            }, onError: { _ in
-                fatalError()
-            }).addDisposableTo(disposeBag)
-
-        router = URLRouterFactory.with(entries: urlEntries())
-        _ = router(URL(string: "app://records")!) { controller in
+        configureServices()
+        configureRouting()
+                
+        serviceLocator.router.open(appURL: .showLatestRecord) { controller in
             guard let viewController = controller as? UIViewController else { fatalError() }
             viewController.title = NSLocalizedString("Last measurement", comment: "Last measurement")
             let rootController = UINavigationController(rootViewController: viewController)
             
             self.window?.rootViewController = rootController
         }
-        
-        serviceLocator.router = router
-        
+
         // Override point for customization after application launch.
         return true
     }
     
-    private func urlEntries() -> [URLRouterEntry] {
-        let serviceLocator = self.serviceLocator!
+    private func configureServices() {
+        serviceLocator = AppServiceLocator()
+
+        _ = CoreDataStackInitializer({ success in
+            NSLog("Core Data Stack initialized correctly")
+            
+            self.serviceLocator.fitnessInfoRepository = CoreDataInfoRepository(managedObjectContext: success)
+        }, { error in
+            fatalError(error as! String)
+        })
         
-        let currentRecordURLPattern = URLRouterEntryFactory.with(pattern: "app://records") { [weak self] _,_ in
-            guard let `self` = self else { return nil }
-            
-            let latestRecordInteractor = LatestRecordInteractor(repository: serviceLocator.fitnessInfoRepository)
-            let latestResultsComparisonInteractor = ShowPreviousLatestResultInteractor(repository: serviceLocator.fitnessInfoRepository)
-            
-            let view = LatestRecordView()
-            let disposeBag = DisposeBag()
-            
-            guard let viewController = UIStoryboard(name: "Main", bundle: nil).instantiateInitialViewController() as? LatestRecordViewController else {
-                fatalError()
-            }
-            
-            viewController.interactors = [latestRecordInteractor, latestResultsComparisonInteractor]
-            viewController.disposeBag = disposeBag
-            viewController.latestRecordView = view
-            viewController.router = self.router
-            
-            LatestRecordPresenter(latestRecordInteractor, view, self.router!, disposeBag)
-            LatestResultsComparisonPresenter(latestResultsComparisonInteractor, viewController, disposeBag)
-            
-            return viewController
-        }
-        
-        let createRecordURLPattern = URLRouterEntryFactory.with(pattern: "app://records/new") { _,_ in
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let viewController = storyboard.instantiateViewController(withIdentifier: "NewRecordViewController") as? NewRecordViewController
-            guard viewController != nil else { fatalError() }
-            
-            let seeLatestRecordInteractor = LatestRecordInteractor(repository: serviceLocator.fitnessInfoRepository)
-            let insertNewRecordInteractor = NewRecordInteractor(repository: serviceLocator.fitnessInfoRepository)
-            let disposeBag = DisposeBag()
-            
-            viewController!.interactors = [seeLatestRecordInteractor, insertNewRecordInteractor]
-            viewController!.disposeBag = disposeBag
-            NewRecordPresenter(seeLatestRecordInteractor, insertNewRecordInteractor, viewController!, disposeBag)
-            
-            return viewController
-        }
-        
-        let showMetricData = URLRouterEntryFactory.with(pattern: "app://records/history") { _, parameters -> Any? in
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let viewController = storyboard.instantiateViewController(withIdentifier: "ShowMetricHistoricalData") as? ShowMetricHistoricalDataViewController
-            guard viewController != nil else { fatalError() }
-            let disposeBag = DisposeBag()
-            
-            viewController!.selectedMetric = BodyMetric(rawValue: parameters["metric"]!)!
-            let historicDataInteractor = MetricHistoryInteractor(repository: serviceLocator.fitnessInfoRepository)
-            viewController!.bag = [historicDataInteractor, disposeBag]
-            
-            MetricHistoryPresenter(historicDataInteractor, viewController!, disposeBag)
-            
-            return viewController
-        }
-        
-        return [currentRecordURLPattern, createRecordURLPattern, showMetricData]
+        serviceLocator.mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
+    }
+    
+    private func configureRouting() {
+        let allEntries = AppRouterEntry.allEntries(serviceLocator: self.serviceLocator)
+     
+        serviceLocator.router = AppRouter(urlRouter: URLRouterFactory.with(entries: allEntries))
     }
 
 }
