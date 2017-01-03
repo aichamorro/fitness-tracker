@@ -10,49 +10,38 @@ import Foundation
 import RxSwift
 import CoreData
 
-typealias ICoreDataStackInitializer = () -> Observable<NSManagedObjectContext>
-internal let CoreDataStackInitializer: ICoreDataStackInitializer = {
-    let modelURL: () -> Observable<URL> = {
-        return Observable.create { observer in
-            guard let modelURL = Bundle.main.url(forResource: "CoreDataModel", withExtension: "momd") else {
-                observer.onError(NSError(domain: "Core Data", code: -1, userInfo: nil))
-                
-                return Disposables.create()
-            }
+typealias ICoreDataStackInitializerSuccess = (NSManagedObjectContext) -> Void
+typealias ICoreDataStackInitializerError = (Error) -> Void
+typealias ICoreDataStackInitializer = (@escaping ICoreDataStackInitializerSuccess, @escaping ICoreDataStackInitializerError) -> Void
+typealias IRxCoreDataStackInitializer = () -> Observable<NSManagedObjectContext?>
+
+internal let CoreDataStackInitializer: ICoreDataStackInitializer = { success, error in
+    let modelURL: () -> URL? = {
+        guard let modelURL = Bundle.main.url(forResource: "CoreDataModel", withExtension: "momd") else {
+            error(NSError(domain: "Core Data", code: -1, userInfo: nil))
             
-            observer.onNext(modelURL)
-            observer.onCompleted()
-            
-            return Disposables.create()
+            return nil
         }
+        
+        return modelURL
     }
     
-    let mom: (URL) -> Observable<NSManagedObjectModel> = { url in
-        return Observable.create { observer in
-            guard let mom = NSManagedObjectModel(contentsOf: url) else {
-                observer.onError(NSError(domain: "Core Data", code: -1, userInfo: nil))
-                
-                return Disposables.create()
-            }
+    let mom: (URL) -> NSManagedObjectModel? = { url in
+        guard let mom = NSManagedObjectModel(contentsOf: url) else {
+            error(NSError(domain: "Core Data", code: -1, userInfo: nil))
             
-            observer.onNext(mom)
-            observer.onCompleted()
-            
-            return Disposables.create()
+            return nil
         }
+        
+        return mom
     }
     
-    let managedObjectContext: (NSManagedObjectModel) -> Observable<NSManagedObjectContext> = { mom in
-        return Observable.create { observer in
-            let managedObjectContext = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
-            let psc = NSPersistentStoreCoordinator(managedObjectModel: mom)
-            managedObjectContext.persistentStoreCoordinator = psc
-            
-            observer.onNext(managedObjectContext)
-            observer.onCompleted()
-            
-            return Disposables.create()
-        }
+    let managedObjectContext: (NSManagedObjectModel) -> NSManagedObjectContext = { mom in
+        let managedObjectContext = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
+        let psc = NSPersistentStoreCoordinator(managedObjectModel: mom)
+        managedObjectContext.persistentStoreCoordinator = psc
+
+        return managedObjectContext
     }
     
     let initializePSC: (NSManagedObjectContext) -> Void = { moc in
@@ -71,10 +60,27 @@ internal let CoreDataStackInitializer: ICoreDataStackInitializer = {
         }
     }
     
-    return modelURL()
-        .flatMap(mom)
-        .flatMap(managedObjectContext)
-        .do(onNext: { initializePSC($0) })
+    guard let url = modelURL(), let managedObjectModel = mom(url) else {
+            return
+    }
+    
+    let moc = managedObjectContext(managedObjectModel)
+    initializePSC(moc)
+    
+    success(moc)
+}
+
+internal let RxCoreDataStackInitializer: IRxCoreDataStackInitializer = {
+    return Observable.create { observer in
+        CoreDataStackInitializer({ moc in
+                observer.onNext(moc)
+                observer.onCompleted()
+            }, { error in
+                observer.onError(error)
+            })
+        
+        return Disposables.create() {}
+    }
 }
 
 struct CoreDataEngine {

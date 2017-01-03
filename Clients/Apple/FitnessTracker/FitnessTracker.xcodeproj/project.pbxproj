@@ -37,6 +37,7 @@
 		20FA510F1E0B1B05002E536A /* NewRecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FA510E1E0B1B05002E536A /* NewRecordView.swift */; };
 		20FA51111E0B1D74002E536A /* NewRecordPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FA51101E0B1D74002E536A /* NewRecordPresenter.swift */; };
 		20FA51131E0B1DDF002E536A /* NewRecordInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FA51121E0B1DDF002E536A /* NewRecordInteractor.swift */; };
+		3903F5CA1E1BFA7D0093095B /* AppRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3903F5C91E1BFA7D0093095B /* AppRouter.swift */; };
 		45AA81FD1D29B16082BA4BBA /* Pods_FitnessTracker_FitnessTrackerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95868793967C2540BD298442 /* Pods_FitnessTracker_FitnessTrackerTests.framework */; };
 		60DCC2D4BE7EC6D04AACF7B5 /* Pods_FitnessTracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 243E297E8C331F616EE9C451 /* Pods_FitnessTracker.framework */; };
 /* End PBXBuildFile section */
@@ -88,6 +89,7 @@
 		20FA51101E0B1D74002E536A /* NewRecordPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = NewRecordPresenter.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		20FA51121E0B1DDF002E536A /* NewRecordInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = NewRecordInteractor.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		243E297E8C331F616EE9C451 /* Pods_FitnessTracker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FitnessTracker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3903F5C91E1BFA7D0093095B /* AppRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppRouter.swift; sourceTree = "<group>"; };
 		95868793967C2540BD298442 /* Pods_FitnessTracker_FitnessTrackerTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FitnessTracker_FitnessTrackerTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF97CF9401854D9B0C19B13A /* Pods-FitnessTracker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FitnessTracker.release.xcconfig"; path = "Pods/Target Support Files/Pods-FitnessTracker/Pods-FitnessTracker.release.xcconfig"; sourceTree = "<group>"; };
 		C55A1B87566A2A9F0CFFFE02 /* Pods-FitnessTracker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FitnessTracker.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FitnessTracker/Pods-FitnessTracker.debug.xcconfig"; sourceTree = "<group>"; };
@@ -148,6 +150,7 @@
 				200323DB1E00166200B1C33A /* Assets.xcassets */,
 				200323DD1E00166200B1C33A /* LaunchScreen.storyboard */,
 				200323E01E00166200B1C33A /* Info.plist */,
+				3903F5C91E1BFA7D0093095B /* AppRouter.swift */,
 			);
 			path = FitnessTracker;
 			sourceTree = "<group>";
@@ -457,6 +460,7 @@
 				20FA50FB1E095712002E536A /* LatestRecordInteractor.swift in Sources */,
 				20E89E6A1E130D3D00F03644 /* ShowMetricHistoricalDataViewController.swift in Sources */,
 				200323D51E00166200B1C33A /* AppDelegate.swift in Sources */,
+				3903F5CA1E1BFA7D0093095B /* AppRouter.swift in Sources */,
 				20FA51051E095947002E536A /* LatestRecordViewController.swift in Sources */,
 				20E89E681E130C5C00F03644 /* ShowMetricHistoricalDataVIP.swift in Sources */,
 				20FA51071E0976D1002E536A /* LatestRecordMetricCell.swift in Sources */,

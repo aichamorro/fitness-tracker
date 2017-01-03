@@ -14,7 +14,7 @@ class LatestRecordViewController: UITableViewController {
     var interactors: [Any]!
     var disposeBag: DisposeBag!
     var latestRecordView: LatestRecordView!
-    var router: URLRouter!
+    var router: AppRouter!
     
     fileprivate let needsRefreshSubject = PublishSubject<Void>()
     fileprivate let previousLatestResult = Variable<LatestRecordViewModel>(LatestRecordViewModel.empty)
@@ -36,7 +36,7 @@ class LatestRecordViewController: UITableViewController {
     }
     
     func createNewRecord(sender: Any?) {
-        _ = router(URL(string: "app://records/new")!) { viewController in
+        _ = router.open(appURL: AppRouterEntry.createRecord) { viewController in
             guard let viewController = viewController as? UIViewController else { fatalError() }
             
             self.present(viewController, animated: true, completion: nil)

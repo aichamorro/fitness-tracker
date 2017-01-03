@@ -10,7 +10,7 @@ import Foundation
 import RxSwift
 import URLRouter
 
-typealias ILatestRecordPresenter = (ILatestRecordInteractor, ILatestRecordView, @escaping URLRouter, DisposeBag) -> Void
+typealias ILatestRecordPresenter = (ILatestRecordInteractor, ILatestRecordView, AppRouter, DisposeBag) -> Void
 let LatestRecordPresenter: ILatestRecordPresenter = { interactor, view, router, disposeBag in
     view.rx_viewDidLoad
         .flatMap { interactor.rx_findLatest() }
@@ -20,7 +20,7 @@ let LatestRecordPresenter: ILatestRecordPresenter = { interactor, view, router, 
     
     view.rx_didSelectMetric
         .subscribe(onNext: { metric in
-            _ = router(URL(string: "app://records/history?metric=\(metric.rawValue)")!) { viewController in
+            router.open(appURL: .showMetricDataHistory(metric: metric)) { viewController in
                 guard let viewController = viewController as? UIViewController else { fatalError() }
                 
                 UIApplication.shared.keyWindow?.rootViewController?.show(viewController, sender: nil)
