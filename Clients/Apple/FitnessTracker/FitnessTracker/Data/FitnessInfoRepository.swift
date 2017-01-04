@@ -16,6 +16,8 @@ protocol IFitnessInfoRepository {
     func rx_findLatest(numberOfRecords: Int) -> Observable<[IFitnessInfo]>
     func rx_findAll() -> Observable<[IFitnessInfo]>
     
+    func findWeek(ofDay dayOfWeek: NSDate) -> [IFitnessInfo]
+    
     @discardableResult func rx_save(record: IFitnessInfo) -> Observable<IFitnessInfo>
 }
 
@@ -42,6 +44,7 @@ enum CoreDataEntity: String {
 enum CoreDataQueryRequest {
     case findLatestRecords(limit: Int)
     case findLatest
+    case findWeek(date: NSDate)
     case findAll
 }
 
@@ -58,6 +61,14 @@ extension CoreDataQueryRequest {
             
             return fetchRequest
             
+        case .findWeek(let date):
+            let startDate = Calendar.current.previousMonday(fromDate: date)
+            let dateInterval = DateInterval(start: startDate as Date, duration: SEC_PER_WEEK)
+            let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: self.entity)
+            fetchRequest.predicate = NSPredicate(format: "((date >= %@) AND (date <= %@))", dateInterval.start as CVarArg, dateInterval.end as CVarArg)
+            
+            return fetchRequest
+            
         case .findAll:
             let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: self.entity)
             fetchRequest.sortDescriptors = [NSSortDescriptor(key: "date", ascending: false)]
@@ -68,6 +79,7 @@ extension CoreDataQueryRequest {
     
     var entity: String {
         switch self {
+        case .findWeek(_): fallthrough
         case .findLatest: fallthrough
         case .findAll: fallthrough
         case .findLatestRecords(_):
@@ -91,15 +103,19 @@ final class CoreDataInfoRepository: IFitnessInfoRepository {
     }
     
     func rx_findLatest(numberOfRecords: Int) -> Observable<[IFitnessInfo]> {
-        return coreDataEngine.execute(query: .findLatestRecords(limit: numberOfRecords))
+        return coreDataEngine.rx_execute(query: .findLatestRecords(limit: numberOfRecords))
             .do(onNext: nil, onError: { NSLog("Error: \($0)") })
             .catchErrorJustReturn([])
             .flatMap { return Observable.just($0 as! [CoreDataFitnessInfo]) }
     }
     
     func rx_findAll() -> Observable<[IFitnessInfo]> {
-        return coreDataEngine.execute(query: .findAll)
+        return coreDataEngine.rx_execute(query: .findAll)
             .flatMap { return Observable.just($0 as! [CoreDataFitnessInfo]) }
+    }
+    
+    func findWeek(ofDay dayOfWeek: NSDate) -> [IFitnessInfo] {
+        return coreDataEngine.execute(query: .findWeek(date: dayOfWeek)) as! [IFitnessInfo]
     }
     
     @discardableResult func rx_save(record: IFitnessInfo) -> Observable<IFitnessInfo> {

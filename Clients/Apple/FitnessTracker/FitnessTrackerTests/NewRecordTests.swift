@@ -20,7 +20,7 @@ private class FakeNewRecordView: INewRecordView {
     var musclePercentage: Double = 0
     var waterPercentage: Double = 0
     var isDismissed = false
-    var calibrationFix: Double = 0
+    var calibrationFix: Double = 1.0
     
     private let rx_viewDidLoadSubject = PublishSubject<Void>()
     var rx_viewDidLoad: Observable<Void> { return rx_viewDidLoadSubject.asObservable() }
@@ -33,7 +33,7 @@ private class FakeNewRecordView: INewRecordView {
     }
     
     func save() {
-        rx_actionSaveSubject.onNext((height: height, weight: weight, muscle: musclePercentage, bodyFat: bodyFatPercentage, water: waterPercentage))
+        rx_actionSaveSubject.onNext(NewRecordViewModel(height: height, weight: weight, muscle: musclePercentage, bodyFat: bodyFatPercentage, water: waterPercentage))
     }
     
     func dismiss() {
