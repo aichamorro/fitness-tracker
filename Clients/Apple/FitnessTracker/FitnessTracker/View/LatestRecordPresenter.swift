@@ -20,7 +20,8 @@ let LatestRecordPresenter: ILatestRecordPresenter = { interactor, view, router, 
     
     view.rx_didSelectMetric
         .subscribe(onNext: { metric in
-            router.open(appURL: .showMetricDataHistory(metric: metric)) { viewController in
+            let url = URL(string: "app://records/history/\(metric.rawValue)")!
+            router.open(appURL: url) { viewController in
                 guard let viewController = viewController as? UIViewController else { fatalError() }
                 
                 UIApplication.shared.keyWindow?.rootViewController?.show(viewController, sender: nil)

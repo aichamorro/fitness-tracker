@@ -36,7 +36,7 @@ class LatestRecordViewController: UITableViewController {
     }
     
     func createNewRecord(sender: Any?) {
-        _ = router.open(appURL: AppRouterEntry.createRecord) { viewController in
+        _ = router.open(appURL: URL(string: "app://record/new")!) { viewController in
             guard let viewController = viewController as? UIViewController else { fatalError() }
             
             self.present(viewController, animated: true, completion: nil)

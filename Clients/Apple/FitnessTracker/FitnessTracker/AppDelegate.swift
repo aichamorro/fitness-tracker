@@ -33,7 +33,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         configureServices()
         configureRouting()
                 
-        serviceLocator.router.open(appURL: .showLatestRecord) { controller in
+        serviceLocator.router.open(appURL: URL(string: "app://records")!) { controller in
             guard let viewController = controller as? UIViewController else { fatalError() }
             viewController.title = NSLocalizedString("Last measurement", comment: "Last measurement")
             let rootController = UINavigationController(rootViewController: viewController)
@@ -60,7 +60,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     private func configureRouting() {
-        let allEntries = AppRouterEntry.allEntries(serviceLocator: self.serviceLocator)
+        let allEntries = AppRouter.allEntries(serviceLocator: self.serviceLocator)
      
         serviceLocator.router = AppRouter(urlRouter: URLRouterFactory.with(entries: allEntries))
     }

@@ -10,34 +10,6 @@ import Foundation
 import URLRouter
 import RxSwift
 
-enum AppRouterEntry {
-    case showLatestRecord
-    case createRecord
-    case showMetricDataHistory(metric: BodyMetric)
-    
-    var url: URL {
-        switch self {
-        case .showMetricDataHistory(let metric):
-            return URL(string: "app://records/history/\(metric.rawValue)")!
-        case .showLatestRecord: fallthrough
-        case .createRecord: fallthrough
-        default:
-            return URL(string: self.pattern)!
-        }
-    }
-    
-    var pattern: String {
-        switch self {
-        case .showLatestRecord:
-            return "app://records"
-        case .createRecord:
-            return "app://records/new"
-        case .showMetricDataHistory(_):
-            return "app://records/history/:metric"
-        }
-    }
-}
-
 final class AppRouter {
     let urlRouter: URLRouter
     
@@ -45,14 +17,14 @@ final class AppRouter {
         self.urlRouter = urlRouter
     }
     
-    @discardableResult func open(appURL: AppRouterEntry, resultHandler: URLRouterResultHandler?) -> Bool {
-        return urlRouter(appURL.url, resultHandler)
+    @discardableResult func open(appURL url: URL, resultHandler: URLRouterResultHandler?) -> Bool {
+        return urlRouter(url, resultHandler)
     }
 }
 
-extension AppRouterEntry {
+extension AppRouter {
     static private func currentRecordEntry(serviceLocator: AppServiceLocator) -> URLRouterEntry {
-        return URLRouterEntryFactory.with(pattern: AppRouterEntry.showLatestRecord.pattern) { _,_ in
+        return URLRouterEntryFactory.with(pattern: "app://records") { _,_ in
             let latestRecordInteractor = LatestRecordInteractor(repository: serviceLocator.fitnessInfoRepository)
             let latestResultsComparisonInteractor = ShowPreviousLatestResultInteractor(repository: serviceLocator.fitnessInfoRepository)
             
@@ -76,7 +48,7 @@ extension AppRouterEntry {
     }
     
     static private func createRecordEntry(serviceLocator: AppServiceLocator) -> URLRouterEntry {
-        return URLRouterEntryFactory.with(pattern: AppRouterEntry.createRecord.pattern) { _,_ in
+        return URLRouterEntryFactory.with(pattern: "app://records/new") { _,_ in
             let viewController = serviceLocator.mainStoryboard.instantiateViewController(withIdentifier: "NewRecordViewController") as? NewRecordViewController
             guard viewController != nil else { fatalError() }
             
@@ -93,7 +65,7 @@ extension AppRouterEntry {
     }
     
     static private func showMetricHistoricData(serviceLocator: AppServiceLocator) -> URLRouterEntry {
-        return URLRouterEntryFactory.with(pattern: AppRouterEntry.showMetricDataHistory(metric: BodyMetric.bmi).pattern) { _, parameters -> Any? in
+        return URLRouterEntryFactory.with(pattern: "app://records/history/:metric") { _, parameters -> Any? in
             let viewController = serviceLocator.mainStoryboard.instantiateViewController(withIdentifier: "ShowMetricHistoricalData") as? ShowMetricHistoricalDataViewController
             guard viewController != nil else { fatalError() }
             let disposeBag = DisposeBag()
