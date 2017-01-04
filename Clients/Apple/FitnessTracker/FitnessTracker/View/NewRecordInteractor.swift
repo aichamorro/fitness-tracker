@@ -21,6 +21,6 @@ final class NewRecordInteractor: INewRecordInteractor {
     }
     
     func rx_save(record: IFitnessInfo) -> Observable<IFitnessInfo> {
-        return repository.save(record: record)
+        return repository.rx_save(record: record)
     }
 }

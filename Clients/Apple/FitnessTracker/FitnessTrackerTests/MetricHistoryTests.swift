@@ -25,7 +25,7 @@ import RxSwift
 
 final class FakeMetricHistoryView: IMetricHistoryView {
     var selectedMetric: BodyMetric = .weight
-    var metricData: [String] = []
+    var metricData: [MetricDataReading] = []
     
     var hasUpdated = false
     func update() {
@@ -75,10 +75,10 @@ class MetricHistoryTests: QuickSpec {
                 
                 context("Can show chronologically sorted data for each metric") {
                     beforeEach {
-                        repository.save(many: [
-                            FitnessInfo(weight: 60.5, height: 171, bodyFatPercentage: 30.4, musclePercentage: 20.0),
-                            FitnessInfo(weight: 60.0, height: 171, bodyFatPercentage: 30.4, musclePercentage: 20.5),
-                            FitnessInfo(weight: 63.0, height: 171, bodyFatPercentage: 31.0, musclePercentage: 20.8)
+                        repository.rx_save(many: [
+                            FitnessInfo(weight: 60.5, height: 171, bodyFatPercentage: 30.4, musclePercentage: 20.0, waterPercentage: 20.0),
+                            FitnessInfo(weight: 60.0, height: 171, bodyFatPercentage: 30.4, musclePercentage: 20.5, waterPercentage: 22.0),
+                            FitnessInfo(weight: 63.0, height: 171, bodyFatPercentage: 31.0, musclePercentage: 20.8, waterPercentage: 24.0)
                             ]).subscribe(onNext: nil, onError: { _ in fail() })
                             .addDisposableTo(disposeBag)
                     }
@@ -87,29 +87,37 @@ class MetricHistoryTests: QuickSpec {
                         view.selectedMetric = .bodyFatPercentage
                         view.rx_loadHistoricDataSubject.onNext()
                         expect(view._noHistoricalDataWarningShown).to(beFalse())
-                        expect(view.metricData).to(equal(["31.0", "30.4", "30.4"]))
+                        expect(view.metricData.map { return $0.reading }).to(equal(["31.0", "30.4", "30.4"]))
                     }
                     
                     it("Shows data for muscle percentage") {
                         view.selectedMetric = .musclePercentage
                         view.rx_loadHistoricDataSubject.onNext()
                         expect(view._noHistoricalDataWarningShown).to(beFalse())
-                        expect(view.metricData).to(equal(["20.8", "20.5", "20.0"]))
+                        expect(view.metricData.map { return $0.reading }).to(equal(["20.8", "20.5", "20.0"]))
                     }
                     
                     it("Shows data for height") {
                         view.selectedMetric = .height
                         view.rx_loadHistoricDataSubject.onNext()
                         expect(view._noHistoricalDataWarningShown).to(beFalse())
-                        expect(view.metricData).to(equal(["171.0", "171.0", "171.0"]))
+                        expect(view.metricData.map { return $0.reading }).to(equal(["171.0", "171.0", "171.0"]))
                     }
                     
                     it("Shows data for weight") {
                         view.selectedMetric = .weight
                         view.rx_loadHistoricDataSubject.onNext()
                         expect(view._noHistoricalDataWarningShown).to(beFalse())
-                        expect(view.metricData).to(equal(["63.0", "60.0", "60.5"]))
+                        expect(view.metricData.map { return $0.reading }).to(equal(["63.0", "60.0", "60.5"]))
                     }
+                    
+                    it("Shows data for water") {
+                        view.selectedMetric = .waterPercentage
+                        view.rx_loadHistoricDataSubject.onNext()
+                        expect(view._noHistoricalDataWarningShown).to(beFalse())
+                        expect(view.metricData.map { return $0.reading }).to(equal(["24.0", "22.0", "20.0"]))
+                    }
+
                 }
             }
         }

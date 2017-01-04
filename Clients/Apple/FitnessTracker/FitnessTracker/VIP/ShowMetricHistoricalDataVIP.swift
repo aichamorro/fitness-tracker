@@ -77,7 +77,7 @@ final class MetricHistoryInteractor: IMetricHistoryInteractor {
             }
         }
         
-        return repository.findAll().flatMap { fetched in
+        return repository.rx_findAll().flatMap { fetched in
             return Observable.just(convertArray(fetched))
         }
     }
