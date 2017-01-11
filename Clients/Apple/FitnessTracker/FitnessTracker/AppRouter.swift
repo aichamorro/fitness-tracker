@@ -23,6 +23,12 @@ final class AppRouter {
 }
 
 extension AppRouter {
+    static var empty: AppRouter {
+        return AppRouter(urlRouter: URLRouterFactory.with(entries: []))
+    }
+}
+
+extension AppRouter {
     static private func currentRecordEntry(serviceLocator: AppServiceLocator) -> URLRouterEntry {
         return URLRouterEntryFactory.with(pattern: "app://records") { _,_ in
             let latestRecordInteractor = LatestRecordInteractor(repository: serviceLocator.fitnessInfoRepository)

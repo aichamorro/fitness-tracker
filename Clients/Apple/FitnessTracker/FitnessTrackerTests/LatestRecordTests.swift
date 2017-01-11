@@ -23,26 +23,23 @@ class LatestRecordTests: QuickSpec {
                 var view: LatestRecordView!
                 var disposeBag: DisposeBag!
                 var scheduler: TestScheduler!
-                var presenter: ILatestRecordPresenter!
                 var repository: CoreDataInfoRepository!
                 var managedObjectContext: NSManagedObjectContext!
                 var interactor: ILatestRecordInteractor!
-                var router: URLRouter!
-                
+                var router: AppRouter!
+                    
                 beforeEach {
                     managedObjectContext = SetUpInMemoryManagedObjectContext()
                     repository = CoreDataInfoRepository(managedObjectContext: managedObjectContext)
                     view = LatestRecordView()
                     disposeBag = DisposeBag()
                     scheduler = TestScheduler(initialClock: 0)
-                    presenter = LatestRecordPresenter
                     interactor = LatestRecordInteractor(repository: repository)
-                    router = URLRouterFactory.with(entries: [])
-                    presenter(interactor, view, router, disposeBag)
+                    router = AppRouter.empty
+                    LatestRecordPresenter(interactor, view, router, disposeBag)
                 }
                 
                 afterEach {
-                    presenter = nil
                     view = nil
                     managedObjectContext.reset()
                     managedObjectContext = nil

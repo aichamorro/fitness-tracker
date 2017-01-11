@@ -22,7 +22,7 @@ class InsightsTests: QuickSpec {
                     let fitnessInfoRepository = CoreDataInfoRepository(managedObjectContext: managedObjectContext)
                     let interactor = InsightsInteractor(repository: fitnessInfoRepository)
                     let disposeBag = DisposeBag()
-                    
+                
                     fitnessInfoRepository.rx_save(many:
                         [FitnessInfo(weight: 60.9, height: 171, bodyFatPercentage: 20.0, musclePercentage: 20.0, waterPercentage: 20.0),
                          FitnessInfo(weight: 61.0, height: 171, bodyFatPercentage: 20.0, musclePercentage: 20.0, waterPercentage: 20.0)])
