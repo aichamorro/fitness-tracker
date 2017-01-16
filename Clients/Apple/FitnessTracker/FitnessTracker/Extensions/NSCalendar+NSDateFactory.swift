@@ -30,5 +30,13 @@ extension Calendar {
     private func isDateInMonday(date: NSDate) -> Bool {
         return component(.weekday, from: date as Date) == 2
     }
+    
+    public func monthInterval(of date: NSDate) -> DateInterval? {
+        return dateInterval(of: .month, for: date as Date)
+    }
+    
+    public func yearInterval(of date: NSDate) -> DateInterval? {
+        return dateInterval(of: .year, for: date as Date)
+    }
 }
 

@@ -13,7 +13,7 @@ import RxSwift
 class AppServiceLocator {
     var fitnessInfoRepository: IFitnessInfoRepository!
     var router: AppRouter!
-    var mainStoryboard: UIStoryboard!
+    var viewControllerFactory: IUIViewControllerFactory!
 }
 
 typealias RetainerBag = [Any]
@@ -32,14 +32,27 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         
         configureServices()
         configureRouting()
-                
+        
+        var initialViewControllers: [UIViewController] = []
         serviceLocator.router.open(appURL: URL(string: "app://records")!) { controller in
             guard let viewController = controller as? UIViewController else { fatalError() }
             viewController.title = NSLocalizedString("Last measurement", comment: "Last measurement")
             let rootController = UINavigationController(rootViewController: viewController)
             
-            self.window?.rootViewController = rootController
+            initialViewControllers.append(rootController)
         }
+        
+        serviceLocator.router.open(appURL: URL(string: "app://insights")!) { controller in
+            guard let viewController = controller as? UIViewController else { fatalError() }
+            viewController.title = NSLocalizedString("Insights", comment: "Insights")
+            let rootController = UINavigationController(rootViewController: viewController)
+            
+            initialViewControllers.append(rootController)
+        }
+        
+        let mainTabController = UITabBarController()
+        mainTabController.viewControllers = initialViewControllers
+        window?.rootViewController = mainTabController
 
         // Override point for customization after application launch.
         return true
@@ -56,7 +69,8 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
             fatalError(error as! String)
         })
         
-        serviceLocator.mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        serviceLocator.viewControllerFactory = UIViewControllerFactory(storyboard: mainStoryboard)
     }
     
     private func configureRouting() {

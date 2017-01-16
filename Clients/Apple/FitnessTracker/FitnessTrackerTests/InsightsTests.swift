@@ -45,6 +45,10 @@ class InsightsTests: QuickSpec {
                         }).addDisposableTo(disposeBag)
                     }
                 }
+                
+                it("Creates a comparison of the data from the previous week") {
+                    
+                }
             }
         }
     }

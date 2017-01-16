@@ -37,10 +37,7 @@ extension AppRouter {
             let view = LatestRecordView()
             let disposeBag = DisposeBag()
             
-            guard let viewController = serviceLocator.mainStoryboard.instantiateInitialViewController() as? LatestRecordViewController else {
-                fatalError()
-            }
-            
+            let viewController = serviceLocator.viewControllerFactory.latestRecordViewController()
             viewController.interactors = [latestRecordInteractor, latestResultsComparisonInteractor]
             viewController.disposeBag = disposeBag
             viewController.latestRecordView = view
@@ -55,16 +52,15 @@ extension AppRouter {
     
     static private func createRecordEntry(serviceLocator: AppServiceLocator) -> URLRouterEntry {
         return URLRouterEntryFactory.with(pattern: "app://records/new") { _,_ in
-            let viewController = serviceLocator.mainStoryboard.instantiateViewController(withIdentifier: "NewRecordViewController") as? NewRecordViewController
-            guard viewController != nil else { fatalError() }
+            let viewController = serviceLocator.viewControllerFactory.newRecordViewController()
             
             let seeLatestRecordInteractor = LatestRecordInteractor(repository: serviceLocator.fitnessInfoRepository)
             let insertNewRecordInteractor = NewRecordInteractor(repository: serviceLocator.fitnessInfoRepository)
             let disposeBag = DisposeBag()
             
-            viewController!.interactors = [seeLatestRecordInteractor, insertNewRecordInteractor]
-            viewController!.disposeBag = disposeBag
-            NewRecordPresenter(seeLatestRecordInteractor, insertNewRecordInteractor, viewController!, disposeBag)
+            viewController.interactors = [seeLatestRecordInteractor, insertNewRecordInteractor]
+            viewController.disposeBag = disposeBag
+            NewRecordPresenter(seeLatestRecordInteractor, insertNewRecordInteractor, viewController, disposeBag)
             
             return viewController
         }
@@ -72,16 +68,28 @@ extension AppRouter {
     
     static private func showMetricHistoricData(serviceLocator: AppServiceLocator) -> URLRouterEntry {
         return URLRouterEntryFactory.with(pattern: "app://records/history/:metric") { _, parameters -> Any? in
-            let viewController = serviceLocator.mainStoryboard.instantiateViewController(withIdentifier: "ShowMetricHistoricalData") as? ShowMetricHistoricalDataViewController
-            guard viewController != nil else { fatalError() }
+            let viewController = serviceLocator.viewControllerFactory.showMetricHistoryData()
             let disposeBag = DisposeBag()
             
-            viewController!.selectedMetric = BodyMetric(rawValue: parameters["metric"]!)!
+            viewController.selectedMetric = BodyMetric(rawValue: parameters["metric"]!)!
             let historicDataInteractor = MetricHistoryInteractor(repository: serviceLocator.fitnessInfoRepository)
-            viewController!.bag = [historicDataInteractor, disposeBag]
+            viewController.bag = [historicDataInteractor, disposeBag]
             
-            MetricHistoryPresenter(historicDataInteractor, viewController!, disposeBag)
+            MetricHistoryPresenter(historicDataInteractor, viewController, disposeBag)
             
+            return viewController
+        }
+    }
+    
+    static private func insights(serviceLocator: AppServiceLocator) -> URLRouterEntry {
+        return URLRouterEntryFactory.with(pattern: "app://insights") { _,_ in
+            let viewController = serviceLocator.viewControllerFactory.showInsights()
+            let insightsInteractor = InsightsInteractor(repository: serviceLocator.fitnessInfoRepository)
+            let disposeBag = DisposeBag()
+            
+            viewController.bag = [disposeBag]
+            InsightsPresenter(insightsInteractor, viewController, disposeBag)
+
             return viewController
         }
     }
@@ -89,7 +97,8 @@ extension AppRouter {
     static func allEntries(serviceLocator: AppServiceLocator) -> [URLRouterEntry] {
         return [currentRecordEntry(serviceLocator: serviceLocator),
                 createRecordEntry(serviceLocator: serviceLocator),
-                showMetricHistoricData(serviceLocator: serviceLocator)]
+                showMetricHistoricData(serviceLocator: serviceLocator),
+                insights(serviceLocator: serviceLocator)]
     }
     
 }

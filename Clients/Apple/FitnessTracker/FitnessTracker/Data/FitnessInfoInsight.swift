@@ -26,35 +26,35 @@ struct InsightInfo {
 
 extension InsightInfo: IInsightInfo {
     var height: Int {
-        return Int(before.height - after.height)
+        return Int(after.height - before.height)
     }
     
     var weight: Double {
-        return before.weight - after.weight
+        return after.weight - before.weight
     }
     
     var musclePercentage: Double {
-        return before.musclePercentage - after.musclePercentage
+        return after.musclePercentage - before.musclePercentage
     }
     
     var bodyFatPercentage: Double {
-        return before.bodyFatPercentage - after.bodyFatPercentage
+        return after.bodyFatPercentage - before.bodyFatPercentage
     }
     
     var waterPercentage: Double {
-        return before.waterPercentage - after.waterPercentage
+        return after.waterPercentage - before.waterPercentage
     }
     
     var muscleWeight: Double {
-        return before.muscleWeight - after.muscleWeight
+        return after.muscleWeight - before.muscleWeight
     }
     
     var bodyFatWeight: Double {
-        return before.bodyFatWeight - after.bodyFatWeight
+        return after.bodyFatWeight - before.bodyFatWeight
     }
     
     var waterWeight: Double {
-        return before.waterWeight - after.waterWeight
+        return after.waterWeight - before.waterWeight
     }
 }
 
@@ -63,6 +63,7 @@ struct FitnessInfoInsight {
     let previousRecord: IFitnessInfo?
     let firstDayOfWeek: IFitnessInfo?
     let firstDayOfMonth: IFitnessInfo?
+    let firstDayOfYear: IFitnessInfo?
     
     private var canComputeDayInsight: Bool {
         return previousRecord != nil && reference != nil
@@ -74,6 +75,10 @@ struct FitnessInfoInsight {
     
     private var canComputeMonthlyInsight: Bool {
         return firstDayOfMonth != nil && reference != nil
+    }
+    
+    private var canComputeYearInsight: Bool {
+        return firstDayOfYear != nil && reference != nil
     }
     
     var dayInsight: IInsightInfo? {
@@ -93,10 +98,16 @@ struct FitnessInfoInsight {
         
         return InsightInfo(before: firstDayOfMonth!, after: reference!)
     }
+    
+    var yearInsight: IInsightInfo? {
+        guard canComputeYearInsight else { return nil }
+        
+        return InsightInfo(before: firstDayOfYear!, after: reference!)
+    }
 }
 
 extension FitnessInfoInsight {
     static var empty: FitnessInfoInsight {
-        return FitnessInfoInsight(reference: nil, previousRecord: nil, firstDayOfWeek: nil, firstDayOfMonth: nil)
+        return FitnessInfoInsight(reference: nil, previousRecord: nil, firstDayOfWeek: nil, firstDayOfMonth: nil, firstDayOfYear: nil)
     }
 }

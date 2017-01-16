@@ -9,12 +9,20 @@
 import Foundation
 import RxSwift
 
+typealias FitnessInfoInsightViewModel = (title: String, weight: Double, bodyFatWeight: Double, muscleWeight: Double, waterPercentage: Double)
 protocol IInsightsView {
-    
+    var rx_insights: AnyObserver<[FitnessInfoInsightViewModel]> { get }
 }
 
 protocol IInsightsInteractor {
     func rx_getInsights() -> Observable<FitnessInfoInsight>
+    var rx_latestRecordUpdated: Observable<Void> { get }
+}
+
+private extension Disposables {
+    static var NoOpDisposable: Cancelable {
+        return Disposables.create { }
+    }
 }
 
 class InsightsInteractor: IInsightsInteractor {
@@ -25,17 +33,55 @@ class InsightsInteractor: IInsightsInteractor {
     }
     
     func rx_getInsights() -> Observable<FitnessInfoInsight> {
-        return self.repository.rx_findLatest(numberOfRecords: 2)
-            .flatMap { insights -> Observable<FitnessInfoInsight> in
-                guard insights.count == 2 else { return Observable.just(FitnessInfoInsight.empty) }
+        return Observable.create { observer in
+            let latestRecords = self.repository.findLatest(numberOfRecords: 2)
+            guard latestRecords.count == 2 else {
+                observer.onNext(FitnessInfoInsight.empty)
                 
-                let weekOfDate = self.repository.findWeek(ofDay: insights.first!.date!)
-                
-                return Observable.just(FitnessInfoInsight(reference: insights[0], previousRecord: insights[1], firstDayOfWeek: weekOfDate.first, firstDayOfMonth: nil))
+                return Disposables.NoOpDisposable
             }
+            
+            let latestRecordDate = latestRecords.first!.date!
+            let firstDayOfWeek = self.repository.findFirstOfWeek(ofDay: latestRecordDate)
+            let firstDayOfMonth = self.repository.findFirstOfMonth(ofDay: latestRecordDate)
+            let firstDayOfYear = self.repository.findFirstOfYear(ofDay: latestRecordDate)
+            
+            observer.onNext(FitnessInfoInsight(reference: latestRecords[0], previousRecord: latestRecords[1], firstDayOfWeek: firstDayOfWeek, firstDayOfMonth: firstDayOfMonth, firstDayOfYear: firstDayOfYear))
+            
+            return Disposables.NoOpDisposable
+        }
+    }
+    
+    var rx_latestRecordUpdated: Observable<Void> {
+        return self.repository.rx_updated
     }
     
 }
 
 typealias IInsightsPresenter = (IInsightsInteractor, IInsightsView, DisposeBag) -> Void
-let InsightsPresenter: IInsightsPresenter = { interactor, view, disposeBag in }
+let InsightsPresenter: IInsightsPresenter = { interactor, view, disposeBag in
+    let mapInsights: (FitnessInfoInsight) -> Observable<[FitnessInfoInsightViewModel]> = { insights in
+            let insightsViewModel: [FitnessInfoInsightViewModel] = zip([insights.dayInsight, insights.weekInsight, insights.monthInsight, insights.yearInsight], ["Day", "Week", "Month", "Year"]).map {
+                guard let insight = $0.0 else { return nil }
+                
+                return FitnessInfoInsightViewModel(title: $0.1,
+                                                   weight: insight.weight,
+                                                   bodyFatWeight: insight.bodyFatWeight,
+                                                   muscleWeight: insight.muscleWeight,
+                                                   waterPercentage: insight.waterPercentage)
+                }.flatMap { $0 }
+            
+            return Observable.just(insightsViewModel)
+    }
+        
+    interactor.rx_getInsights()
+        .flatMap(mapInsights)
+        .bindTo(view.rx_insights)
+        .addDisposableTo(disposeBag)
+    
+    interactor.rx_latestRecordUpdated
+        .flatMap { return interactor.rx_getInsights() }
+        .flatMap(mapInsights)
+        .bindTo(view.rx_insights)
+        .addDisposableTo(disposeBag)
+}
