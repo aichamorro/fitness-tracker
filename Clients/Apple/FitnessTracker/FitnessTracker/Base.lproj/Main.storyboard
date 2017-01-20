@@ -38,21 +38,21 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="E3D-cU-SSs">
-                            <size key="itemSize" width="317" height="165"/>
+                            <size key="itemSize" width="300" height="165"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="InsightCardTableViewCell" id="aDw-Vo-Qgk" customClass="InsightsCardCollectionViewCell" customModule="FitnessTracker" customModuleProvider="target">
-                                <rect key="frame" x="29" y="0.0" width="317" height="165"/>
+                                <rect key="frame" x="37.5" y="0.0" width="300" height="165"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="317" height="165"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="300" height="165"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jDI-ZN-0we">
-                                            <rect key="frame" x="71" y="8" width="176" height="147.5"/>
+                                            <rect key="frame" x="62" y="8" width="176" height="147.5"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aG8-43-EjR">
                                                     <rect key="frame" x="68.5" y="5" width="37.5" height="21.5"/>
@@ -138,24 +138,6 @@
                                     <constraint firstItem="jDI-ZN-0we" firstAttribute="centerX" secondItem="aDw-Vo-Qgk" secondAttribute="centerX" id="Gtj-18-ofG"/>
                                     <constraint firstItem="jDI-ZN-0we" firstAttribute="top" secondItem="aDw-Vo-Qgk" secondAttribute="topMargin" id="kVv-sV-FmQ"/>
                                 </constraints>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
-                                        <integer key="value" value="1"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="layer.borderColor">
-                                        <color key="value" red="0.74613340736040601" green="0.74613340736040601" blue="0.74613340736040601" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBound" value="NO"/>
-                                    <userDefinedRuntimeAttribute type="size" keyPath="layer.shadowOffset">
-                                        <size key="value" width="0.0" height="0.0"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.shadowRadius">
-                                        <integer key="value" value="5"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.shadowOpacity">
-                                        <real key="value" value="0.5"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <outlet property="bodyFatWeight" destination="wIW-Ai-UHa" id="qSD-7d-OLR"/>
                                     <outlet property="muscleWeight" destination="7F6-CM-DaQ" id="G32-DM-sr5"/>

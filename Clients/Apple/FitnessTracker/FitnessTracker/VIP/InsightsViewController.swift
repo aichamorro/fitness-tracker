@@ -41,12 +41,14 @@ extension InsightsViewController {
         cell.muscleWeight.text = String(format: "%.2f Kg", insights[indexPath.row].muscleWeight)
         cell.waterPercentage.text = String(format: "%.2f %%", insights[indexPath.row].waterPercentage)
 
+        cell.layer.borderWidth = 1
+        cell.layer.borderColor = UIColor.gray.cgColor
+        
         return cell
     }
 }
 
 extension InsightsViewController: IInsightsView {
-    
     var rx_insights: AnyObserver<[FitnessInfoInsightViewModel]> {
         return rx_insightsLazy
     }
