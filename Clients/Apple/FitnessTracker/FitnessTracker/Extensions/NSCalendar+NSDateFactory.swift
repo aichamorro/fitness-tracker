@@ -18,7 +18,9 @@ extension Calendar {
             return date as Date
         }
         
-        return self.date(byAdding: .day, value: -daysToPrevMondayFromDate(date: date), to: date as Date)!
+        let monday = self.date(byAdding: .day, value: -daysToPrevMondayFromDate(date: date), to: date as Date)!
+
+        return self.date(bySettingHour: 0, minute: 0, second: 0, of: monday)!
     }
     
     private func daysToPrevMondayFromDate(date: NSDate) -> Int {
@@ -29,6 +31,12 @@ extension Calendar {
     
     private func isDateInMonday(date: NSDate) -> Bool {
         return component(.weekday, from: date as Date) == 2
+    }
+    
+    public func weekInterval(of date: NSDate) -> DateInterval? {
+        let firstDayOfWeek = previousMonday(fromDate: date)
+        
+        return DateInterval(start: firstDayOfWeek, duration: SEC_PER_WEEK)
     }
     
     public func monthInterval(of date: NSDate) -> DateInterval? {
