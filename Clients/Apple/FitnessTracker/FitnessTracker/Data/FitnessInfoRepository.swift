@@ -67,17 +67,18 @@ extension CoreDataQueryRequest {
             return fetchRequest
             
         case .findFirstRecordOfWeek(let date):
-            let startDate = Calendar.current.previousMonday(fromDate: date)
-            let dateInterval = DateInterval(start: startDate as Date, duration: SEC_PER_WEEK)
+            let dateInterval = Calendar.current.weekInterval(of: date)!
             let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: self.entity)
-            fetchRequest.fetchLimit = 1
-            fetchRequest.predicate = NSPredicate(format: "((date >= %@) AND (date <= %@))", dateInterval.start as CVarArg, dateInterval.end as CVarArg)
+            fetchRequest.fetchLimit = 7
+            fetchRequest.sortDescriptors = [NSSortDescriptor(key: "date", ascending: true)]
+            fetchRequest.predicate = NSPredicate(format: "((date >= %@) AND (date < %@))", dateInterval.start as CVarArg, dateInterval.end as CVarArg)
             
             return fetchRequest
             
         case .findFirstRecordOfMonth(let date):
             let dateInterval = Calendar.current.monthInterval(of: date)!
             let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: self.entity)
+            fetchRequest.sortDescriptors = [NSSortDescriptor(key: "date", ascending: true)]
             fetchRequest.fetchLimit = 1
             fetchRequest.predicate = NSPredicate(format: "((date >= %@) AND (date < %@))", dateInterval.start as CVarArg, dateInterval.end as CVarArg)
             
@@ -86,6 +87,7 @@ extension CoreDataQueryRequest {
         case .findFirstRecordOfYear(let date):
             let dateInterval = Calendar.current.yearInterval(of: date)!
             let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: self.entity)
+            fetchRequest.sortDescriptors = [NSSortDescriptor(key: "date", ascending: true)]
             fetchRequest.fetchLimit = 1
             fetchRequest.predicate = NSPredicate(format: "((date >= %@) AND (date < %@))", dateInterval.start as CVarArg, dateInterval.end as CVarArg)
             
