@@ -141,6 +141,8 @@
 		392FEADF1E2C09E200D10C3D /* InsightsCardCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InsightsCardCollectionViewCell.swift; sourceTree = "<group>"; };
 		397EBDA41E27B6B70060BCC1 /* InsightsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InsightsViewController.swift; sourceTree = "<group>"; };
 		397EBDA61E27BA610060BCC1 /* IUIViewControllerFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IUIViewControllerFactory.swift; sourceTree = "<group>"; };
+		39BBF6271E37616600CF5AE7 /* FitnessTracker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FitnessTracker.entitlements; sourceTree = "<group>"; };
+		39BBF6281E37668500CF5AE7 /* TodayExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TodayExtension.entitlements; sourceTree = "<group>"; };
 		39EE912F1E36329F00F104C8 /* TodayExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = TodayExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		39EE91301E36329F00F104C8 /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
 		39EE91331E36329F00F104C8 /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
@@ -212,6 +214,7 @@
 		200323D31E00166200B1C33A /* FitnessTracker */ = {
 			isa = PBXGroup;
 			children = (
+				39BBF6271E37616600CF5AE7 /* FitnessTracker.entitlements */,
 				20471A4B1E1ADB770000F7C2 /* Extensions */,
 				20E89E661E130C2500F03644 /* VIP */,
 				20FA50FF1E095785002E536A /* View */,
@@ -322,6 +325,7 @@
 		39EE91321E36329F00F104C8 /* TodayExtension */ = {
 			isa = PBXGroup;
 			children = (
+				39BBF6281E37668500CF5AE7 /* TodayExtension.entitlements */,
 				39EE91331E36329F00F104C8 /* TodayViewController.swift */,
 				39EE91351E36329F00F104C8 /* MainInterface.storyboard */,
 				39EE91381E36329F00F104C8 /* Info.plist */,
@@ -434,6 +438,11 @@
 						CreatedOnToolsVersion = 8.2;
 						DevelopmentTeam = K344HSVA53;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 					200323E91E0018A500B1C33A = {
 						CreatedOnToolsVersion = 8.2;
@@ -445,6 +454,11 @@
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = K344HSVA53;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -826,6 +840,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = FitnessTracker/FitnessTracker.entitlements;
 				DEVELOPMENT_TEAM = K344HSVA53;
 				INFOPLIST_FILE = FitnessTracker/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -841,6 +856,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = FitnessTracker/FitnessTracker.entitlements;
 				DEVELOPMENT_TEAM = K344HSVA53;
 				INFOPLIST_FILE = FitnessTracker/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -884,6 +900,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 28A3F34B67D440117A76919C /* Pods-TodayExtension.debug.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = TodayExtension/TodayExtension.entitlements;
 				DEVELOPMENT_TEAM = K344HSVA53;
 				INFOPLIST_FILE = TodayExtension/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
@@ -898,6 +915,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 94B5A7A9738E9EE617B4C9E1 /* Pods-TodayExtension.release.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = TodayExtension/TodayExtension.entitlements;
 				DEVELOPMENT_TEAM = K344HSVA53;
 				INFOPLIST_FILE = TodayExtension/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";

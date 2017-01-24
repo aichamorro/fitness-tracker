@@ -8,7 +8,15 @@
 
 import UIKit
 import NotificationCenter
-//import FitnessTracker
+import RxSwift
+
+private func LatestRecordPresenter(interactor: ILatestRecordInteractor, view: ILatestRecordView, disposeBag: DisposeBag) {
+    view.rx_viewDidLoad
+        .flatMap { interactor.rx_findLatest() }
+        .map { LatestRecordViewModel.from(fitnessInfo: $0) }
+        .subscribe(onNext: { view.viewModel = $0 })
+        .addDisposableTo(disposeBag)
+}
 
 class TodayViewController: UIViewController, NCWidgetProviding {
     
@@ -17,16 +25,41 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     @IBOutlet private var bodyFatWeightLabel: UILabel!
     @IBOutlet private var muscleWeightLabel: UILabel!
     @IBOutlet private var waterPercentageLabel: UILabel!
-        
+    
+    private var interactor: ILatestRecordInteractor!
+    private let disposeBag = DisposeBag()
+    fileprivate let viewDidLoadSubject = PublishSubject<Void>()
+    
+    var viewModel: LatestRecordViewModel = LatestRecordViewModel.empty {
+        didSet {
+            updateView()
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view from its nib.
-//        let fitnessInfo = FitnessInfo(weight: 0, height: 0, bodyFatPercentage: 0, musclePercentage: 0, waterPercentage: 0)
+        
+        CoreDataStackInitializer({ managedObjectContext in
+            NSLog("Core Data Stack initialized correctly")
+            
+            self.interactor = LatestRecordInteractor(repository: CoreDataInfoRepository(managedObjectContext: managedObjectContext))
+            LatestRecordPresenter(interactor: self.interactor, view: self, disposeBag: self.disposeBag)
+        }, { error in
+            fatalError(error as! String)
+        })
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    private func updateView() {
+        heightLabel.text = String(format: "%d", viewModel.height)
+        weightLabel.text = String(format: "%.2f", viewModel.weight)
+        bodyFatWeightLabel.text = String(format: "%.2f", viewModel.bodyFatWeight)
+        muscleWeightLabel.text = String(format: "%.2f", viewModel.muscleWeight)
+        waterPercentageLabel.text = String(format: "%.2f", viewModel.water)
     }
     
     func widgetPerformUpdate(completionHandler: (@escaping (NCUpdateResult) -> Void)) {
@@ -36,11 +69,18 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         // If there's no update required, use NCUpdateResult.NoData
         // If there's an update, use NCUpdateResult.NewData
         
+        viewDidLoadSubject.onNext()
         completionHandler(NCUpdateResult.newData)
     }
     
 }
 
-//extension TodayViewController: ILatestRecordView {
-//    
-//}
+extension TodayViewController: ILatestRecordView {
+    var rx_viewDidLoad: Observable<Void> {
+        return viewDidLoadSubject.asObservable()
+    }
+    
+    var rx_didSelectMetric: Observable<BodyMetric> {
+        fatalError("Did select metric is not available for Today Extensions")
+    }
+}
