@@ -23,8 +23,10 @@ let LatestRecordPresenter: ILatestRecordPresenter = { interactor, view, router, 
             let url = URL(string: "app://records/history/\(metric.rawValue)")!
             router.open(appURL: url) { viewController in
                 guard let viewController = viewController as? UIViewController else { fatalError() }
+                guard let tabController = UIApplication.shared.keyWindow?.rootViewController as? UITabBarController,
+                 let rootViewController = tabController.viewControllers?.first else { fatalError() }
                 
-                UIApplication.shared.keyWindow?.rootViewController?.show(viewController, sender: nil)
+                rootViewController.show(viewController, sender: nil)
             }
         }).addDisposableTo(disposeBag)
 

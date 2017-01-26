@@ -13,20 +13,25 @@ import CoreData
 protocol IFitnessInfoRepository {
     var rx_updated: Observable<Void> { get }
     
-    func findLatest(numberOfRecords: Int) -> Observable<[IFitnessInfo]>
-    func findAll() -> Observable<[IFitnessInfo]>
+    func rx_findLatest(numberOfRecords: Int) -> Observable<[IFitnessInfo]>
+    func rx_findAll() -> Observable<[IFitnessInfo]>
     
-    @discardableResult func save(record: IFitnessInfo) -> Observable<IFitnessInfo>
+    func findFirstOfWeek(ofDay dayOfWeek: NSDate) -> IFitnessInfo?
+    func findFirstOfMonth(ofDay dayOfMonth: NSDate) -> IFitnessInfo?
+    func findFirstOfYear(ofDay dayOfYear: NSDate) -> IFitnessInfo?
+    func findLatest(numberOfRecords: Int) -> [IFitnessInfo]
+    
+    @discardableResult func rx_save(record: IFitnessInfo) -> Observable<IFitnessInfo>
 }
 
 extension IFitnessInfoRepository {
-    func save(many records: [IFitnessInfo]) -> Observable<[IFitnessInfo]> {
+    func rx_save(many records: [IFitnessInfo]) -> Observable<[IFitnessInfo]> {
         var result: [IFitnessInfo] = []
         var error: Error?
         let disposeBag = DisposeBag()
         
         for record in records {
-            self.save(record: record)
+            self.rx_save(record: record)
                 .subscribe(onNext: { result.append($0) }, onError: { error = $0 } )
                 .addDisposableTo(disposeBag)
         }
@@ -42,6 +47,9 @@ enum CoreDataEntity: String {
 enum CoreDataQueryRequest {
     case findLatestRecords(limit: Int)
     case findLatest
+    case findFirstRecordOfWeek(date: NSDate)
+    case findFirstRecordOfMonth(date: NSDate)
+    case findFirstRecordOfYear(date: NSDate)
     case findAll
 }
 
@@ -58,6 +66,33 @@ extension CoreDataQueryRequest {
             
             return fetchRequest
             
+        case .findFirstRecordOfWeek(let date):
+            let dateInterval = Calendar.current.weekInterval(of: date)!
+            let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: self.entity)
+            fetchRequest.fetchLimit = 7
+            fetchRequest.sortDescriptors = [NSSortDescriptor(key: "date", ascending: true)]
+            fetchRequest.predicate = NSPredicate(format: "((date >= %@) AND (date < %@))", dateInterval.start as CVarArg, dateInterval.end as CVarArg)
+            
+            return fetchRequest
+            
+        case .findFirstRecordOfMonth(let date):
+            let dateInterval = Calendar.current.monthInterval(of: date)!
+            let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: self.entity)
+            fetchRequest.sortDescriptors = [NSSortDescriptor(key: "date", ascending: true)]
+            fetchRequest.fetchLimit = 1
+            fetchRequest.predicate = NSPredicate(format: "((date >= %@) AND (date < %@))", dateInterval.start as CVarArg, dateInterval.end as CVarArg)
+            
+            return fetchRequest
+            
+        case .findFirstRecordOfYear(let date):
+            let dateInterval = Calendar.current.yearInterval(of: date)!
+            let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: self.entity)
+            fetchRequest.sortDescriptors = [NSSortDescriptor(key: "date", ascending: true)]
+            fetchRequest.fetchLimit = 1
+            fetchRequest.predicate = NSPredicate(format: "((date >= %@) AND (date < %@))", dateInterval.start as CVarArg, dateInterval.end as CVarArg)
+            
+            return fetchRequest
+            
         case .findAll:
             let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: self.entity)
             fetchRequest.sortDescriptors = [NSSortDescriptor(key: "date", ascending: false)]
@@ -68,8 +103,11 @@ extension CoreDataQueryRequest {
     
     var entity: String {
         switch self {
+        case .findFirstRecordOfWeek(_): fallthrough
         case .findLatest: fallthrough
         case .findAll: fallthrough
+        case .findFirstRecordOfMonth(_): fallthrough
+        case .findFirstRecordOfYear(_): fallthrough
         case .findLatestRecords(_):
             return CoreDataEntity.fitnessInfo.rawValue
         }
@@ -90,19 +128,35 @@ final class CoreDataInfoRepository: IFitnessInfoRepository {
         return rx_updatedSubject.asObservable()
     }
     
-    func findLatest(numberOfRecords: Int) -> Observable<[IFitnessInfo]> {
-        return coreDataEngine.execute(query: .findLatestRecords(limit: numberOfRecords))
+    func rx_findLatest(numberOfRecords: Int) -> Observable<[IFitnessInfo]> {
+        return coreDataEngine.rx_execute(query: .findLatestRecords(limit: numberOfRecords))
             .do(onNext: nil, onError: { NSLog("Error: \($0)") })
             .catchErrorJustReturn([])
             .flatMap { return Observable.just($0 as! [CoreDataFitnessInfo]) }
     }
     
-    func findAll() -> Observable<[IFitnessInfo]> {
-        return coreDataEngine.execute(query: .findAll)
+    func findLatest(numberOfRecords: Int) -> [IFitnessInfo] {
+        return coreDataEngine.execute(query: .findLatestRecords(limit: numberOfRecords)) as! [IFitnessInfo]
+    }
+    
+    func rx_findAll() -> Observable<[IFitnessInfo]> {
+        return coreDataEngine.rx_execute(query: .findAll)
             .flatMap { return Observable.just($0 as! [CoreDataFitnessInfo]) }
     }
     
-    @discardableResult func save(record: IFitnessInfo) -> Observable<IFitnessInfo> {
+    func findFirstOfWeek(ofDay dayOfWeek: NSDate) -> IFitnessInfo? {
+        return coreDataEngine.execute(query: .findFirstRecordOfWeek(date: dayOfWeek)).first as! IFitnessInfo?
+    }
+    
+    func findFirstOfMonth(ofDay dayOfMonth: NSDate) -> IFitnessInfo? {
+        return coreDataEngine.execute(query: .findFirstRecordOfMonth(date: dayOfMonth)).first as! IFitnessInfo?
+    }
+    
+    func findFirstOfYear(ofDay dayOfYear: NSDate) -> IFitnessInfo? {
+        return coreDataEngine.execute(query: .findFirstRecordOfYear(date: dayOfYear)).first as! IFitnessInfo?
+    }
+    
+    @discardableResult func rx_save(record: IFitnessInfo) -> Observable<IFitnessInfo> {
         return coreDataEngine.create(entityName: CoreDataEntity.fitnessInfo.rawValue) { entity in
             guard let saved = entity as? CoreDataFitnessInfo else { fatalError() }
             

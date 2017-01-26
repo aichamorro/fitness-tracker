@@ -86,7 +86,15 @@ internal let RxCoreDataStackInitializer: IRxCoreDataStackInitializer = {
 struct CoreDataEngine {
     let managedObjectContext: NSManagedObjectContext
     
-    func execute(query: CoreDataQueryRequest) -> Observable<[Any]> {
+    func execute(query: CoreDataQueryRequest) -> [Any] {
+        do {
+            return try self.managedObjectContext.fetch(query.fetchRequest)
+        } catch {
+            fatalError()
+        }
+    }
+    
+    func rx_execute(query: CoreDataQueryRequest) -> Observable<[Any]> {
         return Observable.create { observer in
             do {
                 let result = try self.managedObjectContext.fetch(query.fetchRequest)

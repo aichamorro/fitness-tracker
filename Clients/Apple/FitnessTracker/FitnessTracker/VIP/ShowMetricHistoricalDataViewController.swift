@@ -40,7 +40,7 @@ final class ShowMetricHistoricalDataViewController: UITableViewController, IMetr
         dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .medium
         dateFormatter.timeStyle = .none
-        dateFormatter.dateFormat = "dd MMM yy, hh:mm"
+        dateFormatter.dateFormat = "EEE, dd MMM yy, hh:mm"
         
         rx_loadHistoricDataSubject.onNext()
     }

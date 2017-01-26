@@ -35,19 +35,19 @@ class CoreDataFitnessInfoRepositoryTests: QuickSpec {
                 }
                 
                 it("Returns an empty result when fetching if there is no data") {
-                    createObserverAndSubscribe(to: repository.findLatest(numberOfRecords: 5), scheduler: scheduler, disposeBag: disposeBag, expect: { result in
+                    createObserverAndSubscribe(to: repository.rx_findLatest(numberOfRecords: 5), scheduler: scheduler, disposeBag: disposeBag, expect: { result in
                         expect(result).to(beEmpty())
                     }, action:{ })
                 }
                 
                 it("Can return a single result") {
-                    let expected = FitnessInfo(weight: 60.0, height: 171, bodyFatPercentage: 30.0, musclePercentage: 30.0)
-                    repository.save(record: expected)
+                    let expected = FitnessInfo(weight: 60.0, height: 171, bodyFatPercentage: 30.0, musclePercentage: 30.0, waterPercentage: 0.0)
+                    repository.rx_save(record: expected)
                         .do(onNext: nil, onError: { _ in fail() })
                         .subscribe(onNext: nil)
                         .addDisposableTo(disposeBag)
                     
-                    createObserverAndSubscribe(to: repository.findLatest(numberOfRecords: 5), scheduler: scheduler, disposeBag: disposeBag, expect: { result in
+                    createObserverAndSubscribe(to: repository.rx_findLatest(numberOfRecords: 5), scheduler: scheduler, disposeBag: disposeBag, expect: { result in
                         expect(result.count).to(equal(1))
                         
                         guard let first = result.first else {
@@ -61,15 +61,15 @@ class CoreDataFitnessInfoRepositoryTests: QuickSpec {
                 }
                 
                 it("Can return several results ordered from latest to oldest") {
-                    let firstExpected = FitnessInfo(weight: 60.0, height: 171, bodyFatPercentage: 30.0, musclePercentage: 30.0)
-                    let secondExpected = FitnessInfo(weight: 65.0, height: 171, bodyFatPercentage: 40.0, musclePercentage: 50.0)
+                    let firstExpected = FitnessInfo(weight: 60.0, height: 171, bodyFatPercentage: 30.0, musclePercentage: 30.0, waterPercentage: 0.0)
+                    let secondExpected = FitnessInfo(weight: 65.0, height: 171, bodyFatPercentage: 40.0, musclePercentage: 50.0, waterPercentage: 0.0)
                     
-                    repository.save(many: [secondExpected, firstExpected])
+                    repository.rx_save(many: [secondExpected, firstExpected])
                         .do(onNext: nil, onError: { _ in fail() })
                         .subscribe(onNext: nil)
                         .addDisposableTo(disposeBag)
                    
-                    createObserverAndSubscribe(to: repository.findLatest(numberOfRecords: 5), scheduler: scheduler, disposeBag: disposeBag, expect: { result in
+                    createObserverAndSubscribe(to: repository.rx_findLatest(numberOfRecords: 5), scheduler: scheduler, disposeBag: disposeBag, expect: { result in
                         expect(result.count).to(equal(2))
                         
                         expect(result[0] == firstExpected).to(beTrue())
@@ -78,7 +78,7 @@ class CoreDataFitnessInfoRepositoryTests: QuickSpec {
                 }
                 
                 it("Notifies when the repository has been updated") {
-                    let any = FitnessInfo(weight: 60.0, height: 171, bodyFatPercentage: 30.0, musclePercentage: 30.0)
+                    let any = FitnessInfo(weight: 60.0, height: 171, bodyFatPercentage: 30.0, musclePercentage: 30.0, waterPercentage: 0)
                     
                     waitUntil(timeout: 5) { done in
                         repository.rx_updated
@@ -86,7 +86,7 @@ class CoreDataFitnessInfoRepositoryTests: QuickSpec {
                             done()
                         }).addDisposableTo(disposeBag)
                         
-                        repository.save(record: any).subscribe(onNext: nil).addDisposableTo(disposeBag)
+                        repository.rx_save(record: any).subscribe(onNext: nil).addDisposableTo(disposeBag)
                     }
                 }
             }
