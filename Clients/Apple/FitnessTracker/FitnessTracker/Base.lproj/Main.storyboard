@@ -409,14 +409,6 @@
                                                     </stackView>
                                                 </subviews>
                                                 <color key="backgroundColor" red="1" green="0.42649608529999999" blue="0.1505924418" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
-                                                        <integer key="value" value="3"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                    <userDefinedRuntimeAttribute type="color" keyPath="layer.borderColor">
-                                                        <color key="value" red="0.85828705238726788" green="0.85828705238726788" blue="0.85828705238726788" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                </userDefinedRuntimeAttributes>
                                             </stackView>
                                         </subviews>
                                         <color key="backgroundColor" red="0.95887526279898705" green="0.95756792504917609" blue="0.98040385915835548" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

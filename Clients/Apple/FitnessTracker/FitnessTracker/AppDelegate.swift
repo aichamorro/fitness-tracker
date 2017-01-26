@@ -81,3 +81,16 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
 
 }
 
+extension AppDelegate {
+    func application(_ application: UIApplication, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
+        switch shortcutItem.type {
+        case "org.onset-bits.fitness-tracker.new-record": serviceLocator.router.open(appURL: URL(string: "app://records/new")!, resultHandler: { result in
+            guard let viewController = result as? UIViewController else { fatalError() }
+            
+            self.window?.rootViewController?.show(viewController, sender: nil)
+        })
+            
+        default: fatalError("Shortcut not handled")
+        }
+    }
+}
