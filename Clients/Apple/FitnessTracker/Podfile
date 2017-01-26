@@ -16,3 +16,11 @@ target 'FitnessTracker' do
     pod 'RxTest'
   end
 end
+
+target 'TodayExtension' do
+  use_frameworks!
+
+  pod 'RxSwift'
+  pod 'RxCocoa'
+  pod 'URLRouter', git: 'https://github.com/aichamorro/URLRouter.git'
+end

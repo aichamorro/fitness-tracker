@@ -16,7 +16,11 @@ typealias ICoreDataStackInitializer = (@escaping ICoreDataStackInitializerSucces
 typealias IRxCoreDataStackInitializer = () -> Observable<NSManagedObjectContext?>
 
 internal let CoreDataStackInitializer: ICoreDataStackInitializer = { success, error in
-    let modelURL: () -> URL? = {
+    let databaseFilename = "FitnessTrackerDataModel.sqlite"
+    let containerPath = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.org.onset-bits.fitness-tracker")
+    var storeURL = containerPath!.appendingPathComponent(databaseFilename)
+    
+    func modelURL() -> URL? {
         guard let modelURL = Bundle.main.url(forResource: "CoreDataModel", withExtension: "momd") else {
             error(NSError(domain: "Core Data", code: -1, userInfo: nil))
             
@@ -25,8 +29,7 @@ internal let CoreDataStackInitializer: ICoreDataStackInitializer = { success, er
         
         return modelURL
     }
-    
-    let mom: (URL) -> NSManagedObjectModel? = { url in
+    func mom(url: URL) -> NSManagedObjectModel? {
         guard let mom = NSManagedObjectModel(contentsOf: url) else {
             error(NSError(domain: "Core Data", code: -1, userInfo: nil))
             
@@ -35,37 +38,56 @@ internal let CoreDataStackInitializer: ICoreDataStackInitializer = { success, er
         
         return mom
     }
-    
-    let managedObjectContext: (NSManagedObjectModel) -> NSManagedObjectContext = { mom in
+    func managedObjectContext(mom: NSManagedObjectModel) -> NSManagedObjectContext {
         let managedObjectContext = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
         let psc = NSPersistentStoreCoordinator(managedObjectModel: mom)
         managedObjectContext.persistentStoreCoordinator = psc
 
         return managedObjectContext
     }
-    
-    let initializePSC: (NSManagedObjectContext) -> Void = { moc in
+    func initializePSC(moc: NSManagedObjectContext) -> Void {
+        func needsMigration() -> Bool {
+            if FileManager.default.fileExists(atPath: storeURL.path) {
+                return false
+            }
+            
+            return true
+        }
+
         DispatchQueue.global(qos: .background).async {
-            let urls = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
-            let docURL = urls[urls.endIndex - 1]
-            let storeURL = docURL.appendingPathComponent("FitnessTrackerDataModel.sqlite")
             let options = [NSMigratePersistentStoresAutomaticallyOption: true, NSInferMappingModelAutomaticallyOption: true]
             
             do {
                 let psc = moc.persistentStoreCoordinator!
-                try psc.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: storeURL, options: options)
+                
+                if needsMigration() {
+                    // TODO: Copy the database
+                    let urls = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+                    let docURL = urls[urls.endIndex - 1]
+                    let oldStoreURL = docURL.appendingPathComponent(databaseFilename)
+                    
+                    do {
+                        try psc.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: oldStoreURL, options: options)
+                        try psc.migratePersistentStore(psc.persistentStore(for: oldStoreURL)!, to: storeURL, options: options, withType: NSSQLiteStoreType)
+                    } catch {
+                        fatalError()
+                    }
+                } else {
+                    try psc.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: storeURL, options: options)
+                }
             } catch {
                 fatalError("Error migrating store: \(error)")
             }
         }
     }
     
-    guard let url = modelURL(), let managedObjectModel = mom(url) else {
+    // MARK: CoreData initialization
+    guard let url = modelURL(), let managedObjectModel = mom(url: url) else {
             return
     }
     
-    let moc = managedObjectContext(managedObjectModel)
-    initializePSC(moc)
+    let moc = managedObjectContext(mom: managedObjectModel)
+    initializePSC(moc: moc)
     
     success(moc)
 }

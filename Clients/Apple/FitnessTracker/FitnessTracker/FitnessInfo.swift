@@ -11,7 +11,7 @@ import Foundation
 typealias Weight = Double
 typealias Height = UInt
 
-public protocol IFitnessInfo {
+protocol IFitnessInfo {
     var weight: Double { get }
     var height: UInt { get }
     var bodyFatPercentage: Double { get }
@@ -20,22 +20,31 @@ public protocol IFitnessInfo {
     var date: NSDate? { get }
 }
 
-public struct FitnessInfo: IFitnessInfo {
-    public let weight: Double
-    public let height: UInt
-    public let bodyFatPercentage: Double
-    public let musclePercentage: Double
-    public let waterPercentage: Double
-    public let date: NSDate? = nil
+struct FitnessInfo: IFitnessInfo {
+    let weight: Double
+    let height: UInt
+    let bodyFatPercentage: Double
+    let musclePercentage: Double
+    let waterPercentage: Double
+    let date: NSDate?
+    
+    init(weight: Double, height: UInt, bodyFatPercentage: Double, musclePercentage: Double, waterPercentage: Double, date: NSDate? = nil) {
+        self.weight = weight
+        self.height = height
+        self.bodyFatPercentage = bodyFatPercentage
+        self.musclePercentage = musclePercentage
+        self.waterPercentage = waterPercentage
+        self.date = date
+    }
 }
 
-public extension FitnessInfo {
+extension FitnessInfo {
     static var empty: IFitnessInfo = {
         return FitnessInfo(weight: 0, height: 0, bodyFatPercentage: 0, musclePercentage: 0, waterPercentage: 0)
     }()
 }
 
-public extension IFitnessInfo {
+extension IFitnessInfo {
     var bodyFatWeight: Double {
         return Double(weight) * (bodyFatPercentage/100)
     }
@@ -61,7 +70,7 @@ public extension IFitnessInfo {
 }
 
 
-public enum BMIRating: String {
+enum BMIRating: String {
     case underweight = "Underweight"
     case healthyweight = "Healthy weight"
     case overweight = "Overweight"
@@ -71,7 +80,7 @@ public enum BMIRating: String {
     case superObese = "Super obese"
 }
 
-public extension BMIRating {
+extension BMIRating {
     static func `for`(bmi: Double) -> BMIRating {
         return DefaultBMIClassification(bmi)
     }

@@ -61,10 +61,10 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     private func configureServices() {
         serviceLocator = AppServiceLocator()
 
-        _ = CoreDataStackInitializer({ success in
+        CoreDataStackInitializer({ managedObjectContext in
             NSLog("Core Data Stack initialized correctly")
             
-            self.serviceLocator.fitnessInfoRepository = CoreDataInfoRepository(managedObjectContext: success)
+            self.serviceLocator.fitnessInfoRepository = CoreDataInfoRepository(managedObjectContext: managedObjectContext)
         }, { error in
             fatalError(error as! String)
         })
