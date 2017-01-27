@@ -43,6 +43,7 @@
 		20FA51131E0B1DDF002E536A /* NewRecordInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FA51121E0B1DDF002E536A /* NewRecordInteractor.swift */; };
 		3903F5CA1E1BFA7D0093095B /* AppRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3903F5C91E1BFA7D0093095B /* AppRouter.swift */; };
 		392FEAE01E2C09E200D10C3D /* InsightsCardCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 392FEADF1E2C09E200D10C3D /* InsightsCardCollectionViewCell.swift */; };
+		395F02171E3A0C3F0041DE67 /* UIDispersionGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395F02161E3A0C3F0041DE67 /* UIDispersionGraph.swift */; };
 		397EBDA51E27B6B70060BCC1 /* InsightsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397EBDA41E27B6B70060BCC1 /* InsightsViewController.swift */; };
 		397EBDA71E27BA610060BCC1 /* IUIViewControllerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397EBDA61E27BA610060BCC1 /* IUIViewControllerFactory.swift */; };
 		39EE91311E36329F00F104C8 /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39EE91301E36329F00F104C8 /* NotificationCenter.framework */; };
@@ -139,6 +140,7 @@
 		28A3F34B67D440117A76919C /* Pods-TodayExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TodayExtension.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TodayExtension/Pods-TodayExtension.debug.xcconfig"; sourceTree = "<group>"; };
 		3903F5C91E1BFA7D0093095B /* AppRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppRouter.swift; sourceTree = "<group>"; };
 		392FEADF1E2C09E200D10C3D /* InsightsCardCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InsightsCardCollectionViewCell.swift; sourceTree = "<group>"; };
+		395F02161E3A0C3F0041DE67 /* UIDispersionGraph.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIDispersionGraph.swift; sourceTree = "<group>"; };
 		397EBDA41E27B6B70060BCC1 /* InsightsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InsightsViewController.swift; sourceTree = "<group>"; };
 		397EBDA61E27BA610060BCC1 /* IUIViewControllerFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IUIViewControllerFactory.swift; sourceTree = "<group>"; };
 		39BBF6271E37616600CF5AE7 /* FitnessTracker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FitnessTracker.entitlements; sourceTree = "<group>"; };
@@ -318,6 +320,7 @@
 				20FA51101E0B1D74002E536A /* NewRecordPresenter.swift */,
 				20FA51121E0B1DDF002E536A /* NewRecordInteractor.swift */,
 				20D76F1E1E0D8E5C00FDD122 /* ShowPreviousLatestResultVIP.swift */,
+				395F02161E3A0C3F0041DE67 /* UIDispersionGraph.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -657,6 +660,7 @@
 				20E89E6A1E130D3D00F03644 /* ShowMetricHistoricalDataViewController.swift in Sources */,
 				200323D51E00166200B1C33A /* AppDelegate.swift in Sources */,
 				3903F5CA1E1BFA7D0093095B /* AppRouter.swift in Sources */,
+				395F02171E3A0C3F0041DE67 /* UIDispersionGraph.swift in Sources */,
 				20FA51051E095947002E536A /* LatestRecordViewController.swift in Sources */,
 				20E89E681E130C5C00F03644 /* ShowMetricHistoricalDataVIP.swift in Sources */,
 				20FA51071E0976D1002E536A /* LatestRecordMetricCell.swift in Sources */,
