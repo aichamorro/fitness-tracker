@@ -51,7 +51,7 @@ final class MetricGraphInteractor: IMetricGraphInteractor {
         return fitnessInfoRepository
             .rx_findLatest(numberOfRecords: 7)
             .flatMap { fetched in
-                return Observable.just(fetched.map {
+                return Observable.just(fetched.reversed().map {
                     return ($0.date!, $0.value(for: bodyMetric).doubleValue)
                 })
             }

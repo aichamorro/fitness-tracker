@@ -62,6 +62,7 @@ struct UIGraphViewDrawingStyles {
                 context.strokePath()
 
                 // Gradients
+                path.addLine(to: CGPoint(x: path.currentPoint.x, y: rect.maxY))
                 path.addLine(to: CGPoint(x: rect.origin.x, y: rect.maxY))
                 context.addPath(path)
                 context.clip()
