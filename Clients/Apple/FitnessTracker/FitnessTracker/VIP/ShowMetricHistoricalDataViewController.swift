@@ -9,32 +9,31 @@
 import UIKit
 import RxSwift
 import UIGraphView
+import RxCocoa
 
-final class ShowMetricHistoricalDataViewController: UIViewController, IMetricHistoryView {
+final class ShowMetricHistoricalDataViewController: UIViewController {
     @IBOutlet private var tableView: UITableView!
     @IBOutlet private var graphView: UIGraphView!
-    @IBOutlet private var titleLabel: UILabel!
+    @IBOutlet fileprivate var graphVisualizationSegmentControl: UISegmentedControl!
     
     fileprivate let rx_didReceiveGraphData = PublishSubject<([Double], [Double])>()
     fileprivate let rx_loadGraphData = PublishSubject<Int>()
-    var rx_loadHistoricData: Observable<Void> {
-        return rx_loadGraphData.flatMap { _ in Observable.just() }.asObservable()
-    }
+    fileprivate let rx_loadCurrentWeekSubject = PublishSubject<Void>()
+    fileprivate let rx_loadHistoricDataSubject = PublishSubject<Void>()
     
     fileprivate var dateFormatter: DateFormatter!
     
     var bag: RetainerBag!
     let disposeBag = DisposeBag()
     
+    var metricData: [MetricDataReading] = []
+    var graphData: ([Double], [Double]) = ([],[])
     var selectedMetric: BodyMetric = .weight {
         didSet {
             self.title = selectedMetric.description
         }
     }
-    
-    var metricData: [MetricDataReading] = []
-    var graphData: ([Double], [Double]) = ([],[])
-    
+
     func showNoHistoricalDataWarning() {
         let alert = UIAlertController(title: "Error", message: "There is no data recorded for \(selectedMetric.description)", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { _ in alert.dismiss(animated: true, completion: nil) }))
@@ -52,10 +51,21 @@ final class ShowMetricHistoricalDataViewController: UIViewController, IMetricHis
         dateFormatter.timeStyle = .none
         dateFormatter.dateFormat = "EEE, dd MMM yy, hh:mm"
         
-        titleLabel.text = "Last 7 days of \(self.title!)"
-        
         graphView.delegate = self
         graphView.datasource = self
+        
+        graphVisualizationSegmentControl.rx.value
+            .asObservable()
+            .bindNext { [weak self] value in
+                guard let `self` = self else { return }
+                
+                switch value {
+                    case 0: self.rx_loadCurrentWeekSubject.onNext()
+                    case 1: self.rx_loadGraphData.onNext(7)
+                    case 2: self.rx_loadGraphData.onNext(30)
+                    default: fatalError()
+                }
+            }.addDisposableTo(disposeBag)
         
         rx_didReceiveGraphData
             .asObservable()
@@ -66,23 +76,36 @@ final class ShowMetricHistoricalDataViewController: UIViewController, IMetricHis
                 self.graphView.reloadData()
             }.addDisposableTo(disposeBag)
         
-        rx_loadGraphData.onNext(7)
+        rx_loadCurrentWeekSubject.onNext()
+        rx_loadHistoricDataSubject.onNext()
     }
 }
 
-extension ShowMetricHistoricalDataViewController: IMetricGraphView {
+extension ShowMetricHistoricalDataViewController: IMetricGraphView, ICurrentWeekGraphView, IMetricHistoryView {
     var rx_loadLatestRecords: Observable<Int> {
         return rx_loadGraphData.asObservable()
     }
     
+    var rx_loadCurrentWeekRecords: Observable<Void> {
+        return rx_loadCurrentWeekSubject.asObservable()
+    }
+    
     var rx_graphData: AnyObserver<([Double], [Double])> {
         return rx_didReceiveGraphData.asObserver()
+    }
+    
+    var rx_loadHistoricData: Observable<Void> {
+        return rx_loadHistoricDataSubject.asObservable()
     }
 }
 
 extension ShowMetricHistoricalDataViewController: UIGraphViewDelegate, UIGraphViewDataSource {
     func data(for dispersionGraph: UIGraphView) -> UIGraphViewSampleData {
         return graphData
+    }
+    
+    func graphView(_ graphView: UIGraphView, shouldAddHorizontalTagFor index: Int) -> Bool {
+        return self.graphVisualizationSegmentControl.selectedSegmentIndex == 2 ? (index % 7) == 0 : true
     }
 }
 

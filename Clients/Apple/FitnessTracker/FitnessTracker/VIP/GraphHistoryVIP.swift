@@ -13,10 +13,58 @@ protocol IMetricGraphInteractor {
     func findLatest(numberOfRecords: Int, for bodyMetric: BodyMetric) -> Observable<[(NSDate, Double)]>
 }
 
+protocol ICurrentWeekGraphInteractor {
+    func findCurrentWeek() -> Observable<[IFitnessInfo]>
+}
+
 protocol IMetricGraphView {
     var rx_loadLatestRecords: Observable<Int> { get }
     var rx_graphData: AnyObserver<([Double], [Double])> { get }
     var selectedMetric: BodyMetric { get }
+}
+
+protocol ICurrentWeekGraphView {
+    var rx_loadCurrentWeekRecords: Observable<Void> { get }
+    var rx_graphData: AnyObserver<([Double], [Double])> { get }
+    var selectedMetric: BodyMetric { get }
+}
+
+private extension Int {
+    var doubleValue: Double {
+        return Double(self)
+    }
+}
+
+private extension NSDate {
+    class var today: NSDate {
+        return NSDate()
+    }
+}
+
+private let calendar = Calendar.current
+private func FitnessInfoToGraphDataAdapter(bodyMetric: BodyMetric) -> ([IFitnessInfo]) -> ([Double],[Double]) {
+    return { data in
+        var dates: [Double] = []
+        var readings: [Double] = []
+        
+        data.forEach { info in
+            let day = calendar.component(.day, from: info.date! as Date)
+            dates.append(day.doubleValue)
+            readings.append(info.value(for: bodyMetric).doubleValue)
+        }
+        
+        return (dates, readings)
+    }
+}
+
+typealias ICurrentWeekGraphPresenter = (ICurrentWeekGraphInteractor, ICurrentWeekGraphView, DisposeBag) -> Void
+let CurrentWeekGraphPresenter: ICurrentWeekGraphPresenter = { interactor, view, disposeBag in
+    view.rx_loadCurrentWeekRecords
+        .flatMap {
+            interactor.findCurrentWeek()
+        }.map(FitnessInfoToGraphDataAdapter(bodyMetric: view.selectedMetric))
+        .bindTo(view.rx_graphData)
+        .addDisposableTo(disposeBag)
 }
 
 typealias IMetricGraphPresenter = (IMetricGraphInteractor, IMetricGraphView, DisposeBag) -> Void
@@ -55,5 +103,17 @@ final class MetricGraphInteractor: IMetricGraphInteractor {
                     return ($0.date!, $0.value(for: bodyMetric).doubleValue)
                 })
             }
+    }
+}
+
+final class CurrentWeekGraphInteractor: ICurrentWeekGraphInteractor {
+    private let fitnessInfoRepository: IFitnessInfoRepository
+    
+    init(repository: IFitnessInfoRepository) {
+        self.fitnessInfoRepository = repository
+    }
+    
+    func findCurrentWeek() -> Observable<[IFitnessInfo]> {
+        return fitnessInfoRepository.rx_findWeek(ofDay: NSDate.today)
     }
 }

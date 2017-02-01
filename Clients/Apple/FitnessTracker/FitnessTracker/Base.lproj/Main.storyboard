@@ -45,7 +45,7 @@
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="InsightCardTableViewCell" id="aDw-Vo-Qgk" customClass="InsightsCardCollectionViewCell" customModule="FitnessTracker" customModuleProvider="target">
-                                <rect key="frame" x="37.5" y="0.0" width="300" height="165"/>
+                                <rect key="frame" x="38" y="0.0" width="300" height="165"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="300" height="165"/>
@@ -636,18 +636,21 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Dg-oF-xwJ" userLabel="Header">
                                         <rect key="frame" x="0.0" y="0.0" width="375.5" height="40"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dzR-iH-BM8">
-                                                <rect key="frame" x="10" y="10" width="365.5" height="20"/>
-                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
-                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
+                                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="qte-Ky-5A0">
+                                                <rect key="frame" x="48.5" y="6" width="278" height="29"/>
+                                                <color key="backgroundColor" red="0.023083547659999998" green="0.79944180369999995" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <segments>
+                                                    <segment title="This Week"/>
+                                                    <segment title="Last 7 days"/>
+                                                    <segment title="Last 30 days"/>
+                                                </segments>
+                                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            </segmentedControl>
                                         </subviews>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="Njk-n5-tsK"/>
-                                            <constraint firstItem="dzR-iH-BM8" firstAttribute="centerY" secondItem="6Dg-oF-xwJ" secondAttribute="centerY" id="aC6-rO-NKe"/>
-                                            <constraint firstItem="dzR-iH-BM8" firstAttribute="leading" secondItem="6Dg-oF-xwJ" secondAttribute="leading" constant="10" id="cga-LM-HsP"/>
-                                            <constraint firstAttribute="trailing" secondItem="dzR-iH-BM8" secondAttribute="trailing" id="pdW-Qb-e5y"/>
+                                            <constraint firstItem="qte-Ky-5A0" firstAttribute="centerX" secondItem="6Dg-oF-xwJ" secondAttribute="centerX" id="SAV-Vf-XY3"/>
+                                            <constraint firstItem="qte-Ky-5A0" firstAttribute="centerY" secondItem="6Dg-oF-xwJ" secondAttribute="centerY" id="bFN-fv-gH7"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HNN-MD-8pM" customClass="UIGraphView" customModule="UIGraphView">
@@ -657,10 +660,10 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
+                                    <constraint firstItem="HNN-MD-8pM" firstAttribute="top" secondItem="6Dg-oF-xwJ" secondAttribute="bottom" constant="2.5" id="WM5-Ow-hGy"/>
                                     <constraint firstItem="HNN-MD-8pM" firstAttribute="leading" secondItem="6Dg-oF-xwJ" secondAttribute="leading" id="bS8-Tz-TYT"/>
                                     <constraint firstAttribute="bottom" secondItem="HNN-MD-8pM" secondAttribute="bottom" id="kCv-H8-wUi"/>
                                     <constraint firstItem="6Dg-oF-xwJ" firstAttribute="leading" secondItem="fJ2-II-f31" secondAttribute="leading" id="kWX-2f-hIc"/>
-                                    <constraint firstItem="HNN-MD-8pM" firstAttribute="top" secondItem="dzR-iH-BM8" secondAttribute="bottom" constant="12.5" id="lQl-w1-gEp"/>
                                     <constraint firstItem="6Dg-oF-xwJ" firstAttribute="width" secondItem="fJ2-II-f31" secondAttribute="width" id="mVD-fG-pkK"/>
                                     <constraint firstItem="6Dg-oF-xwJ" firstAttribute="trailing" secondItem="HNN-MD-8pM" secondAttribute="trailing" id="oXs-ub-UzK"/>
                                     <constraint firstItem="6Dg-oF-xwJ" firstAttribute="top" secondItem="fJ2-II-f31" secondAttribute="top" id="wFv-Xz-jCh"/>
@@ -674,7 +677,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Pok-s4-tdh" id="kys-03-nIZ">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bDV-zE-1Bb">
@@ -727,8 +730,8 @@
                     </view>
                     <connections>
                         <outlet property="graphView" destination="HNN-MD-8pM" id="sQX-Ch-UIB"/>
+                        <outlet property="graphVisualizationSegmentControl" destination="qte-Ky-5A0" id="K8M-VL-gBO"/>
                         <outlet property="tableView" destination="7My-Cm-1o0" id="8KM-XW-DEK"/>
-                        <outlet property="titleLabel" destination="dzR-iH-BM8" id="M69-1N-vbV"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Lu9-fM-pbg" userLabel="First Responder" sceneMemberID="firstResponder"/>
