@@ -13,7 +13,8 @@ internal typealias UIGraphViewAxisValueMapper = (Double) -> Double
 
 private func proportional(range: Range<Double>) -> UIGraphViewAxisValueMapper {
     let translation = range.lowerBound
-    let factor = 1/(range.upperBound - range.lowerBound)
+    let rangeDistance = range.upperBound - range.lowerBound
+    let factor = rangeDistance > 0 ? 1/rangeDistance : 1
     
     return { value in
         return (value - translation) * factor

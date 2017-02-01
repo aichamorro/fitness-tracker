@@ -49,7 +49,7 @@ final class MetricGraphInteractor: IMetricGraphInteractor {
     
     func findRecordsForCurrentWeek(for bodyMetric: BodyMetric) -> Observable<[(NSDate, Double)]> {
         return fitnessInfoRepository
-            .rx_findWeek(ofDay: NSDate())
+            .rx_findLatest(numberOfRecords: 7)
             .flatMap { fetched in
                 return Observable.just(fetched.map {
                     return ($0.date!, $0.value(for: bodyMetric).doubleValue)
