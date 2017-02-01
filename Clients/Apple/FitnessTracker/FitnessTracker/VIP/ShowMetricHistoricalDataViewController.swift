@@ -12,8 +12,10 @@ import UIGraphView
 
 final class ShowMetricHistoricalDataViewController: UIViewController, IMetricHistoryView {
     @IBOutlet private var tableView: UITableView!
-    @IBOutlet private var graphView: UIGraphView!
-    @IBOutlet private var titleLabel: UILabel!
+    @IBOutlet private var weekGraphView: UIGraphView!
+    @IBOutlet private var weekTitleLabel: UILabel!
+    @IBOutlet private var monthGraphTitleLabel: UILabel!
+    @IBOutlet private var monthGraphView: UIGraphView!
     
     fileprivate let rx_graphDataSubject = PublishSubject<([Double], [Double])>()
     fileprivate let rx_loadHistoricDataSubject = PublishSubject<Void>()
@@ -43,7 +45,8 @@ final class ShowMetricHistoricalDataViewController: UIViewController, IMetricHis
     
     func update() {
         self.tableView.reloadData()
-        self.graphView.reloadData()
+        self.weekGraphView.reloadData()
+        self.monthGraphView.reloadData()
     }
     
     override func viewDidLoad() {
@@ -52,9 +55,11 @@ final class ShowMetricHistoricalDataViewController: UIViewController, IMetricHis
         dateFormatter.timeStyle = .none
         dateFormatter.dateFormat = "EEE, dd MMM yy, hh:mm"
         
-        self.titleLabel.text = "Last 7 days of \(self.title!)"
-        graphView.datasource = self
-        graphView.delegate = self
+        self.weekTitleLabel.text = "Last 7 days of \(self.title!)"
+        weekGraphView.datasource = self
+        weekGraphView.delegate = self
+        monthGraphView.datasource = self
+        monthGraphView.delegate = self
         
         rx_graphDataSubject
             .asObservable()
@@ -62,7 +67,8 @@ final class ShowMetricHistoricalDataViewController: UIViewController, IMetricHis
                 guard let `self` = self else { return }
                 
                 self.graphData = data
-                self.graphView.reloadData()
+                self.weekGraphView.reloadData()
+                self.monthGraphView.reloadData()
             }.addDisposableTo(disposeBag)
         rx_loadHistoricDataSubject.onNext()
     }

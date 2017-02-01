@@ -656,8 +656,8 @@
                                                             <constraint firstAttribute="trailing" secondItem="dzR-iH-BM8" secondAttribute="trailing" id="pdW-Qb-e5y"/>
                                                         </constraints>
                                                     </view>
-                                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HNN-MD-8pM" customClass="UIGraphView" customModule="UIGraphView">
-                                                        <rect key="frame" x="0.0" y="37" width="375.5" height="194"/>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HNN-MD-8pM" customClass="UIGraphView" customModule="UIGraphView">
+                                                        <rect key="frame" x="0.0" y="42.5" width="375.5" height="188.5"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     </view>
                                                 </subviews>
@@ -672,19 +672,59 @@
                                                     <constraint firstItem="6Dg-oF-xwJ" firstAttribute="top" secondItem="fJ2-II-f31" secondAttribute="top" id="wFv-Xz-jCh"/>
                                                 </constraints>
                                             </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pWx-4C-aZG" userLabel="Graph Details">
+                                                <rect key="frame" x="375.5" y="0.0" width="375.5" height="231"/>
+                                                <subviews>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KV0-QE-b0F" userLabel="Header">
+                                                        <rect key="frame" x="0.0" y="0.0" width="375.5" height="40"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WHO-tN-kRj">
+                                                                <rect key="frame" x="10" y="10" width="365.5" height="20"/>
+                                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
+                                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                        </subviews>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="40" id="7Ie-3q-CD7"/>
+                                                            <constraint firstAttribute="trailing" secondItem="WHO-tN-kRj" secondAttribute="trailing" id="K00-6E-JP3"/>
+                                                            <constraint firstItem="WHO-tN-kRj" firstAttribute="leading" secondItem="KV0-QE-b0F" secondAttribute="leading" constant="10" id="qSA-dH-fIb"/>
+                                                            <constraint firstItem="WHO-tN-kRj" firstAttribute="centerY" secondItem="KV0-QE-b0F" secondAttribute="centerY" id="xT5-XS-goX"/>
+                                                        </constraints>
+                                                    </view>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="POc-TJ-zgd" customClass="UIGraphView" customModule="UIGraphView">
+                                                        <rect key="frame" x="0.0" y="42.5" width="375.5" height="188.5"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                    </view>
+                                                </subviews>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                <constraints>
+                                                    <constraint firstItem="POc-TJ-zgd" firstAttribute="leading" secondItem="KV0-QE-b0F" secondAttribute="leading" id="5Tg-nn-af0"/>
+                                                    <constraint firstItem="KV0-QE-b0F" firstAttribute="trailing" secondItem="POc-TJ-zgd" secondAttribute="trailing" id="ATk-rp-3iG"/>
+                                                    <constraint firstItem="KV0-QE-b0F" firstAttribute="leading" secondItem="pWx-4C-aZG" secondAttribute="leading" id="XWR-sQ-bUE"/>
+                                                    <constraint firstItem="POc-TJ-zgd" firstAttribute="top" secondItem="WHO-tN-kRj" secondAttribute="bottom" constant="12.5" id="XmW-s1-UNN"/>
+                                                    <constraint firstItem="KV0-QE-b0F" firstAttribute="top" secondItem="pWx-4C-aZG" secondAttribute="top" id="eD7-fM-deV"/>
+                                                    <constraint firstAttribute="bottom" secondItem="POc-TJ-zgd" secondAttribute="bottom" id="eoo-a2-CHz"/>
+                                                    <constraint firstItem="KV0-QE-b0F" firstAttribute="width" secondItem="pWx-4C-aZG" secondAttribute="width" id="oMg-dQ-cDK"/>
+                                                </constraints>
+                                            </view>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="bottom" secondItem="fJ2-II-f31" secondAttribute="bottom" id="1Uc-Ka-nWF"/>
+                                            <constraint firstItem="pWx-4C-aZG" firstAttribute="width" secondItem="fJ2-II-f31" secondAttribute="width" id="LPc-GT-dSF"/>
                                             <constraint firstItem="fJ2-II-f31" firstAttribute="leading" secondItem="hlH-Eh-Fdf" secondAttribute="leading" id="Ze7-ZA-Qcs"/>
                                             <constraint firstAttribute="trailing" secondItem="fJ2-II-f31" secondAttribute="trailing" id="czO-mZ-FrO"/>
                                             <constraint firstItem="fJ2-II-f31" firstAttribute="top" secondItem="hlH-Eh-Fdf" secondAttribute="top" id="l6E-hT-ldh"/>
+                                            <constraint firstItem="pWx-4C-aZG" firstAttribute="leading" secondItem="fJ2-II-f31" secondAttribute="trailing" id="oir-IQ-SGu"/>
+                                            <constraint firstItem="pWx-4C-aZG" firstAttribute="height" secondItem="fJ2-II-f31" secondAttribute="height" id="q6q-f1-gy6"/>
+                                            <constraint firstItem="pWx-4C-aZG" firstAttribute="top" secondItem="fJ2-II-f31" secondAttribute="top" id="usc-X9-Ap8"/>
                                         </constraints>
                                     </view>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="hlH-Eh-Fdf" secondAttribute="trailing" id="73n-Sy-dNL"/>
+                                    <constraint firstAttribute="trailing" secondItem="hlH-Eh-Fdf" secondAttribute="trailing" multiplier="2" id="73n-Sy-dNL"/>
                                     <constraint firstItem="hlH-Eh-Fdf" firstAttribute="centerX" secondItem="PhO-Ha-Gum" secondAttribute="centerX" id="8rM-si-WRc"/>
                                     <constraint firstAttribute="bottom" secondItem="hlH-Eh-Fdf" secondAttribute="bottom" id="dPq-wB-hk6"/>
                                     <constraint firstItem="hlH-Eh-Fdf" firstAttribute="centerY" secondItem="PhO-Ha-Gum" secondAttribute="centerY" id="tB9-Bv-sgC"/>
@@ -752,9 +792,11 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="graphView" destination="HNN-MD-8pM" id="BYF-HO-zOc"/>
+                        <outlet property="monthGraphTitleLabel" destination="WHO-tN-kRj" id="kF4-MH-rPa"/>
+                        <outlet property="monthGraphView" destination="POc-TJ-zgd" id="hda-5c-elb"/>
                         <outlet property="tableView" destination="7My-Cm-1o0" id="8KM-XW-DEK"/>
-                        <outlet property="titleLabel" destination="dzR-iH-BM8" id="efv-z4-XE4"/>
+                        <outlet property="weekGraphView" destination="HNN-MD-8pM" id="TZ3-5G-ai1"/>
+                        <outlet property="weekTitleLabel" destination="dzR-iH-BM8" id="5Ij-5E-fsW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Lu9-fM-pbg" userLabel="First Responder" sceneMemberID="firstResponder"/>
