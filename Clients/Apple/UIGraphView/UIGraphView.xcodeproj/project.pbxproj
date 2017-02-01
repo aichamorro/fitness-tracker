@@ -1,0 +1,481 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		39DE512F1E3B57F900DD29CE /* UIGraphView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39DE51251E3B57F900DD29CE /* UIGraphView.framework */; };
+		39DE51341E3B57F900DD29CE /* UIGraphViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39DE51331E3B57F900DD29CE /* UIGraphViewTests.swift */; };
+		39DE51361E3B57F900DD29CE /* UIGraphView.h in Headers */ = {isa = PBXBuildFile; fileRef = 39DE51281E3B57F900DD29CE /* UIGraphView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		39DE51401E3B5C4300DD29CE /* UIGraphViewValuesAdapaterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39DE513F1E3B5C4300DD29CE /* UIGraphViewValuesAdapaterTests.swift */; };
+		39DE51441E3B5E6B00DD29CE /* XCTestCase+FatalErrorReplacement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39DE51431E3B5E6B00DD29CE /* XCTestCase+FatalErrorReplacement.swift */; };
+		39DE51451E3B61AD00DD29CE /* FatalErrorReplacement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39DE51411E3B5DC200DD29CE /* FatalErrorReplacement.swift */; };
+		39DE518E1E3D137500DD29CE /* UIGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39DE518D1E3D137500DD29CE /* UIGraphView.swift */; };
+		39DE51901E3D2A8A00DD29CE /* UIGraphViewValueAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39DE518F1E3D2A8A00DD29CE /* UIGraphViewValueAdapter.swift */; };
+		39DE51931E3E4A9900DD29CE /* QuartzCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39DE51921E3E4A9900DD29CE /* QuartzCore.swift */; };
+		39DE51951E3E4AB600DD29CE /* Sequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39DE51941E3E4AB600DD29CE /* Sequence.swift */; };
+		39DE51981E3E4B0500DD29CE /* UIGraphViewDrawingStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39DE51971E3E4B0500DD29CE /* UIGraphViewDrawingStyles.swift */; };
+		39DE51AC1E40940600DD29CE /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39DE51AB1E40940600DD29CE /* UIView.swift */; };
+		39DE51AF1E40E8B100DD29CE /* UIGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39DE51AE1E40E8B100DD29CE /* UIGradientView.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		39DE51301E3B57F900DD29CE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 39DE511C1E3B57F900DD29CE /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 39DE51241E3B57F900DD29CE;
+			remoteInfo = UIDispersionGraph;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		39DE51251E3B57F900DD29CE /* UIGraphView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = UIGraphView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		39DE51281E3B57F900DD29CE /* UIGraphView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UIGraphView.h; sourceTree = "<group>"; };
+		39DE51291E3B57F900DD29CE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		39DE512E1E3B57F900DD29CE /* UIGraphViewTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UIGraphViewTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		39DE51331E3B57F900DD29CE /* UIGraphViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIGraphViewTests.swift; sourceTree = "<group>"; };
+		39DE51351E3B57F900DD29CE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		39DE513F1E3B5C4300DD29CE /* UIGraphViewValuesAdapaterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIGraphViewValuesAdapaterTests.swift; sourceTree = "<group>"; };
+		39DE51411E3B5DC200DD29CE /* FatalErrorReplacement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FatalErrorReplacement.swift; sourceTree = "<group>"; };
+		39DE51431E3B5E6B00DD29CE /* XCTestCase+FatalErrorReplacement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "XCTestCase+FatalErrorReplacement.swift"; sourceTree = "<group>"; };
+		39DE518D1E3D137500DD29CE /* UIGraphView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIGraphView.swift; sourceTree = "<group>"; };
+		39DE518F1E3D2A8A00DD29CE /* UIGraphViewValueAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIGraphViewValueAdapter.swift; sourceTree = "<group>"; };
+		39DE51921E3E4A9900DD29CE /* QuartzCore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = QuartzCore.swift; path = Extensions/QuartzCore.swift; sourceTree = "<group>"; };
+		39DE51941E3E4AB600DD29CE /* Sequence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Sequence.swift; path = Extensions/Sequence.swift; sourceTree = "<group>"; };
+		39DE51971E3E4B0500DD29CE /* UIGraphViewDrawingStyles.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIGraphViewDrawingStyles.swift; path = GraphStyles/UIGraphViewDrawingStyles.swift; sourceTree = "<group>"; };
+		39DE51AB1E40940600DD29CE /* UIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
+		39DE51AE1E40E8B100DD29CE /* UIGradientView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIGradientView.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		39DE51211E3B57F900DD29CE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		39DE512B1E3B57F900DD29CE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				39DE512F1E3B57F900DD29CE /* UIGraphView.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		39DE511B1E3B57F900DD29CE = {
+			isa = PBXGroup;
+			children = (
+				39DE51271E3B57F900DD29CE /* UIGraphView */,
+				39DE51321E3B57F900DD29CE /* UIGraphViewTests */,
+				39DE51261E3B57F900DD29CE /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		39DE51261E3B57F900DD29CE /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				39DE51251E3B57F900DD29CE /* UIGraphView.framework */,
+				39DE512E1E3B57F900DD29CE /* UIGraphViewTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		39DE51271E3B57F900DD29CE /* UIGraphView */ = {
+			isa = PBXGroup;
+			children = (
+				39DE51961E3E4AEB00DD29CE /* GraphStyles */,
+				39DE51911E3E4A8500DD29CE /* Extensions */,
+				39DE51281E3B57F900DD29CE /* UIGraphView.h */,
+				39DE51291E3B57F900DD29CE /* Info.plist */,
+				39DE518D1E3D137500DD29CE /* UIGraphView.swift */,
+				39DE518F1E3D2A8A00DD29CE /* UIGraphViewValueAdapter.swift */,
+				39DE51AE1E40E8B100DD29CE /* UIGradientView.swift */,
+			);
+			path = UIGraphView;
+			sourceTree = "<group>";
+		};
+		39DE51321E3B57F900DD29CE /* UIGraphViewTests */ = {
+			isa = PBXGroup;
+			children = (
+				39DE51411E3B5DC200DD29CE /* FatalErrorReplacement.swift */,
+				39DE51331E3B57F900DD29CE /* UIGraphViewTests.swift */,
+				39DE51351E3B57F900DD29CE /* Info.plist */,
+				39DE513F1E3B5C4300DD29CE /* UIGraphViewValuesAdapaterTests.swift */,
+				39DE51431E3B5E6B00DD29CE /* XCTestCase+FatalErrorReplacement.swift */,
+			);
+			path = UIGraphViewTests;
+			sourceTree = "<group>";
+		};
+		39DE51911E3E4A8500DD29CE /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				39DE51921E3E4A9900DD29CE /* QuartzCore.swift */,
+				39DE51941E3E4AB600DD29CE /* Sequence.swift */,
+				39DE51AB1E40940600DD29CE /* UIView.swift */,
+			);
+			name = Extensions;
+			sourceTree = "<group>";
+		};
+		39DE51961E3E4AEB00DD29CE /* GraphStyles */ = {
+			isa = PBXGroup;
+			children = (
+				39DE51971E3E4B0500DD29CE /* UIGraphViewDrawingStyles.swift */,
+			);
+			name = GraphStyles;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		39DE51221E3B57F900DD29CE /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				39DE51361E3B57F900DD29CE /* UIGraphView.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		39DE51241E3B57F900DD29CE /* UIGraphView */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 39DE51391E3B57F900DD29CE /* Build configuration list for PBXNativeTarget "UIGraphView" */;
+			buildPhases = (
+				39DE51201E3B57F900DD29CE /* Sources */,
+				39DE51211E3B57F900DD29CE /* Frameworks */,
+				39DE51221E3B57F900DD29CE /* Headers */,
+				39DE51231E3B57F900DD29CE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = UIGraphView;
+			productName = UIDispersionGraph;
+			productReference = 39DE51251E3B57F900DD29CE /* UIGraphView.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		39DE512D1E3B57F900DD29CE /* UIGraphViewTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 39DE513C1E3B57F900DD29CE /* Build configuration list for PBXNativeTarget "UIGraphViewTests" */;
+			buildPhases = (
+				39DE512A1E3B57F900DD29CE /* Sources */,
+				39DE512B1E3B57F900DD29CE /* Frameworks */,
+				39DE512C1E3B57F900DD29CE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				39DE51311E3B57F900DD29CE /* PBXTargetDependency */,
+			);
+			name = UIGraphViewTests;
+			productName = UIDispersionGraphTests;
+			productReference = 39DE512E1E3B57F900DD29CE /* UIGraphViewTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		39DE511C1E3B57F900DD29CE /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0820;
+				LastUpgradeCheck = 0820;
+				ORGANIZATIONNAME = OnsetBits;
+				TargetAttributes = {
+					39DE51241E3B57F900DD29CE = {
+						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = K344HSVA53;
+						LastSwiftMigration = 0820;
+						ProvisioningStyle = Automatic;
+					};
+					39DE512D1E3B57F900DD29CE = {
+						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = K344HSVA53;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 39DE511F1E3B57F900DD29CE /* Build configuration list for PBXProject "UIGraphView" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 39DE511B1E3B57F900DD29CE;
+			productRefGroup = 39DE51261E3B57F900DD29CE /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				39DE51241E3B57F900DD29CE /* UIGraphView */,
+				39DE512D1E3B57F900DD29CE /* UIGraphViewTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		39DE51231E3B57F900DD29CE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		39DE512C1E3B57F900DD29CE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		39DE51201E3B57F900DD29CE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				39DE51AC1E40940600DD29CE /* UIView.swift in Sources */,
+				39DE51931E3E4A9900DD29CE /* QuartzCore.swift in Sources */,
+				39DE51AF1E40E8B100DD29CE /* UIGradientView.swift in Sources */,
+				39DE51901E3D2A8A00DD29CE /* UIGraphViewValueAdapter.swift in Sources */,
+				39DE51951E3E4AB600DD29CE /* Sequence.swift in Sources */,
+				39DE518E1E3D137500DD29CE /* UIGraphView.swift in Sources */,
+				39DE51981E3E4B0500DD29CE /* UIGraphViewDrawingStyles.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		39DE512A1E3B57F900DD29CE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				39DE51451E3B61AD00DD29CE /* FatalErrorReplacement.swift in Sources */,
+				39DE51401E3B5C4300DD29CE /* UIGraphViewValuesAdapaterTests.swift in Sources */,
+				39DE51341E3B57F900DD29CE /* UIGraphViewTests.swift in Sources */,
+				39DE51441E3B5E6B00DD29CE /* XCTestCase+FatalErrorReplacement.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		39DE51311E3B57F900DD29CE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 39DE51241E3B57F900DD29CE /* UIGraphView */;
+			targetProxy = 39DE51301E3B57F900DD29CE /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		39DE51371E3B57F900DD29CE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		39DE51381E3B57F900DD29CE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		39DE513A1E3B57F900DD29CE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "";
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = K344HSVA53;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "$(SRCROOT)/UIGraphView/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.onsetbits.UIDispersionGraph;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		39DE513B1E3B57F900DD29CE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "";
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = K344HSVA53;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "$(SRCROOT)/UIGraphView/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.onsetbits.UIDispersionGraph;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+		39DE513D1E3B57F900DD29CE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				DEVELOPMENT_TEAM = K344HSVA53;
+				INFOPLIST_FILE = UIDispersionGraphTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.onsetbits.UIDispersionGraphTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		39DE513E1E3B57F900DD29CE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				DEVELOPMENT_TEAM = K344HSVA53;
+				INFOPLIST_FILE = UIDispersionGraphTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.onsetbits.UIDispersionGraphTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		39DE511F1E3B57F900DD29CE /* Build configuration list for PBXProject "UIGraphView" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				39DE51371E3B57F900DD29CE /* Debug */,
+				39DE51381E3B57F900DD29CE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		39DE51391E3B57F900DD29CE /* Build configuration list for PBXNativeTarget "UIGraphView" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				39DE513A1E3B57F900DD29CE /* Debug */,
+				39DE513B1E3B57F900DD29CE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		39DE513C1E3B57F900DD29CE /* Build configuration list for PBXNativeTarget "UIGraphViewTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				39DE513D1E3B57F900DD29CE /* Debug */,
+				39DE513E1E3B57F900DD29CE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 39DE511C1E3B57F900DD29CE /* Project object */;
+}

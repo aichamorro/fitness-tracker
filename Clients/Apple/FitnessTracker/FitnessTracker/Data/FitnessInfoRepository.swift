@@ -15,6 +15,7 @@ protocol IFitnessInfoRepository {
     
     func rx_findLatest(numberOfRecords: Int) -> Observable<[IFitnessInfo]>
     func rx_findAll() -> Observable<[IFitnessInfo]>
+    func rx_findWeek(ofDay dayOfWeek: NSDate) -> Observable<[IFitnessInfo]>
     
     func findFirstOfWeek(ofDay dayOfWeek: NSDate) -> IFitnessInfo?
     func findFirstOfMonth(ofDay dayOfMonth: NSDate) -> IFitnessInfo?
@@ -47,6 +48,7 @@ enum CoreDataEntity: String {
 enum CoreDataQueryRequest {
     case findLatestRecords(limit: Int)
     case findLatest
+    case findWeek(date: NSDate)
     case findFirstRecordOfWeek(date: NSDate)
     case findFirstRecordOfMonth(date: NSDate)
     case findFirstRecordOfYear(date: NSDate)
@@ -66,9 +68,20 @@ extension CoreDataQueryRequest {
             
             return fetchRequest
             
+        case .findWeek(let date):
+            let dateInterval = Calendar.current.weekInterval(of: date)!
+            let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: self.entity)
+            // TODO: Is this correct?
+            fetchRequest.fetchLimit = 7
+            fetchRequest.sortDescriptors = [NSSortDescriptor(key: "date", ascending: true)]
+            fetchRequest.predicate = NSPredicate(format: "((date >= %@) AND (date < %@))", dateInterval.start as CVarArg, dateInterval.end as CVarArg)
+            
+            return fetchRequest
+
         case .findFirstRecordOfWeek(let date):
             let dateInterval = Calendar.current.weekInterval(of: date)!
             let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: self.entity)
+            // TODO: Is this correct?
             fetchRequest.fetchLimit = 7
             fetchRequest.sortDescriptors = [NSSortDescriptor(key: "date", ascending: true)]
             fetchRequest.predicate = NSPredicate(format: "((date >= %@) AND (date < %@))", dateInterval.start as CVarArg, dateInterval.end as CVarArg)
@@ -108,6 +121,7 @@ extension CoreDataQueryRequest {
         case .findAll: fallthrough
         case .findFirstRecordOfMonth(_): fallthrough
         case .findFirstRecordOfYear(_): fallthrough
+        case .findWeek(_): fallthrough
         case .findLatestRecords(_):
             return CoreDataEntity.fitnessInfo.rawValue
         }
@@ -142,6 +156,11 @@ final class CoreDataInfoRepository: IFitnessInfoRepository {
     func rx_findAll() -> Observable<[IFitnessInfo]> {
         return coreDataEngine.rx_execute(query: .findAll)
             .flatMap { return Observable.just($0 as! [CoreDataFitnessInfo]) }
+    }
+    
+    func rx_findWeek(ofDay dayOfWeek: NSDate) -> Observable<[IFitnessInfo]> {
+        return coreDataEngine.rx_execute(query: .findWeek(date: dayOfWeek))
+            .flatMap { return Observable.just($0 as! [IFitnessInfo]) }
     }
     
     func findFirstOfWeek(ofDay dayOfWeek: NSDate) -> IFitnessInfo? {

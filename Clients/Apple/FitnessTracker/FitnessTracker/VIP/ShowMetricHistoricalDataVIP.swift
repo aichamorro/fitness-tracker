@@ -53,7 +53,7 @@ final class MetricHistoryInteractor: IMetricHistoryInteractor {
     }
 }
 
-private extension IFitnessInfo {
+extension IFitnessInfo {
     func value(for metric: BodyMetric) -> NSNumber {
         switch metric {
         case .bmi:

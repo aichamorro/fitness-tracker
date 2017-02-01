@@ -33,31 +33,26 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         configureServices()
         configureRouting()
         
-        let showDispersion = true
-        if showDispersion {
-            window?.rootViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "DispersionGraph")
-        } else {
-            var initialViewControllers: [UIViewController] = []
-            serviceLocator.router.open(appURL: URL(string: "app://records")!) { controller in
-                guard let viewController = controller as? UIViewController else { fatalError() }
-                viewController.title = NSLocalizedString("Last measurement", comment: "Last measurement")
-                let rootController = UINavigationController(rootViewController: viewController)
-                
-                initialViewControllers.append(rootController)
-            }
+        var initialViewControllers: [UIViewController] = []
+        serviceLocator.router.open(appURL: URL(string: "app://records")!) { controller in
+            guard let viewController = controller as? UIViewController else { fatalError() }
+            viewController.title = NSLocalizedString("Last measurement", comment: "Last measurement")
+            let rootController = UINavigationController(rootViewController: viewController)
             
-            serviceLocator.router.open(appURL: URL(string: "app://insights")!) { controller in
-                guard let viewController = controller as? UIViewController else { fatalError() }
-                viewController.title = NSLocalizedString("Insights", comment: "Insights")
-                let rootController = UINavigationController(rootViewController: viewController)
-                
-                initialViewControllers.append(rootController)
-            }
-            
-            let mainTabController = UITabBarController()
-            mainTabController.viewControllers = initialViewControllers
-            window?.rootViewController = mainTabController
+            initialViewControllers.append(rootController)
         }
+        
+        serviceLocator.router.open(appURL: URL(string: "app://insights")!) { controller in
+            guard let viewController = controller as? UIViewController else { fatalError() }
+            viewController.title = NSLocalizedString("Insights", comment: "Insights")
+            let rootController = UINavigationController(rootViewController: viewController)
+            
+            initialViewControllers.append(rootController)
+        }
+        
+        let mainTabController = UITabBarController()
+        mainTabController.viewControllers = initialViewControllers
+        window?.rootViewController = mainTabController
 
         return true
     }

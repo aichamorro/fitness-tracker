@@ -8,9 +8,15 @@
 
 import UIKit
 import RxSwift
+import UIGraphView
 
-final class ShowMetricHistoricalDataViewController: UITableViewController, IMetricHistoryView {
-    private let rx_loadHistoricDataSubject = PublishSubject<Void>()
+final class ShowMetricHistoricalDataViewController: UIViewController, IMetricHistoryView {
+    @IBOutlet private var tableView: UITableView!
+    @IBOutlet private var graphView: UIGraphView!
+    @IBOutlet private var titleLabel: UILabel!
+    
+    fileprivate let rx_graphDataSubject = PublishSubject<([Double], [Double])>()
+    fileprivate let rx_loadHistoricDataSubject = PublishSubject<Void>()
     var rx_loadHistoricData: Observable<Void> {
         return rx_loadHistoricDataSubject.asObservable()
     }
@@ -18,6 +24,7 @@ final class ShowMetricHistoricalDataViewController: UITableViewController, IMetr
     fileprivate var dateFormatter: DateFormatter!
     
     var bag: RetainerBag!
+    let disposeBag = DisposeBag()
     
     var selectedMetric: BodyMetric = .weight {
         didSet {
@@ -26,6 +33,8 @@ final class ShowMetricHistoricalDataViewController: UITableViewController, IMetr
     }
     
     var metricData: [MetricDataReading] = []
+    var graphData: ([Double], [Double]) = ([],[])
+    
     func showNoHistoricalDataWarning() {
         let alert = UIAlertController(title: "Error", message: "There is no data recorded for \(selectedMetric.description)", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { _ in alert.dismiss(animated: true, completion: nil) }))
@@ -34,6 +43,7 @@ final class ShowMetricHistoricalDataViewController: UITableViewController, IMetr
     
     func update() {
         self.tableView.reloadData()
+        self.graphView.reloadData()
     }
     
     override func viewDidLoad() {
@@ -42,20 +52,48 @@ final class ShowMetricHistoricalDataViewController: UITableViewController, IMetr
         dateFormatter.timeStyle = .none
         dateFormatter.dateFormat = "EEE, dd MMM yy, hh:mm"
         
+        self.titleLabel.text = "Last 7 days of \(self.title!)"
+        graphView.datasource = self
+        graphView.delegate = self
+        
+        rx_graphDataSubject
+            .asObservable()
+            .bindNext { [weak self] data in
+                guard let `self` = self else { return }
+                
+                self.graphData = data
+                self.graphView.reloadData()
+            }.addDisposableTo(disposeBag)
         rx_loadHistoricDataSubject.onNext()
     }
 }
 
-extension ShowMetricHistoricalDataViewController {
-    override func numberOfSections(in tableView: UITableView) -> Int {
+extension ShowMetricHistoricalDataViewController: IMetricGraphView {
+    var rx_loadCurrentWeek: Observable<Void> {
+        return rx_loadHistoricDataSubject.asObservable()
+    }
+    
+    var rx_graphData: AnyObserver<([Double], [Double])> {
+        return rx_graphDataSubject.asObserver()
+    }
+}
+
+extension ShowMetricHistoricalDataViewController: UIGraphViewDelegate, UIGraphViewDataSource {
+    func data(for dispersionGraph: UIGraphView) -> UIGraphViewSampleData {
+        return graphData
+    }
+}
+
+extension ShowMetricHistoricalDataViewController: UITableViewDelegate, UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return metricData.count
     }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MetricReadingCell", for: indexPath) as! MetricReadingTableViewCell
         
         cell.valueLabel.text = metricData[indexPath.row].reading
