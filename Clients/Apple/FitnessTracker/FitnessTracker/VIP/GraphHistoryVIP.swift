@@ -10,19 +10,19 @@ import Foundation
 import RxSwift
 
 protocol IMetricGraphInteractor {
-    func findRecordsForCurrentWeek(for bodyMetric: BodyMetric) -> Observable<[(NSDate, Double)]>
+    func findLatest(numberOfRecords: Int, for bodyMetric: BodyMetric) -> Observable<[(NSDate, Double)]>
 }
 
 protocol IMetricGraphView {
-    var rx_loadCurrentWeek: Observable<Void> { get }
+    var rx_loadLatestRecords: Observable<Int> { get }
     var rx_graphData: AnyObserver<([Double], [Double])> { get }
     var selectedMetric: BodyMetric { get }
 }
 
 typealias IMetricGraphPresenter = (IMetricGraphInteractor, IMetricGraphView, DisposeBag) -> Void
 let MetricGraphPresenter: IMetricGraphPresenter = { (interactor, view, disposeBag) in
-    view.rx_loadCurrentWeek
-        .flatMap { interactor.findRecordsForCurrentWeek(for: view.selectedMetric) }
+    view.rx_loadLatestRecords
+        .flatMap { interactor.findLatest(numberOfRecords: $0, for: view.selectedMetric) }
         .bindNext { info in
             let calendar = Calendar.current
             var dates: [Double] = []
@@ -47,9 +47,9 @@ final class MetricGraphInteractor: IMetricGraphInteractor {
         self.fitnessInfoRepository = repository
     }
     
-    func findRecordsForCurrentWeek(for bodyMetric: BodyMetric) -> Observable<[(NSDate, Double)]> {
+    func findLatest(numberOfRecords: Int, for bodyMetric: BodyMetric) -> Observable<[(NSDate, Double)]> {
         return fitnessInfoRepository
-            .rx_findLatest(numberOfRecords: 7)
+            .rx_findLatest(numberOfRecords: numberOfRecords)
             .flatMap { fetched in
                 return Observable.just(fetched.reversed().map {
                     return ($0.date!, $0.value(for: bodyMetric).doubleValue)
