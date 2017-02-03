@@ -16,6 +16,7 @@ protocol IFitnessInfoRepository {
     func rx_findLatest(numberOfRecords: Int) -> Observable<[IFitnessInfo]>
     func rx_findAll() -> Observable<[IFitnessInfo]>
     func rx_findWeek(ofDay dayOfWeek: NSDate) -> Observable<[IFitnessInfo]>
+    func rx_find(from: NSDate, to: NSDate) -> Observable<[IFitnessInfo]>
     
     func findFirstOfWeek(ofDay dayOfWeek: NSDate) -> IFitnessInfo?
     func findFirstOfMonth(ofDay dayOfMonth: NSDate) -> IFitnessInfo?
@@ -52,6 +53,7 @@ enum CoreDataQueryRequest {
     case findFirstRecordOfWeek(date: NSDate)
     case findFirstRecordOfMonth(date: NSDate)
     case findFirstRecordOfYear(date: NSDate)
+    case findInterval(from: NSDate, to: NSDate)
     case findAll
 }
 
@@ -97,6 +99,15 @@ extension CoreDataQueryRequest {
             
             return fetchRequest
             
+        case .findInterval(let from, let to):
+            let dateInterval = DateInterval(start: from as Date, end: to as Date)
+            let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: self.entity)
+            fetchRequest.sortDescriptors = [NSSortDescriptor(key: "date", ascending: true)]
+            fetchRequest.predicate = NSPredicate(format: "((date >= %@) AND (date < %@))", dateInterval.start as CVarArg, dateInterval.end as CVarArg)
+            
+            return fetchRequest
+
+            
         case .findFirstRecordOfYear(let date):
             let dateInterval = Calendar.current.yearInterval(of: date)!
             let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: self.entity)
@@ -122,6 +133,7 @@ extension CoreDataQueryRequest {
         case .findFirstRecordOfMonth(_): fallthrough
         case .findFirstRecordOfYear(_): fallthrough
         case .findWeek(_): fallthrough
+        case .findInterval(_, _): fallthrough
         case .findLatestRecords(_):
             return CoreDataEntity.fitnessInfo.rawValue
         }
@@ -158,6 +170,11 @@ final class CoreDataInfoRepository: IFitnessInfoRepository {
             .flatMap { return Observable.just($0 as! [CoreDataFitnessInfo]) }
     }
     
+    func rx_find(from: NSDate, to: NSDate) -> Observable<[IFitnessInfo]> {
+        return coreDataEngine.rx_execute(query: .findInterval(from: from, to: to))
+            .flatMap { return Observable.just($0 as! [IFitnessInfo]) }
+    }
+
     func rx_findWeek(ofDay dayOfWeek: NSDate) -> Observable<[IFitnessInfo]> {
         return coreDataEngine.rx_execute(query: .findWeek(date: dayOfWeek))
             .flatMap { return Observable.just($0 as! [IFitnessInfo]) }

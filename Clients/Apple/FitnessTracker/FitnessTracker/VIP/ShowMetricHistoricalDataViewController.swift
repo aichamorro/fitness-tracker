@@ -17,7 +17,7 @@ final class ShowMetricHistoricalDataViewController: UIViewController {
     @IBOutlet fileprivate var graphVisualizationSegmentControl: UISegmentedControl!
     
     fileprivate let rx_didReceiveGraphData = PublishSubject<([Double], [Double])>()
-    fileprivate let rx_loadGraphData = PublishSubject<Int>()
+    fileprivate let rx_loadGraphData = PublishSubject<Date>()
     fileprivate let rx_loadCurrentWeekSubject = PublishSubject<Void>()
     fileprivate let rx_loadHistoricDataSubject = PublishSubject<Void>()
     
@@ -61,8 +61,9 @@ final class ShowMetricHistoricalDataViewController: UIViewController {
                 
                 switch value {
                     case 0: self.rx_loadCurrentWeekSubject.onNext()
-                    case 1: self.rx_loadGraphData.onNext(7)
-                    case 2: self.rx_loadGraphData.onNext(30)
+                case 1: self.rx_loadGraphData.onNext(Date.now.adding(days: -7))
+                case 2: self.rx_loadGraphData.onNext(Date.now.adding(days: -30))
+                case 3: self.rx_loadGraphData.onNext(Date.now.adding(days: -90))
                     default: fatalError()
                 }
             }.addDisposableTo(disposeBag)
@@ -82,7 +83,7 @@ final class ShowMetricHistoricalDataViewController: UIViewController {
 }
 
 extension ShowMetricHistoricalDataViewController: IMetricGraphView, ICurrentWeekGraphView, IMetricHistoryView {
-    var rx_loadLatestRecords: Observable<Int> {
+    var rx_loadLatestRecords: Observable<Date> {
         return rx_loadGraphData.asObservable()
     }
     
@@ -105,7 +106,7 @@ extension ShowMetricHistoricalDataViewController: UIGraphViewDelegate, UIGraphVi
     }
     
     func graphView(_ graphView: UIGraphView, shouldAddHorizontalTagFor index: Int) -> Bool {
-        return self.graphVisualizationSegmentControl.selectedSegmentIndex == 2 ? (index % 7) == 0 : true
+        return self.graphVisualizationSegmentControl.selectedSegmentIndex > 1 ? (index % 7) == 0 : true
     }
 }
 
