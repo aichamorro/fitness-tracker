@@ -97,7 +97,7 @@ final class MetricGraphInteractor: IMetricGraphInteractor {
     
     func find(from: Date, for bodyMetric: BodyMetric) -> Observable<[(NSDate, Double)]> {
         return fitnessInfoRepository
-            .rx_find(from: from as NSDate, to: Date.now as NSDate)
+            .rx_find(from: from as NSDate, to: Date.now as NSDate, order: .ascendent)
             .flatMap { fetched in
                 return Observable.just(fetched.map {
                     return ($0.date!, $0.value(for: bodyMetric).doubleValue)

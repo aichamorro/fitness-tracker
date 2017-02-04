@@ -60,6 +60,10 @@
 		39EE91701E36405E00F104C8 /* BodyMetric.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39EE916F1E36405E00F104C8 /* BodyMetric.swift */; };
 		39EE91711E36406C00F104C8 /* BodyMetric.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39EE916F1E36405E00F104C8 /* BodyMetric.swift */; };
 		39EE91721E3640D200F104C8 /* NSCalendar+NSDateFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20471A4C1E1ADBB00000F7C2 /* NSCalendar+NSDateFactory.swift */; };
+		39F988961E465523008A1DB6 /* IFitnessInfoRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F988951E465523008A1DB6 /* IFitnessInfoRepository.swift */; };
+		39F988971E46556E008A1DB6 /* IFitnessInfoRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F988951E465523008A1DB6 /* IFitnessInfoRepository.swift */; };
+		39F988991E46559D008A1DB6 /* CoreDataQueryRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F988981E46559D008A1DB6 /* CoreDataQueryRequest.swift */; };
+		39F9889A1E4656CA008A1DB6 /* CoreDataQueryRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F988981E46559D008A1DB6 /* CoreDataQueryRequest.swift */; };
 		3C7E764AE3C8B71A2F15C64D /* Pods_TodayExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7EBF53B2E60378C64BDDE11 /* Pods_TodayExtension.framework */; };
 		45AA81FD1D29B16082BA4BBA /* Pods_FitnessTracker_FitnessTrackerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95868793967C2540BD298442 /* Pods_FitnessTracker_FitnessTrackerTests.framework */; };
 		60DCC2D4BE7EC6D04AACF7B5 /* Pods_FitnessTracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 243E297E8C331F616EE9C451 /* Pods_FitnessTracker.framework */; };
@@ -152,6 +156,8 @@
 		39EE91381E36329F00F104C8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		39EE91401E363A5A00F104C8 /* Pods_FitnessTracker.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Pods_FitnessTracker.framework; path = "../../../../../../Library/Developer/Xcode/DerivedData/FitnessTracker-eskvvptwtkzxnkgqfwrlvsxlqtdt/Build/Products/Debug-iphonesimulator/Pods_FitnessTracker.framework"; sourceTree = "<group>"; };
 		39EE916F1E36405E00F104C8 /* BodyMetric.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BodyMetric.swift; sourceTree = "<group>"; };
+		39F988951E465523008A1DB6 /* IFitnessInfoRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IFitnessInfoRepository.swift; sourceTree = "<group>"; };
+		39F988981E46559D008A1DB6 /* CoreDataQueryRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataQueryRequest.swift; sourceTree = "<group>"; };
 		94B5A7A9738E9EE617B4C9E1 /* Pods-TodayExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TodayExtension.release.xcconfig"; path = "Pods/Target Support Files/Pods-TodayExtension/Pods-TodayExtension.release.xcconfig"; sourceTree = "<group>"; };
 		95868793967C2540BD298442 /* Pods_FitnessTracker_FitnessTrackerTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FitnessTracker_FitnessTrackerTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF97CF9401854D9B0C19B13A /* Pods-FitnessTracker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FitnessTracker.release.xcconfig"; path = "Pods/Target Support Files/Pods-FitnessTracker/Pods-FitnessTracker.release.xcconfig"; sourceTree = "<group>"; };
@@ -305,6 +311,8 @@
 				202142101E0D57C200BAF444 /* CoreDataStack.swift */,
 				20D76F201E0DA8DA00FDD122 /* FitnessInfo+Operators.swift */,
 				20471A491E1983F80000F7C2 /* FitnessInfoInsight.swift */,
+				39F988951E465523008A1DB6 /* IFitnessInfoRepository.swift */,
+				39F988981E46559D008A1DB6 /* CoreDataQueryRequest.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -663,6 +671,8 @@
 				3903F5CA1E1BFA7D0093095B /* AppRouter.swift in Sources */,
 				20FA51051E095947002E536A /* LatestRecordViewController.swift in Sources */,
 				20E89E681E130C5C00F03644 /* ShowMetricHistoricalDataVIP.swift in Sources */,
+				39F988961E465523008A1DB6 /* IFitnessInfoRepository.swift in Sources */,
+				39F988991E46559D008A1DB6 /* CoreDataQueryRequest.swift in Sources */,
 				20FA51071E0976D1002E536A /* LatestRecordMetricCell.swift in Sources */,
 				20FA51131E0B1DDF002E536A /* NewRecordInteractor.swift in Sources */,
 				20FA51031E0957C2002E536A /* LatestRecordPresenter.swift in Sources */,
@@ -694,10 +704,12 @@
 				39EE91491E363EDE00F104C8 /* CoreDataFitnessInfo.swift in Sources */,
 				39EE914A1E363F0100F104C8 /* CoreDataStack.swift in Sources */,
 				39EE916E1E36403000F104C8 /* LatestRecordView.swift in Sources */,
+				39F9889A1E4656CA008A1DB6 /* CoreDataQueryRequest.swift in Sources */,
 				39EE916A1E363F7E00F104C8 /* CoreDataModel.xcdatamodeld in Sources */,
 				39EE91711E36406C00F104C8 /* BodyMetric.swift in Sources */,
 				39EE916D1E363FFF00F104C8 /* FitnessInfo.swift in Sources */,
 				39EE91451E363DAA00F104C8 /* LatestRecordInteractor.swift in Sources */,
+				39F988971E46556E008A1DB6 /* IFitnessInfoRepository.swift in Sources */,
 				39EE91481E363EDA00F104C8 /* FitnessInfoRepository.swift in Sources */,
 				39EE91721E3640D200F104C8 /* NSCalendar+NSDateFactory.swift in Sources */,
 				39EE91341E36329F00F104C8 /* TodayViewController.swift in Sources */,
