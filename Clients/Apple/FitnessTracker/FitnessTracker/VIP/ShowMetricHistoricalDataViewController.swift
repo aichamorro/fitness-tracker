@@ -9,32 +9,32 @@
 import UIKit
 import RxSwift
 import UIGraphView
+import RxCocoa
 
-final class ShowMetricHistoricalDataViewController: UIViewController, IMetricHistoryView {
+private let DefaultGraphViewOption = 0
+
+final class ShowMetricHistoricalDataViewController: UIViewController {
     @IBOutlet private var tableView: UITableView!
     @IBOutlet private var graphView: UIGraphView!
-    @IBOutlet private var titleLabel: UILabel!
+    @IBOutlet fileprivate var graphVisualizationSegmentControl: UISegmentedControl!
     
-    fileprivate let rx_graphDataSubject = PublishSubject<([Double], [Double])>()
+    fileprivate let rx_didReceiveGraphData = PublishSubject<([Double], [Double])>()
+    fileprivate let rx_loadGraphData = PublishSubject<Date>()
     fileprivate let rx_loadHistoricDataSubject = PublishSubject<Void>()
-    var rx_loadHistoricData: Observable<Void> {
-        return rx_loadHistoricDataSubject.asObservable()
-    }
     
     fileprivate var dateFormatter: DateFormatter!
     
     var bag: RetainerBag!
     let disposeBag = DisposeBag()
     
+    var metricData: [MetricDataReading] = []
+    var graphData: ([Double], [Double]) = ([],[])
     var selectedMetric: BodyMetric = .weight {
         didSet {
             self.title = selectedMetric.description
         }
     }
-    
-    var metricData: [MetricDataReading] = []
-    var graphData: ([Double], [Double]) = ([],[])
-    
+
     func showNoHistoricalDataWarning() {
         let alert = UIAlertController(title: "Error", message: "There is no data recorded for \(selectedMetric.description)", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { _ in alert.dismiss(animated: true, completion: nil) }))
@@ -52,35 +52,74 @@ final class ShowMetricHistoricalDataViewController: UIViewController, IMetricHis
         dateFormatter.timeStyle = .none
         dateFormatter.dateFormat = "EEE, dd MMM yy, hh:mm"
         
-        self.titleLabel.text = "Last 7 days of \(self.title!)"
-        graphView.datasource = self
         graphView.delegate = self
+        graphView.datasource = self
         
-        rx_graphDataSubject
+        graphVisualizationSegmentControl.rx.value
             .asObservable()
-            .bindNext { [weak self] data in
+            .bindNext { [weak self] value in
+                guard let `self` = self else { return }
+                
+                switch value {
+                case 0: self.showCurrentWeekInGraph()
+                case 1: self.showLastSevenDaysInGraph()
+                case 2: self.showLastMontInGraph()
+                case 3: self.showLastThreeMonthsInGraph()
+                    default: fatalError()
+                }
+            }.addDisposableTo(disposeBag)
+        
+        rx_didReceiveGraphData
+            .asObservable()
+            .subscribe (onNext: { [weak self] data in
                 guard let `self` = self else { return }
                 
                 self.graphData = data
                 self.graphView.reloadData()
-            }.addDisposableTo(disposeBag)
+            }).addDisposableTo(disposeBag)
+
+        showCurrentWeekInGraph()
         rx_loadHistoricDataSubject.onNext()
+    }
+    
+    private func showCurrentWeekInGraph() {
+        rx_loadGraphData.onNext(Calendar.current.weekInterval(of: Date.today as NSDate)!.start)
+    }
+    
+    private func showLastSevenDaysInGraph() {
+        rx_loadGraphData.onNext(Date.today.adding(days: -7))
+    }
+    
+    private func showLastMontInGraph() {
+        rx_loadGraphData.onNext(Date.today.adding(days: -30))
+    }
+    
+    private func showLastThreeMonthsInGraph() {
+        rx_loadGraphData.onNext(Date.today.adding(days: -90))
     }
 }
 
-extension ShowMetricHistoricalDataViewController: IMetricGraphView {
-    var rx_loadCurrentWeek: Observable<Void> {
-        return rx_loadHistoricDataSubject.asObservable()
+extension ShowMetricHistoricalDataViewController: IMetricGraphView, IMetricHistoryView {
+    var rx_loadLatestRecords: Observable<Date> {
+        return rx_loadGraphData.asObservable()
     }
     
     var rx_graphData: AnyObserver<([Double], [Double])> {
-        return rx_graphDataSubject.asObserver()
+        return rx_didReceiveGraphData.asObserver()
+    }
+    
+    var rx_loadHistoricData: Observable<Void> {
+        return rx_loadHistoricDataSubject.asObservable()
     }
 }
 
 extension ShowMetricHistoricalDataViewController: UIGraphViewDelegate, UIGraphViewDataSource {
     func data(for dispersionGraph: UIGraphView) -> UIGraphViewSampleData {
         return graphData
+    }
+    
+    func graphView(_ graphView: UIGraphView, shouldAddHorizontalTagFor index: Int) -> Bool {
+        return self.graphVisualizationSegmentControl.selectedSegmentIndex > 1 ? (index % 7) == 0 : true
     }
 }
 

@@ -48,3 +48,13 @@ extension Calendar {
     }
 }
 
+extension Date {
+    static var today: Date {
+        return Calendar.current.date(bySettingHour: 0, minute: 0, second: 0, of: Date())!
+    }
+    
+    func adding(days: Int) -> Date {
+        return Calendar.current.date(byAdding: .day, value: days, to: self)!
+    }
+}
+
