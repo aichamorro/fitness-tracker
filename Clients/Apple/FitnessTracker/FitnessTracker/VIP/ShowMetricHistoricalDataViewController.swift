@@ -82,19 +82,21 @@ final class ShowMetricHistoricalDataViewController: UIViewController {
     }
     
     private func showCurrentWeekInGraph() {
-        rx_loadGraphData.onNext(Calendar.current.weekInterval(of: Date.today as NSDate)!.start)
+        let calendar = Calendar.current
+        
+        rx_loadGraphData.onNext(Calendar.current.weekInterval(of: calendar.now as NSDate)!.start)
     }
     
     private func showLastSevenDaysInGraph() {
-        rx_loadGraphData.onNext(Date.today.adding(days: -7))
+        rx_loadGraphData.onNext(Calendar.current.date(addingDays: -7, to: Calendar.current.startOfToday))
     }
     
     private func showLastMontInGraph() {
-        rx_loadGraphData.onNext(Date.today.adding(days: -30))
+        rx_loadGraphData.onNext(Calendar.current.date(addingDays: -30, to: Calendar.current.startOfToday))
     }
     
     private func showLastThreeMonthsInGraph() {
-        rx_loadGraphData.onNext(Date.today.adding(days: -90))
+        rx_loadGraphData.onNext(Calendar.current.date(addingDays: -90, to: Calendar.current.startOfToday))
     }
 }
 
