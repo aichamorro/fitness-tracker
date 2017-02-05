@@ -38,8 +38,7 @@ private func FitnessInfoToGraphDataAdapter(bodyMetric: BodyMetric) -> ([IFitness
         var readings: [Double] = []
         
         data.forEach { info in
-            let day = calendar.component(.day, from: info.date! as Date)
-            dates.append(day.doubleValue)
+            dates.append(info.date!.timeIntervalSinceReferenceDate)
             readings.append(info.value(for: bodyMetric).doubleValue)
         }
         
