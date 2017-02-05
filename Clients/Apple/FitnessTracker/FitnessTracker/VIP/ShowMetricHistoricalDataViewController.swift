@@ -71,11 +71,10 @@ final class ShowMetricHistoricalDataViewController: UIViewController {
         
         rx_didReceiveGraphData
             .asObservable()
-            .subscribe (onNext: { [weak self] data in
-                guard let `self` = self else { return }
-                
-                self.graphData = data
-                self.graphView.reloadData()
+            .do(onNext: { [weak self] data in
+                self?.graphData = data
+            }).subscribe (onNext: { [weak self] data in
+                self?.graphView.reloadData()
             }).addDisposableTo(disposeBag)
 
         showCurrentWeekInGraph()
@@ -83,19 +82,21 @@ final class ShowMetricHistoricalDataViewController: UIViewController {
     }
     
     private func showCurrentWeekInGraph() {
-        rx_loadGraphData.onNext(Calendar.current.weekInterval(of: Date.today as NSDate)!.start)
+        let calendar = Calendar.current
+        
+        rx_loadGraphData.onNext(Calendar.current.weekInterval(of: calendar.now as NSDate)!.start)
     }
     
     private func showLastSevenDaysInGraph() {
-        rx_loadGraphData.onNext(Date.today.adding(days: -7))
+        rx_loadGraphData.onNext(Calendar.current.date(addingDays: -7, to: Calendar.current.startOfToday))
     }
     
     private func showLastMontInGraph() {
-        rx_loadGraphData.onNext(Date.today.adding(days: -30))
+        rx_loadGraphData.onNext(Calendar.current.date(addingDays: -30, to: Calendar.current.startOfToday))
     }
     
     private func showLastThreeMonthsInGraph() {
-        rx_loadGraphData.onNext(Date.today.adding(days: -90))
+        rx_loadGraphData.onNext(Calendar.current.date(addingDays: -90, to: Calendar.current.startOfToday))
     }
 }
 
@@ -120,6 +121,14 @@ extension ShowMetricHistoricalDataViewController: UIGraphViewDelegate, UIGraphVi
     
     func graphView(_ graphView: UIGraphView, shouldAddHorizontalTagFor index: Int) -> Bool {
         return self.graphVisualizationSegmentControl.selectedSegmentIndex > 1 ? (index % 7) == 0 : true
+    }
+    
+    func graphView(_ graphView: UIGraphView, horizontalTagFor index: Int) -> String {
+        let timeInterval = graphData.0[index]
+        let date = Date(timeIntervalSinceReferenceDate: timeInterval)
+        let day = Calendar.current.component(.day, from: date)
+        
+        return "\(day)"
     }
 }
 

@@ -47,7 +47,7 @@ extension CoreDataQueryRequest {
         case .findInterval(let dateInterval, let limit, let order):
             let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: self.entity)
             fetchRequest.sortDescriptors = [NSSortDescriptor(key: "date", ascending: order.ascending)]
-            fetchRequest.predicate = NSPredicate(format: "((date >= %@) AND (date < %@))", dateInterval.start as CVarArg, dateInterval.end as CVarArg)
+            fetchRequest.predicate = NSPredicate(format: "((date >= %@) AND (date <= %@))", dateInterval.start as CVarArg, dateInterval.end as CVarArg)
             
             addLimitIfNeeded(limit, to: fetchRequest)
             

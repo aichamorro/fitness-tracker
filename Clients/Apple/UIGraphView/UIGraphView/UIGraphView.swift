@@ -17,11 +17,16 @@ public protocol UIGraphViewDataSource: class {
 
 public protocol UIGraphViewDelegate: class {
     func graphView(_ graphView: UIGraphView, shouldAddHorizontalTagFor index: Int) -> Bool
+    func graphView(_ graphView: UIGraphView, horizontalTagFor index: Int) -> String
 }
 
 public extension UIGraphViewDelegate {
     func graphView(_ graphView: UIGraphView, shouldAddHorizontalTagFor index: Int) -> Bool {
         return true
+    }
+    
+    func graphView(_ graphView: UIGraphView, horizontalTagFor index: Int) -> String {
+        return ""
     }
 }
 
@@ -37,7 +42,6 @@ final public class UIGraphView: UIView {
     var verticalMinValue: NSString!
     var verticalMaxValue: NSString!
     var textAttributes: [String:Any]!
-    var horizontalTags: [String]!
     
     weak public var datasource: UIGraphViewDataSource? {
         didSet {
@@ -68,7 +72,6 @@ final public class UIGraphView: UIView {
         // Graph Info
         verticalMinValue = String(format: "%.2f", verticalRange.lowerBound) as NSString
         verticalMaxValue = String(format: "%.2f", verticalRange.upperBound) as NSString
-        horizontalTags = data.horizontal.map { String(format: "%.0f", $0) }
         
         // From value to pixel
         let mappingFunction = UIGraphViewValueMapperFactory.create(horizontalRange: data.horizontal, verticalRange: data.vertical)
@@ -119,7 +122,9 @@ extension UIGraphView {
                 // Draw graph and horiontal tags
                 drawingFunction(context, graphRect, dataMapper) { point, index in
                     if self.delegate?.graphView(self, shouldAddHorizontalTagFor: index) ?? true {
-                        self.horizontalTags[index].draw(at: CGPoint(x: point.x - 5, y: graphRect.maxY + horizontalTagHeight), withAttributes: self.textAttributes)
+                        let tag = (self.delegate?.graphView(self, horizontalTagFor: index) ?? "") as NSString
+                        
+                        tag.draw(at: CGPoint(x: point.x - 5, y: graphRect.maxY + horizontalTagHeight), withAttributes: self.textAttributes)
                     }
                 }
             }

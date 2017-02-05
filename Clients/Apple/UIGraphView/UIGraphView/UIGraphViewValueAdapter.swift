@@ -35,7 +35,7 @@ private func fillEqually(steps: Int) -> UIGraphViewAxisValueMapper {
 
 internal struct UIGraphViewValueMapperFactory {
     static func create(horizontalRange: [Double], verticalRange: [Double]) -> UIGraphViewValueMapper {
-        let horizontalValueMapper = fillEqually(steps: horizontalRange.count)
+        let horizontalValueMapper = proportional(range: horizontalRange.range!)
         let verticalValueMapper = proportional(range: verticalRange.range!)
         
         return { rect, xValue, yValue in

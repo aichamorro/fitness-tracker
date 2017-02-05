@@ -25,12 +25,6 @@ private extension Int {
     }
 }
 
-private extension NSDate {
-    class var today: NSDate {
-        return NSDate()
-    }
-}
-
 private let calendar = Calendar.current
 private func FitnessInfoToGraphDataAdapter(bodyMetric: BodyMetric) -> ([IFitnessInfo]) -> ([Double], [Double]) {
     return { data in
@@ -38,8 +32,8 @@ private func FitnessInfoToGraphDataAdapter(bodyMetric: BodyMetric) -> ([IFitness
         var readings: [Double] = []
         
         data.forEach { info in
-            let day = calendar.component(.day, from: info.date! as Date)
-            dates.append(day.doubleValue)
+            let alignedDate = Calendar.current.date(bySettingHour: 0, minute: 0, second: 0, of: info.date! as Date)!
+            dates.append(alignedDate.timeIntervalSinceReferenceDate)
             readings.append(info.value(for: bodyMetric).doubleValue)
         }
         
@@ -63,9 +57,9 @@ final class MetricGraphInteractor: IMetricGraphInteractor {
         self.fitnessInfoRepository = repository
     }
     
-    func find(from: Date) -> Observable<[IFitnessInfo]> {
+    func find(from intervalStart: Date) -> Observable<[IFitnessInfo]> {
         return fitnessInfoRepository
-            .rx_find(from: from as NSDate, to: Date.today as NSDate, order: .ascendent)
+            .rx_find(from: intervalStart as NSDate, to: Calendar.current.endOfToday as NSDate, order: .ascendent)
     }
 }
 
