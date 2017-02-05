@@ -11,6 +11,8 @@ import RxSwift
 import UIGraphView
 import RxCocoa
 
+private let DefaultGraphViewOption = 0
+
 final class ShowMetricHistoricalDataViewController: UIViewController {
     @IBOutlet private var tableView: UITableView!
     @IBOutlet private var graphView: UIGraphView!
@@ -18,7 +20,6 @@ final class ShowMetricHistoricalDataViewController: UIViewController {
     
     fileprivate let rx_didReceiveGraphData = PublishSubject<([Double], [Double])>()
     fileprivate let rx_loadGraphData = PublishSubject<Date>()
-    fileprivate let rx_loadCurrentWeekSubject = PublishSubject<Void>()
     fileprivate let rx_loadHistoricDataSubject = PublishSubject<Void>()
     
     fileprivate var dateFormatter: DateFormatter!
@@ -60,35 +61,47 @@ final class ShowMetricHistoricalDataViewController: UIViewController {
                 guard let `self` = self else { return }
                 
                 switch value {
-                    case 0: self.rx_loadCurrentWeekSubject.onNext()
-                case 1: self.rx_loadGraphData.onNext(Date.now.adding(days: -7))
-                case 2: self.rx_loadGraphData.onNext(Date.now.adding(days: -30))
-                case 3: self.rx_loadGraphData.onNext(Date.now.adding(days: -90))
+                case 0: self.showCurrentWeekInGraph()
+                case 1: self.showLastSevenDaysInGraph()
+                case 2: self.showLastMontInGraph()
+                case 3: self.showLastThreeMonthsInGraph()
                     default: fatalError()
                 }
             }.addDisposableTo(disposeBag)
         
         rx_didReceiveGraphData
             .asObservable()
-            .bindNext { [weak self] data in
+            .subscribe (onNext: { [weak self] data in
                 guard let `self` = self else { return }
                 
                 self.graphData = data
                 self.graphView.reloadData()
-            }.addDisposableTo(disposeBag)
-        
-        rx_loadCurrentWeekSubject.onNext()
+            }).addDisposableTo(disposeBag)
+
+        showCurrentWeekInGraph()
         rx_loadHistoricDataSubject.onNext()
+    }
+    
+    private func showCurrentWeekInGraph() {
+        rx_loadGraphData.onNext(Calendar.current.weekInterval(of: Date.today as NSDate)!.start)
+    }
+    
+    private func showLastSevenDaysInGraph() {
+        rx_loadGraphData.onNext(Date.today.adding(days: -7))
+    }
+    
+    private func showLastMontInGraph() {
+        rx_loadGraphData.onNext(Date.today.adding(days: -30))
+    }
+    
+    private func showLastThreeMonthsInGraph() {
+        rx_loadGraphData.onNext(Date.today.adding(days: -90))
     }
 }
 
-extension ShowMetricHistoricalDataViewController: IMetricGraphView, ICurrentWeekGraphView, IMetricHistoryView {
+extension ShowMetricHistoricalDataViewController: IMetricGraphView, IMetricHistoryView {
     var rx_loadLatestRecords: Observable<Date> {
         return rx_loadGraphData.asObservable()
-    }
-    
-    var rx_loadCurrentWeekRecords: Observable<Void> {
-        return rx_loadCurrentWeekSubject.asObservable()
     }
     
     var rx_graphData: AnyObserver<([Double], [Double])> {

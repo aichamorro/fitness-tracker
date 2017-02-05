@@ -10,21 +10,11 @@ import Foundation
 import RxSwift
 
 protocol IMetricGraphInteractor {
-    func find(from: Date, for bodyMetric: BodyMetric) -> Observable<[(NSDate, Double)]>
-}
-
-protocol ICurrentWeekGraphInteractor {
-    func findCurrentWeek() -> Observable<[IFitnessInfo]>
+    func find(from: Date) -> Observable<[IFitnessInfo]>
 }
 
 protocol IMetricGraphView {
     var rx_loadLatestRecords: Observable<Date> { get }
-    var rx_graphData: AnyObserver<([Double], [Double])> { get }
-    var selectedMetric: BodyMetric { get }
-}
-
-protocol ICurrentWeekGraphView {
-    var rx_loadCurrentWeekRecords: Observable<Void> { get }
     var rx_graphData: AnyObserver<([Double], [Double])> { get }
     var selectedMetric: BodyMetric { get }
 }
@@ -42,7 +32,7 @@ private extension NSDate {
 }
 
 private let calendar = Calendar.current
-private func FitnessInfoToGraphDataAdapter(bodyMetric: BodyMetric) -> ([IFitnessInfo]) -> ([Double],[Double]) {
+private func FitnessInfoToGraphDataAdapter(bodyMetric: BodyMetric) -> ([IFitnessInfo]) -> ([Double], [Double]) {
     return { data in
         var dates: [Double] = []
         var readings: [Double] = []
@@ -57,35 +47,13 @@ private func FitnessInfoToGraphDataAdapter(bodyMetric: BodyMetric) -> ([IFitness
     }
 }
 
-typealias ICurrentWeekGraphPresenter = (ICurrentWeekGraphInteractor, ICurrentWeekGraphView, DisposeBag) -> Void
-let CurrentWeekGraphPresenter: ICurrentWeekGraphPresenter = { interactor, view, disposeBag in
-    view.rx_loadCurrentWeekRecords
-        .flatMap {
-            interactor.findCurrentWeek()
-        }.map(FitnessInfoToGraphDataAdapter(bodyMetric: view.selectedMetric))
-        .bindTo(view.rx_graphData)
-        .addDisposableTo(disposeBag)
-}
-
 typealias IMetricGraphPresenter = (IMetricGraphInteractor, IMetricGraphView, DisposeBag) -> Void
 let MetricGraphPresenter: IMetricGraphPresenter = { (interactor, view, disposeBag) in
     view.rx_loadLatestRecords
-        .flatMap { interactor.find(from: $0, for: view.selectedMetric) }
-        .bindNext { info in
-            let calendar = Calendar.current
-            var dates: [Double] = []
-            var readings: [Double] = []
-            
-            _ = info.map { return ($0.0, $0.1) }.reduce([]) { result, current in
-                let day = calendar.component(.day, from:current.0 as Date)
-                dates.append(Double(day))
-                readings.append(Double(current.1))
-                
-                return result
-            }
-            
-            view.rx_graphData.onNext((dates, readings))
-        }.addDisposableTo(disposeBag)
+        .flatMap { interactor.find(from: $0) }
+        .map(FitnessInfoToGraphDataAdapter(bodyMetric: view.selectedMetric))
+        .bindTo(view.rx_graphData)
+        .addDisposableTo(disposeBag)
 }
 
 final class MetricGraphInteractor: IMetricGraphInteractor {
@@ -95,25 +63,9 @@ final class MetricGraphInteractor: IMetricGraphInteractor {
         self.fitnessInfoRepository = repository
     }
     
-    func find(from: Date, for bodyMetric: BodyMetric) -> Observable<[(NSDate, Double)]> {
+    func find(from: Date) -> Observable<[IFitnessInfo]> {
         return fitnessInfoRepository
-            .rx_find(from: from as NSDate, to: Date.now as NSDate, order: .ascendent)
-            .flatMap { fetched in
-                return Observable.just(fetched.map {
-                    return ($0.date!, $0.value(for: bodyMetric).doubleValue)
-                })
-            }
+            .rx_find(from: from as NSDate, to: Date.today as NSDate, order: .ascendent)
     }
 }
 
-final class CurrentWeekGraphInteractor: ICurrentWeekGraphInteractor {
-    private let fitnessInfoRepository: IFitnessInfoRepository
-    
-    init(repository: IFitnessInfoRepository) {
-        self.fitnessInfoRepository = repository
-    }
-    
-    func findCurrentWeek() -> Observable<[IFitnessInfo]> {
-        return fitnessInfoRepository.rx_findWeek(ofDay: NSDate.today)
-    }
-}
