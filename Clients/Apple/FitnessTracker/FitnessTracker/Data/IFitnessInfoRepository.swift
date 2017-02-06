@@ -20,15 +20,15 @@ protocol IFitnessInfoRepository {
     
     func rx_findAll() -> Observable<[IFitnessInfo]>
     
-    @discardableResult func save(record: IFitnessInfo) throws -> IFitnessInfo
-    @discardableResult func rx_save(record: IFitnessInfo) -> Observable<IFitnessInfo>
+    @discardableResult func save(_ record: IFitnessInfo) throws -> IFitnessInfo
+    @discardableResult func rx_save(_ record: IFitnessInfo) -> Observable<IFitnessInfo>
 }
 
 extension IFitnessInfoRepository {
-    func rx_save(record: IFitnessInfo) -> Observable<IFitnessInfo> {
+    func rx_save(_ record: IFitnessInfo) -> Observable<IFitnessInfo> {
         return Observable.create { observer -> Disposable in
             do {
-                let saved = try self.save(record: record)
+                let saved = try self.save(record)
                 
                 observer.onNext(saved)
                 observer.onCompleted()
@@ -82,7 +82,7 @@ extension IFitnessInfoRepository {
         let disposeBag = DisposeBag()
         
         for record in records {
-            self.rx_save(record: record)
+            self.rx_save(record)
                 .subscribe(onNext: { result.append($0) }, onError: { error = $0 } )
                 .addDisposableTo(disposeBag)
         }

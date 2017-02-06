@@ -77,7 +77,7 @@ class NewRecordTests: QuickSpec {
                 
                 it("Shows the previous reading when there is some previous data") {
                     do {
-                        try repository.save(record: FitnessInfo(weight: 65.0, height: 171, bodyFatPercentage: 30.0, musclePercentage: 40.0, waterPercentage: 40.0))
+                        try repository.save(FitnessInfo(weight: 65.0, height: 171, bodyFatPercentage: 30.0, musclePercentage: 40.0, waterPercentage: 40.0))
                     } catch {
                         fail()
                         return

@@ -55,7 +55,7 @@ final class CoreDataInfoRepository: IFitnessInfoRepository {
             .flatMap { return Observable.just($0 as! [CoreDataFitnessInfo]) }
     }
     
-    @discardableResult func save(record: IFitnessInfo) throws -> IFitnessInfo {
+    @discardableResult func save(_ record: IFitnessInfo) throws -> IFitnessInfo {
         let result = try coreDataEngine.create(entityName: CoreDataEntity.fitnessInfo.rawValue, configuration: { entity in
             guard let saved = entity as? CoreDataFitnessInfo else { fatalError() }
             

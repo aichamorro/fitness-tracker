@@ -64,5 +64,9 @@ extension Calendar {
     func date(addingDays days: Int, to date: Date) -> Date {
         return self.date(byAdding: .day, value: days, to: date)!
     }
+    
+    func dateBySettingStartOfDay(to date: Date) -> Date {
+        return self.date(bySettingHour: 0, minute: 0, second: 0, of: date)!
+    }
 }
 

@@ -52,7 +52,7 @@ class LatestRecordTests: QuickSpec {
                 
                 it("Shows the latest record data") {
                     do {
-                        try repository.save(record: FitnessInfo(weight: 34.5, height: 171, bodyFatPercentage: 30.0, musclePercentage: 30.0, waterPercentage: 41.0))
+                        try repository.save(FitnessInfo(weight: 34.5, height: 171, bodyFatPercentage: 30.0, musclePercentage: 30.0, waterPercentage: 41.0))
                     } catch {
                         fail()
                         return
