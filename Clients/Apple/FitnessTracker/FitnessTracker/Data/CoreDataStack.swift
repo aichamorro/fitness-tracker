@@ -133,20 +133,14 @@ struct CoreDataEngine {
         }
     }
     
-    func create(entityName: String, configuration: ((NSManagedObject) -> Void)?) -> Observable<NSManagedObject> {
+    func create(entityName: String, configuration: ((NSManagedObject) -> Void)?) throws -> NSManagedObject {
         let newObject = NSEntityDescription.insertNewObject(forEntityName: entityName, into: managedObjectContext)
         
         configuration?(newObject)
         
-        do {
-            try managedObjectContext.save()
-            
-            return Observable.just(newObject)
-        } catch {
-            return Observable
-                .error(NSError(domain: "Core Data", code: -1, userInfo: nil))
-                .do(onNext: nil, onError: { error in NSLog("Failure when saving the context: \(error)") })
-        }
+        try managedObjectContext.save()
+
+        return newObject
     }
 }
 

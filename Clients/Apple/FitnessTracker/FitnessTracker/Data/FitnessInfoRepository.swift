@@ -55,8 +55,8 @@ final class CoreDataInfoRepository: IFitnessInfoRepository {
             .flatMap { return Observable.just($0 as! [CoreDataFitnessInfo]) }
     }
     
-    @discardableResult func rx_save(record: IFitnessInfo) -> Observable<IFitnessInfo> {
-        return coreDataEngine.create(entityName: CoreDataEntity.fitnessInfo.rawValue) { entity in
+    @discardableResult func save(record: IFitnessInfo) throws -> IFitnessInfo {
+        let result = try coreDataEngine.create(entityName: CoreDataEntity.fitnessInfo.rawValue, configuration: { entity in
             guard let saved = entity as? CoreDataFitnessInfo else { fatalError() }
             
             saved.height_ = Int16(record.height)
@@ -64,12 +64,13 @@ final class CoreDataInfoRepository: IFitnessInfoRepository {
             saved.musclePercentage = record.musclePercentage
             saved.bodyFatPercentage = record.bodyFatPercentage
             saved.waterPercentage = record.waterPercentage
-            saved.date = NSDate()
-        }.do(onNext: { [weak self] _ in
-            self?.rx_updatedSubject.onNext()
-        }).flatMap {
-            return Observable.just($0 as! IFitnessInfo)
-        }
+            saved.date = record.date ?? NSDate()
+        }) as! IFitnessInfo
+        
+        rx_updatedSubject.onNext()
+        
+        return result
     }
+    
 }
 

@@ -66,15 +66,20 @@ class InsightsTests: QuickSpec {
                     
                     for (info, date) in zip(weekFitnessInfo, dates)
                     {
-                        _ = coreDataEngine.create(entityName: CoreDataEntity.fitnessInfo.rawValue) { entity in
-                            guard let saved = entity as? CoreDataFitnessInfo else { fatalError() }
-                            
-                            saved.date = date as NSDate
-                            saved.weight = info.weight
-                            saved.height_ = Int16(info.height)
-                            saved.bodyFatPercentage = info.bodyFatPercentage
-                            saved.musclePercentage = info.musclePercentage
-                            saved.waterPercentage = info.waterPercentage
+                        do {
+                            _ = try coreDataEngine.create(entityName: CoreDataEntity.fitnessInfo.rawValue) { entity in
+                                guard let saved = entity as? CoreDataFitnessInfo else { fatalError() }
+                                
+                                saved.date = date as NSDate
+                                saved.weight = info.weight
+                                saved.height_ = Int16(info.height)
+                                saved.bodyFatPercentage = info.bodyFatPercentage
+                                saved.musclePercentage = info.musclePercentage
+                                saved.waterPercentage = info.waterPercentage
+                            }
+                        } catch {
+                            fail()
+                            return
                         }
                     }
                     
