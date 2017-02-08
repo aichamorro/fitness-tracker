@@ -20,6 +20,34 @@ protocol IFitnessInfo {
     var date: NSDate? { get }
 }
 
+func ==<T: IFitnessInfo>(lhs: T, rhs: T) -> Bool {
+    if lhs.weight != rhs.weight {
+        return false
+    }
+    
+    if lhs.height != lhs.height {
+        return false
+    }
+    
+    if lhs.bodyFatPercentage != rhs.bodyFatPercentage {
+        return false
+    }
+    
+    if lhs.musclePercentage != rhs.musclePercentage {
+        return false
+    }
+    
+    if lhs.waterPercentage != rhs.waterPercentage {
+        return false
+    }
+    
+    if lhs.date != rhs.date {
+        return false
+    }
+    
+    return true
+}
+
 struct FitnessInfo: IFitnessInfo {
     let weight: Double
     let height: UInt

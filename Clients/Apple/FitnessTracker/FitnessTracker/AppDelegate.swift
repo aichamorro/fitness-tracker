@@ -54,7 +54,6 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         mainTabController.viewControllers = initialViewControllers
         window?.rootViewController = mainTabController
 
-        // Override point for customization after application launch.
         return true
     }
     

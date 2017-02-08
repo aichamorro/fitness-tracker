@@ -25,8 +25,9 @@ class LatestRecordTests: QuickSpec {
                 var scheduler: TestScheduler!
                 var repository: CoreDataInfoRepository!
                 var managedObjectContext: NSManagedObjectContext!
-                var interactor: ILatestRecordInteractor!
+                var interactor: IFindLatestRecord!
                 var router: AppRouter!
+                var storeUpdates: IRecordStoreUpdate!
                     
                 beforeEach {
                     managedObjectContext = SetUpInMemoryManagedObjectContext()
@@ -34,9 +35,11 @@ class LatestRecordTests: QuickSpec {
                     view = LatestRecordView()
                     disposeBag = DisposeBag()
                     scheduler = TestScheduler(initialClock: 0)
-                    interactor = LatestRecordInteractor(repository: repository)
+                    interactor = FindLatestRecord(repository: repository)
+                    storeUpdates = RecordStoreUpdate(repository: repository)
                     router = AppRouter.empty
-                    LatestRecordPresenter(interactor, view, router, disposeBag)
+                    
+                    LatestRecordPresenter(interactor, storeUpdates, view, router, disposeBag)
                 }
                 
                 afterEach {
@@ -51,7 +54,12 @@ class LatestRecordTests: QuickSpec {
                 }
                 
                 it("Shows the latest record data") {
-                    repository.rx_save(record: FitnessInfo(weight: 34.5, height: 171, bodyFatPercentage: 30.0, musclePercentage: 30.0, waterPercentage: 41.0))
+                    do {
+                        try repository.save(FitnessInfo(weight: 34.5, height: 171, bodyFatPercentage: 30.0, musclePercentage: 30.0, waterPercentage: 41.0))
+                    } catch {
+                        fail()
+                        return
+                    }
                     
                     createObserverAndSubscribe(to: view.viewModelVariable.asObservable().skip(1), scheduler: scheduler, disposeBag: disposeBag, expect: { viewModel in
                         expect(viewModel.weight - 34.5 < 0.000001).to(beTrue())

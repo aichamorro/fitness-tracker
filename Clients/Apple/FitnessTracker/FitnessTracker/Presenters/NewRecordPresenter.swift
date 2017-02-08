@@ -19,15 +19,15 @@ private func record(applyingCalibration calibration: Double, to record: NewRecor
 }
 
 typealias INewRecordPresenter =
-    (ILatestRecordInteractor,
-    INewRecordInteractor,
+    (IFindLatestRecord,
+    ICreateNewRecord,
     INewRecordView,
     DisposeBag) -> Void
 
 let NewRecordPresenter: INewRecordPresenter = { latestRecordInteractor, insertNewRecordInteractor, view, disposeBag in
     let loadLatestResult: () -> Void = {
         latestRecordInteractor
-            .rx_findLatest()
+            .rx_find()
             .bindNext(mapFitnessInfoToView(view: view))
             .addDisposableTo(disposeBag)
     }
@@ -40,7 +40,7 @@ let NewRecordPresenter: INewRecordPresenter = { latestRecordInteractor, insertNe
         .flatMap {
             Observable.just(record(applyingCalibration: view.calibrationFix, to: $0))
         }.flatMap(mapViewModelToFitnessInfo)
-        .flatMap { insertNewRecordInteractor.rx_save(record: $0) }
+        .flatMap { insertNewRecordInteractor.rx_save($0) }
         .do(onNext: { _ in loadLatestResult() })
         .subscribe { _ in view.dismiss() }
         .addDisposableTo(disposeBag)

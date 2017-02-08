@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="UIGraphViewExample" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yxF-oD-JzP" customClass="UIGradientView" customModule="UIGraphView">
+                                <rect key="frame" x="0.0" y="20" width="375" height="261"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="startColor">
+                                        <color key="value" red="0.023083547660471826" green="0.79944180373284857" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="endColor">
+                                        <color key="value" red="0.009098933929672471" green="0.47110269472287691" blue="0.59456297588832485" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="V7Q-u0-3TU">
+                                <rect key="frame" x="0.0" y="20" width="375" height="68"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7q8-OF-6Uu">
+                                        <rect key="frame" x="8" y="8" width="42.5" height="24"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bis-AM-9td">
+                                        <rect key="frame" x="8" y="40" width="57" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="Bis-AM-9td" firstAttribute="leading" secondItem="7q8-OF-6Uu" secondAttribute="leading" id="4Nh-oA-ado"/>
+                                    <constraint firstAttribute="width" constant="375" id="Ene-5G-Z9K"/>
+                                    <constraint firstItem="7q8-OF-6Uu" firstAttribute="leading" secondItem="V7Q-u0-3TU" secondAttribute="leading" constant="8" id="Xpc-pr-7nI"/>
+                                    <constraint firstItem="Bis-AM-9td" firstAttribute="top" secondItem="7q8-OF-6Uu" secondAttribute="bottom" constant="8" id="YKS-OK-Xwy"/>
+                                    <constraint firstAttribute="height" constant="68" id="ZHc-E9-QqM"/>
+                                    <constraint firstItem="7q8-OF-6Uu" firstAttribute="top" secondItem="V7Q-u0-3TU" secondAttribute="top" constant="8" id="m42-9R-7dk"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2yU-Dj-tCG" customClass="UIGraphView" customModule="UIGraphView">
+                                <rect key="frame" x="0.0" y="86" width="375" height="195"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="195" id="RnG-bi-kIQ"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="2yU-Dj-tCG" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="8SN-3q-Djf"/>
+                            <constraint firstItem="yxF-oD-JzP" firstAttribute="top" secondItem="V7Q-u0-3TU" secondAttribute="top" id="K2K-zH-Wlj"/>
+                            <constraint firstItem="V7Q-u0-3TU" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="QX9-kY-cje"/>
+                            <constraint firstItem="yxF-oD-JzP" firstAttribute="bottom" secondItem="2yU-Dj-tCG" secondAttribute="bottom" id="U0c-Zj-sqO"/>
+                            <constraint firstItem="2yU-Dj-tCG" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-16" id="Ztb-Ub-1V0"/>
+                            <constraint firstItem="yxF-oD-JzP" firstAttribute="trailing" secondItem="V7Q-u0-3TU" secondAttribute="trailing" id="bMI-ct-4b3"/>
+                            <constraint firstItem="yxF-oD-JzP" firstAttribute="leading" secondItem="V7Q-u0-3TU" secondAttribute="leading" id="j6g-J1-HU0"/>
+                            <constraint firstItem="2yU-Dj-tCG" firstAttribute="top" secondItem="V7Q-u0-3TU" secondAttribute="bottom" constant="-2" id="na8-lr-Rz7"/>
+                            <constraint firstItem="V7Q-u0-3TU" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-16" id="zOV-f3-O39"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="graph" destination="2yU-Dj-tCG" id="F4l-ig-qNB"/>
+                        <outlet property="graphSubtitle" destination="Bis-AM-9td" id="3Hf-id-ph6"/>
+                        <outlet property="graphTitle" destination="7q8-OF-6Uu" id="gwi-fQ-mXR"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="136.80000000000001" y="137.18140929535232"/>
+        </scene>
+    </scenes>
+</document>

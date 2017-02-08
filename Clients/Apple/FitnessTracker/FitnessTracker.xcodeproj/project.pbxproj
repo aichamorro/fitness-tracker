@@ -17,48 +17,59 @@
 		2021420B1E0D248900BAF444 /* CoreDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 202142091E0D248900BAF444 /* CoreDataModel.xcdatamodeld */; };
 		2021420F1E0D27FD00BAF444 /* CoreDataFitnessInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2021420E1E0D27FD00BAF444 /* CoreDataFitnessInfo.swift */; };
 		202142111E0D57C200BAF444 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 202142101E0D57C200BAF444 /* CoreDataStack.swift */; };
-		20471A461E197D1A0000F7C2 /* InsightsVIP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20471A451E197D1A0000F7C2 /* InsightsVIP.swift */; };
 		20471A481E197E9D0000F7C2 /* InsightsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20471A471E197E9D0000F7C2 /* InsightsTests.swift */; };
 		20471A4A1E1983F80000F7C2 /* FitnessInfoInsight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20471A491E1983F80000F7C2 /* FitnessInfoInsight.swift */; };
 		20471A4D1E1ADBB00000F7C2 /* NSCalendar+NSDateFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20471A4C1E1ADBB00000F7C2 /* NSCalendar+NSDateFactory.swift */; };
 		204C62141E0FFFC100B6CE47 /* NewRecordTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204C62131E0FFFC100B6CE47 /* NewRecordTests.swift */; };
 		204C62161E1046C300B6CE47 /* CoreDataFitnessInfoRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204C62151E1046C300B6CE47 /* CoreDataFitnessInfoRepositoryTests.swift */; };
 		205212FB1E01D3AD00F9A9E7 /* LatestRecordTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205212FA1E01D3AD00F9A9E7 /* LatestRecordTests.swift */; };
-		20D76F1F1E0D8E5C00FDD122 /* ShowPreviousLatestResultVIP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20D76F1E1E0D8E5C00FDD122 /* ShowPreviousLatestResultVIP.swift */; };
 		20D76F211E0DA8DA00FDD122 /* FitnessInfo+Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20D76F201E0DA8DA00FDD122 /* FitnessInfo+Operators.swift */; };
 		20E89E651E12F44E00F03644 /* MetricHistoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E89E641E12F44E00F03644 /* MetricHistoryTests.swift */; };
-		20E89E681E130C5C00F03644 /* ShowMetricHistoricalDataVIP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E89E671E130C5C00F03644 /* ShowMetricHistoricalDataVIP.swift */; };
-		20E89E6A1E130D3D00F03644 /* ShowMetricHistoricalDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E89E691E130D3D00F03644 /* ShowMetricHistoricalDataViewController.swift */; };
-		20E89E6C1E130D6900F03644 /* MetricReadingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E89E6B1E130D6900F03644 /* MetricReadingTableViewCell.swift */; };
-		20FA50FB1E095712002E536A /* LatestRecordInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FA50FA1E095712002E536A /* LatestRecordInteractor.swift */; };
+		20E89E681E130C5C00F03644 /* ShowMetricHistoricalDataVP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E89E671E130C5C00F03644 /* ShowMetricHistoricalDataVP.swift */; };
+		20FA50FB1E095712002E536A /* FindLatestRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FA50FA1E095712002E536A /* FindLatestRecord.swift */; };
 		20FA50FE1E09575E002E536A /* FitnessInfoRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FA50FD1E09575E002E536A /* FitnessInfoRepository.swift */; };
-		20FA51011E09579F002E536A /* LatestRecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FA51001E09579F002E536A /* LatestRecordView.swift */; };
-		20FA51031E0957C2002E536A /* LatestRecordPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FA51021E0957C2002E536A /* LatestRecordPresenter.swift */; };
-		20FA51051E095947002E536A /* LatestRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FA51041E095947002E536A /* LatestRecordViewController.swift */; };
-		20FA51071E0976D1002E536A /* LatestRecordMetricCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FA51061E0976D1002E536A /* LatestRecordMetricCell.swift */; };
 		20FA510B1E0AE4D0002E536A /* CommonUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FA510A1E0AE4D0002E536A /* CommonUtils.swift */; };
-		20FA510D1E0AFCED002E536A /* NewRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FA510C1E0AFCED002E536A /* NewRecordViewController.swift */; };
-		20FA510F1E0B1B05002E536A /* NewRecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FA510E1E0B1B05002E536A /* NewRecordView.swift */; };
-		20FA51111E0B1D74002E536A /* NewRecordPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FA51101E0B1D74002E536A /* NewRecordPresenter.swift */; };
-		20FA51131E0B1DDF002E536A /* NewRecordInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FA51121E0B1DDF002E536A /* NewRecordInteractor.swift */; };
 		3903F5CA1E1BFA7D0093095B /* AppRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3903F5C91E1BFA7D0093095B /* AppRouter.swift */; };
-		392FEAE01E2C09E200D10C3D /* InsightsCardCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 392FEADF1E2C09E200D10C3D /* InsightsCardCollectionViewCell.swift */; };
 		397EBDA51E27B6B70060BCC1 /* InsightsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397EBDA41E27B6B70060BCC1 /* InsightsViewController.swift */; };
-		397EBDA71E27BA610060BCC1 /* IUIViewControllerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397EBDA61E27BA610060BCC1 /* IUIViewControllerFactory.swift */; };
+		39DE51B11E41798D00DD29CE /* GraphHistoryVP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39DE51B01E41798D00DD29CE /* GraphHistoryVP.swift */; };
 		39EE91311E36329F00F104C8 /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39EE91301E36329F00F104C8 /* NotificationCenter.framework */; };
 		39EE91341E36329F00F104C8 /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39EE91331E36329F00F104C8 /* TodayViewController.swift */; };
 		39EE91371E36329F00F104C8 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 39EE91351E36329F00F104C8 /* MainInterface.storyboard */; };
 		39EE913B1E36329F00F104C8 /* TodayExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 39EE912F1E36329F00F104C8 /* TodayExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		39EE91451E363DAA00F104C8 /* LatestRecordInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FA50FA1E095712002E536A /* LatestRecordInteractor.swift */; };
+		39EE91451E363DAA00F104C8 /* FindLatestRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FA50FA1E095712002E536A /* FindLatestRecord.swift */; };
 		39EE91481E363EDA00F104C8 /* FitnessInfoRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FA50FD1E09575E002E536A /* FitnessInfoRepository.swift */; };
 		39EE91491E363EDE00F104C8 /* CoreDataFitnessInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2021420E1E0D27FD00BAF444 /* CoreDataFitnessInfo.swift */; };
 		39EE914A1E363F0100F104C8 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 202142101E0D57C200BAF444 /* CoreDataStack.swift */; };
 		39EE916A1E363F7E00F104C8 /* CoreDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 202142091E0D248900BAF444 /* CoreDataModel.xcdatamodeld */; };
 		39EE916D1E363FFF00F104C8 /* FitnessInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200323F41E0038B300B1C33A /* FitnessInfo.swift */; };
-		39EE916E1E36403000F104C8 /* LatestRecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FA51001E09579F002E536A /* LatestRecordView.swift */; };
-		39EE91701E36405E00F104C8 /* BodyMetric.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39EE916F1E36405E00F104C8 /* BodyMetric.swift */; };
-		39EE91711E36406C00F104C8 /* BodyMetric.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39EE916F1E36405E00F104C8 /* BodyMetric.swift */; };
 		39EE91721E3640D200F104C8 /* NSCalendar+NSDateFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20471A4C1E1ADBB00000F7C2 /* NSCalendar+NSDateFactory.swift */; };
+		39F988961E465523008A1DB6 /* IFitnessInfoRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F988951E465523008A1DB6 /* IFitnessInfoRepository.swift */; };
+		39F988971E46556E008A1DB6 /* IFitnessInfoRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F988951E465523008A1DB6 /* IFitnessInfoRepository.swift */; };
+		39F988991E46559D008A1DB6 /* CoreDataQueryRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F988981E46559D008A1DB6 /* CoreDataQueryRequest.swift */; };
+		39F9889A1E4656CA008A1DB6 /* CoreDataQueryRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F988981E46559D008A1DB6 /* CoreDataQueryRequest.swift */; };
+		39F9889C1E48878E008A1DB6 /* FindRecordsInIntervalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F9889B1E48878E008A1DB6 /* FindRecordsInIntervalTests.swift */; };
+		39F9889E1E4B3121008A1DB6 /* FindRecordsInInterval.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F9889D1E4B3121008A1DB6 /* FindRecordsInInterval.swift */; };
+		39F988A01E4B3906008A1DB6 /* FindAllRecords.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F9889F1E4B3906008A1DB6 /* FindAllRecords.swift */; };
+		39F988A61E4B3F86008A1DB6 /* ShowMetricHistoricalDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F988A21E4B3F86008A1DB6 /* ShowMetricHistoricalDataViewController.swift */; };
+		39F988A71E4B3F86008A1DB6 /* IUIViewControllerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F988A31E4B3F86008A1DB6 /* IUIViewControllerFactory.swift */; };
+		39F988A81E4B3F86008A1DB6 /* LatestRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F988A41E4B3F86008A1DB6 /* LatestRecordViewController.swift */; };
+		39F988A91E4B3F86008A1DB6 /* NewRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F988A51E4B3F86008A1DB6 /* NewRecordViewController.swift */; };
+		39F988AB1E4B4194008A1DB6 /* CreateNewRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F988AA1E4B4194008A1DB6 /* CreateNewRecord.swift */; };
+		39F988AD1E4B41A0008A1DB6 /* FindInsights.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F988AC1E4B41A0008A1DB6 /* FindInsights.swift */; };
+		39F988AF1E4B4218008A1DB6 /* BodyMetric.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F988AE1E4B4218008A1DB6 /* BodyMetric.swift */; };
+		39F988B11E4B42C6008A1DB6 /* InsightsVP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F988B01E4B42C6008A1DB6 /* InsightsVP.swift */; };
+		39F988B51E4B4337008A1DB6 /* InsightsCardCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F988B21E4B4337008A1DB6 /* InsightsCardCollectionViewCell.swift */; };
+		39F988B61E4B4337008A1DB6 /* LatestRecordMetricCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F988B31E4B4337008A1DB6 /* LatestRecordMetricCell.swift */; };
+		39F988B71E4B4337008A1DB6 /* MetricReadingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F988B41E4B4337008A1DB6 /* MetricReadingTableViewCell.swift */; };
+		39F988BD1E4B4361008A1DB6 /* LatestRecordPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F988B81E4B4361008A1DB6 /* LatestRecordPresenter.swift */; };
+		39F988BE1E4B4361008A1DB6 /* LatestRecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F988B91E4B4361008A1DB6 /* LatestRecordView.swift */; };
+		39F988BF1E4B4361008A1DB6 /* NewRecordPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F988BA1E4B4361008A1DB6 /* NewRecordPresenter.swift */; };
+		39F988C01E4B4361008A1DB6 /* NewRecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F988BB1E4B4361008A1DB6 /* NewRecordView.swift */; };
+		39F988C11E4B4361008A1DB6 /* ShowPreviousLatestResultVIP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F988BC1E4B4361008A1DB6 /* ShowPreviousLatestResultVIP.swift */; };
+		39F988C21E4B436F008A1DB6 /* LatestRecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F988B91E4B4361008A1DB6 /* LatestRecordView.swift */; };
+		39F988C31E4B4380008A1DB6 /* BodyMetric.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F988AE1E4B4218008A1DB6 /* BodyMetric.swift */; };
+		39F988C51E4B43EB008A1DB6 /* FindPreviousLatestResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F988C41E4B43EB008A1DB6 /* FindPreviousLatestResult.swift */; };
+		39F988C71E4B4569008A1DB6 /* RecordsStoreUpdates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F988C61E4B4569008A1DB6 /* RecordsStoreUpdates.swift */; };
 		3C7E764AE3C8B71A2F15C64D /* Pods_TodayExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7EBF53B2E60378C64BDDE11 /* Pods_TodayExtension.framework */; };
 		45AA81FD1D29B16082BA4BBA /* Pods_FitnessTracker_FitnessTrackerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95868793967C2540BD298442 /* Pods_FitnessTracker_FitnessTrackerTests.framework */; };
 		60DCC2D4BE7EC6D04AACF7B5 /* Pods_FitnessTracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 243E297E8C331F616EE9C451 /* Pods_FitnessTracker.framework */; };
@@ -110,46 +121,55 @@
 		2021420A1E0D248900BAF444 /* CoreDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreDataModel.xcdatamodel; sourceTree = "<group>"; };
 		2021420E1E0D27FD00BAF444 /* CoreDataFitnessInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataFitnessInfo.swift; sourceTree = "<group>"; };
 		202142101E0D57C200BAF444 /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
-		20471A451E197D1A0000F7C2 /* InsightsVIP.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InsightsVIP.swift; sourceTree = "<group>"; };
 		20471A471E197E9D0000F7C2 /* InsightsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InsightsTests.swift; sourceTree = "<group>"; };
 		20471A491E1983F80000F7C2 /* FitnessInfoInsight.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FitnessInfoInsight.swift; sourceTree = "<group>"; };
 		20471A4C1E1ADBB00000F7C2 /* NSCalendar+NSDateFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSCalendar+NSDateFactory.swift"; sourceTree = "<group>"; };
 		204C62131E0FFFC100B6CE47 /* NewRecordTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewRecordTests.swift; sourceTree = "<group>"; };
 		204C62151E1046C300B6CE47 /* CoreDataFitnessInfoRepositoryTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataFitnessInfoRepositoryTests.swift; sourceTree = "<group>"; };
 		205212FA1E01D3AD00F9A9E7 /* LatestRecordTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = LatestRecordTests.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		20D76F1E1E0D8E5C00FDD122 /* ShowPreviousLatestResultVIP.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ShowPreviousLatestResultVIP.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		20D76F201E0DA8DA00FDD122 /* FitnessInfo+Operators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FitnessInfo+Operators.swift"; sourceTree = "<group>"; };
 		20E89E641E12F44E00F03644 /* MetricHistoryTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MetricHistoryTests.swift; sourceTree = "<group>"; };
-		20E89E671E130C5C00F03644 /* ShowMetricHistoricalDataVIP.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowMetricHistoricalDataVIP.swift; sourceTree = "<group>"; };
-		20E89E691E130D3D00F03644 /* ShowMetricHistoricalDataViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowMetricHistoricalDataViewController.swift; sourceTree = "<group>"; };
-		20E89E6B1E130D6900F03644 /* MetricReadingTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MetricReadingTableViewCell.swift; sourceTree = "<group>"; };
+		20E89E671E130C5C00F03644 /* ShowMetricHistoricalDataVP.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowMetricHistoricalDataVP.swift; sourceTree = "<group>"; };
 		20F0BC171E16E86E00695F2A /* CoreDataModel_v2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreDataModel_v2.xcdatamodel; sourceTree = "<group>"; };
-		20FA50FA1E095712002E536A /* LatestRecordInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = LatestRecordInteractor.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		20FA50FA1E095712002E536A /* FindLatestRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = FindLatestRecord.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		20FA50FD1E09575E002E536A /* FitnessInfoRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FitnessInfoRepository.swift; sourceTree = "<group>"; };
-		20FA51001E09579F002E536A /* LatestRecordView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = LatestRecordView.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		20FA51021E0957C2002E536A /* LatestRecordPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = LatestRecordPresenter.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		20FA51041E095947002E536A /* LatestRecordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = LatestRecordViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		20FA51061E0976D1002E536A /* LatestRecordMetricCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = LatestRecordMetricCell.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		20FA510A1E0AE4D0002E536A /* CommonUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonUtils.swift; sourceTree = "<group>"; };
-		20FA510C1E0AFCED002E536A /* NewRecordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = NewRecordViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		20FA510E1E0B1B05002E536A /* NewRecordView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = NewRecordView.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		20FA51101E0B1D74002E536A /* NewRecordPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = NewRecordPresenter.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		20FA51121E0B1DDF002E536A /* NewRecordInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = NewRecordInteractor.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		243E297E8C331F616EE9C451 /* Pods_FitnessTracker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FitnessTracker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		28A3F34B67D440117A76919C /* Pods-TodayExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TodayExtension.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TodayExtension/Pods-TodayExtension.debug.xcconfig"; sourceTree = "<group>"; };
 		3903F5C91E1BFA7D0093095B /* AppRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppRouter.swift; sourceTree = "<group>"; };
-		392FEADF1E2C09E200D10C3D /* InsightsCardCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InsightsCardCollectionViewCell.swift; sourceTree = "<group>"; };
 		397EBDA41E27B6B70060BCC1 /* InsightsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InsightsViewController.swift; sourceTree = "<group>"; };
-		397EBDA61E27BA610060BCC1 /* IUIViewControllerFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IUIViewControllerFactory.swift; sourceTree = "<group>"; };
 		39BBF6271E37616600CF5AE7 /* FitnessTracker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FitnessTracker.entitlements; sourceTree = "<group>"; };
 		39BBF6281E37668500CF5AE7 /* TodayExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TodayExtension.entitlements; sourceTree = "<group>"; };
+		39DE51B01E41798D00DD29CE /* GraphHistoryVP.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphHistoryVP.swift; sourceTree = "<group>"; };
 		39EE912F1E36329F00F104C8 /* TodayExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = TodayExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		39EE91301E36329F00F104C8 /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
 		39EE91331E36329F00F104C8 /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
 		39EE91361E36329F00F104C8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		39EE91381E36329F00F104C8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		39EE91401E363A5A00F104C8 /* Pods_FitnessTracker.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Pods_FitnessTracker.framework; path = "../../../../../../Library/Developer/Xcode/DerivedData/FitnessTracker-eskvvptwtkzxnkgqfwrlvsxlqtdt/Build/Products/Debug-iphonesimulator/Pods_FitnessTracker.framework"; sourceTree = "<group>"; };
-		39EE916F1E36405E00F104C8 /* BodyMetric.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BodyMetric.swift; sourceTree = "<group>"; };
+		39F988951E465523008A1DB6 /* IFitnessInfoRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IFitnessInfoRepository.swift; sourceTree = "<group>"; };
+		39F988981E46559D008A1DB6 /* CoreDataQueryRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataQueryRequest.swift; sourceTree = "<group>"; };
+		39F9889B1E48878E008A1DB6 /* FindRecordsInIntervalTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FindRecordsInIntervalTests.swift; sourceTree = "<group>"; };
+		39F9889D1E4B3121008A1DB6 /* FindRecordsInInterval.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FindRecordsInInterval.swift; sourceTree = "<group>"; };
+		39F9889F1E4B3906008A1DB6 /* FindAllRecords.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FindAllRecords.swift; sourceTree = "<group>"; };
+		39F988A21E4B3F86008A1DB6 /* ShowMetricHistoricalDataViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowMetricHistoricalDataViewController.swift; sourceTree = "<group>"; };
+		39F988A31E4B3F86008A1DB6 /* IUIViewControllerFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IUIViewControllerFactory.swift; sourceTree = "<group>"; };
+		39F988A41E4B3F86008A1DB6 /* LatestRecordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LatestRecordViewController.swift; sourceTree = "<group>"; };
+		39F988A51E4B3F86008A1DB6 /* NewRecordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewRecordViewController.swift; sourceTree = "<group>"; };
+		39F988AA1E4B4194008A1DB6 /* CreateNewRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateNewRecord.swift; sourceTree = "<group>"; };
+		39F988AC1E4B41A0008A1DB6 /* FindInsights.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FindInsights.swift; sourceTree = "<group>"; };
+		39F988AE1E4B4218008A1DB6 /* BodyMetric.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BodyMetric.swift; sourceTree = "<group>"; };
+		39F988B01E4B42C6008A1DB6 /* InsightsVP.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InsightsVP.swift; sourceTree = "<group>"; };
+		39F988B21E4B4337008A1DB6 /* InsightsCardCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InsightsCardCollectionViewCell.swift; sourceTree = "<group>"; };
+		39F988B31E4B4337008A1DB6 /* LatestRecordMetricCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LatestRecordMetricCell.swift; sourceTree = "<group>"; };
+		39F988B41E4B4337008A1DB6 /* MetricReadingTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MetricReadingTableViewCell.swift; sourceTree = "<group>"; };
+		39F988B81E4B4361008A1DB6 /* LatestRecordPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LatestRecordPresenter.swift; sourceTree = "<group>"; };
+		39F988B91E4B4361008A1DB6 /* LatestRecordView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LatestRecordView.swift; sourceTree = "<group>"; };
+		39F988BA1E4B4361008A1DB6 /* NewRecordPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewRecordPresenter.swift; sourceTree = "<group>"; };
+		39F988BB1E4B4361008A1DB6 /* NewRecordView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewRecordView.swift; sourceTree = "<group>"; };
+		39F988BC1E4B4361008A1DB6 /* ShowPreviousLatestResultVIP.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowPreviousLatestResultVIP.swift; sourceTree = "<group>"; };
+		39F988C41E4B43EB008A1DB6 /* FindPreviousLatestResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FindPreviousLatestResult.swift; sourceTree = "<group>"; };
+		39F988C61E4B4569008A1DB6 /* RecordsStoreUpdates.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordsStoreUpdates.swift; sourceTree = "<group>"; };
 		94B5A7A9738E9EE617B4C9E1 /* Pods-TodayExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TodayExtension.release.xcconfig"; path = "Pods/Target Support Files/Pods-TodayExtension/Pods-TodayExtension.release.xcconfig"; sourceTree = "<group>"; };
 		95868793967C2540BD298442 /* Pods_FitnessTracker_FitnessTrackerTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FitnessTracker_FitnessTrackerTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF97CF9401854D9B0C19B13A /* Pods-FitnessTracker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FitnessTracker.release.xcconfig"; path = "Pods/Target Support Files/Pods-FitnessTracker/Pods-FitnessTracker.release.xcconfig"; sourceTree = "<group>"; };
@@ -214,10 +234,11 @@
 		200323D31E00166200B1C33A /* FitnessTracker */ = {
 			isa = PBXGroup;
 			children = (
+				39F988A11E4B3EEB008A1DB6 /* ViewControllers */,
 				39BBF6271E37616600CF5AE7 /* FitnessTracker.entitlements */,
 				20471A4B1E1ADB770000F7C2 /* Extensions */,
-				20E89E661E130C2500F03644 /* VIP */,
-				20FA50FF1E095785002E536A /* View */,
+				20E89E661E130C2500F03644 /* Presentation */,
+				20FA50FF1E095785002E536A /* View Components */,
 				20FA50FC1E095749002E536A /* Data */,
 				20FA50F91E0956F9002E536A /* Domain */,
 				200323D41E00166200B1C33A /* AppDelegate.swift */,
@@ -226,7 +247,6 @@
 				200323DD1E00166200B1C33A /* LaunchScreen.storyboard */,
 				200323E01E00166200B1C33A /* Info.plist */,
 				3903F5C91E1BFA7D0093095B /* AppRouter.swift */,
-				397EBDA61E27BA610060BCC1 /* IUIViewControllerFactory.swift */,
 			);
 			path = FitnessTracker;
 			sourceTree = "<group>";
@@ -242,18 +262,9 @@
 				204C62151E1046C300B6CE47 /* CoreDataFitnessInfoRepositoryTests.swift */,
 				20E89E641E12F44E00F03644 /* MetricHistoryTests.swift */,
 				20471A471E197E9D0000F7C2 /* InsightsTests.swift */,
+				39F9889B1E48878E008A1DB6 /* FindRecordsInIntervalTests.swift */,
 			);
 			path = FitnessTrackerTests;
-			sourceTree = "<group>";
-		};
-		20471A441E197CDC0000F7C2 /* Insights */ = {
-			isa = PBXGroup;
-			children = (
-				20471A451E197D1A0000F7C2 /* InsightsVIP.swift */,
-				397EBDA41E27B6B70060BCC1 /* InsightsViewController.swift */,
-				392FEADF1E2C09E200D10C3D /* InsightsCardCollectionViewCell.swift */,
-			);
-			name = Insights;
 			sourceTree = "<group>";
 		};
 		20471A4B1E1ADB770000F7C2 /* Extensions */ = {
@@ -264,30 +275,32 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
-		20A9EA571E1428110048B95E /* ShowMetricHistoryData */ = {
+		20E89E661E130C2500F03644 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
-				20E89E671E130C5C00F03644 /* ShowMetricHistoricalDataVIP.swift */,
-				20E89E691E130D3D00F03644 /* ShowMetricHistoricalDataViewController.swift */,
-				20E89E6B1E130D6900F03644 /* MetricReadingTableViewCell.swift */,
-				39EE916F1E36405E00F104C8 /* BodyMetric.swift */,
+				39F988B81E4B4361008A1DB6 /* LatestRecordPresenter.swift */,
+				39F988B91E4B4361008A1DB6 /* LatestRecordView.swift */,
+				39F988BA1E4B4361008A1DB6 /* NewRecordPresenter.swift */,
+				39F988BB1E4B4361008A1DB6 /* NewRecordView.swift */,
+				39F988BC1E4B4361008A1DB6 /* ShowPreviousLatestResultVIP.swift */,
+				39F988B01E4B42C6008A1DB6 /* InsightsVP.swift */,
+				20E89E671E130C5C00F03644 /* ShowMetricHistoricalDataVP.swift */,
+				39DE51B01E41798D00DD29CE /* GraphHistoryVP.swift */,
 			);
-			name = ShowMetricHistoryData;
-			sourceTree = "<group>";
-		};
-		20E89E661E130C2500F03644 /* VIP */ = {
-			isa = PBXGroup;
-			children = (
-				20471A441E197CDC0000F7C2 /* Insights */,
-				20A9EA571E1428110048B95E /* ShowMetricHistoryData */,
-			);
-			path = VIP;
+			name = Presentation;
+			path = Presenters;
 			sourceTree = "<group>";
 		};
 		20FA50F91E0956F9002E536A /* Domain */ = {
 			isa = PBXGroup;
 			children = (
-				20FA50FA1E095712002E536A /* LatestRecordInteractor.swift */,
+				39F988AA1E4B4194008A1DB6 /* CreateNewRecord.swift */,
+				20FA50FA1E095712002E536A /* FindLatestRecord.swift */,
+				39F9889D1E4B3121008A1DB6 /* FindRecordsInInterval.swift */,
+				39F9889F1E4B3906008A1DB6 /* FindAllRecords.swift */,
+				39F988AC1E4B41A0008A1DB6 /* FindInsights.swift */,
+				39F988C41E4B43EB008A1DB6 /* FindPreviousLatestResult.swift */,
+				39F988C61E4B4569008A1DB6 /* RecordsStoreUpdates.swift */,
 			);
 			path = Domain;
 			sourceTree = "<group>";
@@ -295,6 +308,7 @@
 		20FA50FC1E095749002E536A /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				39F988AE1E4B4218008A1DB6 /* BodyMetric.swift */,
 				200323F41E0038B300B1C33A /* FitnessInfo.swift */,
 				20FA50FD1E09575E002E536A /* FitnessInfoRepository.swift */,
 				202142091E0D248900BAF444 /* CoreDataModel.xcdatamodeld */,
@@ -302,24 +316,20 @@
 				202142101E0D57C200BAF444 /* CoreDataStack.swift */,
 				20D76F201E0DA8DA00FDD122 /* FitnessInfo+Operators.swift */,
 				20471A491E1983F80000F7C2 /* FitnessInfoInsight.swift */,
+				39F988951E465523008A1DB6 /* IFitnessInfoRepository.swift */,
+				39F988981E46559D008A1DB6 /* CoreDataQueryRequest.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
 		};
-		20FA50FF1E095785002E536A /* View */ = {
+		20FA50FF1E095785002E536A /* View Components */ = {
 			isa = PBXGroup;
 			children = (
-				20FA51001E09579F002E536A /* LatestRecordView.swift */,
-				20FA51021E0957C2002E536A /* LatestRecordPresenter.swift */,
-				20FA51041E095947002E536A /* LatestRecordViewController.swift */,
-				20FA51061E0976D1002E536A /* LatestRecordMetricCell.swift */,
-				20FA510C1E0AFCED002E536A /* NewRecordViewController.swift */,
-				20FA510E1E0B1B05002E536A /* NewRecordView.swift */,
-				20FA51101E0B1D74002E536A /* NewRecordPresenter.swift */,
-				20FA51121E0B1DDF002E536A /* NewRecordInteractor.swift */,
-				20D76F1E1E0D8E5C00FDD122 /* ShowPreviousLatestResultVIP.swift */,
+				39F988B21E4B4337008A1DB6 /* InsightsCardCollectionViewCell.swift */,
+				39F988B31E4B4337008A1DB6 /* LatestRecordMetricCell.swift */,
+				39F988B41E4B4337008A1DB6 /* MetricReadingTableViewCell.swift */,
 			);
-			path = View;
+			path = "View Components";
 			sourceTree = "<group>";
 		};
 		39EE91321E36329F00F104C8 /* TodayExtension */ = {
@@ -331,6 +341,18 @@
 				39EE91381E36329F00F104C8 /* Info.plist */,
 			);
 			path = TodayExtension;
+			sourceTree = "<group>";
+		};
+		39F988A11E4B3EEB008A1DB6 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				397EBDA41E27B6B70060BCC1 /* InsightsViewController.swift */,
+				39F988A21E4B3F86008A1DB6 /* ShowMetricHistoricalDataViewController.swift */,
+				39F988A31E4B3F86008A1DB6 /* IUIViewControllerFactory.swift */,
+				39F988A41E4B3F86008A1DB6 /* LatestRecordViewController.swift */,
+				39F988A51E4B3F86008A1DB6 /* NewRecordViewController.swift */,
+			);
+			path = ViewControllers;
 			sourceTree = "<group>";
 		};
 		6E6B8390641336CE69A69123 /* Pods */ = {
@@ -638,32 +660,40 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				39F988AB1E4B4194008A1DB6 /* CreateNewRecord.swift in Sources */,
+				39F988B51E4B4337008A1DB6 /* InsightsCardCollectionViewCell.swift in Sources */,
 				397EBDA51E27B6B70060BCC1 /* InsightsViewController.swift in Sources */,
-				392FEAE01E2C09E200D10C3D /* InsightsCardCollectionViewCell.swift in Sources */,
 				202142111E0D57C200BAF444 /* CoreDataStack.swift in Sources */,
+				39F988A91E4B3F86008A1DB6 /* NewRecordViewController.swift in Sources */,
+				39F988B71E4B4337008A1DB6 /* MetricReadingTableViewCell.swift in Sources */,
 				20FA50FE1E09575E002E536A /* FitnessInfoRepository.swift in Sources */,
+				39F988A71E4B3F86008A1DB6 /* IUIViewControllerFactory.swift in Sources */,
 				20D76F211E0DA8DA00FDD122 /* FitnessInfo+Operators.swift in Sources */,
-				39EE91701E36405E00F104C8 /* BodyMetric.swift in Sources */,
-				20D76F1F1E0D8E5C00FDD122 /* ShowPreviousLatestResultVIP.swift in Sources */,
-				20E89E6C1E130D6900F03644 /* MetricReadingTableViewCell.swift in Sources */,
-				20FA510D1E0AFCED002E536A /* NewRecordViewController.swift in Sources */,
+				39F9889E1E4B3121008A1DB6 /* FindRecordsInInterval.swift in Sources */,
+				39DE51B11E41798D00DD29CE /* GraphHistoryVP.swift in Sources */,
 				20471A4D1E1ADBB00000F7C2 /* NSCalendar+NSDateFactory.swift in Sources */,
+				39F988A81E4B3F86008A1DB6 /* LatestRecordViewController.swift in Sources */,
 				200323F51E0038B300B1C33A /* FitnessInfo.swift in Sources */,
-				20471A461E197D1A0000F7C2 /* InsightsVIP.swift in Sources */,
-				20FA51111E0B1D74002E536A /* NewRecordPresenter.swift in Sources */,
+				39F988A61E4B3F86008A1DB6 /* ShowMetricHistoricalDataViewController.swift in Sources */,
+				39F988AD1E4B41A0008A1DB6 /* FindInsights.swift in Sources */,
+				39F988B61E4B4337008A1DB6 /* LatestRecordMetricCell.swift in Sources */,
+				39F988BE1E4B4361008A1DB6 /* LatestRecordView.swift in Sources */,
+				39F988C51E4B43EB008A1DB6 /* FindPreviousLatestResult.swift in Sources */,
 				20471A4A1E1983F80000F7C2 /* FitnessInfoInsight.swift in Sources */,
-				20FA50FB1E095712002E536A /* LatestRecordInteractor.swift in Sources */,
-				397EBDA71E27BA610060BCC1 /* IUIViewControllerFactory.swift in Sources */,
-				20E89E6A1E130D3D00F03644 /* ShowMetricHistoricalDataViewController.swift in Sources */,
+				39F988BD1E4B4361008A1DB6 /* LatestRecordPresenter.swift in Sources */,
+				39F988BF1E4B4361008A1DB6 /* NewRecordPresenter.swift in Sources */,
+				20FA50FB1E095712002E536A /* FindLatestRecord.swift in Sources */,
 				200323D51E00166200B1C33A /* AppDelegate.swift in Sources */,
+				39F988C01E4B4361008A1DB6 /* NewRecordView.swift in Sources */,
 				3903F5CA1E1BFA7D0093095B /* AppRouter.swift in Sources */,
-				20FA51051E095947002E536A /* LatestRecordViewController.swift in Sources */,
-				20E89E681E130C5C00F03644 /* ShowMetricHistoricalDataVIP.swift in Sources */,
-				20FA51071E0976D1002E536A /* LatestRecordMetricCell.swift in Sources */,
-				20FA51131E0B1DDF002E536A /* NewRecordInteractor.swift in Sources */,
-				20FA51031E0957C2002E536A /* LatestRecordPresenter.swift in Sources */,
-				20FA51011E09579F002E536A /* LatestRecordView.swift in Sources */,
-				20FA510F1E0B1B05002E536A /* NewRecordView.swift in Sources */,
+				39F988A01E4B3906008A1DB6 /* FindAllRecords.swift in Sources */,
+				20E89E681E130C5C00F03644 /* ShowMetricHistoricalDataVP.swift in Sources */,
+				39F988C11E4B4361008A1DB6 /* ShowPreviousLatestResultVIP.swift in Sources */,
+				39F988961E465523008A1DB6 /* IFitnessInfoRepository.swift in Sources */,
+				39F988991E46559D008A1DB6 /* CoreDataQueryRequest.swift in Sources */,
+				39F988AF1E4B4218008A1DB6 /* BodyMetric.swift in Sources */,
+				39F988B11E4B42C6008A1DB6 /* InsightsVP.swift in Sources */,
+				39F988C71E4B4569008A1DB6 /* RecordsStoreUpdates.swift in Sources */,
 				2021420B1E0D248900BAF444 /* CoreDataModel.xcdatamodeld in Sources */,
 				2021420F1E0D27FD00BAF444 /* CoreDataFitnessInfo.swift in Sources */,
 			);
@@ -679,6 +709,7 @@
 				205212FB1E01D3AD00F9A9E7 /* LatestRecordTests.swift in Sources */,
 				20E89E651E12F44E00F03644 /* MetricHistoryTests.swift in Sources */,
 				20471A481E197E9D0000F7C2 /* InsightsTests.swift in Sources */,
+				39F9889C1E48878E008A1DB6 /* FindRecordsInIntervalTests.swift in Sources */,
 				200323ED1E0018A500B1C33A /* FitnessTrackerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -689,11 +720,13 @@
 			files = (
 				39EE91491E363EDE00F104C8 /* CoreDataFitnessInfo.swift in Sources */,
 				39EE914A1E363F0100F104C8 /* CoreDataStack.swift in Sources */,
-				39EE916E1E36403000F104C8 /* LatestRecordView.swift in Sources */,
+				39F9889A1E4656CA008A1DB6 /* CoreDataQueryRequest.swift in Sources */,
 				39EE916A1E363F7E00F104C8 /* CoreDataModel.xcdatamodeld in Sources */,
-				39EE91711E36406C00F104C8 /* BodyMetric.swift in Sources */,
+				39F988C21E4B436F008A1DB6 /* LatestRecordView.swift in Sources */,
+				39F988C31E4B4380008A1DB6 /* BodyMetric.swift in Sources */,
 				39EE916D1E363FFF00F104C8 /* FitnessInfo.swift in Sources */,
-				39EE91451E363DAA00F104C8 /* LatestRecordInteractor.swift in Sources */,
+				39EE91451E363DAA00F104C8 /* FindLatestRecord.swift in Sources */,
+				39F988971E46556E008A1DB6 /* IFitnessInfoRepository.swift in Sources */,
 				39EE91481E363EDA00F104C8 /* FitnessInfoRepository.swift in Sources */,
 				39EE91721E3640D200F104C8 /* NSCalendar+NSDateFactory.swift in Sources */,
 				39EE91341E36329F00F104C8 /* TodayViewController.swift in Sources */,
@@ -746,6 +779,7 @@
 		200323E11E00166200B1C33A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -795,6 +829,7 @@
 		200323E21E00166200B1C33A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";

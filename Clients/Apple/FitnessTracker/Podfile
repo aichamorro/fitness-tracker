@@ -9,6 +9,7 @@ target 'FitnessTracker' do
   pod 'RxSwift'
   pod 'RxCocoa'
   pod 'URLRouter', git: 'https://github.com/aichamorro/URLRouter.git'
+  pod 'UIGraphView', :path => '../'
   
   target 'FitnessTrackerTests' do
     pod 'Quick'

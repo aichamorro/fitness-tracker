@@ -20,7 +20,7 @@ class InsightsTests: QuickSpec {
                 it("Creates a comparison of the data from the previous day") {
                     let managedObjectContext = SetUpInMemoryManagedObjectContext()
                     let fitnessInfoRepository = CoreDataInfoRepository(managedObjectContext: managedObjectContext)
-                    let interactor = InsightsInteractor(repository: fitnessInfoRepository)
+                    let interactor = FindInsights(repository: fitnessInfoRepository)
                     let disposeBag = DisposeBag()
                 
                     fitnessInfoRepository.rx_save(many:
@@ -30,7 +30,7 @@ class InsightsTests: QuickSpec {
                         .addDisposableTo(disposeBag)
                     
                     waitUntil { done in
-                        interactor.rx_getInsights().subscribe(onNext: { insights in
+                        interactor.rx_insights().subscribe(onNext: { insights in
                             guard let daily = insights.dayInsight else {
                                 fail(); done(); return
                             }
@@ -66,24 +66,29 @@ class InsightsTests: QuickSpec {
                     
                     for (info, date) in zip(weekFitnessInfo, dates)
                     {
-                        _ = coreDataEngine.create(entityName: CoreDataEntity.fitnessInfo.rawValue) { entity in
-                            guard let saved = entity as? CoreDataFitnessInfo else { fatalError() }
-                            
-                            saved.date = date as NSDate
-                            saved.weight = info.weight
-                            saved.height_ = Int16(info.height)
-                            saved.bodyFatPercentage = info.bodyFatPercentage
-                            saved.musclePercentage = info.musclePercentage
-                            saved.waterPercentage = info.waterPercentage
+                        do {
+                            _ = try coreDataEngine.create(entityName: CoreDataEntity.fitnessInfo.rawValue) { entity in
+                                guard let saved = entity as? CoreDataFitnessInfo else { fatalError() }
+                                
+                                saved.date = date as NSDate
+                                saved.weight = info.weight
+                                saved.height_ = Int16(info.height)
+                                saved.bodyFatPercentage = info.bodyFatPercentage
+                                saved.musclePercentage = info.musclePercentage
+                                saved.waterPercentage = info.waterPercentage
+                            }
+                        } catch {
+                            fail()
+                            return
                         }
                     }
                     
                     let fitnessInfoRepository = CoreDataInfoRepository(managedObjectContext: managedObjectContext)
-                    let interactor = InsightsInteractor(repository: fitnessInfoRepository)
+                    let interactor = FindInsights(repository: fitnessInfoRepository)
                     let disposeBag = DisposeBag()
 
                     waitUntil { done in
-                        interactor.rx_getInsights().subscribe(onNext: { insights in
+                        interactor.rx_insights().subscribe(onNext: { insights in
                             guard let weekly = insights.weekInsight else { fail(); done(); return; }
                             
                             expect(weekly.weight - 0.87 < 0.0000001).to(beTrue())
