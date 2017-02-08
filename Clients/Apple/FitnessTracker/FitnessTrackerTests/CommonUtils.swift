@@ -50,15 +50,3 @@ let SetUpInMemoryManagedObjectContext: () -> NSManagedObjectContext = {
     
     return managedObjectContext
 }
-
-extension Calendar {
-    func date(withDay day: Int, month: Int, year: Int, hour: Int, minute: Int) -> Date? {
-        return DateComponents(calendar: Calendar.current,
-                                        timeZone: TimeZone(identifier: "Europe/London"),
-                                        year: year,
-                                        month: month,
-                                        day: day,
-                                        hour: hour,
-                                        minute: minute).date
-    }
-}

@@ -74,7 +74,7 @@ final public class UIGraphView: UIView {
         verticalMaxValue = String(format: "%.2f", verticalRange.upperBound) as NSString
         
         // From value to pixel
-        let mappingFunction = UIGraphViewValueMapperFactory.create(horizontalRange: data.horizontal, verticalRange: data.vertical)
+        let mappingFunction = UIGraphViewValueMapperFactory.create(horizontalData: data.horizontal, verticalData: data.vertical)
         dataMapper = { rect, operation in zip(data.horizontal, data.vertical).forEach { operation(mappingFunction(rect, $0, $1)) } }
         drawingFunction = UIGraphViewDrawingStyles.points(pointRadius: 4, color: UIColor.white)
         
