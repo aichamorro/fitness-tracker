@@ -64,6 +64,7 @@
 		39F988971E46556E008A1DB6 /* IFitnessInfoRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F988951E465523008A1DB6 /* IFitnessInfoRepository.swift */; };
 		39F988991E46559D008A1DB6 /* CoreDataQueryRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F988981E46559D008A1DB6 /* CoreDataQueryRequest.swift */; };
 		39F9889A1E4656CA008A1DB6 /* CoreDataQueryRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F988981E46559D008A1DB6 /* CoreDataQueryRequest.swift */; };
+		39F9889C1E48878E008A1DB6 /* MetricGraphInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F9889B1E48878E008A1DB6 /* MetricGraphInteractorTests.swift */; };
 		3C7E764AE3C8B71A2F15C64D /* Pods_TodayExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7EBF53B2E60378C64BDDE11 /* Pods_TodayExtension.framework */; };
 		45AA81FD1D29B16082BA4BBA /* Pods_FitnessTracker_FitnessTrackerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95868793967C2540BD298442 /* Pods_FitnessTracker_FitnessTrackerTests.framework */; };
 		60DCC2D4BE7EC6D04AACF7B5 /* Pods_FitnessTracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 243E297E8C331F616EE9C451 /* Pods_FitnessTracker.framework */; };
@@ -158,6 +159,7 @@
 		39EE916F1E36405E00F104C8 /* BodyMetric.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BodyMetric.swift; sourceTree = "<group>"; };
 		39F988951E465523008A1DB6 /* IFitnessInfoRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IFitnessInfoRepository.swift; sourceTree = "<group>"; };
 		39F988981E46559D008A1DB6 /* CoreDataQueryRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataQueryRequest.swift; sourceTree = "<group>"; };
+		39F9889B1E48878E008A1DB6 /* MetricGraphInteractorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MetricGraphInteractorTests.swift; sourceTree = "<group>"; };
 		94B5A7A9738E9EE617B4C9E1 /* Pods-TodayExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TodayExtension.release.xcconfig"; path = "Pods/Target Support Files/Pods-TodayExtension/Pods-TodayExtension.release.xcconfig"; sourceTree = "<group>"; };
 		95868793967C2540BD298442 /* Pods_FitnessTracker_FitnessTrackerTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FitnessTracker_FitnessTrackerTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF97CF9401854D9B0C19B13A /* Pods-FitnessTracker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FitnessTracker.release.xcconfig"; path = "Pods/Target Support Files/Pods-FitnessTracker/Pods-FitnessTracker.release.xcconfig"; sourceTree = "<group>"; };
@@ -250,6 +252,7 @@
 				204C62151E1046C300B6CE47 /* CoreDataFitnessInfoRepositoryTests.swift */,
 				20E89E641E12F44E00F03644 /* MetricHistoryTests.swift */,
 				20471A471E197E9D0000F7C2 /* InsightsTests.swift */,
+				39F9889B1E48878E008A1DB6 /* MetricGraphInteractorTests.swift */,
 			);
 			path = FitnessTrackerTests;
 			sourceTree = "<group>";
@@ -693,6 +696,7 @@
 				205212FB1E01D3AD00F9A9E7 /* LatestRecordTests.swift in Sources */,
 				20E89E651E12F44E00F03644 /* MetricHistoryTests.swift in Sources */,
 				20471A481E197E9D0000F7C2 /* InsightsTests.swift in Sources */,
+				39F9889C1E48878E008A1DB6 /* MetricGraphInteractorTests.swift in Sources */,
 				200323ED1E0018A500B1C33A /* FitnessTrackerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -10,7 +10,13 @@ import Foundation
 import RxSwift
 
 protocol IMetricGraphInteractor {
-    func find(from: Date) -> Observable<[IFitnessInfo]>
+    func find(from: Date, to: Date) -> Observable<[IFitnessInfo]>
+}
+
+extension IMetricGraphInteractor {
+    func find(from: Date) -> Observable<[IFitnessInfo]> {
+        return self.find(from: from, to: Calendar.current.endOfToday)
+    }
 }
 
 protocol IMetricGraphView {
@@ -44,7 +50,7 @@ private func FitnessInfoToGraphDataAdapter(bodyMetric: BodyMetric) -> ([IFitness
 typealias IMetricGraphPresenter = (IMetricGraphInteractor, IMetricGraphView, DisposeBag) -> Void
 let MetricGraphPresenter: IMetricGraphPresenter = { (interactor, view, disposeBag) in
     view.rx_loadLatestRecords
-        .flatMap { interactor.find(from: $0) }
+        .flatMap { interactor.find(from: Calendar.current.dateBySettingStartOfDay(to: $0)) }
         .map(FitnessInfoToGraphDataAdapter(bodyMetric: view.selectedMetric))
         .bindTo(view.rx_graphData)
         .addDisposableTo(disposeBag)
@@ -57,9 +63,11 @@ final class MetricGraphInteractor: IMetricGraphInteractor {
         self.fitnessInfoRepository = repository
     }
     
-    func find(from intervalStart: Date) -> Observable<[IFitnessInfo]> {
+    func find(from: Date, to: Date) -> Observable<[IFitnessInfo]> {
         return fitnessInfoRepository
-            .rx_find(from: intervalStart as NSDate, to: Calendar.current.endOfToday as NSDate, order: .ascendent)
+            .rx_find(from: from as NSDate,
+                     to: to as NSDate,
+                     order: .ascendent)
     }
 }
 

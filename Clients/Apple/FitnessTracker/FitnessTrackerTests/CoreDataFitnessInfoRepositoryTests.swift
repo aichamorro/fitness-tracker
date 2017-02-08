@@ -42,7 +42,7 @@ class CoreDataFitnessInfoRepositoryTests: QuickSpec {
                 
                 it("Can return a single result") {
                     let expected = FitnessInfo(weight: 60.0, height: 171, bodyFatPercentage: 30.0, musclePercentage: 30.0, waterPercentage: 0.0)
-                    repository.rx_save(record: expected)
+                    repository.rx_save(expected)
                         .do(onNext: nil, onError: { _ in fail() })
                         .subscribe(onNext: nil)
                         .addDisposableTo(disposeBag)
@@ -58,6 +58,26 @@ class CoreDataFitnessInfoRepositoryTests: QuickSpec {
                         
                         expect(first == expected).to(beTrue())
                     }, action:{ })
+                }
+                
+                it("Can save a record with set date") {
+                    guard let date = DateComponents(calendar: Calendar.current,
+                                                    timeZone: TimeZone(identifier: "Europe/London"),
+                                                    year: 2017, month: 2, day: 6, hour: 9, minute: 6).date else
+                    {
+                        fail()
+                        return
+                    }
+                    
+                    let info = FitnessInfo(weight: 60.0, height: 171, bodyFatPercentage: 19.2, musclePercentage: 34.10, waterPercentage: 55, date: date as NSDate?)
+                    
+                    do {
+                        let saved = try repository.save(info)
+                        expect(saved.date! as Date).to(equal(date))
+                    } catch {
+                        fail(error.localizedDescription)
+                        return
+                    }
                 }
                 
                 it("Can return several results ordered from latest to oldest") {
@@ -86,7 +106,7 @@ class CoreDataFitnessInfoRepositoryTests: QuickSpec {
                             done()
                         }).addDisposableTo(disposeBag)
                         
-                        repository.rx_save(record: any).subscribe(onNext: nil).addDisposableTo(disposeBag)
+                        repository.rx_save(any).subscribe(onNext: nil).addDisposableTo(disposeBag)
                     }
                 }
             }
