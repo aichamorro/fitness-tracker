@@ -72,7 +72,7 @@ extension AppRouter {
             let disposeBag = DisposeBag()
             
             viewController.selectedMetric = BodyMetric(rawValue: parameters["metric"]!)!
-            let historicDataInteractor = MetricHistoryInteractor(repository: serviceLocator.fitnessInfoRepository)
+            let historicDataInteractor = FindAllRecords(repository: serviceLocator.fitnessInfoRepository)
             let recordsFinderInteractor = FindRecordsInInterval(repository: serviceLocator.fitnessInfoRepository)
             
             viewController.bag = [historicDataInteractor, recordsFinderInteractor, disposeBag]

@@ -10,49 +10,16 @@ import Foundation
 import RxSwift
 
 // MARK: View
-
 protocol IMetricHistoryView: class {
     var rx_loadHistoricData: Observable<Void> { get }
     var selectedMetric: BodyMetric { get }
-    var metricData: [MetricDataReading] { get set }
+    var rx_metricData: AnyObserver<[MetricDataReading]> { get }
     
     func showNoHistoricalDataWarning()
     func update()
 }
 
-// MARK: Interactor
-
 typealias MetricDataReading = (date: NSDate?, reading: String)
-
-protocol IMetricHistoryInteractor {
-    func rx_findAll(for bodyMetric: BodyMetric) -> Observable<[MetricDataReading]>
-}
-
-final class MetricHistoryInteractor: IMetricHistoryInteractor {
-    let repository: IFitnessInfoRepository
-    
-    init(repository: IFitnessInfoRepository) {
-        self.repository = repository
-    }
-    
-    func rx_findAll(for bodyMetric: BodyMetric) -> Observable<[MetricDataReading]> {
-        let convertArray: ([IFitnessInfo]) -> [MetricDataReading] = {
-            let formatter = NumberFormatter()
-            formatter.numberStyle = .decimal
-            formatter.maximumFractionDigits = 2
-            formatter.minimumFractionDigits = 1
-            
-            return $0.map {
-                return ($0.date, formatter.string(from: $0.value(for: bodyMetric))!)
-            }
-        }
-        
-        return repository.rx_findAll().flatMap { fetched in
-            return Observable.just(convertArray(fetched))
-        }
-    }
-}
-
 extension IFitnessInfo {
     func value(for metric: BodyMetric) -> NSNumber {
         switch metric {
@@ -82,18 +49,30 @@ extension IFitnessInfo {
 
 // MARK: Presenter
 
-typealias IMetricHistoryPresenter = (IMetricHistoryInteractor, IMetricHistoryView, DisposeBag) -> Void
+func convert(fitnessRecords: [IFitnessInfo], toBodyMetricReading bodyMetric: BodyMetric) -> [MetricDataReading] {
+    let formatter = NumberFormatter()
+    formatter.numberStyle = .decimal
+    formatter.maximumFractionDigits = 2
+    formatter.minimumFractionDigits = 1
+    
+    return fitnessRecords.map {
+        return ($0.date, formatter.string(from: $0.value(for: bodyMetric))!)
+    }
+}
+
+typealias IMetricHistoryPresenter = (IFindAllRecords, IMetricHistoryView, DisposeBag) -> Void
 let MetricHistoryPresenter: IMetricHistoryPresenter = { interactor, view, disposeBag in
     view.rx_loadHistoricData
         .flatMap {
-            interactor.rx_findAll(for: view.selectedMetric)
-        }.bindNext { data in
-            guard !data.isEmpty else {
+            interactor.rx_findAll()
+        }.map {
+            return convert(fitnessRecords: $0, toBodyMetricReading: view.selectedMetric)
+        }.do(onNext: { records in
+            if records.isEmpty {
                 view.showNoHistoricalDataWarning()
-                return
             }
             
-            view.metricData = data
             view.update()
-        }.addDisposableTo(disposeBag)
+        }).bindTo(view.rx_metricData)
+        .addDisposableTo(disposeBag)
 }

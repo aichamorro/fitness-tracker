@@ -21,13 +21,12 @@ final class ShowMetricHistoricalDataViewController: UIViewController {
     fileprivate let rx_didReceiveGraphData = PublishSubject<([Double], [Double])>()
     fileprivate let rx_loadGraphData = PublishSubject<Date>()
     fileprivate let rx_loadHistoricDataSubject = PublishSubject<Void>()
-    
+    fileprivate let rx_metricDataVariable = Variable<[MetricDataReading]>([])
     fileprivate var dateFormatter: DateFormatter!
     
     var bag: RetainerBag!
     let disposeBag = DisposeBag()
     
-    var metricData: [MetricDataReading] = []
     var graphData: ([Double], [Double]) = ([],[])
     var selectedMetric: BodyMetric = .weight {
         didSet {
@@ -112,6 +111,19 @@ extension ShowMetricHistoricalDataViewController: IMetricGraphView, IMetricHisto
     var rx_loadHistoricData: Observable<Void> {
         return rx_loadHistoricDataSubject.asObservable()
     }
+    
+    var rx_metricData: AnyObserver<[MetricDataReading]> {
+        return AnyObserver { [unowned self] event in
+            switch event {
+            
+            case .next(let element):
+                self.rx_metricDataVariable.value = element
+            
+            default:
+                break
+            }
+        }
+    }
 }
 
 extension ShowMetricHistoricalDataViewController: UIGraphViewDelegate, UIGraphViewDataSource {
@@ -138,14 +150,14 @@ extension ShowMetricHistoricalDataViewController: UITableViewDelegate, UITableVi
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return metricData.count
+        return rx_metricDataVariable.value.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MetricReadingCell", for: indexPath) as! MetricReadingTableViewCell
         
-        cell.valueLabel.text = metricData[indexPath.row].reading
-        if let date = metricData[indexPath.row].date as? Date {
+        cell.valueLabel.text = rx_metricDataVariable.value[indexPath.row].reading
+        if let date = rx_metricDataVariable.value[indexPath.row].date as? Date {
             cell.dateLabel.text = dateFormatter.string(from: date)
         }
         
