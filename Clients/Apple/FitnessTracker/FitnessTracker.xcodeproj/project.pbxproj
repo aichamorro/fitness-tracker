@@ -64,7 +64,8 @@
 		39F988971E46556E008A1DB6 /* IFitnessInfoRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F988951E465523008A1DB6 /* IFitnessInfoRepository.swift */; };
 		39F988991E46559D008A1DB6 /* CoreDataQueryRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F988981E46559D008A1DB6 /* CoreDataQueryRequest.swift */; };
 		39F9889A1E4656CA008A1DB6 /* CoreDataQueryRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F988981E46559D008A1DB6 /* CoreDataQueryRequest.swift */; };
-		39F9889C1E48878E008A1DB6 /* MetricGraphInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F9889B1E48878E008A1DB6 /* MetricGraphInteractorTests.swift */; };
+		39F9889C1E48878E008A1DB6 /* FindRecordsInIntervalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F9889B1E48878E008A1DB6 /* FindRecordsInIntervalTests.swift */; };
+		39F9889E1E4B3121008A1DB6 /* FindRecordsInInterval.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F9889D1E4B3121008A1DB6 /* FindRecordsInInterval.swift */; };
 		3C7E764AE3C8B71A2F15C64D /* Pods_TodayExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7EBF53B2E60378C64BDDE11 /* Pods_TodayExtension.framework */; };
 		45AA81FD1D29B16082BA4BBA /* Pods_FitnessTracker_FitnessTrackerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95868793967C2540BD298442 /* Pods_FitnessTracker_FitnessTrackerTests.framework */; };
 		60DCC2D4BE7EC6D04AACF7B5 /* Pods_FitnessTracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 243E297E8C331F616EE9C451 /* Pods_FitnessTracker.framework */; };
@@ -159,7 +160,8 @@
 		39EE916F1E36405E00F104C8 /* BodyMetric.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BodyMetric.swift; sourceTree = "<group>"; };
 		39F988951E465523008A1DB6 /* IFitnessInfoRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IFitnessInfoRepository.swift; sourceTree = "<group>"; };
 		39F988981E46559D008A1DB6 /* CoreDataQueryRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataQueryRequest.swift; sourceTree = "<group>"; };
-		39F9889B1E48878E008A1DB6 /* MetricGraphInteractorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MetricGraphInteractorTests.swift; sourceTree = "<group>"; };
+		39F9889B1E48878E008A1DB6 /* FindRecordsInIntervalTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FindRecordsInIntervalTests.swift; sourceTree = "<group>"; };
+		39F9889D1E4B3121008A1DB6 /* FindRecordsInInterval.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FindRecordsInInterval.swift; sourceTree = "<group>"; };
 		94B5A7A9738E9EE617B4C9E1 /* Pods-TodayExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TodayExtension.release.xcconfig"; path = "Pods/Target Support Files/Pods-TodayExtension/Pods-TodayExtension.release.xcconfig"; sourceTree = "<group>"; };
 		95868793967C2540BD298442 /* Pods_FitnessTracker_FitnessTrackerTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FitnessTracker_FitnessTrackerTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF97CF9401854D9B0C19B13A /* Pods-FitnessTracker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FitnessTracker.release.xcconfig"; path = "Pods/Target Support Files/Pods-FitnessTracker/Pods-FitnessTracker.release.xcconfig"; sourceTree = "<group>"; };
@@ -252,7 +254,7 @@
 				204C62151E1046C300B6CE47 /* CoreDataFitnessInfoRepositoryTests.swift */,
 				20E89E641E12F44E00F03644 /* MetricHistoryTests.swift */,
 				20471A471E197E9D0000F7C2 /* InsightsTests.swift */,
-				39F9889B1E48878E008A1DB6 /* MetricGraphInteractorTests.swift */,
+				39F9889B1E48878E008A1DB6 /* FindRecordsInIntervalTests.swift */,
 			);
 			path = FitnessTrackerTests;
 			sourceTree = "<group>";
@@ -300,6 +302,7 @@
 			isa = PBXGroup;
 			children = (
 				20FA50FA1E095712002E536A /* LatestRecordInteractor.swift */,
+				39F9889D1E4B3121008A1DB6 /* FindRecordsInInterval.swift */,
 			);
 			path = Domain;
 			sourceTree = "<group>";
@@ -657,6 +660,7 @@
 				202142111E0D57C200BAF444 /* CoreDataStack.swift in Sources */,
 				20FA50FE1E09575E002E536A /* FitnessInfoRepository.swift in Sources */,
 				20D76F211E0DA8DA00FDD122 /* FitnessInfo+Operators.swift in Sources */,
+				39F9889E1E4B3121008A1DB6 /* FindRecordsInInterval.swift in Sources */,
 				39EE91701E36405E00F104C8 /* BodyMetric.swift in Sources */,
 				20D76F1F1E0D8E5C00FDD122 /* ShowPreviousLatestResultVIP.swift in Sources */,
 				39DE51B11E41798D00DD29CE /* GraphHistoryVIP.swift in Sources */,
@@ -696,7 +700,7 @@
 				205212FB1E01D3AD00F9A9E7 /* LatestRecordTests.swift in Sources */,
 				20E89E651E12F44E00F03644 /* MetricHistoryTests.swift in Sources */,
 				20471A481E197E9D0000F7C2 /* InsightsTests.swift in Sources */,
-				39F9889C1E48878E008A1DB6 /* MetricGraphInteractorTests.swift in Sources */,
+				39F9889C1E48878E008A1DB6 /* FindRecordsInIntervalTests.swift in Sources */,
 				200323ED1E0018A500B1C33A /* FitnessTrackerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

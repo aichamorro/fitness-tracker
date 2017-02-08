@@ -12,10 +12,10 @@ import RxSwift
 import CoreData
 @testable import FitnessTracker
 
-class MetricGraphInteractorTests: QuickSpec {
+class FindRecordsInIntervalTests: QuickSpec {
     override func spec() {
         describe("") {
-            var interactor: IMetricGraphInteractor!
+            var interactor: IFindRecordsInInterval!
             var repository: IFitnessInfoRepository!
             let disposeBag = DisposeBag()
 
@@ -23,7 +23,7 @@ class MetricGraphInteractorTests: QuickSpec {
                 let managedObjectContext = SetUpInMemoryManagedObjectContext()
                 
                 repository = CoreDataInfoRepository(managedObjectContext: managedObjectContext)
-                interactor = MetricGraphInteractor(repository: repository)
+                interactor = FindRecordsInInterval(repository: repository)
             }
             
             context("Given no stored records") {

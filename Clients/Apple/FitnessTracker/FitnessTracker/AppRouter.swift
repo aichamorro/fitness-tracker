@@ -73,12 +73,12 @@ extension AppRouter {
             
             viewController.selectedMetric = BodyMetric(rawValue: parameters["metric"]!)!
             let historicDataInteractor = MetricHistoryInteractor(repository: serviceLocator.fitnessInfoRepository)
-            let metricGraphInteractor = MetricGraphInteractor(repository: serviceLocator.fitnessInfoRepository)
+            let recordsFinderInteractor = FindRecordsInInterval(repository: serviceLocator.fitnessInfoRepository)
             
-            viewController.bag = [historicDataInteractor, metricGraphInteractor, disposeBag]
+            viewController.bag = [historicDataInteractor, recordsFinderInteractor, disposeBag]
             
             MetricHistoryPresenter(historicDataInteractor, viewController, disposeBag)
-            MetricGraphPresenter(metricGraphInteractor, viewController, disposeBag)
+            MetricGraphPresenter(recordsFinderInteractor, viewController, disposeBag)
             
             return viewController
         }
