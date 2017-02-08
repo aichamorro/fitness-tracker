@@ -31,8 +31,9 @@ extension AppRouter {
 extension AppRouter {
     static private func currentRecordEntry(serviceLocator: AppServiceLocator) -> URLRouterEntry {
         return URLRouterEntryFactory.with(pattern: "app://records") { _,_ in
-            let latestRecordInteractor = LatestRecordInteractor(repository: serviceLocator.fitnessInfoRepository)
-            let latestResultsComparisonInteractor = ShowPreviousLatestResultInteractor(repository: serviceLocator.fitnessInfoRepository)
+            let latestRecordInteractor = FindLatestRecord(repository: serviceLocator.fitnessInfoRepository)
+            let latestResultsComparisonInteractor = FindPreviousLatestRecord(repository: serviceLocator.fitnessInfoRepository)
+            let storeUpdates = RecordStoreUpdate(repository: serviceLocator.fitnessInfoRepository)
             
             let view = LatestRecordView()
             let disposeBag = DisposeBag()
@@ -43,7 +44,7 @@ extension AppRouter {
             viewController.latestRecordView = view
             viewController.router = serviceLocator.router
             
-            LatestRecordPresenter(latestRecordInteractor, view, serviceLocator.router, disposeBag)
+            LatestRecordPresenter(latestRecordInteractor, storeUpdates, view, serviceLocator.router, disposeBag)
             LatestResultsComparisonPresenter(latestResultsComparisonInteractor, viewController, disposeBag)
             
             return viewController
@@ -54,8 +55,8 @@ extension AppRouter {
         return URLRouterEntryFactory.with(pattern: "app://records/new") { _,_ in
             let viewController = serviceLocator.viewControllerFactory.newRecordViewController()
             
-            let seeLatestRecordInteractor = LatestRecordInteractor(repository: serviceLocator.fitnessInfoRepository)
-            let insertNewRecordInteractor = NewRecordInteractor(repository: serviceLocator.fitnessInfoRepository)
+            let seeLatestRecordInteractor = FindLatestRecord(repository: serviceLocator.fitnessInfoRepository)
+            let insertNewRecordInteractor = CreateNewRecord(repository: serviceLocator.fitnessInfoRepository)
             let disposeBag = DisposeBag()
             
             viewController.interactors = [seeLatestRecordInteractor, insertNewRecordInteractor]
@@ -87,11 +88,12 @@ extension AppRouter {
     static private func insights(serviceLocator: AppServiceLocator) -> URLRouterEntry {
         return URLRouterEntryFactory.with(pattern: "app://insights") { _,_ in
             let viewController = serviceLocator.viewControllerFactory.showInsights()
-            let insightsInteractor = InsightsInteractor(repository: serviceLocator.fitnessInfoRepository)
+            let insightsInteractor = FindInsights(repository: serviceLocator.fitnessInfoRepository)
+            let recordStoreUpdates = RecordStoreUpdate(repository: serviceLocator.fitnessInfoRepository)
             let disposeBag = DisposeBag()
             
             viewController.bag = [disposeBag]
-            InsightsPresenter(insightsInteractor, viewController, disposeBag)
+            InsightsPresenter(insightsInteractor, recordStoreUpdates, viewController, disposeBag)
 
             return viewController
         }

@@ -10,9 +10,9 @@ import UIKit
 import NotificationCenter
 import RxSwift
 
-private func LatestRecordPresenter(interactor: ILatestRecordInteractor, view: ILatestRecordView, disposeBag: DisposeBag) {
+private func LatestRecordPresenter(interactor: IFindLatestRecord, view: ILatestRecordView, disposeBag: DisposeBag) {
     view.rx_viewDidLoad
-        .flatMap { interactor.rx_findLatest() }
+        .flatMap { interactor.rx_find() }
         .map { LatestRecordViewModel.from(fitnessInfo: $0) }
         .subscribe(onNext: { view.viewModel = $0 })
         .addDisposableTo(disposeBag)
@@ -26,7 +26,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     @IBOutlet private var muscleWeightLabel: UILabel!
     @IBOutlet private var waterPercentageLabel: UILabel!
     
-    private var interactor: ILatestRecordInteractor!
+    private var interactor: IFindLatestRecord!
     private let disposeBag = DisposeBag()
     fileprivate let viewDidLoadSubject = PublishSubject<Void>()
     
@@ -42,7 +42,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         CoreDataStackInitializer({ managedObjectContext in
             NSLog("Core Data Stack initialized correctly")
             
-            self.interactor = LatestRecordInteractor(repository: CoreDataInfoRepository(managedObjectContext: managedObjectContext))
+            self.interactor = FindLatestRecord(repository: CoreDataInfoRepository(managedObjectContext: managedObjectContext))
             LatestRecordPresenter(interactor: self.interactor, view: self, disposeBag: self.disposeBag)
         }, { error in
             fatalError(error as! String)

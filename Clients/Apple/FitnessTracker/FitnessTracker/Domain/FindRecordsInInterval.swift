@@ -18,3 +18,18 @@ extension IFindRecordsInInterval {
         return self.find(from: from, to: Calendar.current.endOfToday)
     }
 }
+
+final class FindRecordsInInterval: IFindRecordsInInterval {
+    private let fitnessInfoRepository: IFitnessInfoRepository
+    
+    init(repository: IFitnessInfoRepository) {
+        self.fitnessInfoRepository = repository
+    }
+    
+    func find(from: Date, to: Date) -> Observable<[IFitnessInfo]> {
+        return fitnessInfoRepository
+            .rx_find(from: from as NSDate,
+                     to: to as NSDate,
+                     order: .ascendent)
+    }
+}

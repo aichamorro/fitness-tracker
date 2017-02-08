@@ -10,10 +10,10 @@ import Foundation
 import RxSwift
 import URLRouter
 
-typealias ILatestRecordPresenter = (ILatestRecordInteractor, ILatestRecordView, AppRouter, DisposeBag) -> Void
-let LatestRecordPresenter: ILatestRecordPresenter = { interactor, view, router, disposeBag in
+typealias ILatestRecordPresenter = (IFindLatestRecord, IRecordStoreUpdate, ILatestRecordView, AppRouter, DisposeBag) -> Void
+let LatestRecordPresenter: ILatestRecordPresenter = { interactor, storeUpdates, view, router, disposeBag in
     view.rx_viewDidLoad
-        .flatMap { interactor.rx_findLatest() }
+        .flatMap { interactor.rx_find() }
         .map { LatestRecordViewModel.from(fitnessInfo: $0) }
         .bindTo(view.rx_viewModel)
         .addDisposableTo(disposeBag)
@@ -30,8 +30,8 @@ let LatestRecordPresenter: ILatestRecordPresenter = { interactor, view, router, 
             }
         }).addDisposableTo(disposeBag)
 
-    interactor.rx_latestRecordUpdate
-        .flatMap { interactor.rx_findLatest() }
+    storeUpdates.rx_didUpdate
+        .flatMap { interactor.rx_find() }
         .map { LatestRecordViewModel.from(fitnessInfo: $0) }
         .bindTo(view.rx_viewModel)
         .addDisposableTo(disposeBag)

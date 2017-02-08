@@ -46,8 +46,9 @@ class NewRecordTests: QuickSpec {
     override func spec() {
         describe("As user I would like to be able to add new fitness readings") {
             context("It shows the previous reading") {
-                var newRecordInteractor: INewRecordInteractor!
-                var latestRecordInteractor: LatestRecordInteractor!
+                var newRecordInteractor: ICreateNewRecord!
+                var latestRecordInteractor: IFindLatestRecord!
+                var recordStoreUpdates: IRecordStoreUpdate!
                 var repository: IFitnessInfoRepository!
                 var view: FakeNewRecordView!
                 var disposeBag: DisposeBag!
@@ -59,8 +60,9 @@ class NewRecordTests: QuickSpec {
                     
                     let managedObjectContext = SetUpInMemoryManagedObjectContext()
                     repository = CoreDataInfoRepository(managedObjectContext: managedObjectContext)
-                    newRecordInteractor = NewRecordInteractor(repository: repository)
-                    latestRecordInteractor = LatestRecordInteractor(repository: repository)
+                    newRecordInteractor = CreateNewRecord(repository: repository)
+                    recordStoreUpdates = RecordStoreUpdate(repository: repository)
+                    latestRecordInteractor = FindLatestRecord(repository: repository)
                     view = FakeNewRecordView()
                     
                     NewRecordPresenter(latestRecordInteractor, newRecordInteractor, view, disposeBag)
@@ -109,12 +111,12 @@ class NewRecordTests: QuickSpec {
                     view.musclePercentage = 40.0
                     view.waterPercentage = 34.0
                     
-                    createObserverAndSubscribe(to: latestRecordInteractor.rx_latestRecordUpdate, scheduler: scheduler, disposeBag: disposeBag, expect: nil, action: {
+                    createObserverAndSubscribe(to: recordStoreUpdates.rx_didUpdate, scheduler: scheduler, disposeBag: disposeBag, expect: nil, action: {
                         view.save()
                     })
                     
                     latestRecordInteractor
-                        .rx_findLatest()
+                        .rx_find()
                         .subscribe(onNext: { info in
                             expect(info.height).to(equal(171))
                             expect(info.weight).to(equal(60.0))
@@ -131,12 +133,12 @@ class NewRecordTests: QuickSpec {
                     view.musclePercentage = 40.0
                     view.waterPercentage = 34.0
                     
-                    createObserverAndSubscribe(to: latestRecordInteractor.rx_latestRecordUpdate, scheduler: scheduler, disposeBag: disposeBag, expect: nil, action: {
+                    createObserverAndSubscribe(to: recordStoreUpdates.rx_didUpdate, scheduler: scheduler, disposeBag: disposeBag, expect: nil, action: {
                         view.save()
                     })
                     
                     latestRecordInteractor
-                        .rx_findLatest()
+                        .rx_find()
                         .subscribe(onNext: { info in
                             expect(view.height).to(equal(171))
                             expect(view.weight).to(equal(60.0))

@@ -25,8 +25,9 @@ class LatestRecordTests: QuickSpec {
                 var scheduler: TestScheduler!
                 var repository: CoreDataInfoRepository!
                 var managedObjectContext: NSManagedObjectContext!
-                var interactor: ILatestRecordInteractor!
+                var interactor: IFindLatestRecord!
                 var router: AppRouter!
+                var storeUpdates: IRecordStoreUpdate!
                     
                 beforeEach {
                     managedObjectContext = SetUpInMemoryManagedObjectContext()
@@ -34,9 +35,11 @@ class LatestRecordTests: QuickSpec {
                     view = LatestRecordView()
                     disposeBag = DisposeBag()
                     scheduler = TestScheduler(initialClock: 0)
-                    interactor = LatestRecordInteractor(repository: repository)
+                    interactor = FindLatestRecord(repository: repository)
+                    storeUpdates = RecordStoreUpdate(repository: repository)
                     router = AppRouter.empty
-                    LatestRecordPresenter(interactor, view, router, disposeBag)
+                    
+                    LatestRecordPresenter(interactor, storeUpdates, view, router, disposeBag)
                 }
                 
                 afterEach {

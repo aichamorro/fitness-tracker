@@ -45,19 +45,3 @@ let MetricGraphPresenter: IMetricGraphPresenter = { (interactor, view, disposeBa
         .bindTo(view.rx_graphData)
         .addDisposableTo(disposeBag)
 }
-
-final class FindRecordsInInterval: IFindRecordsInInterval {
-    private let fitnessInfoRepository: IFitnessInfoRepository
-    
-    init(repository: IFitnessInfoRepository) {
-        self.fitnessInfoRepository = repository
-    }
-    
-    func find(from: Date, to: Date) -> Observable<[IFitnessInfo]> {
-        return fitnessInfoRepository
-            .rx_find(from: from as NSDate,
-                     to: to as NSDate,
-                     order: .ascendent)
-    }
-}
-
