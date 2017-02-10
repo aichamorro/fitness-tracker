@@ -17,12 +17,18 @@ class InsightsTests: QuickSpec {
     override func spec() {
         describe("As user I would like to see some insights of my data") {
             context("Compare with previous results") {
-                it("Creates a comparison of the data from the previous day") {
-                    let managedObjectContext = SetUpInMemoryManagedObjectContext()
-                    let fitnessInfoRepository = CoreDataInfoRepository(managedObjectContext: managedObjectContext)
-                    let interactor = FindInsights(repository: fitnessInfoRepository)
-                    let disposeBag = DisposeBag()
+                var fitnessInfoRepository: IFitnessInfoRepository!
+                var interactor: IFindInsights!
+                var disposeBag: DisposeBag!
                 
+                beforeEach {
+                    let managedObjectContext = SetUpInMemoryManagedObjectContext()
+                    fitnessInfoRepository = CoreDataInfoRepository(managedObjectContext: managedObjectContext)
+                    interactor = FindInsights(repository: fitnessInfoRepository)
+                    disposeBag = DisposeBag()
+                }
+                
+                it("Creates a comparison of the data from the previous day") {
                     fitnessInfoRepository.rx_save(many:
                         [FitnessInfo(weight: 60.9, height: 171, bodyFatPercentage: 20.0, musclePercentage: 20.0, waterPercentage: 20.0),
                          FitnessInfo(weight: 61.0, height: 171, bodyFatPercentage: 20.0, musclePercentage: 20.0, waterPercentage: 20.0)])
@@ -47,46 +53,30 @@ class InsightsTests: QuickSpec {
                 }
                 
                 it("Creates a comparison of the data from the previous week") {
-                    let managedObjectContext = SetUpInMemoryManagedObjectContext()
-                    let coreDataEngine = CoreDataEngine(managedObjectContext: managedObjectContext)
                     let dateFormatter = DateFormatter()
                     dateFormatter.dateFormat = "dd/MM/yy hh:mm"
                     
                     let dates = ["22/01/17 11:16", "21/01/17 09:18", "20/01/17 07:53", "19/01/17 07:52", "18/01/17 09:17", "17/01/17 09:42", "16/01/17 12:06"].map {
-                        return dateFormatter.date(from: $0)!
-                    }.reversed()
+                        return dateFormatter.date(from: $0)! as NSDate
+                    }
                     
-                    let weekFitnessInfo = [FitnessInfo(weight: 68.28, height: 171, bodyFatPercentage: 20.1, musclePercentage: 33.2, waterPercentage: 54.3),
-                                           FitnessInfo(weight: 67.98, height: 171, bodyFatPercentage: 19.9, musclePercentage: 33.5, waterPercentage: 54.4),
-                                           FitnessInfo(weight: 67.98, height: 171, bodyFatPercentage: 20.1, musclePercentage: 33.3, waterPercentage: 54.3),
-                                           FitnessInfo(weight: 67.82, height: 171, bodyFatPercentage: 20.0, musclePercentage: 33.4, waterPercentage: 54.4),
-                                           FitnessInfo(weight: 67.98, height: 171, bodyFatPercentage: 19.7, musclePercentage: 33.7, waterPercentage: 54.6),
-                                           FitnessInfo(weight: 67.58, height: 171, bodyFatPercentage: 19.9, musclePercentage: 33.4, waterPercentage: 54.4),
-                                           FitnessInfo(weight: 67.41, height: 171, bodyFatPercentage: 19.6, musclePercentage: 33.7, waterPercentage: 54.6)].reversed()
+                    let weekFitnessInfo = [FitnessInfo(weight: 68.28, height: 171, bodyFatPercentage: 20.1, musclePercentage: 33.2, waterPercentage: 54.3, date: dates[0]),
+                                           FitnessInfo(weight: 67.98, height: 171, bodyFatPercentage: 19.9, musclePercentage: 33.5, waterPercentage: 54.4, date: dates[1]),
+                                           FitnessInfo(weight: 67.98, height: 171, bodyFatPercentage: 20.1, musclePercentage: 33.3, waterPercentage: 54.3, date: dates[2]),
+                                           FitnessInfo(weight: 67.82, height: 171, bodyFatPercentage: 20.0, musclePercentage: 33.4, waterPercentage: 54.4, date: dates[3]),
+                                           FitnessInfo(weight: 67.98, height: 171, bodyFatPercentage: 19.7, musclePercentage: 33.7, waterPercentage: 54.6, date: dates[4]),
+                                           FitnessInfo(weight: 67.58, height: 171, bodyFatPercentage: 19.9, musclePercentage: 33.4, waterPercentage: 54.4, date: dates[5]),
+                                           FitnessInfo(weight: 67.41, height: 171, bodyFatPercentage: 19.6, musclePercentage: 33.7, waterPercentage: 54.6, date: dates[6])]
                     
-                    for (info, date) in zip(weekFitnessInfo, dates)
-                    {
+                    for info in weekFitnessInfo {
                         do {
-                            _ = try coreDataEngine.create(entityName: CoreDataEntity.fitnessInfo.rawValue) { entity in
-                                guard let saved = entity as? CoreDataFitnessInfo else { fatalError() }
-                                
-                                saved.date = date as NSDate
-                                saved.weight = info.weight
-                                saved.height_ = Int16(info.height)
-                                saved.bodyFatPercentage = info.bodyFatPercentage
-                                saved.musclePercentage = info.musclePercentage
-                                saved.waterPercentage = info.waterPercentage
-                            }
+                            try fitnessInfoRepository.save(info)
                         } catch {
                             fail()
                             return
                         }
                     }
                     
-                    let fitnessInfoRepository = CoreDataInfoRepository(managedObjectContext: managedObjectContext)
-                    let interactor = FindInsights(repository: fitnessInfoRepository)
-                    let disposeBag = DisposeBag()
-
                     waitUntil { done in
                         interactor.rx_insights().subscribe(onNext: { insights in
                             guard let weekly = insights.weekInsight else { fail(); done(); return; }
@@ -99,7 +89,7 @@ class InsightsTests: QuickSpec {
                             done()
                         }).addDisposableTo(disposeBag)
                     }
-                }
+                }                
             }
         }
     }
