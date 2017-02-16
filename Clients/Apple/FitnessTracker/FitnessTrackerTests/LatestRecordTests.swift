@@ -61,7 +61,7 @@ class LatestRecordTests: QuickSpec {
                         return
                     }
                     
-                    createObserverAndSubscribe(to: view.viewModelVariable.asObservable().skip(1), scheduler: scheduler, disposeBag: disposeBag, expect: { viewModel in
+                    createObserverAndSubscribe(to: view.viewModelVariable.asObservable().skip(2), scheduler: scheduler, disposeBag: disposeBag, expect: { viewModel in
                         expect(viewModel.weight - 34.5 < 0.000001).to(beTrue())
                         expect(viewModel.height).to(equal(171))
                         expect(viewModel.bodyFat - 30.0 < 0.000001).to(beTrue())
@@ -73,7 +73,7 @@ class LatestRecordTests: QuickSpec {
                 }
                 
                 it("Doesn't crash when there is no previous data recorded") {
-                    createObserverAndSubscribe(to: view.viewModelVariable.asObservable().skip(1), scheduler: scheduler, disposeBag: disposeBag, expect: { viewModel in
+                    createObserverAndSubscribe(to: view.viewModelVariable.asObservable().skip(2), scheduler: scheduler, disposeBag: disposeBag, expect: { viewModel in
                         expect(viewModel.weight).to(equal(0))
                         expect(viewModel.height).to(equal(0))
                         expect(viewModel.bodyFat).to(equal(0))
