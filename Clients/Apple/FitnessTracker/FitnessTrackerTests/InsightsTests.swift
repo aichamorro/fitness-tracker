@@ -36,7 +36,7 @@ class InsightsTests: QuickSpec {
                         .addDisposableTo(disposeBag)
                     
                     waitUntil { done in
-                        interactor.rx_insights().subscribe(onNext: { insights in
+                        interactor.rx_output.subscribe(onNext: { insights in
                             guard let daily = insights.dayInsight else {
                                 fail(); done(); return
                             }
@@ -49,6 +49,8 @@ class InsightsTests: QuickSpec {
                             
                             done()
                         }).addDisposableTo(disposeBag)
+                        
+                        interactor.rx_input.onNext()
                     }
                 }
                 
@@ -78,7 +80,7 @@ class InsightsTests: QuickSpec {
                     }
                     
                     waitUntil { done in
-                        interactor.rx_insights().subscribe(onNext: { insights in
+                        interactor.rx_output.subscribe(onNext: { insights in
                             guard let weekly = insights.weekInsight else { fail(); done(); return; }
                             
                             expect(weekly.weight - 0.87 < 0.0000001).to(beTrue())
@@ -88,6 +90,8 @@ class InsightsTests: QuickSpec {
 
                             done()
                         }).addDisposableTo(disposeBag)
+                        
+                        interactor.rx_input.onNext()
                     }
                 }                
             }

@@ -16,9 +16,12 @@ protocol IShowPreviousLatestResultView {
 
 typealias IShowPreviousLatestResultPresenter = (IFindPreviousLatestRecord, IShowPreviousLatestResultView, DisposeBag) -> Void
 let LatestResultsComparisonPresenter: IShowPreviousLatestResultPresenter = { interactor, view, disposeBag in
-    view.rx_needsRefresh
-        .flatMap { interactor.rx_find() }
+    interactor.rx_output
         .map { info in LatestRecordViewModel.from(fitnessInfo: info) }
         .bindTo(view.rx_comparisonViewModel)
+        .addDisposableTo(disposeBag)
+
+    view.rx_needsRefresh
+        .bindTo(interactor.rx_input)
         .addDisposableTo(disposeBag)
 }

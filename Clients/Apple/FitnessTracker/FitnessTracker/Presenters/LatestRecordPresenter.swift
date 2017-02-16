@@ -12,10 +12,14 @@ import URLRouter
 
 typealias ILatestRecordPresenter = (IFindLatestRecord, IRecordStoreUpdate, ILatestRecordView, AppRouter, DisposeBag) -> Void
 let LatestRecordPresenter: ILatestRecordPresenter = { interactor, storeUpdates, view, router, disposeBag in
-    view.rx_viewDidLoad
-        .flatMap { interactor.rx_find() }
+    
+    interactor.rx_output
         .map { LatestRecordViewModel.from(fitnessInfo: $0) }
         .bindTo(view.rx_viewModel)
+        .addDisposableTo(disposeBag)
+
+    view.rx_viewDidLoad
+        .bindTo(interactor.rx_input)
         .addDisposableTo(disposeBag)
     
     view.rx_didSelectMetric
@@ -29,10 +33,13 @@ let LatestRecordPresenter: ILatestRecordPresenter = { interactor, storeUpdates, 
                 rootViewController.show(viewController, sender: nil)
             }
         }).addDisposableTo(disposeBag)
-
-    storeUpdates.rx_didUpdate
-        .flatMap { interactor.rx_find() }
+    
+    interactor.rx_output
         .map { LatestRecordViewModel.from(fitnessInfo: $0) }
         .bindTo(view.rx_viewModel)
+        .addDisposableTo(disposeBag)
+    
+    storeUpdates.rx_didUpdate
+        .bindTo(interactor.rx_input)
         .addDisposableTo(disposeBag)
 }

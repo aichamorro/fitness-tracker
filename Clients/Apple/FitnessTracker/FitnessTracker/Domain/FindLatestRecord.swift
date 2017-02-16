@@ -9,26 +9,19 @@
 import Foundation
 import RxSwift
 
-protocol IFindLatestRecord {
-    func rx_find() -> Observable<IFitnessInfo>
-}
-
+typealias IFindLatestRecord = AnyInteractor<Void, IFitnessInfo>
 final class FindLatestRecord: IFindLatestRecord {
-    let repository: IFitnessInfoRepository
-    
     init(repository: IFitnessInfoRepository) {
-        self.repository = repository
-    }
-    
-    func rx_find() -> Observable<IFitnessInfo> {
-        let takeFirstResult: ([IFitnessInfo]) -> Observable<IFitnessInfo> = { result in
-            guard let latest = result.first else { return Observable.just(FitnessInfo.empty) }
+        super.init { () -> Observable<IFitnessInfo> in
+            let takeFirstResult: ([IFitnessInfo]) -> Observable<IFitnessInfo> = { result in
+                guard let latest = result.first else { return Observable.just(FitnessInfo.empty) }
+                
+                return Observable.just(latest)
+            }
             
-            return Observable.just(latest)
+            return repository
+                .rx_findLatest(numberOfRecords: 1)
+                .flatMap(takeFirstResult)
         }
-        
-        return repository
-            .rx_findLatest(numberOfRecords: 1)
-            .flatMap(takeFirstResult)
     }
 }

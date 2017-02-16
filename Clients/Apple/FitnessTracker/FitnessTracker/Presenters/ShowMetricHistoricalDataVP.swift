@@ -63,9 +63,10 @@ func convert(fitnessRecords: [IFitnessInfo], toBodyMetricReading bodyMetric: Bod
 typealias IMetricHistoryPresenter = (IFindAllRecords, IMetricHistoryView, DisposeBag) -> Void
 let MetricHistoryPresenter: IMetricHistoryPresenter = { interactor, view, disposeBag in
     view.rx_loadHistoricData
-        .flatMap {
-            interactor.rx_findAll()
-        }.map {
+        .bindTo(interactor.rx_input)
+        .addDisposableTo(disposeBag)
+    
+    interactor.rx_output.map {
             return convert(fitnessRecords: $0, toBodyMetricReading: view.selectedMetric)
         }.do(onNext: { records in
             if records.isEmpty {

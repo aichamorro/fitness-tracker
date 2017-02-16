@@ -9,18 +9,11 @@
 import Foundation
 import RxSwift
 
-protocol ICreateNewRecord {
-    func rx_save(_ record: IFitnessInfo) -> Observable<IFitnessInfo>
-}
-
+typealias ICreateNewRecord = AnyInteractor<IFitnessInfo, IFitnessInfo>
 final class CreateNewRecord: ICreateNewRecord {
-    var repository: IFitnessInfoRepository
-    
     init(repository: IFitnessInfoRepository) {
-        self.repository = repository
-    }
-    
-    func rx_save(_ record: IFitnessInfo) -> Observable<IFitnessInfo> {
-        return repository.rx_save(record)
+        super.init { record -> Observable<IFitnessInfo> in
+            return repository.rx_save(record)
+        }
     }
 }

@@ -39,9 +39,17 @@ private func FitnessInfoToGraphDataAdapter(bodyMetric: BodyMetric) -> ([IFitness
 
 typealias IMetricGraphPresenter = (IFindRecordsInInterval, IMetricGraphView, DisposeBag) -> Void
 let MetricGraphPresenter: IMetricGraphPresenter = { (interactor, view, disposeBag) in
-    view.rx_loadLatestRecords
-        .flatMap { interactor.find(from: Calendar.current.dateBySettingStartOfDay(to: $0)) }
+    interactor.rx_output
         .map(FitnessInfoToGraphDataAdapter(bodyMetric: view.selectedMetric))
         .bindTo(view.rx_graphData)
+        .addDisposableTo(disposeBag)
+
+    view.rx_loadLatestRecords
+        .map {
+            let from = Calendar.current.dateBySettingStartOfDay(to: $0)
+            let to = Calendar.current.endOfToday
+            
+            return (from, to)
+        }.bindTo(interactor.rx_input)
         .addDisposableTo(disposeBag)
 }

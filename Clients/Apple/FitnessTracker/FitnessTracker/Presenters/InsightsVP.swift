@@ -29,15 +29,13 @@ let InsightsPresenter: IInsightsPresenter = { interactor, recordStoreUpdate, vie
             
             return Observable.just(insightsViewModel)
     }
-        
-    interactor.rx_insights()
-        .flatMap(mapInsights)
-        .bindTo(view.rx_insights)
-        .addDisposableTo(disposeBag)
     
-    recordStoreUpdate.rx_didUpdate
-        .flatMap { return interactor.rx_insights() }
+    interactor.rx_output
         .flatMap(mapInsights)
         .bindTo(view.rx_insights)
         .addDisposableTo(disposeBag)
+
+    recordStoreUpdate.rx_didUpdate
+        .bindTo(interactor.rx_input)
+        .addDisposableTo(disposeBag)    
 }
