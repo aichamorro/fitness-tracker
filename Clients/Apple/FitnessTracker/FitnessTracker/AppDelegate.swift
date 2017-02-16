@@ -14,6 +14,7 @@ class AppServiceLocator {
     var fitnessInfoRepository: IFitnessInfoRepository!
     var router: AppRouter!
     var viewControllerFactory: IUIViewControllerFactory!
+    var healthKitRepository: HealthKitRepository?
 }
 
 typealias RetainerBag = [Any]
@@ -59,6 +60,8 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     
     private func configureServices() {
         serviceLocator = AppServiceLocator()
+        
+        serviceLocator.healthKitRepository = HealthKitRepository()
 
         CoreDataStackInitializer({ managedObjectContext in
             NSLog("Core Data Stack initialized correctly")

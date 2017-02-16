@@ -56,7 +56,8 @@ extension AppRouter {
             let viewController = serviceLocator.viewControllerFactory.newRecordViewController()
             
             let seeLatestRecordInteractor = FindLatestRecord(repository: serviceLocator.fitnessInfoRepository)
-            let insertNewRecordInteractor = CreateNewRecord(repository: serviceLocator.fitnessInfoRepository)
+            let insertNewRecordInteractor = CreateNewRecord(repository: serviceLocator.fitnessInfoRepository,
+                                                            healthKitRepository: serviceLocator.healthKitRepository)
             let disposeBag = DisposeBag()
             
             viewController.interactors = [seeLatestRecordInteractor, insertNewRecordInteractor]

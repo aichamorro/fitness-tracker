@@ -71,6 +71,8 @@
 		39F988C51E4B43EB008A1DB6 /* FindPreviousLatestResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F988C41E4B43EB008A1DB6 /* FindPreviousLatestResult.swift */; };
 		39F988C71E4B4569008A1DB6 /* RecordsStoreUpdates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F988C61E4B4569008A1DB6 /* RecordsStoreUpdates.swift */; };
 		39F988C91E4DD1D0008A1DB6 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39F988C81E4DD1D0008A1DB6 /* HealthKit.framework */; };
+		39F988CB1E4E1155008A1DB6 /* HeatlthKitRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F988CA1E4E1155008A1DB6 /* HeatlthKitRepository.swift */; };
+		39F988CD1E4E1207008A1DB6 /* AppContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F988CC1E4E1207008A1DB6 /* AppContext.swift */; };
 		3C7E764AE3C8B71A2F15C64D /* Pods_TodayExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7EBF53B2E60378C64BDDE11 /* Pods_TodayExtension.framework */; };
 		45AA81FD1D29B16082BA4BBA /* Pods_FitnessTracker_FitnessTrackerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95868793967C2540BD298442 /* Pods_FitnessTracker_FitnessTrackerTests.framework */; };
 		60DCC2D4BE7EC6D04AACF7B5 /* Pods_FitnessTracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 243E297E8C331F616EE9C451 /* Pods_FitnessTracker.framework */; };
@@ -172,6 +174,8 @@
 		39F988C41E4B43EB008A1DB6 /* FindPreviousLatestResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FindPreviousLatestResult.swift; sourceTree = "<group>"; };
 		39F988C61E4B4569008A1DB6 /* RecordsStoreUpdates.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordsStoreUpdates.swift; sourceTree = "<group>"; };
 		39F988C81E4DD1D0008A1DB6 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
+		39F988CA1E4E1155008A1DB6 /* HeatlthKitRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeatlthKitRepository.swift; sourceTree = "<group>"; };
+		39F988CC1E4E1207008A1DB6 /* AppContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppContext.swift; sourceTree = "<group>"; };
 		94B5A7A9738E9EE617B4C9E1 /* Pods-TodayExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TodayExtension.release.xcconfig"; path = "Pods/Target Support Files/Pods-TodayExtension/Pods-TodayExtension.release.xcconfig"; sourceTree = "<group>"; };
 		95868793967C2540BD298442 /* Pods_FitnessTracker_FitnessTrackerTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FitnessTracker_FitnessTrackerTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF97CF9401854D9B0C19B13A /* Pods-FitnessTracker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FitnessTracker.release.xcconfig"; path = "Pods/Target Support Files/Pods-FitnessTracker/Pods-FitnessTracker.release.xcconfig"; sourceTree = "<group>"; };
@@ -250,6 +254,7 @@
 				200323DD1E00166200B1C33A /* LaunchScreen.storyboard */,
 				200323E01E00166200B1C33A /* Info.plist */,
 				3903F5C91E1BFA7D0093095B /* AppRouter.swift */,
+				39F988CC1E4E1207008A1DB6 /* AppContext.swift */,
 			);
 			path = FitnessTracker;
 			sourceTree = "<group>";
@@ -321,6 +326,7 @@
 				20471A491E1983F80000F7C2 /* FitnessInfoInsight.swift */,
 				39F988951E465523008A1DB6 /* IFitnessInfoRepository.swift */,
 				39F988981E46559D008A1DB6 /* CoreDataQueryRequest.swift */,
+				39F988CA1E4E1155008A1DB6 /* HeatlthKitRepository.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -680,6 +686,7 @@
 				39DE51B11E41798D00DD29CE /* GraphHistoryVP.swift in Sources */,
 				20471A4D1E1ADBB00000F7C2 /* NSCalendar+NSDateFactory.swift in Sources */,
 				39F988A81E4B3F86008A1DB6 /* LatestRecordViewController.swift in Sources */,
+				39F988CD1E4E1207008A1DB6 /* AppContext.swift in Sources */,
 				200323F51E0038B300B1C33A /* FitnessInfo.swift in Sources */,
 				39F988A61E4B3F86008A1DB6 /* ShowMetricHistoricalDataViewController.swift in Sources */,
 				39F988AD1E4B41A0008A1DB6 /* FindInsights.swift in Sources */,
@@ -697,6 +704,7 @@
 				20E89E681E130C5C00F03644 /* ShowMetricHistoricalDataVP.swift in Sources */,
 				39F988C11E4B4361008A1DB6 /* ShowPreviousLatestResultVIP.swift in Sources */,
 				39F988961E465523008A1DB6 /* IFitnessInfoRepository.swift in Sources */,
+				39F988CB1E4E1155008A1DB6 /* HeatlthKitRepository.swift in Sources */,
 				39F988991E46559D008A1DB6 /* CoreDataQueryRequest.swift in Sources */,
 				39F988AF1E4B4218008A1DB6 /* BodyMetric.swift in Sources */,
 				39F988B11E4B42C6008A1DB6 /* InsightsVP.swift in Sources */,
