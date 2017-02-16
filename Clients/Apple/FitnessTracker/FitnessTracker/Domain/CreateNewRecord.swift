@@ -9,27 +9,18 @@
 import Foundation
 import RxSwift
 
-protocol ICreateNewRecord {
-    func rx_save(_ record: IFitnessInfo) -> Observable<IFitnessInfo>
-}
-
+typealias ICreateNewRecord = AnyInteractor<IFitnessInfo, IFitnessInfo>
 final class CreateNewRecord: ICreateNewRecord {
-    var repository: IFitnessInfoRepository
-    var healthKitRepository: IHealthKitRepository?
-    
     init(repository: IFitnessInfoRepository, healthKitRepository: IHealthKitRepository? = nil) {
-        self.repository = repository
-        self.healthKitRepository = healthKitRepository
-    }
-    
-    func rx_save(_ record: IFitnessInfo) -> Observable<IFitnessInfo> {
-        return repository.rx_save(record).do(onNext: { saved in
-            self.healthKitRepository?.save(height: saved.height,
-                                           weight: saved.weight,
-                                           bodyFatPercentage: saved.bodyFatPercentage,
-                                           leanBodyMass: saved.leanBodyWeight,
-                                           bmi: saved.bmi,
-                                           date: saved.date as! Date)
-        })
+        super.init { record -> Observable<IFitnessInfo> in
+            return repository.rx_save(record).do(onNext: { saved in
+                healthKitRepository?.save(height: saved.height,
+                                          weight: saved.weight,
+                                          bodyFatPercentage: saved.bodyFatPercentage,
+                                          leanBodyMass: saved.leanBodyWeight,
+                                          bmi: saved.bmi,
+                                          date: saved.date as! Date)
+            })
+        }
     }
 }

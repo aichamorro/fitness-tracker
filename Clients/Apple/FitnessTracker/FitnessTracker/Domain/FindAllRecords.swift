@@ -9,18 +9,12 @@
 import Foundation
 import RxSwift
 
-protocol IFindAllRecords {
-    func rx_findAll() -> Observable<[IFitnessInfo]>
-}
+typealias IFindAllRecords = AnyInteractor<Void, [IFitnessInfo]>
 
 final class FindAllRecords: IFindAllRecords {
-    let repository: IFitnessInfoRepository
-    
     init(repository: IFitnessInfoRepository) {
-        self.repository = repository
-    }
-    
-    func rx_findAll() -> Observable<[IFitnessInfo]> {
-        return repository.rx_findAll()
+        super.init { () -> Observable<[IFitnessInfo]> in
+            return repository.rx_findAll()
+        }
     }
 }

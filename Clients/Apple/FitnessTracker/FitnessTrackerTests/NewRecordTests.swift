@@ -116,7 +116,7 @@ class NewRecordTests: QuickSpec {
                     })
                     
                     latestRecordInteractor
-                        .rx_find()
+                        .rx_output
                         .subscribe(onNext: { info in
                             expect(info.height).to(equal(171))
                             expect(info.weight).to(equal(60.0))
@@ -124,6 +124,8 @@ class NewRecordTests: QuickSpec {
                             expect(info.musclePercentage).to(equal(40.0))
                             expect(info.waterPercentage).to(equal(34.0))
                         }).addDisposableTo(disposeBag)
+                    
+                    latestRecordInteractor.rx_input.onNext()
                 }
                 
                 it("Updates the view when saving a new record") {
@@ -138,7 +140,7 @@ class NewRecordTests: QuickSpec {
                     })
                     
                     latestRecordInteractor
-                        .rx_find()
+                        .rx_output
                         .subscribe(onNext: { info in
                             expect(view.height).to(equal(171))
                             expect(view.weight).to(equal(60.0))
@@ -146,6 +148,8 @@ class NewRecordTests: QuickSpec {
                             expect(view.musclePercentage).to(equal(40.0))
                             expect(view.waterPercentage).to(equal(34.0))
                         }).addDisposableTo(disposeBag)
+                    
+                    latestRecordInteractor.rx_input.onNext()
                 }
                 
                 it("Dismisses the view on saving") {

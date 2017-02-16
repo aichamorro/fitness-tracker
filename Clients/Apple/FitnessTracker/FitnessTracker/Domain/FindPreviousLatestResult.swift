@@ -9,24 +9,17 @@
 import Foundation
 import RxSwift
 
-protocol IFindPreviousLatestRecord {
-    func rx_find() -> Observable<IFitnessInfo>
-}
-
-class FindPreviousLatestRecord: IFindPreviousLatestRecord {
-    let repository: IFitnessInfoRepository
-    
+typealias IFindPreviousLatestRecord = AnyInteractor<Void, IFitnessInfo>
+final class FindPreviousLatestRecord: IFindPreviousLatestRecord {
     init(repository: IFitnessInfoRepository) {
-        self.repository = repository
-    }
-    
-    func rx_find() -> Observable<IFitnessInfo> {
-        return repository.rx_findLatest(numberOfRecords: 2).flatMap { info in
-            Observable.create { observer in
-                observer.onNext(info.count == 2 ? info[1] : FitnessInfo.empty)
-                observer.onCompleted()
-                
-                return Disposables.create()
+        super.init { () -> Observable<IFitnessInfo> in
+            return repository.rx_findLatest(numberOfRecords: 2).flatMap { info in
+                Observable.create { observer in
+                    observer.onNext(info.count == 2 ? info[1] : FitnessInfo.empty)
+                    observer.onCompleted()
+                    
+                    return Disposables.create()
+                }
             }
         }
     }

@@ -28,13 +28,16 @@ class FindRecordsInIntervalTests: QuickSpec {
             
             context("Given no stored records") {
                 it("Returns an empty array") {
-                    interactor.find(from: Date()).subscribe(onNext: { records in
+                    interactor.rx_output.subscribe(onNext: { records in
                         expect(records).toNot(beNil())
                         expect(records.count).to(equal(0))
                     }, onError: { _ in
                         fail()
                         return
                     }).addDisposableTo(disposeBag)
+                    
+                    let dateRange = (Date(), Calendar.current.date(addingDays: 5, to: Date()))
+                    interactor.rx_input.onNext(dateRange)
                 }
             }
             
@@ -63,7 +66,7 @@ class FindRecordsInIntervalTests: QuickSpec {
                     let startDate = Calendar.current.date(bySettingHour: 0, minute: 0, second: 0, of: components.date!)!
                     
                     waitUntil { done in
-                        interactor.find(from: Calendar.current.dateBySettingStartOfDay(to: startDate))
+                        interactor.rx_output
                             .subscribe(onNext: { records in
                                 expect(records.count).to(equal(1))
                                 done()
@@ -71,6 +74,9 @@ class FindRecordsInIntervalTests: QuickSpec {
                                 fail()
                                 done()
                             }).addDisposableTo(disposeBag)
+                        
+                        let dateRange = (Calendar.current.dateBySettingStartOfDay(to: startDate), Date())
+                        interactor.rx_input.onNext(dateRange)
                     }
                 }
                 
@@ -83,7 +89,7 @@ class FindRecordsInIntervalTests: QuickSpec {
                         let endDate =  components.date!
 
                         waitUntil { done in
-                            interactor.find(from: startDate, to: endDate)
+                            interactor.rx_output
                                 .subscribe(onNext: { records in
                                     expect(records.count).to(equal(1))
                                     done()
@@ -91,6 +97,8 @@ class FindRecordsInIntervalTests: QuickSpec {
                                     fail()
                                     done()
                                 }).addDisposableTo(disposeBag)
+                            
+                            interactor.rx_input.onNext((startDate, endDate))
                         }
                     }
                     
@@ -100,7 +108,7 @@ class FindRecordsInIntervalTests: QuickSpec {
                         startDateComponents.day = startDateComponents.day! - 1
                         
                         waitUntil { done in
-                            interactor.find(from: startDateComponents.date!, to: endDate)
+                            interactor.rx_output
                                 .subscribe(onNext: { records in
                                     expect(records.count).to(equal(1))
                                     done()
@@ -108,6 +116,8 @@ class FindRecordsInIntervalTests: QuickSpec {
                                     fail()
                                     done()
                                 }).addDisposableTo(disposeBag)
+                            
+                            interactor.rx_input.onNext((startDateComponents.date!, endDate))
                         }
                     }
                 }
@@ -131,7 +141,7 @@ class FindRecordsInIntervalTests: QuickSpec {
                     
                     it("returns both records that match the date interval") {
                         waitUntil { done in
-                            interactor.find(from: record.date! as Date, to: anotherRecord.date! as Date)
+                            interactor.rx_output
                                 .subscribe(onNext: { records in
                                     expect(records.count).to(equal(2))
                                     expect(records[0] == record).to(beTrue())
@@ -141,12 +151,14 @@ class FindRecordsInIntervalTests: QuickSpec {
                                     fail()
                                     done()
                                 }).addDisposableTo(disposeBag)
+                            
+                            interactor.rx_input.onNext((record.date! as Date, anotherRecord.date! as Date))
                         }
                     }
                     
                     it("Leaves out records that don't match the interval criteria") {
                         waitUntil { done in
-                            interactor.find(from: record.date! as Date, to: record.date! as Date)
+                            interactor.rx_output
                                 .subscribe(onNext: { records in
                                     expect(records.count).to(equal(1))
                                     expect(records.first! == record).to(beTrue())
@@ -155,6 +167,8 @@ class FindRecordsInIntervalTests: QuickSpec {
                                     fail()
                                     done()
                                 }).addDisposableTo(disposeBag)
+                            
+                            interactor.rx_input.onNext((from: record.date! as Date, to: record.date! as Date))
                         }
                     }
 

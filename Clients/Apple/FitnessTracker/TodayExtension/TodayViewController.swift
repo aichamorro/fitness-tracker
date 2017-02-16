@@ -10,11 +10,14 @@ import UIKit
 import NotificationCenter
 import RxSwift
 
-private func LatestRecordPresenter(interactor: IFindLatestRecord, view: ILatestRecordView, disposeBag: DisposeBag) {
-    view.rx_viewDidLoad
-        .flatMap { interactor.rx_find() }
-        .map { LatestRecordViewModel.from(fitnessInfo: $0) }
+private func LatestRecordPresenter(interactor: AnyInteractor<Void, IFitnessInfo>, view: ILatestRecordView, disposeBag: DisposeBag) {
+    
+    interactor.rx_output.map { LatestRecordViewModel.from(fitnessInfo: $0) }
         .subscribe(onNext: { view.viewModel = $0 })
+        .addDisposableTo(disposeBag)
+
+    view.rx_viewDidLoad
+        .subscribe(onNext: {interactor.rx_input.onNext()})
         .addDisposableTo(disposeBag)
 }
 
@@ -26,7 +29,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     @IBOutlet private var muscleWeightLabel: UILabel!
     @IBOutlet private var waterPercentageLabel: UILabel!
     
-    private var interactor: IFindLatestRecord!
+    private var interactor: AnyInteractor<Void, IFitnessInfo>!
     private let disposeBag = DisposeBag()
     fileprivate let viewDidLoadSubject = PublishSubject<Void>()
     

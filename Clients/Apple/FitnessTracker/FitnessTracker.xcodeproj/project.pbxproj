@@ -30,6 +30,8 @@
 		20FA50FE1E09575E002E536A /* FitnessInfoRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FA50FD1E09575E002E536A /* FitnessInfoRepository.swift */; };
 		20FA510B1E0AE4D0002E536A /* CommonUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FA510A1E0AE4D0002E536A /* CommonUtils.swift */; };
 		3903F5CA1E1BFA7D0093095B /* AppRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3903F5C91E1BFA7D0093095B /* AppRouter.swift */; };
+		391A195B1E562D0E00436A52 /* Interactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391A195A1E562D0E00436A52 /* Interactor.swift */; };
+		391A195C1E56387700436A52 /* Interactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391A195A1E562D0E00436A52 /* Interactor.swift */; };
 		397EBDA51E27B6B70060BCC1 /* InsightsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397EBDA41E27B6B70060BCC1 /* InsightsViewController.swift */; };
 		39DE51B11E41798D00DD29CE /* GraphHistoryVP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39DE51B01E41798D00DD29CE /* GraphHistoryVP.swift */; };
 		39EE91311E36329F00F104C8 /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39EE91301E36329F00F104C8 /* NotificationCenter.framework */; };
@@ -140,6 +142,7 @@
 		243E297E8C331F616EE9C451 /* Pods_FitnessTracker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FitnessTracker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		28A3F34B67D440117A76919C /* Pods-TodayExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TodayExtension.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TodayExtension/Pods-TodayExtension.debug.xcconfig"; sourceTree = "<group>"; };
 		3903F5C91E1BFA7D0093095B /* AppRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppRouter.swift; sourceTree = "<group>"; };
+		391A195A1E562D0E00436A52 /* Interactor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Interactor.swift; sourceTree = "<group>"; };
 		397EBDA41E27B6B70060BCC1 /* InsightsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InsightsViewController.swift; sourceTree = "<group>"; };
 		39BBF6271E37616600CF5AE7 /* FitnessTracker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FitnessTracker.entitlements; sourceTree = "<group>"; };
 		39BBF6281E37668500CF5AE7 /* TodayExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TodayExtension.entitlements; sourceTree = "<group>"; };
@@ -309,6 +312,7 @@
 				39F988AC1E4B41A0008A1DB6 /* FindInsights.swift */,
 				39F988C41E4B43EB008A1DB6 /* FindPreviousLatestResult.swift */,
 				39F988C61E4B4569008A1DB6 /* RecordsStoreUpdates.swift */,
+				391A195A1E562D0E00436A52 /* Interactor.swift */,
 			);
 			path = Domain;
 			sourceTree = "<group>";
@@ -707,6 +711,7 @@
 				39F988CB1E4E1155008A1DB6 /* HeatlthKitRepository.swift in Sources */,
 				39F988991E46559D008A1DB6 /* CoreDataQueryRequest.swift in Sources */,
 				39F988AF1E4B4218008A1DB6 /* BodyMetric.swift in Sources */,
+				391A195B1E562D0E00436A52 /* Interactor.swift in Sources */,
 				39F988B11E4B42C6008A1DB6 /* InsightsVP.swift in Sources */,
 				39F988C71E4B4569008A1DB6 /* RecordsStoreUpdates.swift in Sources */,
 				2021420B1E0D248900BAF444 /* CoreDataModel.xcdatamodeld in Sources */,
@@ -741,6 +746,7 @@
 				39F988C31E4B4380008A1DB6 /* BodyMetric.swift in Sources */,
 				39EE916D1E363FFF00F104C8 /* FitnessInfo.swift in Sources */,
 				39EE91451E363DAA00F104C8 /* FindLatestRecord.swift in Sources */,
+				391A195C1E56387700436A52 /* Interactor.swift in Sources */,
 				39F988971E46556E008A1DB6 /* IFitnessInfoRepository.swift in Sources */,
 				39EE91481E363EDA00F104C8 /* FitnessInfoRepository.swift in Sources */,
 				39EE91721E3640D200F104C8 /* NSCalendar+NSDateFactory.swift in Sources */,
