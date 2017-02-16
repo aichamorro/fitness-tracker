@@ -9,27 +9,14 @@
 import Foundation
 import RxSwift
 
-protocol IFindRecordsInInterval {
-    func find(from: Date, to: Date) -> Observable<[IFitnessInfo]>
-}
-
-extension IFindRecordsInInterval {
-    func find(from: Date) -> Observable<[IFitnessInfo]> {
-        return self.find(from: from, to: Calendar.current.endOfToday)
-    }
-}
-
+typealias DateRange = (Date, Date)
+typealias IFindRecordsInInterval = AnyInteractor<DateRange, [IFitnessInfo]>
 final class FindRecordsInInterval: IFindRecordsInInterval {
-    private let fitnessInfoRepository: IFitnessInfoRepository
-    
     init(repository: IFitnessInfoRepository) {
-        self.fitnessInfoRepository = repository
-    }
-    
-    func find(from: Date, to: Date) -> Observable<[IFitnessInfo]> {
-        return fitnessInfoRepository
-            .rx_find(from: from as NSDate,
-                     to: to as NSDate,
-                     order: .ascendent)
+        super.init { from, to -> Observable<[IFitnessInfo]> in
+            return repository.rx_find(from: from as NSDate,
+                         to: to as NSDate,
+                         order: .ascendent)
+        }
     }
 }
