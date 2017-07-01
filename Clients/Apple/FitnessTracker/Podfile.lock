@@ -1,6 +1,9 @@
 PODS:
   - Nimble (5.1.1)
   - Quick (1.0.0)
+  - R.swift (3.3.0):
+    - R.swift.Library (~> 3.0.2)
+  - R.swift.Library (3.0.2)
   - RxCocoa (3.0.1):
     - RxSwift (~> 3.0)
   - RxSwift (3.0.1)
@@ -12,6 +15,7 @@ PODS:
 DEPENDENCIES:
   - Nimble
   - Quick
+  - R.swift
   - RxCocoa
   - RxSwift
   - RxTest
@@ -32,12 +36,14 @@ CHECKOUT OPTIONS:
 SPEC CHECKSUMS:
   Nimble: 415e3aa3267e7bc2c96b05fa814ddea7bb686a29
   Quick: 8024e4a47e6cc03a9d5245ef0948264fc6d27cff
+  R.swift: bde9704d50ff36820f49e266bc88ef545e1e9b36
+  R.swift.Library: fbdec16c9802ad104fc1ba53415dc190e6ec5c73
   RxCocoa: 15a52fc590dcc700cb4a690a633b5c5184ce3a78
   RxSwift: af5680055c4ad04480189c52d28385b1029493a6
   RxTest: 9867e6f3c435af30fbdb44b6d8ec30b78c40b515
   UIGraphView: 5a9c1d595cbd2c5e5a2d5b1689058866dafa2e56
   URLRouter: ffa394dfda6d5014e9af70f4b1a9d4e28dff81db
 
-PODFILE CHECKSUM: b1ebad4650462550f43d4a18565b32ad4af3e865
+PODFILE CHECKSUM: 894ed1e0abc97232af7f251e814556f3f2b32bcc
 
 COCOAPODS: 1.2.1
