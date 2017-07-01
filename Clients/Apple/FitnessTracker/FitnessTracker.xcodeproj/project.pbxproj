@@ -17,12 +17,18 @@
 		2021420B1E0D248900BAF444 /* CoreDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 202142091E0D248900BAF444 /* CoreDataModel.xcdatamodeld */; };
 		2021420F1E0D27FD00BAF444 /* CoreDataFitnessInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2021420E1E0D27FD00BAF444 /* CoreDataFitnessInfo.swift */; };
 		202142111E0D57C200BAF444 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 202142101E0D57C200BAF444 /* CoreDataStack.swift */; };
+		2040BF1A1F0718D300520E15 /* LocalizableStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 209175601F070CDD00607117 /* LocalizableStrings.swift */; };
+		2040BF1F1F0858DA00520E15 /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2040BF1E1F0858DA00520E15 /* R.generated.swift */; };
+		2040BF201F0858DA00520E15 /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2040BF1E1F0858DA00520E15 /* R.generated.swift */; };
 		20471A481E197E9D0000F7C2 /* InsightsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20471A471E197E9D0000F7C2 /* InsightsTests.swift */; };
 		20471A4A1E1983F80000F7C2 /* FitnessInfoInsight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20471A491E1983F80000F7C2 /* FitnessInfoInsight.swift */; };
 		20471A4D1E1ADBB00000F7C2 /* NSCalendar+NSDateFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20471A4C1E1ADBB00000F7C2 /* NSCalendar+NSDateFactory.swift */; };
 		204C62141E0FFFC100B6CE47 /* NewRecordTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204C62131E0FFFC100B6CE47 /* NewRecordTests.swift */; };
 		204C62161E1046C300B6CE47 /* CoreDataFitnessInfoRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204C62151E1046C300B6CE47 /* CoreDataFitnessInfoRepositoryTests.swift */; };
 		205212FB1E01D3AD00F9A9E7 /* LatestRecordTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205212FA1E01D3AD00F9A9E7 /* LatestRecordTests.swift */; };
+		207955031F03845600F592C6 /* ExperimentsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 207955021F03845600F592C6 /* ExperimentsTests.swift */; };
+		209175611F070CDD00607117 /* LocalizableStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 209175601F070CDD00607117 /* LocalizableStrings.swift */; };
+		209175631F070CFC00607117 /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 209175621F070CFC00607117 /* Localizable.stringsdict */; };
 		20D76F211E0DA8DA00FDD122 /* FitnessInfo+Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20D76F201E0DA8DA00FDD122 /* FitnessInfo+Operators.swift */; };
 		20E89E651E12F44E00F03644 /* MetricHistoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E89E641E12F44E00F03644 /* MetricHistoryTests.swift */; };
 		20E89E681E130C5C00F03644 /* ShowMetricHistoricalDataVP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E89E671E130C5C00F03644 /* ShowMetricHistoricalDataVP.swift */; };
@@ -123,12 +129,17 @@
 		2021420A1E0D248900BAF444 /* CoreDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreDataModel.xcdatamodel; sourceTree = "<group>"; };
 		2021420E1E0D27FD00BAF444 /* CoreDataFitnessInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataFitnessInfo.swift; sourceTree = "<group>"; };
 		202142101E0D57C200BAF444 /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		2040BF1E1F0858DA00520E15 /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = "<group>"; };
 		20471A471E197E9D0000F7C2 /* InsightsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InsightsTests.swift; sourceTree = "<group>"; };
 		20471A491E1983F80000F7C2 /* FitnessInfoInsight.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FitnessInfoInsight.swift; sourceTree = "<group>"; };
 		20471A4C1E1ADBB00000F7C2 /* NSCalendar+NSDateFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSCalendar+NSDateFactory.swift"; sourceTree = "<group>"; };
 		204C62131E0FFFC100B6CE47 /* NewRecordTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewRecordTests.swift; sourceTree = "<group>"; };
 		204C62151E1046C300B6CE47 /* CoreDataFitnessInfoRepositoryTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataFitnessInfoRepositoryTests.swift; sourceTree = "<group>"; };
 		205212FA1E01D3AD00F9A9E7 /* LatestRecordTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = LatestRecordTests.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		207955021F03845600F592C6 /* ExperimentsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExperimentsTests.swift; sourceTree = "<group>"; };
+		2091755D1F0709B600607117 /* LocalizableStrings.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = LocalizableStrings.json; sourceTree = "<group>"; };
+		209175601F070CDD00607117 /* LocalizableStrings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalizableStrings.swift; sourceTree = "<group>"; };
+		209175621F070CFC00607117 /* Localizable.stringsdict */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.stringsdict; path = Localizable.stringsdict; sourceTree = "<group>"; };
 		20D76F201E0DA8DA00FDD122 /* FitnessInfo+Operators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FitnessInfo+Operators.swift"; sourceTree = "<group>"; };
 		20E89E641E12F44E00F03644 /* MetricHistoryTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MetricHistoryTests.swift; sourceTree = "<group>"; };
 		20E89E671E130C5C00F03644 /* ShowMetricHistoricalDataVP.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowMetricHistoricalDataVP.swift; sourceTree = "<group>"; };
@@ -215,6 +226,8 @@
 		200323C81E00166200B1C33A = {
 			isa = PBXGroup;
 			children = (
+				2091755F1F070C7500607117 /* Generated */,
+				2091755C1F0709A100607117 /* Resources */,
 				200323D31E00166200B1C33A /* FitnessTracker */,
 				200323EB1E0018A500B1C33A /* FitnessTrackerTests */,
 				39EE91321E36329F00F104C8 /* TodayExtension */,
@@ -266,6 +279,7 @@
 				20E89E641E12F44E00F03644 /* MetricHistoryTests.swift */,
 				20471A471E197E9D0000F7C2 /* InsightsTests.swift */,
 				39F9889B1E48878E008A1DB6 /* FindRecordsInIntervalTests.swift */,
+				207955021F03845600F592C6 /* ExperimentsTests.swift */,
 			);
 			path = FitnessTrackerTests;
 			sourceTree = "<group>";
@@ -276,6 +290,25 @@
 				20471A4C1E1ADBB00000F7C2 /* NSCalendar+NSDateFactory.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		2091755C1F0709A100607117 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				209175621F070CFC00607117 /* Localizable.stringsdict */,
+				2091755D1F0709B600607117 /* LocalizableStrings.json */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		2091755F1F070C7500607117 /* Generated */ = {
+			isa = PBXGroup;
+			children = (
+				209175601F070CDD00607117 /* LocalizableStrings.swift */,
+				2040BF1E1F0858DA00520E15 /* R.generated.swift */,
+			);
+			name = Generated;
+			path = FitnessTracker/Generated;
 			sourceTree = "<group>";
 		};
 		20E89E661E130C2500F03644 /* Presentation */ = {
@@ -436,6 +469,8 @@
 			buildConfigurationList = 39EE913E1E36329F00F104C8 /* Build configuration list for PBXNativeTarget "TodayExtension" */;
 			buildPhases = (
 				CDB5BB510136F6BD057376F1 /* [CP] Check Pods Manifest.lock */,
+				2040BF1C1F071CC800520E15 /* Generate LocalizableStrings.swift */,
+				2040BF1D1F08580700520E15 /* R.swift */,
 				39EE912B1E36329F00F104C8 /* Sources */,
 				39EE912C1E36329F00F104C8 /* Frameworks */,
 				39EE912D1E36329F00F104C8 /* Resources */,
@@ -515,6 +550,7 @@
 			files = (
 				200323DF1E00166200B1C33A /* LaunchScreen.storyboard in Resources */,
 				200323DC1E00166200B1C33A /* Assets.xcassets in Resources */,
+				209175631F070CFC00607117 /* Localizable.stringsdict in Resources */,
 				200323DA1E00166200B1C33A /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -552,6 +588,34 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FitnessTracker/Pods-FitnessTracker-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		2040BF1C1F071CC800520E15 /* Generate LocalizableStrings.swift */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Generate LocalizableStrings.swift";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Resources/Cocoa-i18n\" \"${SRCROOT}/Resources/\" \".\"\n#\ndiff -N \"./LocalizableStrings.swift\" \"FitnessTracker/Generated/LocalizableStrings.swift\"\nif [ $? == 1 ]\nthen\n  mv \"./LocalizableStrings.swift\" \"FitnessTracker/Generated/LocalizableStrings.swift\"\nelse\n  rm \"./LocalizableStrings.swift\"\nfi\n#\nmv \"./Localizable.stringsdict\" \"Resources/Localizable.stringsdict\"\n";
+		};
+		2040BF1D1F08580700520E15 /* R.swift */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = R.swift;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"$PODS_ROOT/R.swift/rswift\" \"$SRCROOT\"\n#\ndiff -N \"R.generated.swift\" \"FitnessTracker/Generated/R.generated.swift\"\nif [ $? == 1 ]\nthen\n  mv \"R.generated.swift\" \"FitnessTracker/Generated/R.generated.swift\"\nelse\n  rm \"R.generated.swift\"\nfi";
+		};
 		247BA57E00A8F3D4CC23C4D4 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -579,7 +643,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		9467FB50F9B84BF4A8A7CC04 /* [CP] Copy Pods Resources */ = {
@@ -609,7 +673,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		AB516A9F3D3DBA373B5F2680 /* [CP] Copy Pods Resources */ = {
@@ -654,7 +718,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -685,6 +749,7 @@
 				39F988C51E4B43EB008A1DB6 /* FindPreviousLatestResult.swift in Sources */,
 				20471A4A1E1983F80000F7C2 /* FitnessInfoInsight.swift in Sources */,
 				39F988BD1E4B4361008A1DB6 /* LatestRecordPresenter.swift in Sources */,
+				209175611F070CDD00607117 /* LocalizableStrings.swift in Sources */,
 				39F988BF1E4B4361008A1DB6 /* NewRecordPresenter.swift in Sources */,
 				20FA50FB1E095712002E536A /* FindLatestRecord.swift in Sources */,
 				200323D51E00166200B1C33A /* AppDelegate.swift in Sources */,
@@ -695,6 +760,7 @@
 				39F988C11E4B4361008A1DB6 /* ShowPreviousLatestResultVIP.swift in Sources */,
 				39F988961E465523008A1DB6 /* IFitnessInfoRepository.swift in Sources */,
 				39F988991E46559D008A1DB6 /* CoreDataQueryRequest.swift in Sources */,
+				2040BF1F1F0858DA00520E15 /* R.generated.swift in Sources */,
 				39F988AF1E4B4218008A1DB6 /* BodyMetric.swift in Sources */,
 				391A195B1E562D0E00436A52 /* Interactor.swift in Sources */,
 				39F988B11E4B42C6008A1DB6 /* InsightsVP.swift in Sources */,
@@ -712,6 +778,7 @@
 				204C62141E0FFFC100B6CE47 /* NewRecordTests.swift in Sources */,
 				204C62161E1046C300B6CE47 /* CoreDataFitnessInfoRepositoryTests.swift in Sources */,
 				205212FB1E01D3AD00F9A9E7 /* LatestRecordTests.swift in Sources */,
+				207955031F03845600F592C6 /* ExperimentsTests.swift in Sources */,
 				20E89E651E12F44E00F03644 /* MetricHistoryTests.swift in Sources */,
 				20471A481E197E9D0000F7C2 /* InsightsTests.swift in Sources */,
 				39F9889C1E48878E008A1DB6 /* FindRecordsInIntervalTests.swift in Sources */,
@@ -725,6 +792,7 @@
 			files = (
 				39EE91491E363EDE00F104C8 /* CoreDataFitnessInfo.swift in Sources */,
 				39EE914A1E363F0100F104C8 /* CoreDataStack.swift in Sources */,
+				2040BF201F0858DA00520E15 /* R.generated.swift in Sources */,
 				39F9889A1E4656CA008A1DB6 /* CoreDataQueryRequest.swift in Sources */,
 				39EE916A1E363F7E00F104C8 /* CoreDataModel.xcdatamodeld in Sources */,
 				39F988C21E4B436F008A1DB6 /* LatestRecordView.swift in Sources */,
@@ -732,6 +800,7 @@
 				39EE916D1E363FFF00F104C8 /* FitnessInfo.swift in Sources */,
 				39EE91451E363DAA00F104C8 /* FindLatestRecord.swift in Sources */,
 				391A195C1E56387700436A52 /* Interactor.swift in Sources */,
+				2040BF1A1F0718D300520E15 /* LocalizableStrings.swift in Sources */,
 				39F988971E46556E008A1DB6 /* IFitnessInfoRepository.swift in Sources */,
 				39EE91481E363EDA00F104C8 /* FitnessInfoRepository.swift in Sources */,
 				39EE91721E3640D200F104C8 /* NSCalendar+NSDateFactory.swift in Sources */,
