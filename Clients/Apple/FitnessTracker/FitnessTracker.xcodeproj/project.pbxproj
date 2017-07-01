@@ -17,9 +17,7 @@
 		2021420B1E0D248900BAF444 /* CoreDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 202142091E0D248900BAF444 /* CoreDataModel.xcdatamodeld */; };
 		2021420F1E0D27FD00BAF444 /* CoreDataFitnessInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2021420E1E0D27FD00BAF444 /* CoreDataFitnessInfo.swift */; };
 		202142111E0D57C200BAF444 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 202142101E0D57C200BAF444 /* CoreDataStack.swift */; };
-		2040BF1A1F0718D300520E15 /* LocalizableStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 209175601F070CDD00607117 /* LocalizableStrings.swift */; };
 		2040BF1F1F0858DA00520E15 /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2040BF1E1F0858DA00520E15 /* R.generated.swift */; };
-		2040BF201F0858DA00520E15 /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2040BF1E1F0858DA00520E15 /* R.generated.swift */; };
 		20471A481E197E9D0000F7C2 /* InsightsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20471A471E197E9D0000F7C2 /* InsightsTests.swift */; };
 		20471A4A1E1983F80000F7C2 /* FitnessInfoInsight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20471A491E1983F80000F7C2 /* FitnessInfoInsight.swift */; };
 		20471A4D1E1ADBB00000F7C2 /* NSCalendar+NSDateFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20471A4C1E1ADBB00000F7C2 /* NSCalendar+NSDateFactory.swift */; };
@@ -37,24 +35,10 @@
 		20FA510B1E0AE4D0002E536A /* CommonUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FA510A1E0AE4D0002E536A /* CommonUtils.swift */; };
 		3903F5CA1E1BFA7D0093095B /* AppRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3903F5C91E1BFA7D0093095B /* AppRouter.swift */; };
 		391A195B1E562D0E00436A52 /* Interactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391A195A1E562D0E00436A52 /* Interactor.swift */; };
-		391A195C1E56387700436A52 /* Interactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391A195A1E562D0E00436A52 /* Interactor.swift */; };
 		397EBDA51E27B6B70060BCC1 /* InsightsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397EBDA41E27B6B70060BCC1 /* InsightsViewController.swift */; };
 		39DE51B11E41798D00DD29CE /* GraphHistoryVP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39DE51B01E41798D00DD29CE /* GraphHistoryVP.swift */; };
-		39EE91311E36329F00F104C8 /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39EE91301E36329F00F104C8 /* NotificationCenter.framework */; };
-		39EE91341E36329F00F104C8 /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39EE91331E36329F00F104C8 /* TodayViewController.swift */; };
-		39EE91371E36329F00F104C8 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 39EE91351E36329F00F104C8 /* MainInterface.storyboard */; };
-		39EE913B1E36329F00F104C8 /* TodayExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 39EE912F1E36329F00F104C8 /* TodayExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		39EE91451E363DAA00F104C8 /* FindLatestRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FA50FA1E095712002E536A /* FindLatestRecord.swift */; };
-		39EE91481E363EDA00F104C8 /* FitnessInfoRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FA50FD1E09575E002E536A /* FitnessInfoRepository.swift */; };
-		39EE91491E363EDE00F104C8 /* CoreDataFitnessInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2021420E1E0D27FD00BAF444 /* CoreDataFitnessInfo.swift */; };
-		39EE914A1E363F0100F104C8 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 202142101E0D57C200BAF444 /* CoreDataStack.swift */; };
-		39EE916A1E363F7E00F104C8 /* CoreDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 202142091E0D248900BAF444 /* CoreDataModel.xcdatamodeld */; };
-		39EE916D1E363FFF00F104C8 /* FitnessInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200323F41E0038B300B1C33A /* FitnessInfo.swift */; };
-		39EE91721E3640D200F104C8 /* NSCalendar+NSDateFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20471A4C1E1ADBB00000F7C2 /* NSCalendar+NSDateFactory.swift */; };
 		39F988961E465523008A1DB6 /* IFitnessInfoRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F988951E465523008A1DB6 /* IFitnessInfoRepository.swift */; };
-		39F988971E46556E008A1DB6 /* IFitnessInfoRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F988951E465523008A1DB6 /* IFitnessInfoRepository.swift */; };
 		39F988991E46559D008A1DB6 /* CoreDataQueryRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F988981E46559D008A1DB6 /* CoreDataQueryRequest.swift */; };
-		39F9889A1E4656CA008A1DB6 /* CoreDataQueryRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F988981E46559D008A1DB6 /* CoreDataQueryRequest.swift */; };
 		39F9889C1E48878E008A1DB6 /* FindRecordsInIntervalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F9889B1E48878E008A1DB6 /* FindRecordsInIntervalTests.swift */; };
 		39F9889E1E4B3121008A1DB6 /* FindRecordsInInterval.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F9889D1E4B3121008A1DB6 /* FindRecordsInInterval.swift */; };
 		39F988A01E4B3906008A1DB6 /* FindAllRecords.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F9889F1E4B3906008A1DB6 /* FindAllRecords.swift */; };
@@ -74,11 +58,8 @@
 		39F988BF1E4B4361008A1DB6 /* NewRecordPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F988BA1E4B4361008A1DB6 /* NewRecordPresenter.swift */; };
 		39F988C01E4B4361008A1DB6 /* NewRecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F988BB1E4B4361008A1DB6 /* NewRecordView.swift */; };
 		39F988C11E4B4361008A1DB6 /* ShowPreviousLatestResultVIP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F988BC1E4B4361008A1DB6 /* ShowPreviousLatestResultVIP.swift */; };
-		39F988C21E4B436F008A1DB6 /* LatestRecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F988B91E4B4361008A1DB6 /* LatestRecordView.swift */; };
-		39F988C31E4B4380008A1DB6 /* BodyMetric.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F988AE1E4B4218008A1DB6 /* BodyMetric.swift */; };
 		39F988C51E4B43EB008A1DB6 /* FindPreviousLatestResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F988C41E4B43EB008A1DB6 /* FindPreviousLatestResult.swift */; };
 		39F988C71E4B4569008A1DB6 /* RecordsStoreUpdates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F988C61E4B4569008A1DB6 /* RecordsStoreUpdates.swift */; };
-		3C7E764AE3C8B71A2F15C64D /* Pods_TodayExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7EBF53B2E60378C64BDDE11 /* Pods_TodayExtension.framework */; };
 		45AA81FD1D29B16082BA4BBA /* Pods_FitnessTracker_FitnessTrackerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95868793967C2540BD298442 /* Pods_FitnessTracker_FitnessTrackerTests.framework */; };
 		60DCC2D4BE7EC6D04AACF7B5 /* Pods_FitnessTracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 243E297E8C331F616EE9C451 /* Pods_FitnessTracker.framework */; };
 /* End PBXBuildFile section */
@@ -91,13 +72,6 @@
 			remoteGlobalIDString = 200323D01E00166200B1C33A;
 			remoteInfo = FitnessTracker;
 		};
-		39EE91391E36329F00F104C8 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 200323C91E00166200B1C33A /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 39EE912E1E36329F00F104C8;
-			remoteInfo = TodayExtension;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -107,7 +81,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				39EE913B1E36329F00F104C8 /* TodayExtension.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -153,13 +126,8 @@
 		391A195A1E562D0E00436A52 /* Interactor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Interactor.swift; sourceTree = "<group>"; };
 		397EBDA41E27B6B70060BCC1 /* InsightsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InsightsViewController.swift; sourceTree = "<group>"; };
 		39BBF6271E37616600CF5AE7 /* FitnessTracker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FitnessTracker.entitlements; sourceTree = "<group>"; };
-		39BBF6281E37668500CF5AE7 /* TodayExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TodayExtension.entitlements; sourceTree = "<group>"; };
 		39DE51B01E41798D00DD29CE /* GraphHistoryVP.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphHistoryVP.swift; sourceTree = "<group>"; };
-		39EE912F1E36329F00F104C8 /* TodayExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = TodayExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		39EE91301E36329F00F104C8 /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
-		39EE91331E36329F00F104C8 /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
-		39EE91361E36329F00F104C8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
-		39EE91381E36329F00F104C8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		39EE91401E363A5A00F104C8 /* Pods_FitnessTracker.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Pods_FitnessTracker.framework; path = "../../../../../../Library/Developer/Xcode/DerivedData/FitnessTracker-eskvvptwtkzxnkgqfwrlvsxlqtdt/Build/Products/Debug-iphonesimulator/Pods_FitnessTracker.framework"; sourceTree = "<group>"; };
 		39F988951E465523008A1DB6 /* IFitnessInfoRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IFitnessInfoRepository.swift; sourceTree = "<group>"; };
 		39F988981E46559D008A1DB6 /* CoreDataQueryRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataQueryRequest.swift; sourceTree = "<group>"; };
@@ -211,15 +179,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		39EE912C1E36329F00F104C8 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				39EE91311E36329F00F104C8 /* NotificationCenter.framework in Frameworks */,
-				3C7E764AE3C8B71A2F15C64D /* Pods_TodayExtension.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -230,7 +189,6 @@
 				2091755C1F0709A100607117 /* Resources */,
 				200323D31E00166200B1C33A /* FitnessTracker */,
 				200323EB1E0018A500B1C33A /* FitnessTrackerTests */,
-				39EE91321E36329F00F104C8 /* TodayExtension */,
 				200323D21E00166200B1C33A /* Products */,
 				6E6B8390641336CE69A69123 /* Pods */,
 				D7B064FACE09BB897B8FE4CB /* Frameworks */,
@@ -242,7 +200,6 @@
 			children = (
 				200323D11E00166200B1C33A /* FitnessTracker.app */,
 				200323EA1E0018A500B1C33A /* FitnessTrackerTests.xctest */,
-				39EE912F1E36329F00F104C8 /* TodayExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -369,17 +326,6 @@
 			path = "View Components";
 			sourceTree = "<group>";
 		};
-		39EE91321E36329F00F104C8 /* TodayExtension */ = {
-			isa = PBXGroup;
-			children = (
-				39BBF6281E37668500CF5AE7 /* TodayExtension.entitlements */,
-				39EE91331E36329F00F104C8 /* TodayViewController.swift */,
-				39EE91351E36329F00F104C8 /* MainInterface.storyboard */,
-				39EE91381E36329F00F104C8 /* Info.plist */,
-			);
-			path = TodayExtension;
-			sourceTree = "<group>";
-		};
 		39F988A11E4B3EEB008A1DB6 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -426,6 +372,8 @@
 			buildConfigurationList = 200323E31E00166200B1C33A /* Build configuration list for PBXNativeTarget "FitnessTracker" */;
 			buildPhases = (
 				9507FD782EB359802212F168 /* [CP] Check Pods Manifest.lock */,
+				2040BF2A1F08605300520E15 /* LocalizableStrings.swift */,
+				2040BF211F085A1900520E15 /* R.swift */,
 				200323CD1E00166200B1C33A /* Sources */,
 				200323CE1E00166200B1C33A /* Frameworks */,
 				200323CF1E00166200B1C33A /* Resources */,
@@ -436,7 +384,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				39EE913A1E36329F00F104C8 /* PBXTargetDependency */,
 			);
 			name = FitnessTracker;
 			productName = FitnessTracker;
@@ -464,27 +411,6 @@
 			productReference = 200323EA1E0018A500B1C33A /* FitnessTrackerTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		39EE912E1E36329F00F104C8 /* TodayExtension */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 39EE913E1E36329F00F104C8 /* Build configuration list for PBXNativeTarget "TodayExtension" */;
-			buildPhases = (
-				CDB5BB510136F6BD057376F1 /* [CP] Check Pods Manifest.lock */,
-				2040BF1C1F071CC800520E15 /* Generate LocalizableStrings.swift */,
-				2040BF1D1F08580700520E15 /* R.swift */,
-				39EE912B1E36329F00F104C8 /* Sources */,
-				39EE912C1E36329F00F104C8 /* Frameworks */,
-				39EE912D1E36329F00F104C8 /* Resources */,
-				AB516A9F3D3DBA373B5F2680 /* [CP] Copy Pods Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = TodayExtension;
-			productName = TodayExtension;
-			productReference = 39EE912F1E36329F00F104C8 /* TodayExtension.appex */;
-			productType = "com.apple.product-type.app-extension";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -511,16 +437,6 @@
 						ProvisioningStyle = Automatic;
 						TestTargetID = 200323D01E00166200B1C33A;
 					};
-					39EE912E1E36329F00F104C8 = {
-						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = K344HSVA53;
-						ProvisioningStyle = Automatic;
-						SystemCapabilities = {
-							com.apple.ApplicationGroups.iOS = {
-								enabled = 1;
-							};
-						};
-					};
 				};
 			};
 			buildConfigurationList = 200323CC1E00166200B1C33A /* Build configuration list for PBXProject "FitnessTracker" */;
@@ -538,7 +454,6 @@
 			targets = (
 				200323D01E00166200B1C33A /* FitnessTracker */,
 				200323E91E0018A500B1C33A /* FitnessTrackerTests */,
-				39EE912E1E36329F00F104C8 /* TodayExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -562,14 +477,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		39EE912D1E36329F00F104C8 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				39EE91371E36329F00F104C8 /* MainInterface.storyboard in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
@@ -588,21 +495,7 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FitnessTracker/Pods-FitnessTracker-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		2040BF1C1F071CC800520E15 /* Generate LocalizableStrings.swift */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Generate LocalizableStrings.swift";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Resources/Cocoa-i18n\" \"${SRCROOT}/Resources/\" \".\"\n#\ndiff -N \"./LocalizableStrings.swift\" \"FitnessTracker/Generated/LocalizableStrings.swift\"\nif [ $? == 1 ]\nthen\n  mv \"./LocalizableStrings.swift\" \"FitnessTracker/Generated/LocalizableStrings.swift\"\nelse\n  rm \"./LocalizableStrings.swift\"\nfi\n#\nmv \"./Localizable.stringsdict\" \"Resources/Localizable.stringsdict\"\n";
-		};
-		2040BF1D1F08580700520E15 /* R.swift */ = {
+		2040BF211F085A1900520E15 /* R.swift */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -614,7 +507,21 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"$PODS_ROOT/R.swift/rswift\" \"$SRCROOT\"\n#\ndiff -N \"R.generated.swift\" \"FitnessTracker/Generated/R.generated.swift\"\nif [ $? == 1 ]\nthen\n  mv \"R.generated.swift\" \"FitnessTracker/Generated/R.generated.swift\"\nelse\n  rm \"R.generated.swift\"\nfi";
+			shellScript = "\"$PODS_ROOT/R.swift/rswift\" \"$SRCROOT\"\n#\ndiff -N \"R.generated.swift\" \"FitnessTracker/Generated/R.generated.swift\"\nif [ $? == 1 ]\nthen\nmv \"R.generated.swift\" \"FitnessTracker/Generated/R.generated.swift\"\nelse\nrm \"R.generated.swift\"\nfi";
+		};
+		2040BF2A1F08605300520E15 /* LocalizableStrings.swift */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = LocalizableStrings.swift;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Resources/Cocoa-i18n\" \"${SRCROOT}/Resources/\" \".\"\n#\ndiff -N \"./LocalizableStrings.swift\" \"FitnessTracker/Generated/LocalizableStrings.swift\"\nif [ $? == 1 ]\nthen\nmv \"./LocalizableStrings.swift\" \"FitnessTracker/Generated/LocalizableStrings.swift\"\nelse\nrm \"./LocalizableStrings.swift\"\nfi\n#\nmv \"./Localizable.stringsdict\" \"Resources/Localizable.stringsdict\"\n";
 		};
 		247BA57E00A8F3D4CC23C4D4 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -676,21 +583,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		AB516A9F3D3DBA373B5F2680 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TodayExtension/Pods-TodayExtension-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		BF4CD9088C8297A89DBF0FF3 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -704,21 +596,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FitnessTracker/Pods-FitnessTracker-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		CDB5BB510136F6BD057376F1 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -786,28 +663,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		39EE912B1E36329F00F104C8 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				39EE91491E363EDE00F104C8 /* CoreDataFitnessInfo.swift in Sources */,
-				39EE914A1E363F0100F104C8 /* CoreDataStack.swift in Sources */,
-				2040BF201F0858DA00520E15 /* R.generated.swift in Sources */,
-				39F9889A1E4656CA008A1DB6 /* CoreDataQueryRequest.swift in Sources */,
-				39EE916A1E363F7E00F104C8 /* CoreDataModel.xcdatamodeld in Sources */,
-				39F988C21E4B436F008A1DB6 /* LatestRecordView.swift in Sources */,
-				39F988C31E4B4380008A1DB6 /* BodyMetric.swift in Sources */,
-				39EE916D1E363FFF00F104C8 /* FitnessInfo.swift in Sources */,
-				39EE91451E363DAA00F104C8 /* FindLatestRecord.swift in Sources */,
-				391A195C1E56387700436A52 /* Interactor.swift in Sources */,
-				2040BF1A1F0718D300520E15 /* LocalizableStrings.swift in Sources */,
-				39F988971E46556E008A1DB6 /* IFitnessInfoRepository.swift in Sources */,
-				39EE91481E363EDA00F104C8 /* FitnessInfoRepository.swift in Sources */,
-				39EE91721E3640D200F104C8 /* NSCalendar+NSDateFactory.swift in Sources */,
-				39EE91341E36329F00F104C8 /* TodayViewController.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -815,11 +670,6 @@
 			isa = PBXTargetDependency;
 			target = 200323D01E00166200B1C33A /* FitnessTracker */;
 			targetProxy = 200323EF1E0018A500B1C33A /* PBXContainerItemProxy */;
-		};
-		39EE913A1E36329F00F104C8 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 39EE912E1E36329F00F104C8 /* TodayExtension */;
-			targetProxy = 39EE91391E36329F00F104C8 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -838,14 +688,6 @@
 				200323DE1E00166200B1C33A /* Base */,
 			);
 			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-		39EE91351E36329F00F104C8 /* MainInterface.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				39EE91361E36329F00F104C8 /* Base */,
-			);
-			name = MainInterface.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -1006,36 +848,6 @@
 			};
 			name = Release;
 		};
-		39EE913C1E36329F00F104C8 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 28A3F34B67D440117A76919C /* Pods-TodayExtension.debug.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = TodayExtension/TodayExtension.entitlements;
-				DEVELOPMENT_TEAM = K344HSVA53;
-				INFOPLIST_FILE = TodayExtension/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.onset-bits.FitnessTracker.TodayExtension";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 3.0;
-			};
-			name = Debug;
-		};
-		39EE913D1E36329F00F104C8 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 94B5A7A9738E9EE617B4C9E1 /* Pods-TodayExtension.release.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = TodayExtension/TodayExtension.entitlements;
-				DEVELOPMENT_TEAM = K344HSVA53;
-				INFOPLIST_FILE = TodayExtension/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.onset-bits.FitnessTracker.TodayExtension";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 3.0;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1062,15 +874,6 @@
 			buildConfigurations = (
 				200323F11E0018A500B1C33A /* Debug */,
 				200323F21E0018A500B1C33A /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		39EE913E1E36329F00F104C8 /* Build configuration list for PBXNativeTarget "TodayExtension" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				39EE913C1E36329F00F104C8 /* Debug */,
-				39EE913D1E36329F00F104C8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

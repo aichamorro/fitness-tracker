@@ -24,9 +24,16 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     var serviceLocator: AppServiceLocator!
     var disposeBag = DisposeBag()
+    
+    func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]? = nil) -> Bool {
+        #if DEBUG
+            try! R.validate()
+        #endif
+        
+        return true
+    }
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
         
@@ -68,8 +75,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
             fatalError(error as! String)
         })
         
-        let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        serviceLocator.viewControllerFactory = UIViewControllerFactory(storyboard: mainStoryboard)
+        serviceLocator.viewControllerFactory = UIViewControllerFactory()
     }
     
     private func configureRouting() {
@@ -78,18 +84,4 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         serviceLocator.router = AppRouter(urlRouter: URLRouterFactory.with(entries: allEntries))
     }
 
-}
-
-extension AppDelegate {
-    func application(_ application: UIApplication, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
-        switch shortcutItem.type {
-        case "org.onset-bits.fitness-tracker.new-record": serviceLocator.router.open(appURL: URL(string: "app://records/new")!, resultHandler: { result in
-            guard let viewController = result as? UIViewController else { fatalError() }
-            
-            self.window?.rootViewController?.show(viewController, sender: nil)
-        })
-            
-        default: fatalError("Shortcut not handled")
-        }
-    }
 }

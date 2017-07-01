@@ -15,46 +15,20 @@ protocol IUIViewControllerFactory {
     func showInsights() -> InsightsViewController
 }
 
-final class UIViewControllerFactory {
-    let storyboard: UIStoryboard!
-    
-    init(storyboard: UIStoryboard) {
-        self.storyboard = storyboard
-    }
-}
-
-extension UIViewControllerFactory: IUIViewControllerFactory {
+final class UIViewControllerFactory: IUIViewControllerFactory {
     func latestRecordViewController() -> LatestRecordViewController {
-        return storyboard.latestRecordViewController()
+        return R.storyboard.main.latestRecordViewController()!
     }
     
     func newRecordViewController() -> NewRecordViewController {
-        return storyboard.newRecordViewController()
+        return R.storyboard.main.newRecordViewController()!
     }
     
     func showMetricHistoryData() -> ShowMetricHistoricalDataViewController {
-        return storyboard.showMetricHistoryData()
+        return R.storyboard.main.showMetricHistoricalData()!
     }
     
     func showInsights() -> InsightsViewController {
-        return storyboard.showInsights()
-    }
-}
-
-private extension UIStoryboard {
-    func latestRecordViewController() -> LatestRecordViewController {
-        return instantiateViewController(withIdentifier: "LatestRecordViewController") as! LatestRecordViewController
-    }
-    
-    func newRecordViewController() -> NewRecordViewController {
-        return instantiateViewController(withIdentifier: "NewRecordViewController") as! NewRecordViewController
-    }
-    
-    func showMetricHistoryData() -> ShowMetricHistoricalDataViewController {
-        return instantiateViewController(withIdentifier: "ShowMetricHistoricalData") as! ShowMetricHistoricalDataViewController
-    }
-    
-    func showInsights() -> InsightsViewController {
-        return instantiateViewController(withIdentifier: "InsightsViewController") as! InsightsViewController
+        return R.storyboard.main.insightsViewController()!
     }
 }

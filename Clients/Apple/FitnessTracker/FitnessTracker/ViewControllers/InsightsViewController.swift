@@ -33,7 +33,7 @@ extension InsightsViewController {
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "InsightCardTableViewCell", for: indexPath) as! InsightsCardCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: R.reuseIdentifier.insightCardTableViewCell, for: indexPath)!
         
         cell.title.text = insights[indexPath.row].title
         cell.weight.text = String(format: "%.2f Kg", insights[indexPath.row].weight)
