@@ -99,13 +99,25 @@ extension IFitnessInfo {
 
 
 enum BMIRating: String {
-    case underweight = "Underweight"
+    case underweight =  "Underweight"
     case healthyweight = "Healthy weight"
     case overweight = "Overweight"
     case obese = "Obese"
     case severelyObese = "Severy obese"
     case morbidlyObese = "Morbidly obese"
     case superObese = "Super obese"
+    
+    var localizedDescription: String {
+        switch self {
+        case .underweight: return LocalizableStrings.Measures.BmiRating.underweight()
+        case .healthyweight: return LocalizableStrings.Measures.BmiRating.healthyweight()
+        case .overweight: return LocalizableStrings.Measures.BmiRating.overweight()
+        case .obese: return LocalizableStrings.Measures.BmiRating.obese()
+        case .severelyObese: return LocalizableStrings.Measures.BmiRating.severylyObese()
+        case .morbidlyObese: return LocalizableStrings.Measures.BmiRating.morbidlyObese()
+        case .superObese: return LocalizableStrings.Measures.BmiRating.superObese()
+        }
+    }
 }
 
 extension BMIRating {

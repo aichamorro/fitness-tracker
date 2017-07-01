@@ -22,18 +22,33 @@ enum BodyMetric: String {
 }
 
 extension BodyMetric {
+    var name: String {
+        switch self {
+        case .height: return LocalizableStrings.Measures.BodyMetrics.height()
+        case .weight: return LocalizableStrings.Measures.BodyMetrics.weight()
+        case .bodyFatWeight: fallthrough
+        case .bodyFatPercentage: return LocalizableStrings.Measures.BodyMetrics.bodyFat()
+        case .musclePercentage: fallthrough
+        case .muscleWeight: return LocalizableStrings.Measures.BodyMetrics.muscle()
+        case .waterPercentage: fallthrough
+        case .waterWeight: return LocalizableStrings.Measures.BodyMetrics.water()
+        case .leanBodyWeight: return LocalizableStrings.Measures.BodyMetrics.leanBodyWeight()
+        case .bmi: return LocalizableStrings.Measures.BodyMetrics.bmi()
+        }
+    }
+    
     var description: String {
         switch self {
-        case .height: return "Height"
-        case .weight: return "Weight"
-        case .bodyFatPercentage: return "Body Fat (%)"
-        case .musclePercentage: return "Muscle (%)"
-        case .waterPercentage: return "Water (%)"
-        case .bodyFatWeight: return "Body Fat (Kg)"
-        case .muscleWeight: return "Muscle (Kg)"
-        case .waterWeight: return "Water (Kg)"
-        case .leanBodyWeight: return "Lean Body Weight (Kg)"
-        case .bmi: return "BMI"
+        case .height: return "\(self.name) (cm)"
+        case .weight: return "\(self.name) (cm)"
+        case .bodyFatPercentage: fallthrough
+        case .musclePercentage: fallthrough
+        case .waterPercentage: return "\(self.name) (cm)"
+        case .bodyFatWeight: fallthrough
+        case .muscleWeight: fallthrough
+        case .waterWeight: fallthrough
+        case .leanBodyWeight: return "\(self.name) (kg)"
+        case .bmi: return self.name
         }
     }
 }

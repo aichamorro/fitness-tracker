@@ -36,7 +36,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         var initialViewControllers: [UIViewController] = []
         serviceLocator.router.open(appURL: URL(string: "app://records")!) { controller in
             guard let viewController = controller as? UIViewController else { fatalError() }
-            viewController.title = NSLocalizedString("Last measurement", comment: "Last measurement")
+            viewController.title = LocalizableStrings.Records.Latest.title()
             let rootController = UINavigationController(rootViewController: viewController)
             
             initialViewControllers.append(rootController)
@@ -44,7 +44,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         
         serviceLocator.router.open(appURL: URL(string: "app://insights")!) { controller in
             guard let viewController = controller as? UIViewController else { fatalError() }
-            viewController.title = NSLocalizedString("Insights", comment: "Insights")
+            viewController.title = LocalizableStrings.Insights.title()
             let rootController = UINavigationController(rootViewController: viewController)
             
             initialViewControllers.append(rootController)

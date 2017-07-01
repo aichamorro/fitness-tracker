@@ -20,7 +20,7 @@ DEPENDENCIES:
 
 EXTERNAL SOURCES:
   UIGraphView:
-    :path: ../
+    :path: "../"
   URLRouter:
     :git: https://github.com/aichamorro/URLRouter.git
 
@@ -40,4 +40,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: b1ebad4650462550f43d4a18565b32ad4af3e865
 
-COCOAPODS: 1.1.1
+COCOAPODS: 1.2.1

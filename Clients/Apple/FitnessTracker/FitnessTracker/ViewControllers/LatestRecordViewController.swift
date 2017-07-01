@@ -96,27 +96,29 @@ extension LatestRecordViewController {
     }
     
     func cellTextConfiguration(for indexPath: IndexPath) -> (String, String, String, String) {
-        switch bodyMetric(from: indexPath) {
+        let metric = bodyMetric(from: indexPath)
+
+        switch metric {
         case .height:
-            return ("Height", String(format: "%d", latestRecordView.viewModel.height), "cm", "\(previousLatestResult.value.height) cm")
+            return (metric.name, String(format: "%d", latestRecordView.viewModel.height), "cm", "\(previousLatestResult.value.height) cm")
         case .weight:
-            return ("Weight", String(format: "%.2f", latestRecordView.viewModel.weight), "kg", String(format: "%.2f kg", previousLatestResult.value.weight))
+            return ("\(metric.name)", String(format: "%.2f", latestRecordView.viewModel.weight), "kg", String(format: "%.2f kg", previousLatestResult.value.weight))
         case .bodyFatPercentage:
-            return ("Body Fat", String(format: "%.2f", latestRecordView.viewModel.bodyFat), "%", String(format: "%.2f %%", previousLatestResult.value.bodyFat))
+            return ("\(metric.name)", String(format: "%.2f", latestRecordView.viewModel.bodyFat), "%", String(format: "%.2f %%", previousLatestResult.value.bodyFat))
         case .musclePercentage:
-            return ("Muscle", String(format: "%.2f", latestRecordView.viewModel.muscle), "%", String(format: "%.2f %%", previousLatestResult.value.muscle))
+            return ("\(metric.name)", String(format: "%.2f", latestRecordView.viewModel.muscle), "%", String(format: "%.2f %%", previousLatestResult.value.muscle))
         case .waterPercentage:
-            return ("Water", String(format: "%.2f", latestRecordView.viewModel.water), "%", String(format: "%.2f %%", previousLatestResult.value.water))
+            return ("\(metric.name)", String(format: "%.2f", latestRecordView.viewModel.water), "%", String(format: "%.2f %%", previousLatestResult.value.water))
         case .bodyFatWeight:
-            return ("Body Fat Weight", String(format: "%.2f", latestRecordView.viewModel.bodyFatWeight), "kg", String(format: "%.2f kg",previousLatestResult.value.bodyFatWeight))
+            return ("\(metric.name)", String(format: "%.2f", latestRecordView.viewModel.bodyFatWeight), "kg", String(format: "%.2f kg",previousLatestResult.value.bodyFatWeight))
         case .muscleWeight:
-            return ("Muscle Weight", String(format: "%.2f", latestRecordView.viewModel.muscleWeight), "kg", String(format: "%.2f kg",previousLatestResult.value.muscleWeight))
+            return ("\(metric.name)", String(format: "%.2f", latestRecordView.viewModel.muscleWeight), "kg", String(format: "%.2f kg",previousLatestResult.value.muscleWeight))
         case .waterWeight:
-            return ("Water Weight", String(format: "%.2f", latestRecordView.viewModel.waterWeight), "kg", String(format: "%.2f kg", previousLatestResult.value.waterWeight))
+            return ("\(metric.name)", String(format: "%.2f", latestRecordView.viewModel.waterWeight), "kg", String(format: "%.2f kg", previousLatestResult.value.waterWeight))
         case .leanBodyWeight:
-            return ("Lean Body Weight", String(format: "%.2f", latestRecordView.viewModel.leanBodyWeight), "kg", String(format: "%.2f kg",previousLatestResult.value.leanBodyWeight))
+            return ("\(metric.name)", String(format: "%.2f", latestRecordView.viewModel.leanBodyWeight), "kg", String(format: "%.2f kg",previousLatestResult.value.leanBodyWeight))
         case .bmi:
-            return ("BMI", String(format: "%.1f", latestRecordView.viewModel.bmi), "", BMIRating.for(bmi: latestRecordView.viewModel.bmi).rawValue)
+            return (metric.name, String(format: "%.1f", latestRecordView.viewModel.bmi), "", BMIRating.for(bmi: latestRecordView.viewModel.bmi).rawValue)
         }
     }
     
