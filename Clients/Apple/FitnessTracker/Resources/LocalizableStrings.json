@@ -1,36 +1,42 @@
 {
-  "records": {
-    "latest": {
-      "title": "Last measurement"
-    }
-  },
-  "insights": {
-    "title": "Insights"
-  },
-  "graph": {
-    "errors": {
-      "noData": "There is no data recorded for {{metric}}",
-      "ok": "Ok"
-    }
-  },
-  "measures": {
-    "body-metrics": {
-      "height": "Height",
-      "weight": "Weight",
-      "body-fat": "Body Fat",
-      "muscle": "Muscle",
-      "water": "Water",
-      "leanBody-weight": "Lean Body Weight",
-      "bmi": "BMI"
+    "records": {
+        "latest": {
+            "title": "Last measurement"
+        }
     },
-    "bmi-rating": {
-      "underweight": "Underweight",
-      "healthyweight": "Healthy weight",
-      "overweight": "Overweight",
-      "obese": "Obese",
-      "severyly-obese": "Severely obese",
-      "morbidly-obese": "Morbidly obese",
-      "super-obese": "Super obese"
+    "insights": {
+        "title": "Insights"
+    },
+    "graph": {
+        "errors": {
+            "noData": "There is no data recorded for {{metric}}",
+            "ok": "Ok"
+        }
+    },
+    "measures": {
+        "body-metrics": {
+            "units": {
+                "height": "cm",
+                "weight": "kg",
+                "percentage": "%",
+                "bmi": " "
+            },
+            "height": "Height",
+            "weight": "Weight",
+            "body-fat": "Body Fat",
+            "muscle": "Muscle",
+            "water": "Water",
+            "leanBody-weight": "Lean Body Weight",
+            "bmi": "BMI"
+        },
+        "bmi-rating": {
+            "underweight": "Underweight",
+            "healthyweight": "Healthy weight",
+            "overweight": "Overweight",
+            "obese": "Obese",
+            "severyly-obese": "Severely obese",
+            "morbidly-obese": "Morbidly obese",
+            "super-obese": "Super obese"
+        }
     }
-  }
 }

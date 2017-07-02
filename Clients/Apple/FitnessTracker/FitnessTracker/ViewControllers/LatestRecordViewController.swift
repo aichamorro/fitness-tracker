@@ -78,7 +78,7 @@ extension LatestRecordViewController {
             return tableView.dequeueReusableCell(withIdentifier: "CellSeparator", for: indexPath)
         }
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "BodyMeasurementMetricCell", for: indexPath) as! LatestRecordMetricCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.bodyMeasurementMetricCell, for: indexPath)!
         let cellText = cellTextConfiguration(for: indexPath)
         
         cell.name.text = cellText.0
@@ -100,25 +100,64 @@ extension LatestRecordViewController {
 
         switch metric {
         case .height:
-            return (metric.name, String(format: "%d", latestRecordView.viewModel.height), "cm", "\(previousLatestResult.value.height) cm")
+            return (metric.name,
+                    Formats.BodyMeasurements.WithoutUnit.height(latestRecordView.viewModel.height),
+                    LocalizableStrings.Measures.BodyMetrics.Units.height(),
+                    Formats.BodyMeasurements.WithUnit.height(previousLatestResult.value.height))
+            
         case .weight:
-            return ("\(metric.name)", String(format: "%.2f", latestRecordView.viewModel.weight), "kg", String(format: "%.2f kg", previousLatestResult.value.weight))
+            return (metric.name,
+                    Formats.BodyMeasurements.WithoutUnit.weight(latestRecordView.viewModel.weight),
+                    LocalizableStrings.Measures.BodyMetrics.Units.weight(),
+                    Formats.BodyMeasurements.WithUnit.weight(previousLatestResult.value.weight))
+            
         case .bodyFatPercentage:
-            return ("\(metric.name)", String(format: "%.2f", latestRecordView.viewModel.bodyFat), "%", String(format: "%.2f %%", previousLatestResult.value.bodyFat))
+            return (metric.name,
+                    Formats.BodyMeasurements.WithoutUnit.bodyFatPercentage(latestRecordView.viewModel.bodyFat),
+                    LocalizableStrings.Measures.BodyMetrics.Units.percentage(),
+                    Formats.BodyMeasurements.WithUnit.bodyFatPercentage(previousLatestResult.value.bodyFat))
+
         case .musclePercentage:
-            return ("\(metric.name)", String(format: "%.2f", latestRecordView.viewModel.muscle), "%", String(format: "%.2f %%", previousLatestResult.value.muscle))
+            return (metric.name,
+                    Formats.BodyMeasurements.WithoutUnit.musclePercentage(latestRecordView.viewModel.muscle),
+                    LocalizableStrings.Measures.BodyMetrics.Units.percentage(),
+                    Formats.BodyMeasurements.WithUnit.musclePercentage(previousLatestResult.value.muscle))
+
         case .waterPercentage:
-            return ("\(metric.name)", String(format: "%.2f", latestRecordView.viewModel.water), "%", String(format: "%.2f %%", previousLatestResult.value.water))
+            return (metric.name,
+                    Formats.BodyMeasurements.WithoutUnit.waterPercentage(latestRecordView.viewModel.water),
+                    LocalizableStrings.Measures.BodyMetrics.Units.percentage(),
+                    Formats.BodyMeasurements.WithUnit.waterPercentage(previousLatestResult.value.water))
+
         case .bodyFatWeight:
-            return ("\(metric.name)", String(format: "%.2f", latestRecordView.viewModel.bodyFatWeight), "kg", String(format: "%.2f kg",previousLatestResult.value.bodyFatWeight))
+            return (metric.name,
+                    Formats.BodyMeasurements.WithoutUnit.bodyFatWeight(latestRecordView.viewModel.bodyFatWeight),
+                    LocalizableStrings.Measures.BodyMetrics.Units.weight(),
+                    Formats.BodyMeasurements.WithUnit.bodyFatWeight(previousLatestResult.value.bodyFatWeight))
+
         case .muscleWeight:
-            return ("\(metric.name)", String(format: "%.2f", latestRecordView.viewModel.muscleWeight), "kg", String(format: "%.2f kg",previousLatestResult.value.muscleWeight))
+            return (metric.name,
+                    Formats.BodyMeasurements.WithoutUnit.muscleWeight(latestRecordView.viewModel.muscleWeight),
+                    LocalizableStrings.Measures.BodyMetrics.Units.weight(),
+                    Formats.BodyMeasurements.WithUnit.muscleWeight(previousLatestResult.value.muscleWeight))
+
         case .waterWeight:
-            return ("\(metric.name)", String(format: "%.2f", latestRecordView.viewModel.waterWeight), "kg", String(format: "%.2f kg", previousLatestResult.value.waterWeight))
+            return (metric.name,
+                    Formats.BodyMeasurements.WithoutUnit.waterWeight(latestRecordView.viewModel.waterWeight),
+                    LocalizableStrings.Measures.BodyMetrics.Units.weight(),
+                    Formats.BodyMeasurements.WithUnit.waterWeight(previousLatestResult.value.waterWeight))
+
         case .leanBodyWeight:
-            return ("\(metric.name)", String(format: "%.2f", latestRecordView.viewModel.leanBodyWeight), "kg", String(format: "%.2f kg",previousLatestResult.value.leanBodyWeight))
+            return (metric.name,
+                    Formats.BodyMeasurements.WithoutUnit.leanBodyWeight(latestRecordView.viewModel.leanBodyWeight),
+                    LocalizableStrings.Measures.BodyMetrics.Units.weight(),
+                    Formats.BodyMeasurements.WithUnit.leanBodyWeight(previousLatestResult.value.leanBodyWeight))
+
         case .bmi:
-            return (metric.name, String(format: "%.1f", latestRecordView.viewModel.bmi), "", BMIRating.for(bmi: latestRecordView.viewModel.bmi).rawValue)
+            return (metric.name,
+                    Formats.BodyMeasurements.WithoutUnit.bmi(latestRecordView.viewModel.bmi),
+                    LocalizableStrings.Measures.BodyMetrics.Units.bmi(),
+                    BMIRating.for(bmi: latestRecordView.viewModel.bmi).localizedDescription)
         }
     }
     

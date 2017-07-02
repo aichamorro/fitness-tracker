@@ -36,10 +36,10 @@ extension InsightsViewController {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: R.reuseIdentifier.insightCardTableViewCell, for: indexPath)!
         
         cell.title.text = insights[indexPath.row].title
-        cell.weight.text = String(format: "%.2f Kg", insights[indexPath.row].weight)
-        cell.bodyFatWeight.text = String(format: "%.2f Kg", insights[indexPath.row].bodyFatWeight)
-        cell.muscleWeight.text = String(format: "%.2f Kg", insights[indexPath.row].muscleWeight)
-        cell.waterPercentage.text = String(format: "%.2f %%", insights[indexPath.row].waterPercentage)
+        cell.weight.text = Formats.BodyMeasurements.WithUnit.weight(insights[indexPath.row].weight)
+        cell.bodyFatWeight.text = Formats.BodyMeasurements.WithUnit.bodyFatWeight(insights[indexPath.row].bodyFatWeight)
+        cell.muscleWeight.text = Formats.BodyMeasurements.WithUnit.muscleWeight(insights[indexPath.row].muscleWeight)
+        cell.waterPercentage.text = Formats.BodyMeasurements.WithUnit.waterPercentage(insights[indexPath.row].waterPercentage)
 
         cell.layer.borderWidth = 1
         cell.layer.borderColor = UIColor.gray.cgColor

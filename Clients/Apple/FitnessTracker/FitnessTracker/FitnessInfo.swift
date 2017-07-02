@@ -98,14 +98,14 @@ extension IFitnessInfo {
 }
 
 
-enum BMIRating: String {
-    case underweight =  "Underweight"
-    case healthyweight = "Healthy weight"
-    case overweight = "Overweight"
-    case obese = "Obese"
-    case severelyObese = "Severy obese"
-    case morbidlyObese = "Morbidly obese"
-    case superObese = "Super obese"
+enum BMIRating {
+    case underweight
+    case healthyweight
+    case overweight
+    case obese
+    case severelyObese
+    case morbidlyObese
+    case superObese
     
     var localizedDescription: String {
         switch self {

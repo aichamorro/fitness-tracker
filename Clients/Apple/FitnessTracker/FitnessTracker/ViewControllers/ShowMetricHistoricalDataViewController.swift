@@ -154,10 +154,10 @@ extension ShowMetricHistoricalDataViewController: UITableViewDelegate, UITableVi
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "MetricReadingCell", for: indexPath) as! MetricReadingTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.metricReadingCell, for: indexPath)!
         
         cell.valueLabel.text = rx_metricDataVariable.value[indexPath.row].reading
-        if let date = rx_metricDataVariable.value[indexPath.row].date as? Date {
+        if let date = rx_metricDataVariable.value[indexPath.row].date as Date? {
             cell.dateLabel.text = dateFormatter.string(from: date)
         }
         

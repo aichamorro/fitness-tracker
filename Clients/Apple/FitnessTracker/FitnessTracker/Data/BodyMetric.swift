@@ -39,15 +39,15 @@ extension BodyMetric {
     
     var description: String {
         switch self {
-        case .height: return "\(self.name) (cm)"
-        case .weight: return "\(self.name) (cm)"
+        case .height: return "\(self.name) (\(LocalizableStrings.Measures.BodyMetrics.Units.height()))"
+        case .weight: return "\(self.name) (\(LocalizableStrings.Measures.BodyMetrics.Units.weight()))"
         case .bodyFatPercentage: fallthrough
         case .musclePercentage: fallthrough
-        case .waterPercentage: return "\(self.name) (cm)"
+        case .waterPercentage: return "\(self.name) (\(LocalizableStrings.Measures.BodyMetrics.Units.percentage()))"
         case .bodyFatWeight: fallthrough
         case .muscleWeight: fallthrough
         case .waterWeight: fallthrough
-        case .leanBodyWeight: return "\(self.name) (kg)"
+        case .leanBodyWeight: return "\(self.name) (\(LocalizableStrings.Measures.BodyMetrics.Units.weight()))"
         case .bmi: return self.name
         }
     }
