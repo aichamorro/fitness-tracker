@@ -18,6 +18,7 @@
 		2021420F1E0D27FD00BAF444 /* CoreDataFitnessInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2021420E1E0D27FD00BAF444 /* CoreDataFitnessInfo.swift */; };
 		202142111E0D57C200BAF444 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 202142101E0D57C200BAF444 /* CoreDataStack.swift */; };
 		2040BF1F1F0858DA00520E15 /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2040BF1E1F0858DA00520E15 /* R.generated.swift */; };
+		2040BF2C1F08631800520E15 /* Formats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2040BF2B1F08631800520E15 /* Formats.swift */; };
 		20471A481E197E9D0000F7C2 /* InsightsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20471A471E197E9D0000F7C2 /* InsightsTests.swift */; };
 		20471A4A1E1983F80000F7C2 /* FitnessInfoInsight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20471A491E1983F80000F7C2 /* FitnessInfoInsight.swift */; };
 		20471A4D1E1ADBB00000F7C2 /* NSCalendar+NSDateFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20471A4C1E1ADBB00000F7C2 /* NSCalendar+NSDateFactory.swift */; };
@@ -103,6 +104,7 @@
 		2021420E1E0D27FD00BAF444 /* CoreDataFitnessInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataFitnessInfo.swift; sourceTree = "<group>"; };
 		202142101E0D57C200BAF444 /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		2040BF1E1F0858DA00520E15 /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = "<group>"; };
+		2040BF2B1F08631800520E15 /* Formats.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Formats.swift; sourceTree = "<group>"; };
 		20471A471E197E9D0000F7C2 /* InsightsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InsightsTests.swift; sourceTree = "<group>"; };
 		20471A491E1983F80000F7C2 /* FitnessInfoInsight.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FitnessInfoInsight.swift; sourceTree = "<group>"; };
 		20471A4C1E1ADBB00000F7C2 /* NSCalendar+NSDateFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSCalendar+NSDateFactory.swift"; sourceTree = "<group>"; };
@@ -263,6 +265,7 @@
 			children = (
 				209175601F070CDD00607117 /* LocalizableStrings.swift */,
 				2040BF1E1F0858DA00520E15 /* R.generated.swift */,
+				2040BF2B1F08631800520E15 /* Formats.swift */,
 			);
 			name = Generated;
 			path = FitnessTracker/Generated;
@@ -374,6 +377,7 @@
 				9507FD782EB359802212F168 /* [CP] Check Pods Manifest.lock */,
 				2040BF2A1F08605300520E15 /* LocalizableStrings.swift */,
 				2040BF211F085A1900520E15 /* R.swift */,
+				2040BF2D1F0A4F0100520E15 /* SwiftLint */,
 				200323CD1E00166200B1C33A /* Sources */,
 				200323CE1E00166200B1C33A /* Frameworks */,
 				200323CF1E00166200B1C33A /* Resources */,
@@ -523,6 +527,20 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Resources/Cocoa-i18n\" \"${SRCROOT}/Resources/\" \".\"\n#\ndiff -N \"./LocalizableStrings.swift\" \"FitnessTracker/Generated/LocalizableStrings.swift\"\nif [ $? == 1 ]\nthen\nmv \"./LocalizableStrings.swift\" \"FitnessTracker/Generated/LocalizableStrings.swift\"\nelse\nrm \"./LocalizableStrings.swift\"\nfi\n#\nmv \"./Localizable.stringsdict\" \"Resources/Localizable.stringsdict\"\n";
 		};
+		2040BF2D1F0A4F0100520E15 /* SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = SwiftLint;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/SwiftLint/swiftlint\"";
+		};
 		247BA57E00A8F3D4CC23C4D4 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -625,6 +643,7 @@
 				39F988BE1E4B4361008A1DB6 /* LatestRecordView.swift in Sources */,
 				39F988C51E4B43EB008A1DB6 /* FindPreviousLatestResult.swift in Sources */,
 				20471A4A1E1983F80000F7C2 /* FitnessInfoInsight.swift in Sources */,
+				2040BF2C1F08631800520E15 /* Formats.swift in Sources */,
 				39F988BD1E4B4361008A1DB6 /* LatestRecordPresenter.swift in Sources */,
 				209175611F070CDD00607117 /* LocalizableStrings.swift in Sources */,
 				39F988BF1E4B4361008A1DB6 /* NewRecordPresenter.swift in Sources */,

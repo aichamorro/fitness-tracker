@@ -9,6 +9,7 @@ PODS:
   - RxSwift (3.0.1)
   - RxTest (3.0.1):
     - RxSwift (~> 3.0)
+  - SwiftLint (0.20.0)
   - UIGraphView (1.0.0)
   - URLRouter (1.2.0)
 
@@ -19,6 +20,7 @@ DEPENDENCIES:
   - RxCocoa
   - RxSwift
   - RxTest
+  - SwiftLint
   - UIGraphView (from `../`)
   - URLRouter (from `https://github.com/aichamorro/URLRouter.git`)
 
@@ -41,9 +43,10 @@ SPEC CHECKSUMS:
   RxCocoa: 15a52fc590dcc700cb4a690a633b5c5184ce3a78
   RxSwift: af5680055c4ad04480189c52d28385b1029493a6
   RxTest: 9867e6f3c435af30fbdb44b6d8ec30b78c40b515
+  SwiftLint: 3f7543509c931d1291395335f34e245d3919b7f2
   UIGraphView: 5a9c1d595cbd2c5e5a2d5b1689058866dafa2e56
   URLRouter: ffa394dfda6d5014e9af70f4b1a9d4e28dff81db
 
-PODFILE CHECKSUM: 894ed1e0abc97232af7f251e814556f3f2b32bcc
+PODFILE CHECKSUM: 77f4b1e661e3beccfb2f13c92df6ecbdea534de5
 
 COCOAPODS: 1.2.1
