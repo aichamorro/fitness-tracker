@@ -28,6 +28,11 @@
 		207955031F03845600F592C6 /* ExperimentsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 207955021F03845600F592C6 /* ExperimentsTests.swift */; };
 		209175611F070CDD00607117 /* LocalizableStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 209175601F070CDD00607117 /* LocalizableStrings.swift */; };
 		209175631F070CFC00607117 /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 209175621F070CFC00607117 /* Localizable.stringsdict */; };
+		20A54AF51F100CF000FE879D /* MVPView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A54AF41F100CF000FE879D /* MVPView.swift */; };
+		20A54AF71F100D1400FE879D /* MVPViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A54AF61F100D1400FE879D /* MVPViewController.swift */; };
+		20A54AF91F100D4400FE879D /* Interactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A54AF81F100D4400FE879D /* Interactor.swift */; };
+		20A54AFB1F100D7E00FE879D /* UIWireframe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A54AFA1F100D7E00FE879D /* UIWireframe.swift */; };
+		20A54AFD1F100F6700FE879D /* ServiceLocator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A54AFC1F100F6700FE879D /* ServiceLocator.swift */; };
 		20D76F211E0DA8DA00FDD122 /* FitnessInfo+Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20D76F201E0DA8DA00FDD122 /* FitnessInfo+Operators.swift */; };
 		20E89E651E12F44E00F03644 /* MetricHistoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E89E641E12F44E00F03644 /* MetricHistoryTests.swift */; };
 		20E89E681E130C5C00F03644 /* ShowMetricHistoricalDataVP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E89E671E130C5C00F03644 /* ShowMetricHistoricalDataVP.swift */; };
@@ -35,7 +40,6 @@
 		20FA50FE1E09575E002E536A /* FitnessInfoRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FA50FD1E09575E002E536A /* FitnessInfoRepository.swift */; };
 		20FA510B1E0AE4D0002E536A /* CommonUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FA510A1E0AE4D0002E536A /* CommonUtils.swift */; };
 		3903F5CA1E1BFA7D0093095B /* AppRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3903F5C91E1BFA7D0093095B /* AppRouter.swift */; };
-		391A195B1E562D0E00436A52 /* Interactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391A195A1E562D0E00436A52 /* Interactor.swift */; };
 		397EBDA51E27B6B70060BCC1 /* InsightsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397EBDA41E27B6B70060BCC1 /* InsightsViewController.swift */; };
 		39DE51B11E41798D00DD29CE /* GraphHistoryVP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39DE51B01E41798D00DD29CE /* GraphHistoryVP.swift */; };
 		39F988961E465523008A1DB6 /* IFitnessInfoRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F988951E465523008A1DB6 /* IFitnessInfoRepository.swift */; };
@@ -115,6 +119,11 @@
 		2091755D1F0709B600607117 /* LocalizableStrings.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = LocalizableStrings.json; sourceTree = "<group>"; };
 		209175601F070CDD00607117 /* LocalizableStrings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalizableStrings.swift; sourceTree = "<group>"; };
 		209175621F070CFC00607117 /* Localizable.stringsdict */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.stringsdict; path = Localizable.stringsdict; sourceTree = "<group>"; };
+		20A54AF41F100CF000FE879D /* MVPView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVPView.swift; sourceTree = "<group>"; };
+		20A54AF61F100D1400FE879D /* MVPViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVPViewController.swift; sourceTree = "<group>"; };
+		20A54AF81F100D4400FE879D /* Interactor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Interactor.swift; sourceTree = "<group>"; };
+		20A54AFA1F100D7E00FE879D /* UIWireframe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIWireframe.swift; sourceTree = "<group>"; };
+		20A54AFC1F100F6700FE879D /* ServiceLocator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceLocator.swift; sourceTree = "<group>"; };
 		20D76F201E0DA8DA00FDD122 /* FitnessInfo+Operators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FitnessInfo+Operators.swift"; sourceTree = "<group>"; };
 		20E89E641E12F44E00F03644 /* MetricHistoryTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MetricHistoryTests.swift; sourceTree = "<group>"; };
 		20E89E671E130C5C00F03644 /* ShowMetricHistoricalDataVP.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowMetricHistoricalDataVP.swift; sourceTree = "<group>"; };
@@ -125,7 +134,6 @@
 		243E297E8C331F616EE9C451 /* Pods_FitnessTracker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FitnessTracker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		28A3F34B67D440117A76919C /* Pods-TodayExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TodayExtension.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TodayExtension/Pods-TodayExtension.debug.xcconfig"; sourceTree = "<group>"; };
 		3903F5C91E1BFA7D0093095B /* AppRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppRouter.swift; sourceTree = "<group>"; };
-		391A195A1E562D0E00436A52 /* Interactor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Interactor.swift; sourceTree = "<group>"; };
 		397EBDA41E27B6B70060BCC1 /* InsightsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InsightsViewController.swift; sourceTree = "<group>"; };
 		39BBF6271E37616600CF5AE7 /* FitnessTracker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FitnessTracker.entitlements; sourceTree = "<group>"; };
 		39DE51B01E41798D00DD29CE /* GraphHistoryVP.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphHistoryVP.swift; sourceTree = "<group>"; };
@@ -209,6 +217,7 @@
 		200323D31E00166200B1C33A /* FitnessTracker */ = {
 			isa = PBXGroup;
 			children = (
+				20A54AF31F100C9300FE879D /* Foundation */,
 				39F988A11E4B3EEB008A1DB6 /* ViewControllers */,
 				39BBF6271E37616600CF5AE7 /* FitnessTracker.entitlements */,
 				20471A4B1E1ADB770000F7C2 /* Extensions */,
@@ -271,6 +280,18 @@
 			path = FitnessTracker/Generated;
 			sourceTree = "<group>";
 		};
+		20A54AF31F100C9300FE879D /* Foundation */ = {
+			isa = PBXGroup;
+			children = (
+				20A54AF41F100CF000FE879D /* MVPView.swift */,
+				20A54AF61F100D1400FE879D /* MVPViewController.swift */,
+				20A54AF81F100D4400FE879D /* Interactor.swift */,
+				20A54AFA1F100D7E00FE879D /* UIWireframe.swift */,
+				20A54AFC1F100F6700FE879D /* ServiceLocator.swift */,
+			);
+			path = Foundation;
+			sourceTree = "<group>";
+		};
 		20E89E661E130C2500F03644 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
@@ -297,7 +318,6 @@
 				39F988AC1E4B41A0008A1DB6 /* FindInsights.swift */,
 				39F988C41E4B43EB008A1DB6 /* FindPreviousLatestResult.swift */,
 				39F988C61E4B4569008A1DB6 /* RecordsStoreUpdates.swift */,
-				391A195A1E562D0E00436A52 /* Interactor.swift */,
 			);
 			path = Domain;
 			sourceTree = "<group>";
@@ -539,7 +559,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/SwiftLint/swiftlint\"";
+			shellScript = "\"${PODS_ROOT}/SwiftLint/swiftlint\" \"autocorrect\"";
 		};
 		247BA57E00A8F3D4CC23C4D4 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -631,6 +651,7 @@
 				39F988B71E4B4337008A1DB6 /* MetricReadingTableViewCell.swift in Sources */,
 				20FA50FE1E09575E002E536A /* FitnessInfoRepository.swift in Sources */,
 				39F988A71E4B3F86008A1DB6 /* IUIViewControllerFactory.swift in Sources */,
+				20A54AF71F100D1400FE879D /* MVPViewController.swift in Sources */,
 				20D76F211E0DA8DA00FDD122 /* FitnessInfo+Operators.swift in Sources */,
 				39F9889E1E4B3121008A1DB6 /* FindRecordsInInterval.swift in Sources */,
 				39DE51B11E41798D00DD29CE /* GraphHistoryVP.swift in Sources */,
@@ -642,6 +663,7 @@
 				39F988B61E4B4337008A1DB6 /* LatestRecordMetricCell.swift in Sources */,
 				39F988BE1E4B4361008A1DB6 /* LatestRecordView.swift in Sources */,
 				39F988C51E4B43EB008A1DB6 /* FindPreviousLatestResult.swift in Sources */,
+				20A54AFB1F100D7E00FE879D /* UIWireframe.swift in Sources */,
 				20471A4A1E1983F80000F7C2 /* FitnessInfoInsight.swift in Sources */,
 				2040BF2C1F08631800520E15 /* Formats.swift in Sources */,
 				39F988BD1E4B4361008A1DB6 /* LatestRecordPresenter.swift in Sources */,
@@ -651,18 +673,20 @@
 				200323D51E00166200B1C33A /* AppDelegate.swift in Sources */,
 				39F988C01E4B4361008A1DB6 /* NewRecordView.swift in Sources */,
 				3903F5CA1E1BFA7D0093095B /* AppRouter.swift in Sources */,
+				20A54AF51F100CF000FE879D /* MVPView.swift in Sources */,
 				39F988A01E4B3906008A1DB6 /* FindAllRecords.swift in Sources */,
 				20E89E681E130C5C00F03644 /* ShowMetricHistoricalDataVP.swift in Sources */,
 				39F988C11E4B4361008A1DB6 /* ShowPreviousLatestResultVIP.swift in Sources */,
 				39F988961E465523008A1DB6 /* IFitnessInfoRepository.swift in Sources */,
 				39F988991E46559D008A1DB6 /* CoreDataQueryRequest.swift in Sources */,
+				20A54AFD1F100F6700FE879D /* ServiceLocator.swift in Sources */,
 				2040BF1F1F0858DA00520E15 /* R.generated.swift in Sources */,
 				39F988AF1E4B4218008A1DB6 /* BodyMetric.swift in Sources */,
-				391A195B1E562D0E00436A52 /* Interactor.swift in Sources */,
 				39F988B11E4B42C6008A1DB6 /* InsightsVP.swift in Sources */,
 				39F988C71E4B4569008A1DB6 /* RecordsStoreUpdates.swift in Sources */,
 				2021420B1E0D248900BAF444 /* CoreDataModel.xcdatamodeld in Sources */,
 				2021420F1E0D27FD00BAF444 /* CoreDataFitnessInfo.swift in Sources */,
+				20A54AF91F100D4400FE879D /* Interactor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

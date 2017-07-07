@@ -12,7 +12,6 @@ import Nimble
 import RxSwift
 import RxTest
 import CoreData
-import URLRouter
 @testable import FitnessTracker
 
 class LatestRecordTests: QuickSpec {
@@ -32,13 +31,14 @@ class LatestRecordTests: QuickSpec {
 
                 beforeEach {
                     managedObjectContext = SetUpInMemoryManagedObjectContext()
-                    repository = CoreDataInfoRepository(managedObjectContext: managedObjectContext)
+                    let coreDataEngine = CoreDataEngineImpl(managedObjectContext: managedObjectContext)
+                    repository = CoreDataInfoRepository(coreDataEngine: coreDataEngine)
                     view = LatestRecordView()
                     disposeBag = DisposeBag()
                     scheduler = TestScheduler(initialClock: 0)
                     interactor = FindLatestRecord(repository: repository)
                     storeUpdates = RecordStoreUpdate(repository: repository)
-                    router = AppRouter.empty
+                    router = DefaultAppRouter()
 
                     LatestRecordPresenter(interactor, storeUpdates, view, router, disposeBag)
                 }

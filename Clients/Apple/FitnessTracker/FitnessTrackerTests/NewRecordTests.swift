@@ -65,7 +65,8 @@ class NewRecordTests: QuickSpec {
                     disposeBag = DisposeBag()
 
                     let managedObjectContext = SetUpInMemoryManagedObjectContext()
-                    repository = CoreDataInfoRepository(managedObjectContext: managedObjectContext)
+                    let coreDataEngine = CoreDataEngineImpl(managedObjectContext: managedObjectContext)
+                    repository = CoreDataInfoRepository(coreDataEngine: coreDataEngine)
                     newRecordInteractor = CreateNewRecord(repository: repository)
                     recordStoreUpdates = RecordStoreUpdate(repository: repository)
                     latestRecordInteractor = FindLatestRecord(repository: repository)
@@ -159,17 +160,20 @@ class NewRecordTests: QuickSpec {
                             view.save()
                         })
 
-                    latestRecordInteractor
-                        .rx_output
-                        .subscribe(onNext: { _ in
-                            expect(view.height).to(equal(171))
-                            expect(view.weight).to(equal(60.0))
-                            expect(view.bodyFatPercentage).to(equal(30.0))
-                            expect(view.musclePercentage).to(equal(40.0))
-                            expect(view.waterPercentage).to(equal(34.0))
-                        }).addDisposableTo(disposeBag)
+                    waitUntil { done in
+                        latestRecordInteractor
+                            .rx_output
+                            .subscribe(onNext: { _ in
+                                expect(view.height).to(equal(171))
+                                expect(view.weight).to(equal(60.0))
+                                expect(view.bodyFatPercentage).to(equal(30.0))
+                                expect(view.musclePercentage).to(equal(40.0))
+                                expect(view.waterPercentage).to(equal(34.0))
+                                done()
+                            }).addDisposableTo(disposeBag)
 
-                    latestRecordInteractor.rx_input.onNext()
+                        latestRecordInteractor.rx_input.onNext()
+                    }
                 }
 
                 it("Dismisses the view on saving") {

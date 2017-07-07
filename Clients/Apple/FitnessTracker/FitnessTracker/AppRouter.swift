@@ -7,103 +7,92 @@
 //
 
 import Foundation
-import URLRouter
 import RxSwift
 
-final class AppRouter {
-    let urlRouter: URLRouter
+protocol AppRouter {
+    func currentRecord() -> UIWireframe
+    func addRecordEntry() -> UIWireframe
+    func showMetricHistoricData(metric: BodyMetric) -> UIWireframe
+    func insights() -> UIWireframe
+}
 
-    init(urlRouter: @escaping URLRouter) {
-        self.urlRouter = urlRouter
+final class DefaultAppRouter {
+}
+
+extension ServiceLocator {
+    static var viewControllerFactory: IUIViewControllerFactory {
+        return ServiceLocator.inject()
     }
 
-    @discardableResult func open(appURL url: URL, resultHandler: URLRouterResultHandler?) -> Bool {
-        return urlRouter(url, resultHandler)
+    static var router: AppRouter {
+        return ServiceLocator.inject()
     }
 }
 
-extension AppRouter {
-    static var empty: AppRouter {
-        return AppRouter(urlRouter: URLRouterFactory.with(entries: []))
-    }
-}
+extension DefaultAppRouter: AppRouter {
+    func currentRecord() -> UIWireframe {
+        let latestRecordInteractor = FindLatestRecord(repository: ServiceLocator.inject())
+        let latestResultsComparisonInteractor = FindPreviousLatestRecord(repository: ServiceLocator.inject())
+        let storeUpdates = RecordStoreUpdate(repository: ServiceLocator.inject())
 
-extension AppRouter {
-    static private func currentRecordEntry(serviceLocator: AppServiceLocator) -> URLRouterEntry {
-        return URLRouterEntryFactory.with(pattern: "app://records") { _, _ in
-            let latestRecordInteractor = FindLatestRecord(repository: serviceLocator.fitnessInfoRepository)
-            let latestResultsComparisonInteractor = FindPreviousLatestRecord(repository: serviceLocator.fitnessInfoRepository)
-            let storeUpdates = RecordStoreUpdate(repository: serviceLocator.fitnessInfoRepository)
+        let view = LatestRecordView()
+        let disposeBag = DisposeBag()
 
-            let view = LatestRecordView()
-            let disposeBag = DisposeBag()
+        let viewController = ServiceLocator.viewControllerFactory.latestRecordViewController()
+        viewController.title = LocalizableStrings.Records.Latest.title()
+        viewController.interactors = [latestRecordInteractor, latestResultsComparisonInteractor]
+        viewController.disposeBag = disposeBag
+        viewController.latestRecordView = view
+        viewController.router = ServiceLocator.router
 
-            let viewController = serviceLocator.viewControllerFactory.latestRecordViewController()
-            viewController.interactors = [latestRecordInteractor, latestResultsComparisonInteractor]
-            viewController.disposeBag = disposeBag
-            viewController.latestRecordView = view
-            viewController.router = serviceLocator.router
+        LatestRecordPresenter(latestRecordInteractor, storeUpdates, view, ServiceLocator.router, disposeBag)
+        LatestResultsComparisonPresenter(latestResultsComparisonInteractor, viewController, disposeBag)
 
-            LatestRecordPresenter(latestRecordInteractor, storeUpdates, view, serviceLocator.router, disposeBag)
-            LatestResultsComparisonPresenter(latestResultsComparisonInteractor, viewController, disposeBag)
-
-            return viewController
-        }
+        return UIWireframe(viewController: viewController).embeddedInNavigationController()
     }
 
-    static private func createRecordEntry(serviceLocator: AppServiceLocator) -> URLRouterEntry {
-        return URLRouterEntryFactory.with(pattern: "app://records/new") { _, _ in
-            let viewController = serviceLocator.viewControllerFactory.newRecordViewController()
+    func addRecordEntry() -> UIWireframe {
+        let viewController = ServiceLocator.viewControllerFactory.newRecordViewController()
 
-            let seeLatestRecordInteractor = FindLatestRecord(repository: serviceLocator.fitnessInfoRepository)
-            let insertNewRecordInteractor = CreateNewRecord(repository: serviceLocator.fitnessInfoRepository)
-            let disposeBag = DisposeBag()
+        let seeLatestRecordInteractor = FindLatestRecord(repository: ServiceLocator.inject())
+        let insertNewRecordInteractor = CreateNewRecord(repository: ServiceLocator.inject())
+        let disposeBag = DisposeBag()
 
-            viewController.interactors = [seeLatestRecordInteractor, insertNewRecordInteractor]
-            viewController.disposeBag = disposeBag
-            NewRecordPresenter(seeLatestRecordInteractor, insertNewRecordInteractor, viewController, disposeBag)
+        viewController.interactors = [seeLatestRecordInteractor, insertNewRecordInteractor]
+        viewController.disposeBag = disposeBag
+        NewRecordPresenter(seeLatestRecordInteractor, insertNewRecordInteractor, viewController, disposeBag)
 
-            return viewController
-        }
+        return UIWireframe(viewController: viewController)
     }
 
-    static private func showMetricHistoricData(serviceLocator: AppServiceLocator) -> URLRouterEntry {
-        return URLRouterEntryFactory.with(pattern: "app://records/history/:metric") { _, parameters -> Any? in
-            let viewController = serviceLocator.viewControllerFactory.showMetricHistoryData()
-            let disposeBag = DisposeBag()
+    func showMetricHistoricData(metric: BodyMetric) -> UIWireframe {
+        let viewController = ServiceLocator.viewControllerFactory.showMetricHistoryData()
+        let disposeBag = DisposeBag()
 
-            viewController.selectedMetric = BodyMetric(rawValue: parameters["metric"]!)!
-            let historicDataInteractor = FindAllRecords(repository: serviceLocator.fitnessInfoRepository)
-            let recordsFinderInteractor = FindRecordsInInterval(repository: serviceLocator.fitnessInfoRepository)
+        viewController.selectedMetric = metric
+        let historicDataInteractor = FindAllRecords(repository: ServiceLocator.inject())
+        let recordsFinderInteractor = FindRecordsInInterval(repository: ServiceLocator.inject())
 
-            viewController.bag = [historicDataInteractor, recordsFinderInteractor, disposeBag]
+        viewController.bag = [historicDataInteractor, recordsFinderInteractor, disposeBag]
 
-            MetricHistoryPresenter(historicDataInteractor, viewController, disposeBag)
-            MetricGraphPresenter(recordsFinderInteractor, viewController, disposeBag)
+        MetricHistoryPresenter(historicDataInteractor, viewController, disposeBag)
+        MetricGraphPresenter(recordsFinderInteractor, viewController, disposeBag)
 
-            return viewController
-        }
+        return UIWireframe(viewController: viewController)
     }
 
-    static private func insights(serviceLocator: AppServiceLocator) -> URLRouterEntry {
-        return URLRouterEntryFactory.with(pattern: "app://insights") { _, _ in
-            let viewController = serviceLocator.viewControllerFactory.showInsights()
-            let insightsInteractor = FindInsights(repository: serviceLocator.fitnessInfoRepository)
-            let recordStoreUpdates = RecordStoreUpdate(repository: serviceLocator.fitnessInfoRepository)
-            let disposeBag = DisposeBag()
+    func insights() -> UIWireframe {
+        let viewController = ServiceLocator.viewControllerFactory.showInsights()
+        viewController.title = LocalizableStrings.Insights.title()
 
-            viewController.bag = [disposeBag]
-            InsightsPresenter(insightsInteractor, recordStoreUpdates, viewController, disposeBag)
+        let insightsInteractor = FindInsights(repository: ServiceLocator.inject())
+        let recordStoreUpdates = RecordStoreUpdate(repository: ServiceLocator.inject())
+        let disposeBag = DisposeBag()
 
-            return viewController
-        }
-    }
+        viewController.bag = [disposeBag]
+        InsightsPresenter(insightsInteractor, recordStoreUpdates, viewController, disposeBag)
 
-    static func allEntries(serviceLocator: AppServiceLocator) -> [URLRouterEntry] {
-        return [currentRecordEntry(serviceLocator: serviceLocator),
-                createRecordEntry(serviceLocator: serviceLocator),
-                showMetricHistoricData(serviceLocator: serviceLocator),
-                insights(serviceLocator: serviceLocator)]
+        return UIWireframe(viewController: viewController)
     }
 
 }

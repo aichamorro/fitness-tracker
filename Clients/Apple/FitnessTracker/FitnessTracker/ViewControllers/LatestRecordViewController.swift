@@ -8,7 +8,6 @@
 
 import UIKit
 import RxSwift
-import URLRouter
 
 class LatestRecordViewController: UITableViewController {
     var interactors: [Any]!
@@ -38,11 +37,7 @@ class LatestRecordViewController: UITableViewController {
     }
 
     func createNewRecord(sender: Any?) {
-        _ = router.open(appURL: URL(string: "app://records/new")!) { viewController in
-            guard let viewController = viewController as? UIViewController else { fatalError() }
-
-            self.present(viewController, animated: true, completion: nil)
-        }
+        router.addRecordEntry().presentModally(in: self, animated: true)
     }
 }
 

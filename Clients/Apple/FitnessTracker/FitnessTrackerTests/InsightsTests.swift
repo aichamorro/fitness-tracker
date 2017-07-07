@@ -24,7 +24,8 @@ class InsightsTests: QuickSpec {
 
                 beforeEach {
                     let managedObjectContext = SetUpInMemoryManagedObjectContext()
-                    fitnessInfoRepository = CoreDataInfoRepository(managedObjectContext: managedObjectContext)
+                    let coreDataEngine = CoreDataEngineImpl(managedObjectContext: managedObjectContext)
+                    fitnessInfoRepository = CoreDataInfoRepository(coreDataEngine: coreDataEngine)
                     interactor = FindInsights(repository: fitnessInfoRepository)
                     disposeBag = DisposeBag()
                 }

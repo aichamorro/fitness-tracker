@@ -11,7 +11,6 @@ PODS:
     - RxSwift (~> 3.0)
   - SwiftLint (0.20.0)
   - UIGraphView (1.0.0)
-  - URLRouter (1.2.0)
 
 DEPENDENCIES:
   - Nimble
@@ -22,18 +21,10 @@ DEPENDENCIES:
   - RxTest
   - SwiftLint
   - UIGraphView (from `../`)
-  - URLRouter (from `https://github.com/aichamorro/URLRouter.git`)
 
 EXTERNAL SOURCES:
   UIGraphView:
     :path: "../"
-  URLRouter:
-    :git: https://github.com/aichamorro/URLRouter.git
-
-CHECKOUT OPTIONS:
-  URLRouter:
-    :commit: 4462d86c31ebc89bdf2d96e9f01c032422f17d08
-    :git: https://github.com/aichamorro/URLRouter.git
 
 SPEC CHECKSUMS:
   Nimble: 415e3aa3267e7bc2c96b05fa814ddea7bb686a29
@@ -45,8 +36,7 @@ SPEC CHECKSUMS:
   RxTest: 9867e6f3c435af30fbdb44b6d8ec30b78c40b515
   SwiftLint: 3f7543509c931d1291395335f34e245d3919b7f2
   UIGraphView: 5a9c1d595cbd2c5e5a2d5b1689058866dafa2e56
-  URLRouter: ffa394dfda6d5014e9af70f4b1a9d4e28dff81db
 
-PODFILE CHECKSUM: 77f4b1e661e3beccfb2f13c92df6ecbdea534de5
+PODFILE CHECKSUM: 79cb7c441d7b2bf419bb04bd13b2deaf5ff1c5d6
 
 COCOAPODS: 1.2.1

@@ -13,7 +13,7 @@ typealias IFindLatestRecord = AnyInteractor<Void, IFitnessInfo>
 final class FindLatestRecord: IFindLatestRecord {
     init(repository: IFitnessInfoRepository) {
         super.init { () -> Observable<IFitnessInfo> in
-            let takeFirstResult: ([IFitnessInfo]) -> Observable<IFitnessInfo> = { result in
+            let takeFirst: ([IFitnessInfo]) -> Observable<IFitnessInfo> = { result in
                 guard let latest = result.first else { return Observable.just(FitnessInfo.empty) }
 
                 return Observable.just(latest)
@@ -21,7 +21,7 @@ final class FindLatestRecord: IFindLatestRecord {
 
             return repository
                 .rx_findLatest(numberOfRecords: 1)
-                .flatMap(takeFirstResult)
+                .flatMap(takeFirst)
         }
     }
 }

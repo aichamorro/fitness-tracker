@@ -24,7 +24,8 @@ class CoreDataFitnessInfoRepositoryTests: QuickSpec {
                 var disposeBag: DisposeBag!
 
                 beforeEach {
-                    repository = CoreDataInfoRepository(managedObjectContext: SetUpInMemoryManagedObjectContext())
+                    let coreDataEngine = CoreDataEngineImpl(managedObjectContext: SetUpInMemoryManagedObjectContext())
+                    repository = CoreDataInfoRepository(coreDataEngine: coreDataEngine)
                     scheduler = TestScheduler(initialClock: 0)
                     disposeBag = DisposeBag()
                 }

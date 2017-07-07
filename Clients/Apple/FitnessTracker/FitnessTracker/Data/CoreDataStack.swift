@@ -108,21 +108,16 @@ internal let RxCoreDataStackInitializer: IRxCoreDataStackInitializer = {
     }
 }
 
-struct CoreDataEngine {
-    let managedObjectContext: NSManagedObjectContext
+protocol CoreDataEngine {
+    func execute(query: CoreDataQueryRequest) throws -> [Any]
+    func create(entityName: String, configuration: ((NSManagedObject) -> Void)?) throws -> NSManagedObject
+}
 
-    func execute(query: CoreDataQueryRequest) -> [Any] {
-        do {
-            return try self.managedObjectContext.fetch(query.fetchRequest)
-        } catch {
-            fatalError()
-        }
-    }
-
-    func rx_execute(query: CoreDataQueryRequest) -> Observable<[Any]> {
+extension CoreDataEngine {
+    public func rx_execute(query: CoreDataQueryRequest) -> Observable<[Any]> {
         return Observable.create { observer in
             do {
-                let result = try self.managedObjectContext.fetch(query.fetchRequest)
+                let result = try self.execute(query: query)
 
                 observer.onNext(result)
                 observer.onCompleted()
@@ -133,6 +128,22 @@ struct CoreDataEngine {
             return Disposables.create {
                 observer.onCompleted()
             }
+        }
+    }
+}
+
+struct CoreDataEngineImpl: CoreDataEngine {
+    private let managedObjectContext: NSManagedObjectContext
+
+    init(managedObjectContext: NSManagedObjectContext) {
+        self.managedObjectContext = managedObjectContext
+    }
+
+    public func execute(query: CoreDataQueryRequest) throws -> [Any] {
+        do {
+            return try self.managedObjectContext.fetch(query.fetchRequest)
+        } catch {
+            fatalError()
         }
     }
 
