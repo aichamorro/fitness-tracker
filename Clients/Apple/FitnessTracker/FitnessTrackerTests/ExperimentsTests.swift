@@ -12,7 +12,7 @@ import Quick
 class ExperimentsTests: QuickSpec {
     override func spec() {
         describe("As user, I would like to be able to create moments") {
-            
+
         }
     }
 }

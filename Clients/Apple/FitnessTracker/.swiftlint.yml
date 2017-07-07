@@ -1,3 +1,10 @@
 excluded:
   - Pods
   - FitnessTracker/Generated
+
+disabled_rules:
+  - force_cast
+  - identifier_name
+
+# configurable rules
+line_length: 140

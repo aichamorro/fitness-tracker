@@ -19,15 +19,15 @@ final class UIViewControllerFactory: IUIViewControllerFactory {
     func latestRecordViewController() -> LatestRecordViewController {
         return R.storyboard.main.latestRecordViewController()!
     }
-    
+
     func newRecordViewController() -> NewRecordViewController {
         return R.storyboard.main.newRecordViewController()!
     }
-    
+
     func showMetricHistoryData() -> ShowMetricHistoricalDataViewController {
         return R.storyboard.main.showMetricHistoricalData()!
     }
-    
+
     func showInsights() -> InsightsViewController {
         return R.storyboard.main.insightsViewController()!
     }

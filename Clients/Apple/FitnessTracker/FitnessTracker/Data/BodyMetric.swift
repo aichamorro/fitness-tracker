@@ -36,7 +36,7 @@ extension BodyMetric {
         case .bmi: return LocalizableStrings.Measures.BodyMetrics.bmi()
         }
     }
-    
+
     var description: String {
         switch self {
         case .height: return "\(self.name) (\(LocalizableStrings.Measures.BodyMetrics.Units.height()))"

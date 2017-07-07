@@ -24,27 +24,27 @@ func ==<T: IFitnessInfo>(lhs: T, rhs: T) -> Bool {
     if lhs.weight != rhs.weight {
         return false
     }
-    
+
     if lhs.height != lhs.height {
         return false
     }
-    
+
     if lhs.bodyFatPercentage != rhs.bodyFatPercentage {
         return false
     }
-    
+
     if lhs.musclePercentage != rhs.musclePercentage {
         return false
     }
-    
+
     if lhs.waterPercentage != rhs.waterPercentage {
         return false
     }
-    
+
     if lhs.date != rhs.date {
         return false
     }
-    
+
     return true
 }
 
@@ -55,7 +55,7 @@ struct FitnessInfo: IFitnessInfo {
     let musclePercentage: Double
     let waterPercentage: Double
     let date: NSDate?
-    
+
     init(weight: Double, height: UInt, bodyFatPercentage: Double, musclePercentage: Double, waterPercentage: Double, date: NSDate? = nil) {
         self.weight = weight
         self.height = height
@@ -76,27 +76,26 @@ extension IFitnessInfo {
     var bodyFatWeight: Double {
         return Double(weight) * (bodyFatPercentage/100)
     }
-    
+
     var leanBodyWeight: Double {
         return Double(weight) - bodyFatWeight
     }
-    
+
     var muscleWeight: Double {
         return Double(weight) * (musclePercentage/100)
     }
-    
+
     var waterWeight: Double {
         return Double(weight) * (waterPercentage/100)
     }
-    
+
     var bmi: Double {
         let denominator = Double(height * height)/10000
         let numerator = Double(weight)
-        
-        return numerator/denominator
-    }    
-}
 
+        return numerator/denominator
+    }
+}
 
 enum BMIRating {
     case underweight
@@ -106,7 +105,7 @@ enum BMIRating {
     case severelyObese
     case morbidlyObese
     case superObese
-    
+
     var localizedDescription: String {
         switch self {
         case .underweight: return LocalizableStrings.Measures.BmiRating.underweight()

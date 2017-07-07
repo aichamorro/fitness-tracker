@@ -15,11 +15,11 @@ protocol IRecordStoreUpdate {
 
 final class RecordStoreUpdate: IRecordStoreUpdate {
     private let repository: IFitnessInfoRepository
-    
+
     init(repository: IFitnessInfoRepository) {
         self.repository = repository
     }
-    
+
     var rx_didUpdate: Observable<Void> {
         return repository.rx_updated
     }

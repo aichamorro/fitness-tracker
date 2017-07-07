@@ -15,15 +15,17 @@ class LatestRecordViewController: UITableViewController {
     var disposeBag: DisposeBag!
     var latestRecordView: LatestRecordView!
     var router: AppRouter!
-    
+
     fileprivate let needsRefreshSubject = PublishSubject<Void>()
     fileprivate let previousLatestResult = Variable<LatestRecordViewModel>(LatestRecordViewModel.empty)
 
     override func viewDidLoad() {
         self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "CellSeparator")
 
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(createNewRecord(sender:)))
-        
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add,
+                                                                 target: self,
+                                                                 action: #selector(createNewRecord(sender:)))
+
         latestRecordView.viewModelVariable.asObservable()
             .skip(1)
             .do(onNext: { [weak self] _ in
@@ -31,14 +33,14 @@ class LatestRecordViewController: UITableViewController {
             }).subscribe(onNext: { [weak self] _ in
                 self?.tableView.reloadData()
             }).addDisposableTo(disposeBag)
-        
+
         latestRecordView.viewDidLoad()
     }
-        
+
     func createNewRecord(sender: Any?) {
         _ = router.open(appURL: URL(string: "app://records/new")!) { viewController in
             guard let viewController = viewController as? UIViewController else { fatalError() }
-            
+
             self.present(viewController, animated: true, completion: nil)
         }
     }
@@ -48,16 +50,16 @@ extension LatestRecordViewController: IShowPreviousLatestResultView {
     var rx_needsRefresh: Observable<Void> {
         return needsRefreshSubject.asObservable()
     }
-    
+
     var rx_comparisonViewModel: AnyObserver<LatestRecordViewModel> {
         return AnyObserver { [weak self] event in
             guard let `self` = self else { return }
-            
+
             switch event {
             case .next(let element):
                 self.previousLatestResult.value = element
                 self.tableView.reloadData()
-                
+
             default: break
             }
         }
@@ -68,34 +70,37 @@ extension LatestRecordViewController {
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 2
     }
-    
+
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 10
     }
-    
+
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard indexPath.row % 2 != 0 else {
             return tableView.dequeueReusableCell(withIdentifier: "CellSeparator", for: indexPath)
         }
-        
+
         let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.bodyMeasurementMetricCell, for: indexPath)!
         let cellText = cellTextConfiguration(for: indexPath)
-        
+
         cell.name.text = cellText.0
         cell.value.text = cellText.1
         cell.metric.text = cellText.2
         cell.date.text = cellText.3
-        
+
         if indexPath.section == 1 {
             cell.container.backgroundColor = UIColor(red: 0.529, green: 0.176, blue: 0.384, alpha: 1.0)
         } else {
             cell.container.backgroundColor = UIColor(red: 0.99, green: 0.43, blue: 0.20, alpha: 1.0)
         }
-        
+
         return cell
     }
-    
-    func cellTextConfiguration(for indexPath: IndexPath) -> (String, String, String, String) {
+
+    typealias CellTextConfiguration = (name: String, latest: String, unit: String, previous: String)
+
+    // swiftlint:disable function_body_length
+    func cellTextConfiguration(for indexPath: IndexPath) -> CellTextConfiguration {
         let metric = bodyMetric(from: indexPath)
 
         switch metric {
@@ -104,13 +109,13 @@ extension LatestRecordViewController {
                     Formats.BodyMeasurements.WithoutUnit.height(latestRecordView.viewModel.height),
                     LocalizableStrings.Measures.BodyMetrics.Units.height(),
                     Formats.BodyMeasurements.WithUnit.height(previousLatestResult.value.height))
-            
+
         case .weight:
             return (metric.name,
                     Formats.BodyMeasurements.WithoutUnit.weight(latestRecordView.viewModel.weight),
                     LocalizableStrings.Measures.BodyMetrics.Units.weight(),
                     Formats.BodyMeasurements.WithUnit.weight(previousLatestResult.value.weight))
-            
+
         case .bodyFatPercentage:
             return (metric.name,
                     Formats.BodyMeasurements.WithoutUnit.bodyFatPercentage(latestRecordView.viewModel.bodyFat),
@@ -160,7 +165,8 @@ extension LatestRecordViewController {
                     BMIRating.for(bmi: latestRecordView.viewModel.bmi).localizedDescription)
         }
     }
-    
+
+    // swiftlint:disable cyclomatic_complexity
     private func bodyMetric(from indexPath: IndexPath) -> BodyMetric {
         switch (indexPath.section, indexPath.row/2) {
         case (0, 0): return .height
@@ -173,20 +179,20 @@ extension LatestRecordViewController {
         case (1, 2): return .waterWeight
         case (1, 3): return .leanBodyWeight
         case (1, 4): return .bmi
-        
+
         default: fatalError()
         }
     }
-    
+
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         guard indexPath.row != 0 else { return 20 }
-        
+
         return indexPath.row % 2 == 0 ? 10 : super.tableView(tableView, heightForRowAt: indexPath)
     }
-    
+
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        
+
         latestRecordView.didSelectMetricSubject.onNext(bodyMetric(from: indexPath))
     }
 }

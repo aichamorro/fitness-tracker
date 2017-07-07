@@ -16,10 +16,11 @@ import URLRouter
 @testable import FitnessTracker
 
 class LatestRecordTests: QuickSpec {
+    // swiftlint:disable function_body_length
     override func spec() {
         describe("So that I can see my fitness info at one glance, as user I would like to see the latest measurements") {
             context("Showing measurements") {
-                
+
                 var view: LatestRecordView!
                 var disposeBag: DisposeBag!
                 var scheduler: TestScheduler!
@@ -28,7 +29,7 @@ class LatestRecordTests: QuickSpec {
                 var interactor: IFindLatestRecord!
                 var router: AppRouter!
                 var storeUpdates: IRecordStoreUpdate!
-                    
+
                 beforeEach {
                     managedObjectContext = SetUpInMemoryManagedObjectContext()
                     repository = CoreDataInfoRepository(managedObjectContext: managedObjectContext)
@@ -38,10 +39,10 @@ class LatestRecordTests: QuickSpec {
                     interactor = FindLatestRecord(repository: repository)
                     storeUpdates = RecordStoreUpdate(repository: repository)
                     router = AppRouter.empty
-                    
+
                     LatestRecordPresenter(interactor, storeUpdates, view, router, disposeBag)
                 }
-                
+
                 afterEach {
                     view = nil
                     managedObjectContext.reset()
@@ -52,16 +53,23 @@ class LatestRecordTests: QuickSpec {
                     scheduler = nil
                     router = nil
                 }
-                
+
                 it("Shows the latest record data") {
                     do {
-                        try repository.save(FitnessInfo(weight: 34.5, height: 171, bodyFatPercentage: 30.0, musclePercentage: 30.0, waterPercentage: 41.0))
+                        try repository.save(FitnessInfo(weight: 34.5,
+                                                        height: 171,
+                                                        bodyFatPercentage: 30.0,
+                                                        musclePercentage: 30.0,
+                                                        waterPercentage: 41.0))
                     } catch {
                         fail()
                         return
                     }
-                    
-                    createObserverAndSubscribe(to: view.viewModelVariable.asObservable().skip(2), scheduler: scheduler, disposeBag: disposeBag, expect: { viewModel in
+
+                    createObserverAndSubscribe(to: view.viewModelVariable.asObservable().skip(2),
+                                               scheduler: scheduler,
+                                               disposeBag: disposeBag,
+                                               expect: { viewModel in
                         expect(viewModel.weight - 34.5 < 0.000001).to(beTrue())
                         expect(viewModel.height).to(equal(171))
                         expect(viewModel.bodyFat - 30.0 < 0.000001).to(beTrue())
@@ -71,9 +79,12 @@ class LatestRecordTests: QuickSpec {
                         view.viewDidLoad()
                     })
                 }
-                
+
                 it("Doesn't crash when there is no previous data recorded") {
-                    createObserverAndSubscribe(to: view.viewModelVariable.asObservable().skip(2), scheduler: scheduler, disposeBag: disposeBag, expect: { viewModel in
+                    createObserverAndSubscribe(to: view.viewModelVariable.asObservable().skip(2),
+                                               scheduler: scheduler,
+                                               disposeBag: disposeBag,
+                                               expect: { viewModel in
                         expect(viewModel.weight).to(equal(0))
                         expect(viewModel.height).to(equal(0))
                         expect(viewModel.bodyFat).to(equal(0))
@@ -82,7 +93,7 @@ class LatestRecordTests: QuickSpec {
                     }, action: {
                         view.viewDidLoad()
                     })
-                }                
+                }
             }
         }
     }

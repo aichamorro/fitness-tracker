@@ -60,7 +60,7 @@ protocol ILatestRecordView: class {
 
 extension ILatestRecordView {
     var rx_viewModel: AnyObserver<LatestRecordViewModel> {
-        return AnyObserver() { event in
+        return AnyObserver { event in
             switch event {
             case .next(let element): self.viewModel = element
             default: break
@@ -75,17 +75,17 @@ class LatestRecordView: ILatestRecordView {
         get { return viewModelVariable.value }
         set { viewModelVariable.value = newValue }
     }
-    
+
     var viewDidLoadSubject = PublishSubject<Void>()
     var rx_viewDidLoad: Observable<Void> {
         return viewDidLoadSubject.asObservable()
     }
-    
+
     var didSelectMetricSubject = PublishSubject<BodyMetric>()
     var rx_didSelectMetric: Observable<BodyMetric> {
         return didSelectMetricSubject.asObservable()
     }
-    
+
     func viewDidLoad() {
         viewDidLoadSubject.asObserver().onNext()
     }

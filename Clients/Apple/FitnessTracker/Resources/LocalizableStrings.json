@@ -4,6 +4,15 @@
             "title": "Last measurement"
         }
     },
+    "historical-data": {
+        "errors": {
+            "dialog": {
+                "title": "Error",
+                "Ok": "Ok"
+            },
+            "no-data": "There is no data recorded for {{metric}}"
+        }
+    },
     "insights": {
         "title": "Insights"
     },
