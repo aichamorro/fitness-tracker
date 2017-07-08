@@ -35,17 +35,15 @@ extension DefaultAppRouter: AppRouter {
         let latestResultsComparisonInteractor = FindPreviousLatestRecord(repository: ServiceLocator.inject())
         let storeUpdates = RecordStoreUpdate(repository: ServiceLocator.inject())
 
-        let view = LatestRecordView()
         let disposeBag = DisposeBag()
 
         let viewController = ServiceLocator.viewControllerFactory.latestRecordViewController()
         viewController.title = LocalizableStrings.Records.Latest.title()
         viewController.interactors = [latestRecordInteractor, latestResultsComparisonInteractor]
         viewController.disposeBag = disposeBag
-        viewController.latestRecordView = view
         viewController.router = ServiceLocator.router
 
-        LatestRecordPresenter(latestRecordInteractor, storeUpdates, view, ServiceLocator.router, disposeBag)
+        LatestRecordPresenter(latestRecordInteractor, storeUpdates, viewController as ILatestRecordView, ServiceLocator.router, disposeBag)
         LatestResultsComparisonPresenter(latestResultsComparisonInteractor, viewController, disposeBag)
 
         return UIWireframe(viewController: viewController).embeddedInNavigationController()

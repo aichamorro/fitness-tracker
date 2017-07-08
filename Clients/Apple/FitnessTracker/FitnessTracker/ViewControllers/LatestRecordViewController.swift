@@ -12,28 +12,30 @@ import RxSwift
 class LatestRecordViewController: UITableViewController {
     var interactors: [Any]!
     var disposeBag: DisposeBag!
-    var latestRecordView: LatestRecordView!
     var router: AppRouter!
+
+    fileprivate let viewDidSelectMetricSubject = PublishSubject<BodyMetric>()
+    fileprivate let viewDidLoadSubject = PublishSubject<Void>()
+    internal var viewModel = LatestRecordViewModel.empty {
+        didSet {
+            self.needsRefreshSubject.onNext()
+            self.tableView.reloadData()
+        }
+    }
 
     fileprivate let needsRefreshSubject = PublishSubject<Void>()
     fileprivate let previousLatestResult = Variable<LatestRecordViewModel>(LatestRecordViewModel.empty)
 
     override func viewDidLoad() {
+        super.viewDidLoad()
+
         self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "CellSeparator")
 
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add,
                                                                  target: self,
                                                                  action: #selector(createNewRecord(sender:)))
 
-        latestRecordView.viewModelVariable.asObservable()
-            .skip(1)
-            .do(onNext: { [weak self] _ in
-                self?.needsRefreshSubject.onNext()
-            }).subscribe(onNext: { [weak self] _ in
-                self?.tableView.reloadData()
-            }).addDisposableTo(disposeBag)
-
-        latestRecordView.viewDidLoad()
+        viewDidLoadSubject.onNext()
     }
 
     func createNewRecord(sender: Any?) {
@@ -58,6 +60,16 @@ extension LatestRecordViewController: IShowPreviousLatestResultView {
             default: break
             }
         }
+    }
+}
+
+extension LatestRecordViewController: ILatestRecordView {
+    var rx_viewDidLoad: Observable<Void> {
+        return viewDidLoadSubject.asObservable()
+    }
+
+    var rx_didSelectMetric: Observable<BodyMetric> {
+        return viewDidSelectMetricSubject.asObservable()
     }
 }
 
@@ -101,63 +113,63 @@ extension LatestRecordViewController {
         switch metric {
         case .height:
             return (metric.name,
-                    Formats.BodyMeasurements.WithoutUnit.height(latestRecordView.viewModel.height),
+                    Formats.BodyMeasurements.WithoutUnit.height(viewModel.height),
                     LocalizableStrings.Measures.BodyMetrics.Units.height(),
                     Formats.BodyMeasurements.WithUnit.height(previousLatestResult.value.height))
 
         case .weight:
             return (metric.name,
-                    Formats.BodyMeasurements.WithoutUnit.weight(latestRecordView.viewModel.weight),
+                    Formats.BodyMeasurements.WithoutUnit.weight(viewModel.weight),
                     LocalizableStrings.Measures.BodyMetrics.Units.weight(),
                     Formats.BodyMeasurements.WithUnit.weight(previousLatestResult.value.weight))
 
         case .bodyFatPercentage:
             return (metric.name,
-                    Formats.BodyMeasurements.WithoutUnit.bodyFatPercentage(latestRecordView.viewModel.bodyFat),
+                    Formats.BodyMeasurements.WithoutUnit.bodyFatPercentage(viewModel.bodyFat),
                     LocalizableStrings.Measures.BodyMetrics.Units.percentage(),
                     Formats.BodyMeasurements.WithUnit.bodyFatPercentage(previousLatestResult.value.bodyFat))
 
         case .musclePercentage:
             return (metric.name,
-                    Formats.BodyMeasurements.WithoutUnit.musclePercentage(latestRecordView.viewModel.muscle),
+                    Formats.BodyMeasurements.WithoutUnit.musclePercentage(viewModel.muscle),
                     LocalizableStrings.Measures.BodyMetrics.Units.percentage(),
                     Formats.BodyMeasurements.WithUnit.musclePercentage(previousLatestResult.value.muscle))
 
         case .waterPercentage:
             return (metric.name,
-                    Formats.BodyMeasurements.WithoutUnit.waterPercentage(latestRecordView.viewModel.water),
+                    Formats.BodyMeasurements.WithoutUnit.waterPercentage(viewModel.water),
                     LocalizableStrings.Measures.BodyMetrics.Units.percentage(),
                     Formats.BodyMeasurements.WithUnit.waterPercentage(previousLatestResult.value.water))
 
         case .bodyFatWeight:
             return (metric.name,
-                    Formats.BodyMeasurements.WithoutUnit.bodyFatWeight(latestRecordView.viewModel.bodyFatWeight),
+                    Formats.BodyMeasurements.WithoutUnit.bodyFatWeight(viewModel.bodyFatWeight),
                     LocalizableStrings.Measures.BodyMetrics.Units.weight(),
                     Formats.BodyMeasurements.WithUnit.bodyFatWeight(previousLatestResult.value.bodyFatWeight))
 
         case .muscleWeight:
             return (metric.name,
-                    Formats.BodyMeasurements.WithoutUnit.muscleWeight(latestRecordView.viewModel.muscleWeight),
+                    Formats.BodyMeasurements.WithoutUnit.muscleWeight(viewModel.muscleWeight),
                     LocalizableStrings.Measures.BodyMetrics.Units.weight(),
                     Formats.BodyMeasurements.WithUnit.muscleWeight(previousLatestResult.value.muscleWeight))
 
         case .waterWeight:
             return (metric.name,
-                    Formats.BodyMeasurements.WithoutUnit.waterWeight(latestRecordView.viewModel.waterWeight),
+                    Formats.BodyMeasurements.WithoutUnit.waterWeight(viewModel.waterWeight),
                     LocalizableStrings.Measures.BodyMetrics.Units.weight(),
                     Formats.BodyMeasurements.WithUnit.waterWeight(previousLatestResult.value.waterWeight))
 
         case .leanBodyWeight:
             return (metric.name,
-                    Formats.BodyMeasurements.WithoutUnit.leanBodyWeight(latestRecordView.viewModel.leanBodyWeight),
+                    Formats.BodyMeasurements.WithoutUnit.leanBodyWeight(viewModel.leanBodyWeight),
                     LocalizableStrings.Measures.BodyMetrics.Units.weight(),
                     Formats.BodyMeasurements.WithUnit.leanBodyWeight(previousLatestResult.value.leanBodyWeight))
 
         case .bmi:
             return (metric.name,
-                    Formats.BodyMeasurements.WithoutUnit.bmi(latestRecordView.viewModel.bmi),
+                    Formats.BodyMeasurements.WithoutUnit.bmi(viewModel.bmi),
                     LocalizableStrings.Measures.BodyMetrics.Units.bmi(),
-                    BMIRating.for(bmi: latestRecordView.viewModel.bmi).localizedDescription)
+                    BMIRating.for(bmi: viewModel.bmi).localizedDescription)
         }
     }
 
@@ -188,6 +200,6 @@ extension LatestRecordViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
 
-        latestRecordView.didSelectMetricSubject.onNext(bodyMetric(from: indexPath))
+        viewDidSelectMetricSubject.onNext(bodyMetric(from: indexPath))
     }
 }
