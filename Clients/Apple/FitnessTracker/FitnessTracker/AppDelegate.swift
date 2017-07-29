@@ -26,38 +26,52 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     var serviceLocator: AppServiceLocator!
     var disposeBag = DisposeBag()
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        
+    func application(_ application: UIApplication,
+                     willFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]? = nil) -> Bool {
+        #if DEBUG
+            do {
+                try R.validate()
+            } catch {
+                fatalError("R.swift does not validate")
+            }
+        #endif
+
+        return true
+    }
+
+    func application(_ application: UIApplication,
+                     didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
-        
+
         configureServices()
         configureRouting()
-        
+
         var initialViewControllers: [UIViewController] = []
         serviceLocator.router.open(appURL: URL(string: "app://records")!) { controller in
             guard let viewController = controller as? UIViewController else { fatalError() }
-            viewController.title = NSLocalizedString("Last measurement", comment: "Last measurement")
+            viewController.title = LocalizableStrings.Records.Latest.title()
             let rootController = UINavigationController(rootViewController: viewController)
-            
+
             initialViewControllers.append(rootController)
         }
-        
+
         serviceLocator.router.open(appURL: URL(string: "app://insights")!) { controller in
             guard let viewController = controller as? UIViewController else { fatalError() }
-            viewController.title = NSLocalizedString("Insights", comment: "Insights")
+            viewController.title = LocalizableStrings.Insights.title()
             let rootController = UINavigationController(rootViewController: viewController)
-            
+
             initialViewControllers.append(rootController)
         }
-        
+
         let mainTabController = UITabBarController()
         mainTabController.viewControllers = initialViewControllers
         window?.rootViewController = mainTabController
 
         return true
     }
-    
+
     private func configureServices() {
         serviceLocator = AppServiceLocator()
         
@@ -65,34 +79,19 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
 
         CoreDataStackInitializer({ managedObjectContext in
             NSLog("Core Data Stack initialized correctly")
-            
+
             self.serviceLocator.fitnessInfoRepository = CoreDataInfoRepository(managedObjectContext: managedObjectContext)
         }, { error in
-            fatalError(error as! String)
+            fatalError(error.localizedDescription)
         })
-        
-        let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        serviceLocator.viewControllerFactory = UIViewControllerFactory(storyboard: mainStoryboard)
+
+        serviceLocator.viewControllerFactory = UIViewControllerFactory()
     }
-    
+
     private func configureRouting() {
         let allEntries = AppRouter.allEntries(serviceLocator: self.serviceLocator)
-     
+
         serviceLocator.router = AppRouter(urlRouter: URLRouterFactory.with(entries: allEntries))
     }
 
-}
-
-extension AppDelegate {
-    func application(_ application: UIApplication, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
-        switch shortcutItem.type {
-        case "org.onset-bits.fitness-tracker.new-record": serviceLocator.router.open(appURL: URL(string: "app://records/new")!, resultHandler: { result in
-            guard let viewController = result as? UIViewController else { fatalError() }
-            
-            self.window?.rootViewController?.show(viewController, sender: nil)
-        })
-            
-        default: fatalError("Shortcut not handled")
-        }
-    }
 }

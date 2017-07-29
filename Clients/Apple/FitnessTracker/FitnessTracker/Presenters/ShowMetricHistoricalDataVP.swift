@@ -14,7 +14,7 @@ protocol IMetricHistoryView: class {
     var rx_loadHistoricData: Observable<Void> { get }
     var selectedMetric: BodyMetric { get }
     var rx_metricData: AnyObserver<[MetricDataReading]> { get }
-    
+
     func showNoHistoricalDataWarning()
     func update()
 }
@@ -54,7 +54,7 @@ func convert(fitnessRecords: [IFitnessInfo], toBodyMetricReading bodyMetric: Bod
     formatter.numberStyle = .decimal
     formatter.maximumFractionDigits = 2
     formatter.minimumFractionDigits = 1
-    
+
     return fitnessRecords.map {
         return ($0.date, formatter.string(from: $0.value(for: bodyMetric))!)
     }
@@ -65,14 +65,14 @@ let MetricHistoryPresenter: IMetricHistoryPresenter = { interactor, view, dispos
     view.rx_loadHistoricData
         .bindTo(interactor.rx_input)
         .addDisposableTo(disposeBag)
-    
+
     interactor.rx_output.map {
             return convert(fitnessRecords: $0, toBodyMetricReading: view.selectedMetric)
         }.do(onNext: { records in
             if records.isEmpty {
                 view.showNoHistoricalDataWarning()
             }
-            
+
             view.update()
         }).bindTo(view.rx_metricData)
         .addDisposableTo(disposeBag)

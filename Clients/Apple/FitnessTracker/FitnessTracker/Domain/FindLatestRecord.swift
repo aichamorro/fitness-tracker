@@ -15,10 +15,10 @@ final class FindLatestRecord: IFindLatestRecord {
         super.init { () -> Observable<IFitnessInfo> in
             let takeFirstResult: ([IFitnessInfo]) -> Observable<IFitnessInfo> = { result in
                 guard let latest = result.first else { return Observable.just(FitnessInfo.empty) }
-                
+
                 return Observable.just(latest)
             }
-            
+
             return repository
                 .rx_findLatest(numberOfRecords: 1)
                 .flatMap(takeFirstResult)

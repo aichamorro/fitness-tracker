@@ -15,10 +15,10 @@ protocol INewRecordView: class {
     var bodyFatPercentage: Double { get set }
     var musclePercentage: Double { get set }
     var waterPercentage: Double { get set }
-    
+
     var rx_viewDidLoad: Observable<Void> { get }
     var rx_actionSave: Observable<NewRecordViewModel> { get }
     var calibrationFix: Double { get }
-    
+
     func dismiss()
 }

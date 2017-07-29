@@ -17,7 +17,7 @@ final class FindPreviousLatestRecord: IFindPreviousLatestRecord {
                 Observable.create { observer in
                     observer.onNext(info.count == 2 ? info[1] : FitnessInfo.empty)
                     observer.onCompleted()
-                    
+
                     return Disposables.create()
                 }
             }

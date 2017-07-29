@@ -32,18 +32,17 @@ let NewRecordPresenter: INewRecordPresenter = { latestRecordInteractor, insertNe
 
         latestRecordInteractor.rx_input.onNext()
     }
-    
+
     view.rx_viewDidLoad
         .subscribe(onNext: { loadLatestResult() })
         .addDisposableTo(disposeBag)
-    
+
     insertNewRecordInteractor
         .rx_output
         .do(onNext: { _ in loadLatestResult() })
         .subscribe { _ in view.dismiss() }
         .addDisposableTo(disposeBag)
 
-    
     view.rx_actionSave
         .flatMap {
             Observable.just(record(applyingCalibration: view.calibrationFix, to: $0))
@@ -70,6 +69,6 @@ func mapViewModelToFitnessInfo(viewModel: NewRecordViewModel) -> Observable<IFit
                                   bodyFatPercentage: viewModel.bodyFat,
                                   musclePercentage: viewModel.muscle,
                                   waterPercentage: viewModel.water)
-    
+
     return Observable.just(fitnessInfo)
 }

@@ -7,6 +7,8 @@ target 'FitnessTracker' do
 
   # Pods for FitnessTracker
   pod 'RxSwift'
+  pod 'R.swift'
+  pod 'SwiftLint'
   pod 'RxCocoa'
   pod 'URLRouter', git: 'https://github.com/aichamorro/URLRouter.git'
   pod 'UIGraphView', :path => '../'
@@ -18,10 +20,3 @@ target 'FitnessTracker' do
   end
 end
 
-target 'TodayExtension' do
-  use_frameworks!
-
-  pod 'RxSwift'
-  pod 'RxCocoa'
-  pod 'URLRouter', git: 'https://github.com/aichamorro/URLRouter.git'
-end

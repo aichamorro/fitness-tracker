@@ -18,7 +18,7 @@ enum CoreDataQueryRequestLimit {
 enum CoreDataQueryRequestOrder {
     case ascendent
     case descendent
-    
+
     var ascending: Bool {
         return self == .ascendent
     }
@@ -37,24 +37,35 @@ extension CoreDataQueryRequest {
     var fetchRequest: NSFetchRequest<NSFetchRequestResult> {
         switch self {
         case .findAll(let limit, let order):
-            let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: self.entity)
-            fetchRequest.sortDescriptors = [NSSortDescriptor(key: "date", ascending: order.ascending)]
-            
+            let fetchRequest = findInDateIntervalFetchRequest(order: order)
+
             addLimitIfNeeded(limit, to: fetchRequest)
-            
+
             return fetchRequest
-            
+
         case .findInterval(let dateInterval, let limit, let order):
-            let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: self.entity)
-            fetchRequest.sortDescriptors = [NSSortDescriptor(key: "date", ascending: order.ascending)]
-            fetchRequest.predicate = NSPredicate(format: "((date >= %@) AND (date <= %@))", dateInterval.start as CVarArg, dateInterval.end as CVarArg)
-            
+            let fetchRequest = findInDateIntervalFetchRequest(order: order)
+            fetchRequest.predicate = findPredicate(with: dateInterval)
+
             addLimitIfNeeded(limit, to: fetchRequest)
-            
+
             return fetchRequest
         }
     }
-    
+
+    private func findInDateIntervalFetchRequest(order: CoreDataQueryRequestOrder) -> NSFetchRequest<NSFetchRequestResult> {
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: self.entity)
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "date", ascending: order.ascending)]
+
+        return fetchRequest
+    }
+
+    private func findPredicate(with dateInterval: DateInterval) -> NSPredicate {
+        let predicateFormat = "((date >= %@) AND (date <= %@))"
+
+        return NSPredicate(format: predicateFormat, dateInterval.start as CVarArg, dateInterval.end as CVarArg)
+    }
+
     private func addLimitIfNeeded(_ limit: CoreDataQueryRequestLimit, to request: NSFetchRequest<NSFetchRequestResult>) {
         switch limit {
         case .one:
@@ -65,11 +76,11 @@ extension CoreDataQueryRequest {
             break
         }
     }
-    
+
     var entity: String {
         switch self {
-        case .findAll(_, _): fallthrough
-        case .findInterval(_): 
+        case .findAll: fallthrough
+        case .findInterval:
             return CoreDataEntity.fitnessInfo.rawValue
         }
     }

@@ -24,27 +24,27 @@ func ==<T: IFitnessInfo>(lhs: T, rhs: T) -> Bool {
     if lhs.weight != rhs.weight {
         return false
     }
-    
+
     if lhs.height != lhs.height {
         return false
     }
-    
+
     if lhs.bodyFatPercentage != rhs.bodyFatPercentage {
         return false
     }
-    
+
     if lhs.musclePercentage != rhs.musclePercentage {
         return false
     }
-    
+
     if lhs.waterPercentage != rhs.waterPercentage {
         return false
     }
-    
+
     if lhs.date != rhs.date {
         return false
     }
-    
+
     return true
 }
 
@@ -55,7 +55,7 @@ struct FitnessInfo: IFitnessInfo {
     let musclePercentage: Double
     let waterPercentage: Double
     let date: NSDate?
-    
+
     init(weight: Double, height: UInt, bodyFatPercentage: Double, musclePercentage: Double, waterPercentage: Double, date: NSDate? = nil) {
         self.weight = weight
         self.height = height
@@ -76,36 +76,47 @@ extension IFitnessInfo {
     var bodyFatWeight: Double {
         return Double(weight) * (bodyFatPercentage/100)
     }
-    
+
     var leanBodyWeight: Double {
         return Double(weight) - bodyFatWeight
     }
-    
+
     var muscleWeight: Double {
         return Double(weight) * (musclePercentage/100)
     }
-    
+
     var waterWeight: Double {
         return Double(weight) * (waterPercentage/100)
     }
-    
+
     var bmi: Double {
         let denominator = Double(height * height)/10000
         let numerator = Double(weight)
-        
+
         return numerator/denominator
-    }    
+    }
 }
 
+enum BMIRating {
+    case underweight
+    case healthyweight
+    case overweight
+    case obese
+    case severelyObese
+    case morbidlyObese
+    case superObese
 
-enum BMIRating: String {
-    case underweight = "Underweight"
-    case healthyweight = "Healthy weight"
-    case overweight = "Overweight"
-    case obese = "Obese"
-    case severelyObese = "Severy obese"
-    case morbidlyObese = "Morbidly obese"
-    case superObese = "Super obese"
+    var localizedDescription: String {
+        switch self {
+        case .underweight: return LocalizableStrings.Measures.BmiRating.underweight()
+        case .healthyweight: return LocalizableStrings.Measures.BmiRating.healthyweight()
+        case .overweight: return LocalizableStrings.Measures.BmiRating.overweight()
+        case .obese: return LocalizableStrings.Measures.BmiRating.obese()
+        case .severelyObese: return LocalizableStrings.Measures.BmiRating.severylyObese()
+        case .morbidlyObese: return LocalizableStrings.Measures.BmiRating.morbidlyObese()
+        case .superObese: return LocalizableStrings.Measures.BmiRating.superObese()
+        }
+    }
 }
 
 extension BMIRating {

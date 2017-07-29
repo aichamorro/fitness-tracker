@@ -26,13 +26,13 @@ private func FitnessInfoToGraphDataAdapter(bodyMetric: BodyMetric) -> ([IFitness
     return { data in
         var dates: [Double] = []
         var readings: [Double] = []
-        
+
         data.forEach { info in
             let alignedDate = Calendar.current.date(bySettingHour: 0, minute: 0, second: 0, of: info.date! as Date)!
             dates.append(alignedDate.timeIntervalSinceReferenceDate)
             readings.append(info.value(for: bodyMetric).doubleValue)
         }
-        
+
         return (dates, readings)
     }
 }
@@ -48,7 +48,7 @@ let MetricGraphPresenter: IMetricGraphPresenter = { (interactor, view, disposeBa
         .map {
             let from = Calendar.current.dateBySettingStartOfDay(to: $0)
             let to = Calendar.current.endOfToday
-            
+
             return (from, to)
         }.bindTo(interactor.rx_input)
         .addDisposableTo(disposeBag)

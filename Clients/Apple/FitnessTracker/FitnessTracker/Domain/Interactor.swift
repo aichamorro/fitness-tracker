@@ -10,25 +10,25 @@ import Foundation
 import RxSwift
 
 public protocol InteractorType {
-    associatedtype I
-    associatedtype O
+    associatedtype InputType
+    associatedtype OutputType
 
-    var rx_input: AnyObserver<I> { get }
-    var rx_output: Observable<O> { get }
+    var rx_input: AnyObserver<InputType> { get }
+    var rx_output: Observable<OutputType> { get }
 }
 
 public class AnyInteractor<InElementType, OutElementType>: InteractorType {
-    public typealias O = OutElementType
-    public typealias I = InElementType
+    public typealias OutputType = OutElementType
+    public typealias InputType = InElementType
     public typealias UseCaseImpl = (InElementType) -> Observable<OutElementType>
-    
+
     private let rx_outputSubject = PublishSubject<OutElementType>()
     private let disposeBag = DisposeBag()
-    
+
     public var rx_output: Observable<OutElementType> {
         return rx_outputSubject.asObservable()
     }
-    
+
     public var rx_input: AnyObserver<InElementType> {
         return AnyObserver { event in
             switch event {
@@ -43,7 +43,7 @@ public class AnyInteractor<InElementType, OutElementType>: InteractorType {
             }
         }
     }
-    
+
     let executeUseCaseWithInput: UseCaseImpl
     init(_ useCase: @escaping UseCaseImpl) {
         self.executeUseCaseWithInput = useCase
