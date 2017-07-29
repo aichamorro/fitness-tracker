@@ -17,6 +17,18 @@
 "insights.title" = "Tendencias";
 
 /* No comment provided by engineer. */
+"insights.period.day" = "Día";
+
+/* No comment provided by engineer. */
+"insights.period.week" = "Semana";
+
+/* No comment provided by engineer. */
+"insights.period.month" = "Mes";
+
+/* No comment provided by engineer. */
+"insights.period.year" = "Año";
+
+/* No comment provided by engineer. */
 "measures.bmi-rating.healthyweight" = "Peso saludable";
 
 /* No comment provided by engineer. */

@@ -14,7 +14,13 @@
         }
     },
     "insights": {
-        "title": "Insights"
+        "title": "Insights",
+        "periods": {
+            "day": "Day",
+            "week": "Week",
+            "month": "Month",
+            "year": "Year"
+        }
     },
     "graph": {
         "errors": {

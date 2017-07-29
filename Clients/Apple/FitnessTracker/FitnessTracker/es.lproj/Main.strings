@@ -77,7 +77,7 @@
 "qRd-5R-zUF.title" = "Item";
 
 /* Class = "UISegmentedControl"; qte-Ky-5A0.segmentTitles[0] = "This Week"; ObjectID = "qte-Ky-5A0"; */
-"qte-Ky-5A0.segmentTitles[0]" = "Esta semana";
+"qte-Ky-5A0.segmentTitles[0]" = "Semana";
 
 /* Class = "UISegmentedControl"; qte-Ky-5A0.segmentTitles[1] = "7 days"; ObjectID = "qte-Ky-5A0"; */
 "qte-Ky-5A0.segmentTitles[1]" = "7 días";
@@ -87,6 +87,9 @@
 
 /* Class = "UISegmentedControl"; qte-Ky-5A0.segmentTitles[3] = "3 months"; ObjectID = "qte-Ky-5A0"; */
 "qte-Ky-5A0.segmentTitles[3]" = "3 meses";
+
+/* Class = "UISegmentedControl"; qte-Ky-5A0.segmentTitles[4] = "Year"; ObjectID = "qte-Ky-5A0"; */
+"qte-Ky-5A0.segmentTitles[4]" = "Año";
 
 /* Class = "UILabel"; text = "Body Fat"; ObjectID = "rZI-Oc-UtD"; */
 "rZI-Oc-UtD.text" = "Grasa corporal";

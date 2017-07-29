@@ -22,12 +22,22 @@ protocol IInsightsView {
 
 typealias IInsightsPresenter = (IFindInsights, IRecordStoreUpdate, IInsightsView, DisposeBag) -> Void
 let InsightsPresenter: IInsightsPresenter = { interactor, recordStoreUpdate, view, disposeBag in
+    let periodLabels = [
+        LocalizableStrings.Insights.Periods.day(),
+        LocalizableStrings.Insights.Periods.week(),
+        LocalizableStrings.Insights.Periods.month(),
+        LocalizableStrings.Insights.Periods.year()
+    ]
+
     let mapInsights: (FitnessInfoInsight) -> Observable<[FitnessInfoInsightViewModel]> = { insights in
-        let insightsViewModel: [FitnessInfoInsightViewModel] = zip([insights.dayInsight,
-                                                                    insights.weekInsight,
-                                                                    insights.monthInsight,
-                                                                    insights.yearInsight],
-                                                                   ["Day", "Week", "Month", "Year"]).map {
+        let insightsArray = [
+            insights.dayInsight,
+            insights.weekInsight,
+            insights.monthInsight,
+            insights.yearInsight
+        ]
+
+        let insightsViewModel: [FitnessInfoInsightViewModel] = zip(insightsArray, periodLabels).map {
             guard let insight = $0.0 else { return nil }
 
             return FitnessInfoInsightViewModel(title: $0.1,
