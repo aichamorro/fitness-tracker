@@ -68,6 +68,7 @@ final class ShowMetricHistoricalDataViewController: UIViewController {
                 case 1: self.showLastSevenDaysInGraph()
                 case 2: self.showLastMontInGraph()
                 case 3: self.showLastThreeMonthsInGraph()
+                case 4: self.showLastYearInGraph()
                     default: fatalError()
                 }
             }.addDisposableTo(disposeBag)
@@ -100,6 +101,10 @@ final class ShowMetricHistoricalDataViewController: UIViewController {
 
     private func showLastThreeMonthsInGraph() {
         rx_loadGraphData.onNext(Calendar.current.date(addingDays: -90, to: Calendar.current.startOfToday))
+    }
+
+    private func showLastYearInGraph() {
+        rx_loadGraphData.onNext(Calendar.current.date(addingDays: -365, to: Calendar.current.startOfToday))
     }
 }
 
@@ -136,6 +141,10 @@ extension ShowMetricHistoricalDataViewController: UIGraphViewDelegate, UIGraphVi
     }
 
     func graphView(_ graphView: UIGraphView, shouldAddHorizontalTagFor index: Int) -> Bool {
+        if self.graphVisualizationSegmentControl.selectedSegmentIndex == 4 {
+            return index % 30 == 0
+        }
+
         return self.graphVisualizationSegmentControl.selectedSegmentIndex > 1 ? (index % 7) == 0 : true
     }
 
