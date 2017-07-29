@@ -54,7 +54,7 @@ extension DefaultAppRouter: AppRouter {
 
         let seeLatestRecordInteractor = FindLatestRecord(repository: ServiceLocator.inject())
         let insertNewRecordInteractor = CreateNewRecord(repository: ServiceLocator.inject(),
-                                                healthKitRepository: serviceLocator.inject())
+                                                        healthKitRepository: ServiceLocator.inject())
         let disposeBag = DisposeBag()
 
         viewController.interactors = [seeLatestRecordInteractor, insertNewRecordInteractor]

@@ -91,5 +91,12 @@ private class DefaultRepositories: ServiceLocatorModule {
         let coreDataEngine: CoreDataEngine = ServiceLocator.inject()
 
         serviceLocator.registerSingleton(CoreDataInfoRepository(coreDataEngine: coreDataEngine) as IFitnessInfoRepository)
+
+        if let healthKitRepository = HealthKitRepository() {
+            serviceLocator.registerSingleton(healthKitRepository as IHealthKitRepository)
+        } else {
+            NSLog("Warning: Couldn't initialize HealthKitRepository, using a dummy one")
+            serviceLocator.registerSingleton(DummyHealthKitRepository() as IHealthKitRepository)
+        }
     }
 }

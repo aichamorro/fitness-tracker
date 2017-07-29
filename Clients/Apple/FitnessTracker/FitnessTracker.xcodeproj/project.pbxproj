@@ -26,6 +26,7 @@
 		204C62161E1046C300B6CE47 /* CoreDataFitnessInfoRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204C62151E1046C300B6CE47 /* CoreDataFitnessInfoRepositoryTests.swift */; };
 		205212FB1E01D3AD00F9A9E7 /* LatestRecordTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205212FA1E01D3AD00F9A9E7 /* LatestRecordTests.swift */; };
 		207955031F03845600F592C6 /* ExperimentsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 207955021F03845600F592C6 /* ExperimentsTests.swift */; };
+		208A52E61F2CDC0600914B7E /* DummyHealthKitRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 208A52E51F2CDC0600914B7E /* DummyHealthKitRepository.swift */; };
 		209175611F070CDD00607117 /* LocalizableStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 209175601F070CDD00607117 /* LocalizableStrings.swift */; };
 		209175631F070CFC00607117 /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 209175621F070CFC00607117 /* Localizable.stringsdict */; };
 		20A54AF51F100CF000FE879D /* MVPView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A54AF41F100CF000FE879D /* MVPView.swift */; };
@@ -68,7 +69,6 @@
 		39F988C91E4DD1D0008A1DB6 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39F988C81E4DD1D0008A1DB6 /* HealthKit.framework */; };
 		39F988CB1E4E1155008A1DB6 /* HeatlthKitRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F988CA1E4E1155008A1DB6 /* HeatlthKitRepository.swift */; };
 		39F988CD1E4E1207008A1DB6 /* AppContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F988CC1E4E1207008A1DB6 /* AppContext.swift */; };
-		3C7E764AE3C8B71A2F15C64D /* Pods_TodayExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7EBF53B2E60378C64BDDE11 /* Pods_TodayExtension.framework */; };
 		45AA81FD1D29B16082BA4BBA /* Pods_FitnessTracker_FitnessTrackerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95868793967C2540BD298442 /* Pods_FitnessTracker_FitnessTrackerTests.framework */; };
 		60DCC2D4BE7EC6D04AACF7B5 /* Pods_FitnessTracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 243E297E8C331F616EE9C451 /* Pods_FitnessTracker.framework */; };
 /* End PBXBuildFile section */
@@ -120,6 +120,7 @@
 		204C62151E1046C300B6CE47 /* CoreDataFitnessInfoRepositoryTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataFitnessInfoRepositoryTests.swift; sourceTree = "<group>"; };
 		205212FA1E01D3AD00F9A9E7 /* LatestRecordTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = LatestRecordTests.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		207955021F03845600F592C6 /* ExperimentsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExperimentsTests.swift; sourceTree = "<group>"; };
+		208A52E51F2CDC0600914B7E /* DummyHealthKitRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DummyHealthKitRepository.swift; sourceTree = "<group>"; };
 		2091755D1F0709B600607117 /* LocalizableStrings.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = LocalizableStrings.json; sourceTree = "<group>"; };
 		209175601F070CDD00607117 /* LocalizableStrings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalizableStrings.swift; sourceTree = "<group>"; };
 		209175621F070CFC00607117 /* Localizable.stringsdict */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.stringsdict; path = Localizable.stringsdict; sourceTree = "<group>"; };
@@ -345,6 +346,7 @@
 				39F988951E465523008A1DB6 /* IFitnessInfoRepository.swift */,
 				39F988981E46559D008A1DB6 /* CoreDataQueryRequest.swift */,
 				39F988CA1E4E1155008A1DB6 /* HeatlthKitRepository.swift */,
+				208A52E51F2CDC0600914B7E /* DummyHealthKitRepository.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -697,6 +699,7 @@
 				39F988991E46559D008A1DB6 /* CoreDataQueryRequest.swift in Sources */,
 				20A54AFD1F100F6700FE879D /* ServiceLocator.swift in Sources */,
 				2040BF1F1F0858DA00520E15 /* R.generated.swift in Sources */,
+				208A52E61F2CDC0600914B7E /* DummyHealthKitRepository.swift in Sources */,
 				39F988AF1E4B4218008A1DB6 /* BodyMetric.swift in Sources */,
 				39F988B11E4B42C6008A1DB6 /* InsightsVP.swift in Sources */,
 				39F988C71E4B4569008A1DB6 /* RecordsStoreUpdates.swift in Sources */,

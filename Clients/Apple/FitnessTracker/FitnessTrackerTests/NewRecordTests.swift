@@ -187,7 +187,7 @@ class NewRecordTests: QuickSpec {
                 var repository: IFitnessInfoRepository!
                 var healthKitRepository: IHealthKitRepository!
                 var disposeBag: DisposeBag!
-                
+
                 beforeEach {
                     let managedObjectContext = SetUpInMemoryManagedObjectContext()
                     repository = CoreDataInfoRepository(managedObjectContext: managedObjectContext)
@@ -195,25 +195,25 @@ class NewRecordTests: QuickSpec {
                     interactor = CreateNewRecord(repository: repository, healthKitRepository: healthKitRepository)
                     disposeBag = DisposeBag()
                 }
-                
+
                 it("Writes data in the healthkit repository") {
                     let record = FitnessInfo(weight: 60, height: 171, bodyFatPercentage: 18.8, musclePercentage: 35, waterPercentage: 55, date: Date() as NSDate)
-                    
+
                     waitUntil { done in
-                        interactor.rx_save(record).subscribe(onNext: { info in
+                        interactor.rx_save(record).subscribe(onNext: { _ in
                             guard let fakeHealthKitRepository = healthKitRepository as? FakeHealthKitRepository else {
                                 fail()
                                 done()
-                                
+
                                 return
                             }
-                            
+
                             switch fakeHealthKitRepository.currentState {
                             case .nothing:
                                 fail()
                                 done()
                                 return
-                                
+
                             case .savedValue(let height, let weight, let fat, let leanBodyMass, let bmi, let date):
                                 expect(height).to(equal(record.height))
                                 expect(weight).to(equal(record.weight))
@@ -223,8 +223,8 @@ class NewRecordTests: QuickSpec {
                                 expect(date).to(equal(record.date! as Date))
                                 done()
                             }
-                            
-                        }, onError: { error in
+
+                        }, onError: { _ in
                             fail()
                             done()
                         }).addDisposableTo(disposeBag)
@@ -240,9 +240,9 @@ class FakeHealthKitRepository: IHealthKitRepository {
         case nothing
         case savedValue(height: UInt, weight: Double, fat: Double, leanBodyMass: Double, bmi: Double, date: Date)
     }
-    
+
     var currentState: State = .nothing
-    
+
     func save(height: UInt, weight: Double, bodyFatPercentage: Double, leanBodyMass: Double, bmi: Double, date: Date) {
         currentState = .savedValue(height: height,
                                    weight: weight,
