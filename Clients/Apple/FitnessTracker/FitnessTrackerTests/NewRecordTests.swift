@@ -178,6 +178,73 @@ class NewRecordTests: QuickSpec {
                     expect(view.isDismissed).to(beTrue())
                 }
             }
+            context("HealthKit") {
+                var interactor: ICreateNewRecord!
+                var repository: IFitnessInfoRepository!
+                var healthKitRepository: IHealthKitRepository!
+                var disposeBag: DisposeBag!
+                
+                beforeEach {
+                    let managedObjectContext = SetUpInMemoryManagedObjectContext()
+                    repository = CoreDataInfoRepository(managedObjectContext: managedObjectContext)
+                    healthKitRepository = FakeHealthKitRepository()
+                    interactor = CreateNewRecord(repository: repository, healthKitRepository: healthKitRepository)
+                    disposeBag = DisposeBag()
+                }
+                
+                it("Writes data in the healthkit repository") {
+                    let record = FitnessInfo(weight: 60, height: 171, bodyFatPercentage: 18.8, musclePercentage: 35, waterPercentage: 55, date: Date() as NSDate)
+                    
+                    waitUntil { done in
+                        interactor.rx_save(record).subscribe(onNext: { info in
+                            guard let fakeHealthKitRepository = healthKitRepository as? FakeHealthKitRepository else {
+                                fail()
+                                done()
+                                
+                                return
+                            }
+                            
+                            switch fakeHealthKitRepository.currentState {
+                            case .nothing:
+                                fail()
+                                done()
+                                return
+                                
+                            case .savedValue(let height, let weight, let fat, let leanBodyMass, let bmi, let date):
+                                expect(height).to(equal(record.height))
+                                expect(weight).to(equal(record.weight))
+                                expect(fat).to(equal(record.bodyFatPercentage))
+                                expect(leanBodyMass).to(equal(record.leanBodyWeight))
+                                expect(bmi).to(equal(record.bmi))
+                                expect(date).to(equal(record.date! as Date))
+                                done()
+                            }
+                            
+                        }, onError: { error in
+                            fail()
+                            done()
+                        }).addDisposableTo(disposeBag)
+                    }
+                }
+            }
         }
+    }
+}
+
+class FakeHealthKitRepository: IHealthKitRepository {
+    enum State {
+        case nothing
+        case savedValue(height: UInt, weight: Double, fat: Double, leanBodyMass: Double, bmi: Double, date: Date)
+    }
+    
+    var currentState: State = .nothing
+    
+    func save(height: UInt, weight: Double, bodyFatPercentage: Double, leanBodyMass: Double, bmi: Double, date: Date) {
+        currentState = .savedValue(height: height,
+                                   weight: weight,
+                                   fat: bodyFatPercentage,
+                                   leanBodyMass: leanBodyMass,
+                                   bmi: bmi,
+                                   date: date)
     }
 }
