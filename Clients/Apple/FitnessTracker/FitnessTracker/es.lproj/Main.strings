@@ -1,0 +1,111 @@
+/* Class = "UILabel"; text = "%"; ObjectID = "3ZO-bM-hPK"; */
+"3ZO-bM-hPK.text" = "%";
+
+/* Class = "UILabel"; text = "0 Kg"; ObjectID = "7F6-CM-DaQ"; */
+"7F6-CM-DaQ.text" = "0 Kg";
+
+/* Class = "UILabel"; text = "Weight"; ObjectID = "8tE-0S-d6L"; */
+"8tE-0S-d6L.text" = "Peso";
+
+/* Class = "UILabel"; text = "kg"; ObjectID = "49R-0v-uMQ"; */
+"49R-0v-uMQ.text" = "kg";
+
+/* Class = "UILabel"; text = "%"; ObjectID = "AmT-91-oSa"; */
+"AmT-91-oSa.text" = "%";
+
+/* Class = "UILabel"; text = "cm"; ObjectID = "B3I-06-Opf"; */
+"B3I-06-Opf.text" = "cm";
+
+/* Class = "UIButton"; normalTitle = "Save"; ObjectID = "BfC-51-zDd"; */
+"BfC-51-zDd.normalTitle" = "Guardar";
+
+/* Class = "UILabel"; text = "171"; ObjectID = "Jq5-Xw-6cY"; */
+"Jq5-Xw-6cY.text" = "171";
+
+/* Class = "UINavigationItem"; title = "Insert measurement"; ObjectID = "Jt4-68-Jbb"; */
+"Jt4-68-Jbb.title" = "Nuevas medidas";
+
+/* Class = "UILabel"; text = "Water:"; ObjectID = "LtL-cv-C1d"; */
+"LtL-cv-C1d.text" = "Agua:";
+
+/* Class = "UILabel"; text = "Value"; ObjectID = "PnQ-Ua-9db"; */
+"PnQ-Ua-9db.text" = "Valor";
+
+/* Class = "UITabBarItem"; title = "Item"; ObjectID = "PoU-T6-AWh"; */
+"PoU-T6-AWh.title" = "Item";
+
+/* Class = "UIBarButtonItem"; title = "Close"; ObjectID = "ROF-3k-ZgP"; */
+"ROF-3k-ZgP.title" = "Cerrar";
+
+/* Class = "UILabel"; text = "Body Fat:"; ObjectID = "UMZ-ar-1W9"; */
+"UMZ-ar-1W9.text" = "Grasa corporal:";
+
+/* Class = "UITextField"; placeholder = "Expected (Kg). Ex: 20"; ObjectID = "UoH-C8-ZLc"; */
+"UoH-C8-ZLc.placeholder" = "Esperado. Ej: 20";
+
+/* Class = "UILabel"; text = "Weight:"; ObjectID = "V1w-SP-YsW"; */
+"V1w-SP-YsW.text" = "Peso:";
+
+/* Class = "UILabel"; text = "0 Kg"; ObjectID = "VfM-ep-IFU"; */
+"VfM-ep-IFU.text" = "0 Kg";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "aG8-43-EjR"; */
+"aG8-43-EjR.text" = "Título";
+
+/* Class = "UILabel"; text = "0 %"; ObjectID = "arO-Yg-GzC"; */
+"arO-Yg-GzC.text" = "0 %";
+
+/* Class = "UILabel"; text = "Date"; ObjectID = "bDV-zE-1Bb"; */
+"bDV-zE-1Bb.text" = "Fecha";
+
+/* Class = "UILabel"; text = "Water"; ObjectID = "bnx-xa-9ut"; */
+"bnx-xa-9ut.text" = "Agua";
+
+/* Class = "UILabel"; text = "%"; ObjectID = "gJW-Iw-nSb"; */
+"gJW-Iw-nSb.text" = "%";
+
+/* Class = "UILabel"; text = "Muscle:"; ObjectID = "h0i-2C-vm3"; */
+"h0i-2C-vm3.text" = "Músculo:";
+
+/* Class = "UILabel"; text = "Today, 13:30"; ObjectID = "h5V-Xd-jvE"; */
+"h5V-Xd-jvE.text" = "Hoy, 13:30";
+
+/* Class = "UILabel"; text = "cm"; ObjectID = "p9O-6n-eMg"; */
+"p9O-6n-eMg.text" = "cm";
+
+/* Class = "UITabBarItem"; title = "Item"; ObjectID = "qRd-5R-zUF"; */
+"qRd-5R-zUF.title" = "Item";
+
+/* Class = "UISegmentedControl"; qte-Ky-5A0.segmentTitles[0] = "This Week"; ObjectID = "qte-Ky-5A0"; */
+"qte-Ky-5A0.segmentTitles[0]" = "Esta semana";
+
+/* Class = "UISegmentedControl"; qte-Ky-5A0.segmentTitles[1] = "7 days"; ObjectID = "qte-Ky-5A0"; */
+"qte-Ky-5A0.segmentTitles[1]" = "7 días";
+
+/* Class = "UISegmentedControl"; qte-Ky-5A0.segmentTitles[2] = "30 days"; ObjectID = "qte-Ky-5A0"; */
+"qte-Ky-5A0.segmentTitles[2]" = "30 días";
+
+/* Class = "UISegmentedControl"; qte-Ky-5A0.segmentTitles[3] = "3 months"; ObjectID = "qte-Ky-5A0"; */
+"qte-Ky-5A0.segmentTitles[3]" = "3 meses";
+
+/* Class = "UILabel"; text = "Body Fat"; ObjectID = "rZI-Oc-UtD"; */
+"rZI-Oc-UtD.text" = "Grasa corporal";
+
+/* Class = "UITextField"; placeholder = "Actual (Kg). Ex: 19.7"; ObjectID = "rg2-yE-t4Q"; */
+"rg2-yE-t4Q.placeholder" = "Observado. Ej: 19.7";
+
+/* Class = "UILabel"; text = "Height"; ObjectID = "rgo-EF-NeY"; */
+"rgo-EF-NeY.text" = "Altura";
+
+/* Class = "UILabel"; text = "Muscle"; ObjectID = "tpn-N6-Umh"; */
+"tpn-N6-Umh.text" = "Músculo";
+
+/* Class = "UILabel"; text = "0 Kg"; ObjectID = "wIW-Ai-UHa"; */
+"wIW-Ai-UHa.text" = "0 Kg";
+
+/* Class = "UILabel"; text = "Add calibration fix"; ObjectID = "wXC-Am-iM8"; */
+"wXC-Am-iM8.text" = "Error de calibración";
+
+/* Class = "UILabel"; text = "Height"; ObjectID = "zII-5P-oAx"; */
+"zII-5P-oAx.text" = "Altura";
+

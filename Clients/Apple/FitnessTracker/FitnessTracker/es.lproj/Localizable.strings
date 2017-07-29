@@ -1,0 +1,75 @@
+/* No comment provided by engineer. */
+"graph.errors.noData" = "No se encontraron datos para %@";
+
+/* No comment provided by engineer. */
+"graph.errors.ok" = "Ok";
+
+/* No comment provided by engineer. */
+"historical-data.errors.dialog.Ok" = "Ok";
+
+/* No comment provided by engineer. */
+"historical-data.errors.dialog.title" = "Error";
+
+/* No comment provided by engineer. */
+"historical-data.errors.no-data" = "No se encontraron datos para %@";
+
+/* No comment provided by engineer. */
+"insights.title" = "Tendencias";
+
+/* No comment provided by engineer. */
+"measures.bmi-rating.healthyweight" = "Peso saludable";
+
+/* No comment provided by engineer. */
+"measures.bmi-rating.morbidly-obese" = "Obesidad mórbida";
+
+/* No comment provided by engineer. */
+"measures.bmi-rating.obese" = "Obesidad";
+
+/* No comment provided by engineer. */
+"measures.bmi-rating.overweight" = "Sobrepeso";
+
+/* No comment provided by engineer. */
+"measures.bmi-rating.severyly-obese" = "Obesdidad severa";
+
+/* No comment provided by engineer. */
+"measures.bmi-rating.super-obese" = "Súper obesidad";
+
+/* No comment provided by engineer. */
+"measures.bmi-rating.underweight" = "Bajo peso";
+
+/* No comment provided by engineer. */
+"measures.body-metrics.bmi" = "BMI";
+
+/* No comment provided by engineer. */
+"measures.body-metrics.body-fat" = "Grasa coroporal";
+
+/* No comment provided by engineer. */
+"measures.body-metrics.height" = "Altura";
+
+/* No comment provided by engineer. */
+"measures.body-metrics.leanBody-weight" = "Peso sin grasa";
+
+/* No comment provided by engineer. */
+"measures.body-metrics.muscle" = "Músculo";
+
+/* No comment provided by engineer. */
+"measures.body-metrics.units.bmi" = " ";
+
+/* No comment provided by engineer. */
+"measures.body-metrics.units.height" = "cm";
+
+/* No comment provided by engineer. */
+"measures.body-metrics.units.percentage" = "%";
+
+/* No comment provided by engineer. */
+"measures.body-metrics.units.weight" = "kg";
+
+/* No comment provided by engineer. */
+"measures.body-metrics.water" = "Agua";
+
+/* No comment provided by engineer. */
+"measures.body-metrics.weight" = "Peso";
+
+/* No comment provided by engineer. */
+"records.latest.title" = "Última medición";
+
