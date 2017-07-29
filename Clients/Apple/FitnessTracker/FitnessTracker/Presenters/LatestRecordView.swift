@@ -68,25 +68,3 @@ extension ILatestRecordView {
         }
     }
 }
-
-class LatestRecordView: ILatestRecordView {
-    var viewModelVariable = Variable<LatestRecordViewModel>(LatestRecordViewModel.empty)
-    var viewModel: LatestRecordViewModel {
-        get { return viewModelVariable.value }
-        set { viewModelVariable.value = newValue }
-    }
-
-    var viewDidLoadSubject = PublishSubject<Void>()
-    var rx_viewDidLoad: Observable<Void> {
-        return viewDidLoadSubject.asObservable()
-    }
-
-    var didSelectMetricSubject = PublishSubject<BodyMetric>()
-    var rx_didSelectMetric: Observable<BodyMetric> {
-        return didSelectMetricSubject.asObservable()
-    }
-
-    func viewDidLoad() {
-        viewDidLoadSubject.asObserver().onNext()
-    }
-}

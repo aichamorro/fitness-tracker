@@ -11,15 +11,15 @@ import RxSwift
 
 typealias ICreateNewRecord = AnyInteractor<IFitnessInfo, IFitnessInfo>
 final class CreateNewRecord: ICreateNewRecord {
-    init(repository: IFitnessInfoRepository, healthKitRepository: IHealthKitRepository? = nil) {
+    init(repository: IFitnessInfoRepository, healthKitRepository: IHealthKitRepository) {
         super.init { record -> Observable<IFitnessInfo> in
             return repository.rx_save(record).do(onNext: { saved in
-                healthKitRepository?.save(height: saved.height,
-                                          weight: saved.weight,
-                                          bodyFatPercentage: saved.bodyFatPercentage,
-                                          leanBodyMass: saved.leanBodyWeight,
-                                          bmi: saved.bmi,
-                                          date: saved.date as! Date)
+                healthKitRepository.save(height: saved.height,
+                                         weight: saved.weight,
+                                         bodyFatPercentage: saved.bodyFatPercentage,
+                                         leanBodyMass: saved.leanBodyWeight,
+                                         bmi: saved.bmi,
+                                         date: saved.date! as Date)
             })
         }
     }

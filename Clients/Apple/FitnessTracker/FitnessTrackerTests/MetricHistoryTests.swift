@@ -58,8 +58,8 @@ class MetricHistoryTests: QuickSpec {
                 beforeEach {
                     view = FakeMetricHistoryView()
                     disposeBag = DisposeBag()
-                    let managedObjectContext = SetUpInMemoryManagedObjectContext()
-                    repository = CoreDataInfoRepository(managedObjectContext: managedObjectContext)
+                    let coreDataEngine = CoreDataEngineImpl(managedObjectContext: SetUpInMemoryManagedObjectContext())
+                    repository = CoreDataInfoRepository(coreDataEngine: coreDataEngine)
                     interactor = FindAllRecords(repository: repository)
                     MetricHistoryPresenter(interactor, view, disposeBag)
                 }

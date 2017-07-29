@@ -16,8 +16,8 @@ final class CoreDataInfoRepository: IFitnessInfoRepository {
     private let disposeBag = DisposeBag()
     private let coreDataEngine: CoreDataEngine
 
-    init(managedObjectContext: NSManagedObjectContext) {
-        coreDataEngine = CoreDataEngine(managedObjectContext: managedObjectContext)
+    init(coreDataEngine: CoreDataEngine) {
+        self.coreDataEngine = coreDataEngine
     }
 
     var rx_updated: Observable<Void> {
@@ -40,7 +40,11 @@ final class CoreDataInfoRepository: IFitnessInfoRepository {
         let interval = DateInterval(start: from as Date, end: to as Date)
         let query = CoreDataQueryRequest.findInterval(interval, limit: limit, order: order)
 
-        return coreDataEngine.execute(query: query) as! [IFitnessInfo]
+        do {
+            return try coreDataEngine.execute(query: query) as! [IFitnessInfo]
+        } catch {
+            fatalError()
+        }
     }
 
     func rx_findLatest(numberOfRecords: Int) -> Observable<[IFitnessInfo]> {
@@ -51,7 +55,12 @@ final class CoreDataInfoRepository: IFitnessInfoRepository {
     }
 
     func findLatest(numberOfRecords: Int) -> [IFitnessInfo] {
-        return coreDataEngine.execute(query: .findAll(limit: .many(numberOfRecords), order: .descendent)) as! [IFitnessInfo]
+        do {
+            return try coreDataEngine.execute(query: .findAll(limit: .many(numberOfRecords), order: .descendent)) as! [IFitnessInfo]
+
+        } catch {
+            fatalError()
+        }
     }
 
     func rx_findAll() -> Observable<[IFitnessInfo]> {

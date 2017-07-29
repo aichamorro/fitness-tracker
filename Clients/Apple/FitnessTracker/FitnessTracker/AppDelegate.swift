@@ -7,15 +7,7 @@
 //
 
 import UIKit
-import URLRouter
 import RxSwift
-
-class AppServiceLocator {
-    var fitnessInfoRepository: IFitnessInfoRepository!
-    var router: AppRouter!
-    var viewControllerFactory: IUIViewControllerFactory!
-    var healthKitRepository: HealthKitRepository?
-}
 
 typealias RetainerBag = [Any]
 
@@ -23,7 +15,6 @@ typealias RetainerBag = [Any]
 final class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    var serviceLocator: AppServiceLocator!
     var disposeBag = DisposeBag()
 
     func application(_ application: UIApplication,
@@ -46,52 +37,25 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.makeKeyAndVisible()
 
         configureServices()
-        configureRouting()
 
-        var initialViewControllers: [UIViewController] = []
-        serviceLocator.router.open(appURL: URL(string: "app://records")!) { controller in
-            guard let viewController = controller as? UIViewController else { fatalError() }
-            viewController.title = LocalizableStrings.Records.Latest.title()
-            let rootController = UINavigationController(rootViewController: viewController)
-
-            initialViewControllers.append(rootController)
-        }
-
-        serviceLocator.router.open(appURL: URL(string: "app://insights")!) { controller in
-            guard let viewController = controller as? UIViewController else { fatalError() }
-            viewController.title = LocalizableStrings.Insights.title()
-            let rootController = UINavigationController(rootViewController: viewController)
-
-            initialViewControllers.append(rootController)
-        }
-
+        let router: AppRouter = ServiceLocator.inject()
         let mainTabController = UITabBarController()
-        mainTabController.viewControllers = initialViewControllers
+        mainTabController.viewControllers = [router.currentRecord().viewController, router.insights().viewController]
         window?.rootViewController = mainTabController
 
         return true
     }
 
     private func configureServices() {
-        serviceLocator = AppServiceLocator()
-        
-        serviceLocator.healthKitRepository = HealthKitRepository()
-
         CoreDataStackInitializer({ managedObjectContext in
             NSLog("Core Data Stack initialized correctly")
 
-            self.serviceLocator.fitnessInfoRepository = CoreDataInfoRepository(managedObjectContext: managedObjectContext)
+            let coreDataEngine = CoreDataEngineImpl(managedObjectContext: managedObjectContext)
+
+            ServiceLocator.registerSingleton(coreDataEngine as CoreDataEngine)
+            ServiceLocator.registerCoreDataRepositories()
         }, { error in
             fatalError(error.localizedDescription)
         })
-
-        serviceLocator.viewControllerFactory = UIViewControllerFactory()
     }
-
-    private func configureRouting() {
-        let allEntries = AppRouter.allEntries(serviceLocator: self.serviceLocator)
-
-        serviceLocator.router = AppRouter(urlRouter: URLRouterFactory.with(entries: allEntries))
-    }
-
 }

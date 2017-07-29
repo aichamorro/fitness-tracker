@@ -8,7 +8,6 @@
 
 import Foundation
 import RxSwift
-import URLRouter
 
 typealias ILatestRecordPresenter = (IFindLatestRecord, IRecordStoreUpdate, ILatestRecordView, AppRouter, DisposeBag) -> Void
 let LatestRecordPresenter: ILatestRecordPresenter = { interactor, storeUpdates, view, router, disposeBag in
@@ -24,14 +23,10 @@ let LatestRecordPresenter: ILatestRecordPresenter = { interactor, storeUpdates, 
 
     view.rx_didSelectMetric
         .subscribe(onNext: { metric in
-            let url = URL(string: "app://records/history/\(metric.rawValue)")!
-            router.open(appURL: url) { viewController in
-                guard let viewController = viewController as? UIViewController else { fatalError() }
-                guard let tabController = UIApplication.shared.keyWindow?.rootViewController as? UITabBarController,
-                 let rootViewController = tabController.viewControllers?.first else { fatalError() }
+            guard let tabController = UIApplication.shared.keyWindow?.rootViewController as? UITabBarController,
+            let rootViewController = tabController.viewControllers?.first as? UINavigationController else { fatalError() }
 
-                rootViewController.show(viewController, sender: nil)
-            }
+            router.showMetricHistoricData(metric: metric).push(in: rootViewController)
         }).addDisposableTo(disposeBag)
 
     interactor.rx_output

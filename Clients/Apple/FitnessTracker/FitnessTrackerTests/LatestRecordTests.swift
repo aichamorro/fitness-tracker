@@ -12,8 +12,29 @@ import Nimble
 import RxSwift
 import RxTest
 import CoreData
-import URLRouter
 @testable import FitnessTracker
+
+private class LatestRecordView: ILatestRecordView {
+    var viewModelVariable = Variable<LatestRecordViewModel>(LatestRecordViewModel.empty)
+    var viewModel: LatestRecordViewModel {
+        get { return viewModelVariable.value }
+        set { viewModelVariable.value = newValue }
+    }
+
+    var viewDidLoadSubject = PublishSubject<Void>()
+    var rx_viewDidLoad: Observable<Void> {
+        return viewDidLoadSubject.asObservable()
+    }
+
+    var didSelectMetricSubject = PublishSubject<BodyMetric>()
+    var rx_didSelectMetric: Observable<BodyMetric> {
+        return didSelectMetricSubject.asObservable()
+    }
+
+    func viewDidLoad() {
+        viewDidLoadSubject.asObserver().onNext()
+    }
+}
 
 class LatestRecordTests: QuickSpec {
     // swiftlint:disable function_body_length
@@ -32,13 +53,14 @@ class LatestRecordTests: QuickSpec {
 
                 beforeEach {
                     managedObjectContext = SetUpInMemoryManagedObjectContext()
-                    repository = CoreDataInfoRepository(managedObjectContext: managedObjectContext)
+                    let coreDataEngine = CoreDataEngineImpl(managedObjectContext: managedObjectContext)
+                    repository = CoreDataInfoRepository(coreDataEngine: coreDataEngine)
                     view = LatestRecordView()
                     disposeBag = DisposeBag()
                     scheduler = TestScheduler(initialClock: 0)
                     interactor = FindLatestRecord(repository: repository)
                     storeUpdates = RecordStoreUpdate(repository: repository)
-                    router = AppRouter.empty
+                    router = DefaultAppRouter()
 
                     LatestRecordPresenter(interactor, storeUpdates, view, router, disposeBag)
                 }
