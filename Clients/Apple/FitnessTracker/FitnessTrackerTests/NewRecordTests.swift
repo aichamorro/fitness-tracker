@@ -67,7 +67,7 @@ class NewRecordTests: QuickSpec {
                     let managedObjectContext = SetUpInMemoryManagedObjectContext()
                     let coreDataEngine = CoreDataEngineImpl(managedObjectContext: managedObjectContext)
                     repository = CoreDataInfoRepository(coreDataEngine: coreDataEngine)
-                    newRecordInteractor = CreateNewRecord(repository: repository)
+                    newRecordInteractor = CreateNewRecord(repository: repository, healthKitRepository: DummyHealthKitRepository())
                     recordStoreUpdates = RecordStoreUpdate(repository: repository)
                     latestRecordInteractor = FindLatestRecord(repository: repository)
                     view = FakeNewRecordView()
@@ -189,8 +189,8 @@ class NewRecordTests: QuickSpec {
                 var disposeBag: DisposeBag!
 
                 beforeEach {
-                    let managedObjectContext = SetUpInMemoryManagedObjectContext()
-                    repository = CoreDataInfoRepository(managedObjectContext: managedObjectContext)
+                    let coreDataEngine = CoreDataEngineImpl(managedObjectContext: SetUpInMemoryManagedObjectContext())
+                    repository = CoreDataInfoRepository(coreDataEngine: coreDataEngine)
                     healthKitRepository = FakeHealthKitRepository()
                     interactor = CreateNewRecord(repository: repository, healthKitRepository: healthKitRepository)
                     disposeBag = DisposeBag()
@@ -200,7 +200,7 @@ class NewRecordTests: QuickSpec {
                     let record = FitnessInfo(weight: 60, height: 171, bodyFatPercentage: 18.8, musclePercentage: 35, waterPercentage: 55, date: Date() as NSDate)
 
                     waitUntil { done in
-                        interactor.rx_save(record).subscribe(onNext: { _ in
+                        interactor.rx_output.subscribe(onNext: { _ in
                             guard let fakeHealthKitRepository = healthKitRepository as? FakeHealthKitRepository else {
                                 fail()
                                 done()
@@ -223,11 +223,12 @@ class NewRecordTests: QuickSpec {
                                 expect(date).to(equal(record.date! as Date))
                                 done()
                             }
-
                         }, onError: { _ in
                             fail()
                             done()
                         }).addDisposableTo(disposeBag)
+
+                        interactor.rx_input.onNext(record)
                     }
                 }
             }

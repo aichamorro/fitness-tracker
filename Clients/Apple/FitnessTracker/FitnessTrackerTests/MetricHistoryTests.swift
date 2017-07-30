@@ -45,6 +45,16 @@ final class FakeMetricHistoryView: IMetricHistoryView {
 }
 
 class MetricHistoryTests: QuickSpec {
+    lazy var numberFormatter: NumberFormatter = {
+        let formatter = NumberFormatter()
+        formatter.allowsFloats = true
+        formatter.minimumFractionDigits = 1
+        formatter.maximumFractionDigits = 1
+        formatter.numberStyle = .decimal
+
+        return formatter
+    }()
+
     // swiftlint:disable function_body_length
     override func spec() {
         describe("As user I would like to be able to see the history of my readings, per metric") {
@@ -89,35 +99,40 @@ class MetricHistoryTests: QuickSpec {
                         view.selectedMetric = .bodyFatPercentage
                         view.rx_loadHistoricDataSubject.onNext()
                         expect(view._noHistoricalDataWarningShown).to(beFalse())
-                        expect(view.metricDataVariable.value.map { return $0.reading }).to(equal(["31.0", "30.4", "30.4"]))
+                        let localizedExpected = [31.0, 30.4, 30.4].map { self.numberFormatter.string(from: $0) }
+                        expect(view.metricDataVariable.value.map { return $0.reading }).to(equal(localizedExpected))
                     }
 
                     it("Shows data for muscle percentage") {
                         view.selectedMetric = .musclePercentage
                         view.rx_loadHistoricDataSubject.onNext()
                         expect(view._noHistoricalDataWarningShown).to(beFalse())
-                        expect(view.metricDataVariable.value.map { return $0.reading }).to(equal(["20.8", "20.5", "20.0"]))
+                        let localizedExpected = [20.8, 20.5, 20.0].map { self.numberFormatter.string(from: $0) }
+                        expect(view.metricDataVariable.value.map { return $0.reading }).to(equal(localizedExpected))
                     }
 
                     it("Shows data for height") {
                         view.selectedMetric = .height
                         view.rx_loadHistoricDataSubject.onNext()
                         expect(view._noHistoricalDataWarningShown).to(beFalse())
-                        expect(view.metricDataVariable.value.map { return $0.reading }).to(equal(["171.0", "171.0", "171.0"]))
+                        let localizedExpected = [171.0, 171.0, 171.0].map { self.numberFormatter.string(from: $0) }
+                        expect(view.metricDataVariable.value.map { return $0.reading }).to(equal(localizedExpected))
                     }
 
                     it("Shows data for weight") {
                         view.selectedMetric = .weight
                         view.rx_loadHistoricDataSubject.onNext()
                         expect(view._noHistoricalDataWarningShown).to(beFalse())
-                        expect(view.metricDataVariable.value.map { return $0.reading }).to(equal(["63.0", "60.0", "60.5"]))
+                        let localizedExpected = [63.0, 60.0, 60.5].map { self.numberFormatter.string(from: $0) }
+                        expect(view.metricDataVariable.value.map { return $0.reading }).to(equal(localizedExpected))
                     }
 
                     it("Shows data for water") {
                         view.selectedMetric = .waterPercentage
                         view.rx_loadHistoricDataSubject.onNext()
                         expect(view._noHistoricalDataWarningShown).to(beFalse())
-                        expect(view.metricDataVariable.value.map { return $0.reading }).to(equal(["24.0", "22.0", "20.0"]))
+                        let localizedExpected = [24.0, 22.0, 20.0].map { self.numberFormatter.string(from: $0) }
+                        expect(view.metricDataVariable.value.map { return $0.reading }).to(equal(localizedExpected))
                     }
 
                 }
