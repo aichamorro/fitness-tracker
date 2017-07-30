@@ -176,4 +176,29 @@ extension ShowMetricHistoricalDataViewController: UITableViewDelegate, UITableVi
 
         return cell
     }
+
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        let alert = UIAlertController(
+            title: LocalizableStrings.HistoricalData.RemoveWarning.title(),
+            message: LocalizableStrings.HistoricalData.RemoveWarning.message(),
+            preferredStyle: .alert)
+
+        alert.addAction(UIAlertAction(
+            title: LocalizableStrings.HistoricalData.RemoveWarning.yes(),
+            style: UIAlertActionStyle.default,
+            handler: { _ in
+                NSLog("TODO: Notify the presenter")
+        }))
+
+        alert.addAction(UIAlertAction(title: LocalizableStrings.HistoricalData.RemoveWarning.no(), style: .destructive, handler: { _ in
+            alert.dismiss(animated: true, completion: nil)
+            tableView.setEditing(false, animated: true)
+        }))
+
+        self.present(alert, animated: true, completion: nil)
+    }
 }
