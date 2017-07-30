@@ -30,6 +30,7 @@
 		208A52EB1F2CE1F600914B7E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 208A52ED1F2CE1F600914B7E /* InfoPlist.strings */; };
 		208A52F01F2CE1F700914B7E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 208A52F21F2CE1F700914B7E /* InfoPlist.strings */; };
 		208A52F51F2CE1F800914B7E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 208A52F71F2CE1F800914B7E /* Localizable.strings */; };
+		208A52F91F2DE9D400914B7E /* RemoveRecordTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 208A52F81F2DE9D400914B7E /* RemoveRecordTests.swift */; };
 		209175611F070CDD00607117 /* LocalizableStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 209175601F070CDD00607117 /* LocalizableStrings.swift */; };
 		209175631F070CFC00607117 /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 209175621F070CFC00607117 /* Localizable.stringsdict */; };
 		20A54AF51F100CF000FE879D /* MVPView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A54AF41F100CF000FE879D /* MVPView.swift */; };
@@ -41,7 +42,7 @@
 		20E89E651E12F44E00F03644 /* MetricHistoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E89E641E12F44E00F03644 /* MetricHistoryTests.swift */; };
 		20E89E681E130C5C00F03644 /* ShowMetricHistoricalDataVP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E89E671E130C5C00F03644 /* ShowMetricHistoricalDataVP.swift */; };
 		20FA50FB1E095712002E536A /* FindLatestRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FA50FA1E095712002E536A /* FindLatestRecord.swift */; };
-		20FA50FE1E09575E002E536A /* FitnessInfoRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FA50FD1E09575E002E536A /* FitnessInfoRepository.swift */; };
+		20FA50FE1E09575E002E536A /* CoreDataFitnessInfoRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FA50FD1E09575E002E536A /* CoreDataFitnessInfoRepository.swift */; };
 		20FA510B1E0AE4D0002E536A /* CommonUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FA510A1E0AE4D0002E536A /* CommonUtils.swift */; };
 		3903F5CA1E1BFA7D0093095B /* AppRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3903F5C91E1BFA7D0093095B /* AppRouter.swift */; };
 		397EBDA51E27B6B70060BCC1 /* InsightsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397EBDA41E27B6B70060BCC1 /* InsightsViewController.swift */; };
@@ -129,6 +130,7 @@
 		208A52EC1F2CE1F600914B7E /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		208A52F11F2CE1F700914B7E /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		208A52F61F2CE1F800914B7E /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
+		208A52F81F2DE9D400914B7E /* RemoveRecordTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoveRecordTests.swift; sourceTree = "<group>"; };
 		2091755D1F0709B600607117 /* LocalizableStrings.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = LocalizableStrings.json; sourceTree = "<group>"; };
 		209175601F070CDD00607117 /* LocalizableStrings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalizableStrings.swift; sourceTree = "<group>"; };
 		209175621F070CFC00607117 /* Localizable.stringsdict */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.stringsdict; path = Localizable.stringsdict; sourceTree = "<group>"; };
@@ -142,7 +144,7 @@
 		20E89E671E130C5C00F03644 /* ShowMetricHistoricalDataVP.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowMetricHistoricalDataVP.swift; sourceTree = "<group>"; };
 		20F0BC171E16E86E00695F2A /* CoreDataModel_v2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreDataModel_v2.xcdatamodel; sourceTree = "<group>"; };
 		20FA50FA1E095712002E536A /* FindLatestRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = FindLatestRecord.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		20FA50FD1E09575E002E536A /* FitnessInfoRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FitnessInfoRepository.swift; sourceTree = "<group>"; };
+		20FA50FD1E09575E002E536A /* CoreDataFitnessInfoRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataFitnessInfoRepository.swift; sourceTree = "<group>"; };
 		20FA510A1E0AE4D0002E536A /* CommonUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonUtils.swift; sourceTree = "<group>"; };
 		243E297E8C331F616EE9C451 /* Pods_FitnessTracker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FitnessTracker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		28A3F34B67D440117A76919C /* Pods-TodayExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TodayExtension.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TodayExtension/Pods-TodayExtension.debug.xcconfig"; sourceTree = "<group>"; };
@@ -269,6 +271,7 @@
 				20471A471E197E9D0000F7C2 /* InsightsTests.swift */,
 				39F9889B1E48878E008A1DB6 /* FindRecordsInIntervalTests.swift */,
 				207955021F03845600F592C6 /* ExperimentsTests.swift */,
+				208A52F81F2DE9D400914B7E /* RemoveRecordTests.swift */,
 			);
 			path = FitnessTrackerTests;
 			sourceTree = "<group>";
@@ -348,7 +351,7 @@
 			children = (
 				39F988AE1E4B4218008A1DB6 /* BodyMetric.swift */,
 				200323F41E0038B300B1C33A /* FitnessInfo.swift */,
-				20FA50FD1E09575E002E536A /* FitnessInfoRepository.swift */,
+				20FA50FD1E09575E002E536A /* CoreDataFitnessInfoRepository.swift */,
 				202142091E0D248900BAF444 /* CoreDataModel.xcdatamodeld */,
 				2021420E1E0D27FD00BAF444 /* CoreDataFitnessInfo.swift */,
 				202142101E0D57C200BAF444 /* CoreDataStack.swift */,
@@ -679,7 +682,7 @@
 				202142111E0D57C200BAF444 /* CoreDataStack.swift in Sources */,
 				39F988A91E4B3F86008A1DB6 /* NewRecordViewController.swift in Sources */,
 				39F988B71E4B4337008A1DB6 /* MetricReadingTableViewCell.swift in Sources */,
-				20FA50FE1E09575E002E536A /* FitnessInfoRepository.swift in Sources */,
+				20FA50FE1E09575E002E536A /* CoreDataFitnessInfoRepository.swift in Sources */,
 				39F988A71E4B3F86008A1DB6 /* IUIViewControllerFactory.swift in Sources */,
 				20A54AF71F100D1400FE879D /* MVPViewController.swift in Sources */,
 				20D76F211E0DA8DA00FDD122 /* FitnessInfo+Operators.swift in Sources */,
@@ -733,6 +736,7 @@
 				205212FB1E01D3AD00F9A9E7 /* LatestRecordTests.swift in Sources */,
 				207955031F03845600F592C6 /* ExperimentsTests.swift in Sources */,
 				20E89E651E12F44E00F03644 /* MetricHistoryTests.swift in Sources */,
+				208A52F91F2DE9D400914B7E /* RemoveRecordTests.swift in Sources */,
 				20471A481E197E9D0000F7C2 /* InsightsTests.swift in Sources */,
 				39F9889C1E48878E008A1DB6 /* FindRecordsInIntervalTests.swift in Sources */,
 				200323ED1E0018A500B1C33A /* FitnessTrackerTests.swift in Sources */,

@@ -1,5 +1,5 @@
 //
-//  FitnessInfoRepository.swift
+//  CoreDataFitnessInfoRepository.swift
 //  FitnessTracker
 //
 //  Created by Alberto Chamorro - Personal on 20/12/2016.
@@ -10,7 +10,12 @@ import Foundation
 import RxSwift
 import CoreData
 
-final class CoreDataInfoRepository: IFitnessInfoRepository {
+final class CoreDataFitnessInfoRepository: IFitnessInfoRepository {
+
+    enum Errors: Error {
+        case InconsistencyError
+    }
+
     private let rx_updatedSubject = PublishSubject<Void>()
 
     private let disposeBag = DisposeBag()
@@ -24,18 +29,6 @@ final class CoreDataInfoRepository: IFitnessInfoRepository {
         return rx_updatedSubject.asObservable()
     }
 
-    func rx_find(from: NSDate,
-                 to: NSDate,
-                 limit: CoreDataQueryRequestLimit,
-                 order: CoreDataQueryRequestOrder) -> Observable<[IFitnessInfo]> {
-
-        let interval = DateInterval(start: from as Date, end: to as Date)
-        let query = CoreDataQueryRequest.findInterval(interval, limit: limit, order: order)
-
-        return coreDataEngine.rx_execute(query: query)
-            .flatMap { return Observable.just($0 as! [IFitnessInfo]) }
-    }
-
     func find(from: NSDate, to: NSDate, limit: CoreDataQueryRequestLimit, order: CoreDataQueryRequestOrder) -> [IFitnessInfo] {
         let interval = DateInterval(start: from as Date, end: to as Date)
         let query = CoreDataQueryRequest.findInterval(interval, limit: limit, order: order)
@@ -47,25 +40,20 @@ final class CoreDataInfoRepository: IFitnessInfoRepository {
         }
     }
 
-    func rx_findLatest(numberOfRecords: Int) -> Observable<[IFitnessInfo]> {
-        return coreDataEngine.rx_execute(query: .findAll(limit: .many(numberOfRecords), order: .descendent))
-            .do(onNext: nil, onError: { NSLog("Error: \($0)") })
-            .catchErrorJustReturn([])
-            .flatMap { return Observable.just($0 as! [CoreDataFitnessInfo]) }
-    }
-
     func findLatest(numberOfRecords: Int) -> [IFitnessInfo] {
         do {
             return try coreDataEngine.execute(query: .findAll(limit: .many(numberOfRecords), order: .descendent)) as! [IFitnessInfo]
-
         } catch {
             fatalError()
         }
     }
 
-    func rx_findAll() -> Observable<[IFitnessInfo]> {
-        return coreDataEngine.rx_execute(query: .findAll(limit: .noLimit, order: .descendent))
-            .flatMap { return Observable.just($0 as! [CoreDataFitnessInfo]) }
+    func findAll() -> [IFitnessInfo] {
+        do {
+            return try coreDataEngine.execute(query: .findAll(limit: .noLimit, order: .descendent)) as! [IFitnessInfo]
+        } catch {
+            fatalError()
+        }
     }
 
     @discardableResult func save(_ record: IFitnessInfo) throws -> IFitnessInfo {
@@ -85,4 +73,11 @@ final class CoreDataInfoRepository: IFitnessInfoRepository {
         return result
     }
 
+    @discardableResult func remove(_ record: IFitnessInfo) throws -> Bool {
+        guard let coreDataFitnessInfo = record as? CoreDataFitnessInfo else {
+            throw Errors.InconsistencyError
+        }
+
+        return try coreDataEngine.execute(query: .remove(record: coreDataFitnessInfo)) as! Bool
+    }
 }

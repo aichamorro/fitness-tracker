@@ -29,12 +29,32 @@ enum CoreDataEntity: String {
 }
 
 enum CoreDataQueryRequest {
+    enum QueryType {
+        case fetch
+        case remove(object: NSManagedObject)
+    }
+
     case findInterval(DateInterval, limit: CoreDataQueryRequestLimit, order: CoreDataQueryRequestOrder)
     case findAll(limit: CoreDataQueryRequestLimit, order: CoreDataQueryRequestOrder)
+    case remove(record: CoreDataFitnessInfo)
+
+    var type: QueryType {
+        switch self {
+        case .findInterval(_, _, _): fallthrough
+        case .findAll(_, _):
+            return .fetch
+
+        case .remove(let managedObject):
+            return .remove(object: managedObject)
+
+        default:
+            fatalError()
+        }
+    }
 }
 
 extension CoreDataQueryRequest {
-    var fetchRequest: NSFetchRequest<NSFetchRequestResult> {
+    var fetchRequest: NSFetchRequest<NSFetchRequestResult>? {
         switch self {
         case .findAll(let limit, let order):
             let fetchRequest = findInDateIntervalFetchRequest(order: order)
@@ -50,6 +70,9 @@ extension CoreDataQueryRequest {
             addLimitIfNeeded(limit, to: fetchRequest)
 
             return fetchRequest
+
+        case .remove(_):
+            return nil
         }
     }
 
@@ -80,6 +103,7 @@ extension CoreDataQueryRequest {
     var entity: String {
         switch self {
         case .findAll: fallthrough
+        case .remove(_): fallthrough
         case .findInterval:
             return CoreDataEntity.fitnessInfo.rawValue
         }

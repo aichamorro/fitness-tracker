@@ -16,37 +16,83 @@ class RemoveReadingTests: QuickSpec {
     // swiftlint:disable function_body_length
     override func spec() {
         describe("As user I would like to be able to remove readings") {
-            it("Can remove a record") {
+            var repository: CoreDataFitnessInfoRepository!
+            var removeRecordInteractor: RemoveReadingInteractor!
+            var disposeBag: DisposeBag!
+            let record: IFitnessInfo = FitnessInfo(weight: 72.2, height: 171, bodyFatPercentage: 20.9, musclePercentage: 35.1, waterPercentage: 53.7)
+
+            beforeEach {
                 let managedObjectContext = SetUpInMemoryManagedObjectContext()
                 let coreDataEngine = CoreDataEngineImpl(managedObjectContext: managedObjectContext)
-                let repository = CoreDataInfoRepository(coreDataEngine: coreDataEngine)
-                let removeRecordInteractor = RemoveReadingInteractor(infoRepository: repository)
-                let saveRecordInteractor = CreateNewRecord(repository: repository, healthKitRepository: DummyHealthKitRepository())
-                let disposeBag = DisposeBag()
+                repository = CoreDataFitnessInfoRepository(coreDataEngine: coreDataEngine)
+                removeRecordInteractor = RemoveReadingInteractor(infoRepository: repository)
+                disposeBag = DisposeBag()
+            }
 
-                waitUntil { done in
-                    removeRecordInteractor
-                        .rx_output
-                        .subscribe(onNext: {
-                            expect($0).to(beTrue())
-                            done()
-                        }).addDisposableTo(disposeBag)
+            context("When there is a record in the repository") {
+                var saved: IFitnessInfo!
+                var didRemove: Bool = false
 
-                    saveRecordInteractor
-                        .rx_output
-                        .subscribe(onNext: { record in
-                            removeRecordInteractor.rx_input.onNext(record)
-                        }).addDisposableTo(disposeBag)
+                beforeEach {
+                    saved = try! repository.save(record)
+                    expect(repository.findAll().count).to(equal(1))
+
+                    waitUntil { done in
+                        removeRecordInteractor
+                            .rx_output
+                            .subscribe(onNext: {
+                                didRemove = $0
+                                done()
+                            }).addDisposableTo(disposeBag)
+
+                        removeRecordInteractor.rx_input.onNext(saved)
+                    }
+                }
+
+                it("Was removed") {
+                    expect(didRemove).to(beTrue())
+                    expect(repository.findAll()).to(beEmpty())
                 }
             }
+
+            context("When there is no matching record in the repository") {
+                var didThrow = true
+                var didRemove = true
+
+                beforeEach {
+                    let saved = try! repository.save(record)
+                    try! repository.remove(saved)
+
+                    waitUntil { done in
+                        removeRecordInteractor
+                            .rx_output
+                            .subscribe(onNext: {
+                                didThrow = false
+                                didRemove = $0
+                                done()
+                            }, onError: { _ in
+                                didThrow = true
+                                done()
+                            }).addDisposableTo(disposeBag)
+
+                        removeRecordInteractor.rx_input.onNext(saved)
+                    }
+                }
+
+                it("Does not throw") {
+                    expect(didRemove).to(beFalse())
+                    expect(didThrow).to(beFalse())
+                }
+            }
+
         }
     }
 }
 
 class RemoveReadingInteractor: AnyInteractor<IFitnessInfo, Bool> {
     init(infoRepository: IFitnessInfoRepository) {
-        super.init { _ -> Observable<Bool> in
-            return Observable.just(false)
+        super.init { record -> Observable<Bool> in
+            return infoRepository.rx_remove(record)
         }
 
     }

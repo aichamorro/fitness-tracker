@@ -45,7 +45,7 @@ class LatestRecordTests: QuickSpec {
                 var view: LatestRecordView!
                 var disposeBag: DisposeBag!
                 var scheduler: TestScheduler!
-                var repository: CoreDataInfoRepository!
+                var repository: CoreDataFitnessInfoRepository!
                 var managedObjectContext: NSManagedObjectContext!
                 var interactor: IFindLatestRecord!
                 var router: AppRouter!
@@ -54,7 +54,7 @@ class LatestRecordTests: QuickSpec {
                 beforeEach {
                     managedObjectContext = SetUpInMemoryManagedObjectContext()
                     let coreDataEngine = CoreDataEngineImpl(managedObjectContext: managedObjectContext)
-                    repository = CoreDataInfoRepository(coreDataEngine: coreDataEngine)
+                    repository = CoreDataFitnessInfoRepository(coreDataEngine: coreDataEngine)
                     view = LatestRecordView()
                     disposeBag = DisposeBag()
                     scheduler = TestScheduler(initialClock: 0)

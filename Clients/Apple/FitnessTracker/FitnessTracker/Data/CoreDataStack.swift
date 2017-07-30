@@ -109,12 +109,12 @@ internal let RxCoreDataStackInitializer: IRxCoreDataStackInitializer = {
 }
 
 protocol CoreDataEngine {
-    func execute(query: CoreDataQueryRequest) throws -> [Any]
+    func execute(query: CoreDataQueryRequest) throws -> Any
     func create(entityName: String, configuration: ((NSManagedObject) -> Void)?) throws -> NSManagedObject
 }
 
 extension CoreDataEngine {
-    public func rx_execute(query: CoreDataQueryRequest) -> Observable<[Any]> {
+    public func rx_execute(query: CoreDataQueryRequest) -> Observable<Any> {
         return Observable.create { observer in
             do {
                 let result = try self.execute(query: query)
@@ -139,9 +139,22 @@ struct CoreDataEngineImpl: CoreDataEngine {
         self.managedObjectContext = managedObjectContext
     }
 
-    public func execute(query: CoreDataQueryRequest) throws -> [Any] {
+    public func execute(query: CoreDataQueryRequest) throws -> Any {
         do {
-            return try self.managedObjectContext.fetch(query.fetchRequest)
+            switch query.type {
+            case .fetch:
+                return try self.managedObjectContext.fetch(query.fetchRequest!)
+            case .remove(let object):
+                if let context = object.managedObjectContext {
+                    context.delete(object)
+                    try context.save()
+
+                    return true
+                }
+
+                return false
+            }
+
         } catch {
             fatalError()
         }

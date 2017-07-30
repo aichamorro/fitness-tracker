@@ -24,7 +24,7 @@ class FindRecordsInIntervalTests: QuickSpec {
                 let managedObjectContext = SetUpInMemoryManagedObjectContext()
 
                 let coreDataEngine = CoreDataEngineImpl(managedObjectContext: managedObjectContext)
-                repository = CoreDataInfoRepository(coreDataEngine: coreDataEngine)
+                repository = CoreDataFitnessInfoRepository(coreDataEngine: coreDataEngine)
                 interactor = FindRecordsInInterval(repository: repository)
             }
 

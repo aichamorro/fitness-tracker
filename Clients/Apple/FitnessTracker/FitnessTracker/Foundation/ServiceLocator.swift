@@ -90,7 +90,7 @@ private class DefaultRepositories: ServiceLocatorModule {
     func registerServices(serviceLocator: ServiceLocator) {
         let coreDataEngine: CoreDataEngine = ServiceLocator.inject()
 
-        serviceLocator.registerSingleton(CoreDataInfoRepository(coreDataEngine: coreDataEngine) as IFitnessInfoRepository)
+        serviceLocator.registerSingleton(CoreDataFitnessInfoRepository(coreDataEngine: coreDataEngine) as IFitnessInfoRepository)
 
         if let healthKitRepository = HealthKitRepository() {
             serviceLocator.registerSingleton(healthKitRepository as IHealthKitRepository)
