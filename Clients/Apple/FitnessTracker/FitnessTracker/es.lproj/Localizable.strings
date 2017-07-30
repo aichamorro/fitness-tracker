@@ -50,7 +50,7 @@
 "measures.bmi-rating.underweight" = "Bajo peso";
 
 /* No comment provided by engineer. */
-"measures.body-metrics.bmi" = "BMI";
+"measures.body-metrics.bmi" = "IMC";
 
 /* No comment provided by engineer. */
 "measures.body-metrics.body-fat" = "Grasa coroporal";
