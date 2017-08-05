@@ -17,7 +17,7 @@ protocol IFitnessInfoRepository {
     func findAll() -> [IFitnessInfo]
 
     @discardableResult func save(_ record: IFitnessInfo) throws -> IFitnessInfo
-    @discardableResult func remove(_ record: IFitnessInfo) throws -> Bool
+    @discardableResult func remove(_ record: IFitnessInfo) throws -> IFitnessInfo?
 }
 
 extension IFitnessInfoRepository {
@@ -76,11 +76,11 @@ extension IFitnessInfoRepository {
         }
     }
 
-    func rx_remove(_ record: IFitnessInfo) -> Observable<Bool> {
+    func rx_remove(_ record: IFitnessInfo) -> Observable<IFitnessInfo?> {
         return Observable.create { observer in
             do {
-                let succeed = try self.remove(record)
-                observer.onNext(succeed)
+                let removed = try self.remove(record)
+                observer.onNext(removed)
                 observer.onCompleted()
             } catch {
                 observer.onError(error)

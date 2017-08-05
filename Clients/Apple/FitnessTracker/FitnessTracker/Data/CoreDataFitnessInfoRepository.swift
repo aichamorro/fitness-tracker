@@ -56,6 +56,10 @@ final class CoreDataFitnessInfoRepository: IFitnessInfoRepository {
         }
     }
 
+    private func didUpdate() {
+        rx_updatedSubject.onNext()
+    }
+
     @discardableResult func save(_ record: IFitnessInfo) throws -> IFitnessInfo {
         let result = try coreDataEngine.create(entityName: CoreDataEntity.fitnessInfo.rawValue, configuration: { entity in
             guard let saved = entity as? CoreDataFitnessInfo else { fatalError() }
@@ -68,16 +72,20 @@ final class CoreDataFitnessInfoRepository: IFitnessInfoRepository {
             saved.date = record.date ?? NSDate()
         }) as! IFitnessInfo
 
-        rx_updatedSubject.onNext()
+        didUpdate()
 
         return result
     }
 
-    @discardableResult func remove(_ record: IFitnessInfo) throws -> Bool {
+    @discardableResult func remove(_ record: IFitnessInfo) throws -> IFitnessInfo? {
         guard let coreDataFitnessInfo = record as? CoreDataFitnessInfo else {
             throw Errors.InconsistencyError
         }
 
-        return try coreDataEngine.execute(query: .remove(record: coreDataFitnessInfo)) as! Bool
+        let result = try coreDataEngine.execute(query: .remove(record: coreDataFitnessInfo)) as! IFitnessInfo?
+
+        didUpdate()
+
+        return result
     }
 }

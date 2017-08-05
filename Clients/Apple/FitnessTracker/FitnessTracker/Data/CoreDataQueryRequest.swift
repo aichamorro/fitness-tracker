@@ -46,9 +46,6 @@ enum CoreDataQueryRequest {
 
         case .remove(let managedObject):
             return .remove(object: managedObject)
-
-        default:
-            fatalError()
         }
     }
 }

@@ -25,6 +25,7 @@
 		204C62141E0FFFC100B6CE47 /* NewRecordTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204C62131E0FFFC100B6CE47 /* NewRecordTests.swift */; };
 		204C62161E1046C300B6CE47 /* CoreDataFitnessInfoRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204C62151E1046C300B6CE47 /* CoreDataFitnessInfoRepositoryTests.swift */; };
 		205212FB1E01D3AD00F9A9E7 /* LatestRecordTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205212FA1E01D3AD00F9A9E7 /* LatestRecordTests.swift */; };
+		205E05001F361FBC00046CD0 /* RemoveReadingInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205E04FF1F361FBC00046CD0 /* RemoveReadingInteractor.swift */; };
 		207955031F03845600F592C6 /* ExperimentsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 207955021F03845600F592C6 /* ExperimentsTests.swift */; };
 		208A52E61F2CDC0600914B7E /* DummyHealthKitRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 208A52E51F2CDC0600914B7E /* DummyHealthKitRepository.swift */; };
 		208A52EB1F2CE1F600914B7E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 208A52ED1F2CE1F600914B7E /* InfoPlist.strings */; };
@@ -123,6 +124,7 @@
 		204C62131E0FFFC100B6CE47 /* NewRecordTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewRecordTests.swift; sourceTree = "<group>"; };
 		204C62151E1046C300B6CE47 /* CoreDataFitnessInfoRepositoryTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataFitnessInfoRepositoryTests.swift; sourceTree = "<group>"; };
 		205212FA1E01D3AD00F9A9E7 /* LatestRecordTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = LatestRecordTests.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		205E04FF1F361FBC00046CD0 /* RemoveReadingInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoveReadingInteractor.swift; sourceTree = "<group>"; };
 		207955021F03845600F592C6 /* ExperimentsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExperimentsTests.swift; sourceTree = "<group>"; };
 		208A52E51F2CDC0600914B7E /* DummyHealthKitRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DummyHealthKitRepository.swift; sourceTree = "<group>"; };
 		208A52E71F2CDFA500914B7E /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Main.strings; sourceTree = "<group>"; };
@@ -342,6 +344,7 @@
 				39F988AC1E4B41A0008A1DB6 /* FindInsights.swift */,
 				39F988C41E4B43EB008A1DB6 /* FindPreviousLatestResult.swift */,
 				39F988C61E4B4569008A1DB6 /* RecordsStoreUpdates.swift */,
+				205E04FF1F361FBC00046CD0 /* RemoveReadingInteractor.swift */,
 			);
 			path = Domain;
 			sourceTree = "<group>";
@@ -703,6 +706,7 @@
 				39F988BD1E4B4361008A1DB6 /* LatestRecordPresenter.swift in Sources */,
 				209175611F070CDD00607117 /* LocalizableStrings.swift in Sources */,
 				39F988BF1E4B4361008A1DB6 /* NewRecordPresenter.swift in Sources */,
+				205E05001F361FBC00046CD0 /* RemoveReadingInteractor.swift in Sources */,
 				20FA50FB1E095712002E536A /* FindLatestRecord.swift in Sources */,
 				200323D51E00166200B1C33A /* AppDelegate.swift in Sources */,
 				39F988C01E4B4361008A1DB6 /* NewRecordView.swift in Sources */,

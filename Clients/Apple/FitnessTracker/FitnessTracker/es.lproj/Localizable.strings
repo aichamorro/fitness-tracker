@@ -53,7 +53,7 @@
 "measures.body-metrics.bmi" = "IMC";
 
 /* No comment provided by engineer. */
-"measures.body-metrics.body-fat" = "Grasa coroporal";
+"measures.body-metrics.body-fat" = "Grasa corporal";
 
 /* No comment provided by engineer. */
 "measures.body-metrics.height" = "Altura";

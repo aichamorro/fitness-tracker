@@ -12,7 +12,7 @@ import Nimble
 import RxSwift
 @testable import FitnessTracker
 
-class RemoveReadingTests: QuickSpec {
+class RemoveReadingInteractorTests: QuickSpec {
     // swiftlint:disable function_body_length
     override func spec() {
         describe("As user I would like to be able to remove readings") {
@@ -25,23 +25,29 @@ class RemoveReadingTests: QuickSpec {
                 let managedObjectContext = SetUpInMemoryManagedObjectContext()
                 let coreDataEngine = CoreDataEngineImpl(managedObjectContext: managedObjectContext)
                 repository = CoreDataFitnessInfoRepository(coreDataEngine: coreDataEngine)
-                removeRecordInteractor = RemoveReadingInteractor(infoRepository: repository)
+                removeRecordInteractor = RemoveReadingInteractorImpl(infoRepository: repository)
                 disposeBag = DisposeBag()
             }
 
             context("When there is a record in the repository") {
                 var saved: IFitnessInfo!
-                var didRemove: Bool = false
+                var didRemove = false
+                var repositoryDidUpdate = false
 
                 beforeEach {
                     saved = try! repository.save(record)
                     expect(repository.findAll().count).to(equal(1))
 
+                    repository.rx_updated
+                        .subscribe(onNext: {
+                            repositoryDidUpdate = true
+                        }).addDisposableTo(disposeBag)
+
                     waitUntil { done in
                         removeRecordInteractor
                             .rx_output
                             .subscribe(onNext: {
-                                didRemove = $0
+                                didRemove = ($0 != nil)
                                 done()
                             }).addDisposableTo(disposeBag)
 
@@ -52,6 +58,10 @@ class RemoveReadingTests: QuickSpec {
                 it("Was removed") {
                     expect(didRemove).to(beTrue())
                     expect(repository.findAll()).to(beEmpty())
+                }
+
+                it("Notifies of changes in the repository") {
+                    expect(repositoryDidUpdate).toEventually(beTrue())
                 }
             }
 
@@ -68,7 +78,7 @@ class RemoveReadingTests: QuickSpec {
                             .rx_output
                             .subscribe(onNext: {
                                 didThrow = false
-                                didRemove = $0
+                                didRemove = ($0 != nil && $0! == saved)
                                 done()
                             }, onError: { _ in
                                 didThrow = true
@@ -89,11 +99,81 @@ class RemoveReadingTests: QuickSpec {
     }
 }
 
-class RemoveReadingInteractor: AnyInteractor<IFitnessInfo, Bool> {
-    init(infoRepository: IFitnessInfoRepository) {
-        super.init { record -> Observable<Bool> in
-            return infoRepository.rx_remove(record)
-        }
+protocol RemoveReadingView {
+    var rx_removeReading: Observable<IFitnessInfo> { get }
+}
 
+class DummyRemoveReadingView: RemoveReadingView {
+    let removeReadingSubject = PublishSubject<IFitnessInfo>()
+    var saved: [IFitnessInfo] = []
+
+    var rx_removeReading: Observable<IFitnessInfo> {
+        return removeReadingSubject.asObservable()
+    }
+}
+
+typealias RemoveReadingPresenter = (RemoveReadingInteractor, RemoveReadingView, DisposeBag) -> Void
+let RemoveReadingPresenterImpl: RemoveReadingPresenter = { removeReading, removeReadingView, disposeBag in
+    removeReadingView.rx_removeReading
+        .bindTo(removeReading.rx_input)
+        .addDisposableTo(disposeBag)
+}
+
+class RemoveReadingPresenterSpec: QuickSpec {
+    override func spec() {
+        describe("The Presenter works in conjunction with the interactor") {
+            var interactor: RemoveReadingInteractor!
+            var disposeBag: DisposeBag!
+            var view: RemoveReadingView!
+
+            beforeEach {
+                disposeBag = DisposeBag()
+
+                let coreDataEngine = CoreDataEngineImpl(managedObjectContext: SetUpInMemoryManagedObjectContext())
+                let repository = CoreDataFitnessInfoRepository(coreDataEngine: coreDataEngine)
+                try! repository.save(FitnessInfo(weight: 71.8, height: 171, bodyFatPercentage: 20.9, musclePercentage: 35.0, waterPercentage: 53.7))
+                try! repository.save(FitnessInfo(weight: 71.8, height: 171, bodyFatPercentage: 20.9, musclePercentage: 35.0, waterPercentage: 53.7))
+                try! repository.save(FitnessInfo(weight: 71.8, height: 171, bodyFatPercentage: 20.9, musclePercentage: 35.0, waterPercentage: 53.7))
+                try! repository.save(FitnessInfo(weight: 71.8, height: 171, bodyFatPercentage: 20.9, musclePercentage: 35.0, waterPercentage: 53.7))
+                try! repository.save(FitnessInfo(weight: 71.8, height: 171, bodyFatPercentage: 20.9, musclePercentage: 35.0, waterPercentage: 53.7))
+
+                let dummyView = DummyRemoveReadingView()
+                dummyView.saved = repository.findAll()
+
+                view = dummyView
+
+                interactor = RemoveReadingInteractorImpl(infoRepository: repository)
+                RemoveReadingPresenterImpl(interactor, view, disposeBag)
+            }
+
+            afterEach {
+                interactor = nil
+            }
+
+            context("Removing an item") {
+                var removed: IFitnessInfo?
+
+                beforeEach {
+                    let dummyView = view as! DummyRemoveReadingView
+
+                    waitUntil { done in
+                        interactor.rx_output.subscribe(onNext: {
+                            removed = $0
+                            done()
+                        }, onError: { _ in
+                            fail()
+                            done()
+                        }).addDisposableTo(disposeBag)
+
+                        dummyView.removeReadingSubject.asObserver().onNext(dummyView.saved[0])
+                    }
+
+                }
+                
+                it("Can remove an item") {
+                    expect(removed).toNot(beNil())
+                }
+            }
+        }
     }
 }
