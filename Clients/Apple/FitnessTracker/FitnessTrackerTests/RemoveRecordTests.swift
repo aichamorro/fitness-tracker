@@ -25,7 +25,7 @@ class RemoveReadingInteractorTests: QuickSpec {
                 let managedObjectContext = SetUpInMemoryManagedObjectContext()
                 let coreDataEngine = CoreDataEngineImpl(managedObjectContext: managedObjectContext)
                 repository = CoreDataFitnessInfoRepository(coreDataEngine: coreDataEngine)
-                removeRecordInteractor = RemoveReadingInteractorImpl(infoRepository: repository)
+                removeRecordInteractor = RemoveReadingInteractorImpl(repository: repository)
                 disposeBag = DisposeBag()
             }
 
@@ -99,10 +99,6 @@ class RemoveReadingInteractorTests: QuickSpec {
     }
 }
 
-protocol RemoveReadingView {
-    var rx_removeReading: Observable<IFitnessInfo> { get }
-}
-
 class DummyRemoveReadingView: RemoveReadingView {
     let removeReadingSubject = PublishSubject<IFitnessInfo>()
     var saved: [IFitnessInfo] = []
@@ -110,13 +106,6 @@ class DummyRemoveReadingView: RemoveReadingView {
     var rx_removeReading: Observable<IFitnessInfo> {
         return removeReadingSubject.asObservable()
     }
-}
-
-typealias RemoveReadingPresenter = (RemoveReadingInteractor, RemoveReadingView, DisposeBag) -> Void
-let RemoveReadingPresenterImpl: RemoveReadingPresenter = { removeReading, removeReadingView, disposeBag in
-    removeReadingView.rx_removeReading
-        .bindTo(removeReading.rx_input)
-        .addDisposableTo(disposeBag)
 }
 
 class RemoveReadingPresenterSpec: QuickSpec {
@@ -142,7 +131,7 @@ class RemoveReadingPresenterSpec: QuickSpec {
 
                 view = dummyView
 
-                interactor = RemoveReadingInteractorImpl(infoRepository: repository)
+                interactor = RemoveReadingInteractorImpl(repository: repository)
                 RemoveReadingPresenterImpl(interactor, view, disposeBag)
             }
 
@@ -169,7 +158,7 @@ class RemoveReadingPresenterSpec: QuickSpec {
                     }
 
                 }
-                
+
                 it("Can remove an item") {
                     expect(removed).toNot(beNil())
                 }

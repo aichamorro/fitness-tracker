@@ -71,11 +71,12 @@ extension DefaultAppRouter: AppRouter {
         viewController.selectedMetric = metric
         let historicDataInteractor = FindAllRecords(repository: ServiceLocator.inject())
         let recordsFinderInteractor = FindRecordsInInterval(repository: ServiceLocator.inject())
-
-        viewController.bag = [historicDataInteractor, recordsFinderInteractor, disposeBag]
+        let removeRecordInteractor = RemoveReadingInteractorImpl(repository: ServiceLocator.inject())
+        viewController.bag = [historicDataInteractor, recordsFinderInteractor, removeRecordInteractor, disposeBag]
 
         MetricHistoryPresenter(historicDataInteractor, viewController, disposeBag)
         MetricGraphPresenter(recordsFinderInteractor, viewController, disposeBag)
+        RemoveReadingPresenterImpl(removeRecordInteractor, viewController, disposeBag)
 
         return UIWireframe(viewController: viewController)
     }

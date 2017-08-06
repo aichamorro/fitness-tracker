@@ -13,13 +13,12 @@ import RxSwift
 protocol IMetricHistoryView: class {
     var rx_loadHistoricData: Observable<Void> { get }
     var selectedMetric: BodyMetric { get }
-    var rx_metricData: AnyObserver<[MetricDataReading]> { get }
+    var rx_metricData: AnyObserver<[IFitnessInfo]> { get }
 
     func showNoHistoricalDataWarning()
     func update()
 }
 
-typealias MetricDataReading = (date: NSDate?, reading: String)
 extension IFitnessInfo {
     func value(for metric: BodyMetric) -> NSNumber {
         switch metric {
@@ -49,26 +48,15 @@ extension IFitnessInfo {
 
 // MARK: Presenter
 
-func convert(fitnessRecords: [IFitnessInfo], toBodyMetricReading bodyMetric: BodyMetric) -> [MetricDataReading] {
-    let formatter = NumberFormatter()
-    formatter.numberStyle = .decimal
-    formatter.maximumFractionDigits = 2
-    formatter.minimumFractionDigits = 1
-
-    return fitnessRecords.map {
-        return ($0.date, formatter.string(from: $0.value(for: bodyMetric))!)
-    }
-}
-
 typealias IMetricHistoryPresenter = (IFindAllRecords, IMetricHistoryView, DisposeBag) -> Void
 let MetricHistoryPresenter: IMetricHistoryPresenter = { interactor, view, disposeBag in
     view.rx_loadHistoricData
         .bindTo(interactor.rx_input)
         .addDisposableTo(disposeBag)
 
-    interactor.rx_output.map {
-            return convert(fitnessRecords: $0, toBodyMetricReading: view.selectedMetric)
-        }.do(onNext: { records in
+    interactor
+        .rx_output
+        .do(onNext: { records in
             if records.isEmpty {
                 view.showNoHistoricalDataWarning()
             }

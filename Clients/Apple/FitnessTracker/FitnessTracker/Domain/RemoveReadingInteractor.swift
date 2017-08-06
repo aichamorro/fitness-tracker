@@ -12,9 +12,9 @@ import RxSwift
 typealias RemoveReadingInteractor = AnyInteractor<IFitnessInfo, IFitnessInfo?>
 
 class RemoveReadingInteractorImpl: RemoveReadingInteractor {
-    init(infoRepository: IFitnessInfoRepository) {
+    init(repository: IFitnessInfoRepository) {
         super.init { record -> Observable<IFitnessInfo?> in
-            return infoRepository.rx_remove(record)
+            return repository.rx_remove(record)
         }
 
     }

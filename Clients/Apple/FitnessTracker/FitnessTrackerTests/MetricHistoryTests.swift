@@ -14,10 +14,21 @@ import RxSwift
 @testable import FitnessTracker
 
 final class FakeMetricHistoryView: IMetricHistoryView {
-    var selectedMetric: BodyMetric = .weight
+    var selectedMetric: BodyMetric = .weight {
+        didSet {
+            self.fitnessInfoAdapter = FitnessInfoToMetricDataReading(bodyMetric: selectedMetric)
+        }
+    }
+
     fileprivate var metricDataVariable: Variable<[MetricDataReading]> = Variable([])
+    fileprivate var fitnessInfoAdapter: FitnessInfoAdatper<[MetricDataReading]>!
+
+    init() {
+        fitnessInfoAdapter = FitnessInfoToMetricDataReading(bodyMetric: selectedMetric)
+    }
 
     var hasUpdated = false
+
     func update() {
         hasUpdated = true
     }
@@ -27,11 +38,11 @@ final class FakeMetricHistoryView: IMetricHistoryView {
         return rx_loadHistoricDataSubject.asObservable()
     }
 
-    var rx_metricData: AnyObserver<[MetricDataReading]> {
+    var rx_metricData: AnyObserver<[IFitnessInfo]> {
         return AnyObserver { [unowned self] event in
             switch event {
             case .next(let element):
-                self.metricDataVariable.value = element
+                self.metricDataVariable.value = self.fitnessInfoAdapter(element)
             default:
                 break
             }

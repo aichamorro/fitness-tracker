@@ -13,21 +13,61 @@ import RxCocoa
 
 private let DefaultGraphViewOption = 0
 
+typealias Adapter<T, V> = (T) -> V
+typealias FitnessInfoAdatper<T> = Adapter<[IFitnessInfo], T>
+typealias MetricDataReading = (date: NSDate?, reading: String)
+
+internal func FitnessInfoToGraphDataAdapter(bodyMetric: BodyMetric) -> FitnessInfoAdatper<([Double], [Double])> {
+    let calendar = Calendar.current
+
+    return { data in
+        var dates: [Double] = []
+        var readings: [Double] = []
+
+        data.forEach { info in
+            let alignedDate = calendar.date(bySettingHour: 0, minute: 0, second: 0, of: info.date! as Date)!
+            dates.append(alignedDate.timeIntervalSinceReferenceDate)
+            readings.append(info.value(for: bodyMetric).doubleValue)
+        }
+
+        return (dates, readings)
+    }
+}
+
+internal func FitnessInfoToMetricDataReading(bodyMetric: BodyMetric) -> FitnessInfoAdatper<[MetricDataReading]> {
+    let formatter = NumberFormatter()
+    formatter.numberStyle = .decimal
+    formatter.maximumFractionDigits = 2
+    formatter.minimumFractionDigits = 1
+
+    return { fitnessInfoRecords in
+        return fitnessInfoRecords.map {
+            return ($0.date, formatter.string(from: $0.value(for: bodyMetric))!)
+        }
+    }
+}
+
 final class ShowMetricHistoricalDataViewController: UIViewController {
     @IBOutlet private var tableView: UITableView!
     @IBOutlet private var graphView: UIGraphView!
     @IBOutlet fileprivate var graphVisualizationSegmentControl: UISegmentedControl!
 
-    fileprivate let rx_didReceiveGraphData = PublishSubject<([Double], [Double])>()
+    fileprivate let rx_didReceiveGraphData = PublishSubject<[IFitnessInfo]>()
     fileprivate let rx_loadGraphData = PublishSubject<Date>()
+    fileprivate let rx_removeReadingSubject = PublishSubject<IFitnessInfo>()
     fileprivate let rx_loadHistoricDataSubject = PublishSubject<Void>()
-    fileprivate let rx_metricDataVariable = Variable<[MetricDataReading]>([])
     fileprivate var dateFormatter: DateFormatter!
 
     var bag: RetainerBag!
     let disposeBag = DisposeBag()
 
-    var graphData: ([Double], [Double]) = ([], [])
+    fileprivate var tableViewData: [MetricDataReading] = []
+    fileprivate var graphData: ([Double], [Double]) = ([], [])
+    fileprivate let rx_metricDataVariable = Variable<[IFitnessInfo]>([])
+
+    fileprivate var graphDataAdapter: FitnessInfoAdatper<([Double], [Double])>!
+    fileprivate var metricDataAdapter: FitnessInfoAdatper<[MetricDataReading]>!
+
     var selectedMetric: BodyMetric = .weight {
         didSet {
             self.title = selectedMetric.description
@@ -55,8 +95,11 @@ final class ShowMetricHistoricalDataViewController: UIViewController {
         dateFormatter.timeStyle = .none
         dateFormatter.dateFormat = "EEE, dd MMM yy, hh:mm"
 
+        graphDataAdapter = FitnessInfoToGraphDataAdapter(bodyMetric: self.selectedMetric)
         graphView.delegate = self
         graphView.datasource = self
+
+        metricDataAdapter = FitnessInfoToMetricDataReading(bodyMetric: self.selectedMetric)
 
         graphVisualizationSegmentControl.rx.value
             .asObservable()
@@ -76,7 +119,9 @@ final class ShowMetricHistoricalDataViewController: UIViewController {
         rx_didReceiveGraphData
             .asObservable()
             .do(onNext: { [weak self] data in
-                self?.graphData = data
+                guard let `self` = self else { return }
+
+                self.graphData = self.graphDataAdapter(data)
             }).subscribe (onNext: { [weak self] _ in
                 self?.graphView.reloadData()
             }).addDisposableTo(disposeBag)
@@ -113,7 +158,7 @@ extension ShowMetricHistoricalDataViewController: IMetricGraphView, IMetricHisto
         return rx_loadGraphData.asObservable()
     }
 
-    var rx_graphData: AnyObserver<([Double], [Double])> {
+    var rx_graphData: AnyObserver<[IFitnessInfo]> {
         return rx_didReceiveGraphData.asObserver()
     }
 
@@ -121,17 +166,24 @@ extension ShowMetricHistoricalDataViewController: IMetricGraphView, IMetricHisto
         return rx_loadHistoricDataSubject.asObservable()
     }
 
-    var rx_metricData: AnyObserver<[MetricDataReading]> {
+    var rx_metricData: AnyObserver<[IFitnessInfo]> {
         return AnyObserver { [unowned self] event in
             switch event {
 
             case .next(let element):
                 self.rx_metricDataVariable.value = element
+                self.tableViewData = self.metricDataAdapter(element)
 
             default:
                 break
             }
         }
+    }
+}
+
+extension ShowMetricHistoricalDataViewController: RemoveReadingView {
+    var rx_removeReading: Observable<IFitnessInfo> {
+        return rx_removeReadingSubject.asObservable()
     }
 }
 
@@ -169,8 +221,8 @@ extension ShowMetricHistoricalDataViewController: UITableViewDelegate, UITableVi
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.metricReadingCell, for: indexPath)!
 
-        cell.valueLabel.text = rx_metricDataVariable.value[indexPath.row].reading
-        if let date = rx_metricDataVariable.value[indexPath.row].date as Date? {
+        cell.valueLabel.text = tableViewData[indexPath.row].reading
+        if let date = tableViewData[indexPath.row].date as Date? {
             cell.dateLabel.text = dateFormatter.string(from: date)
         }
 
@@ -191,7 +243,9 @@ extension ShowMetricHistoricalDataViewController: UITableViewDelegate, UITableVi
             title: LocalizableStrings.HistoricalData.RemoveWarning.yes(),
             style: UIAlertActionStyle.default,
             handler: { _ in
-                NSLog("TODO: Notify the presenter")
+                let recordToRemove = self.rx_metricDataVariable.value[indexPath.row]
+
+                self.removeRecord(recordToRemove)
         }))
 
         alert.addAction(UIAlertAction(title: LocalizableStrings.HistoricalData.RemoveWarning.no(), style: .destructive, handler: { _ in
@@ -200,5 +254,9 @@ extension ShowMetricHistoricalDataViewController: UITableViewDelegate, UITableVi
         }))
 
         self.present(alert, animated: true, completion: nil)
+    }
+
+    func removeRecord(_ record: IFitnessInfo) {
+        rx_removeReadingSubject.onNext(record)
     }
 }

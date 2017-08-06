@@ -26,6 +26,7 @@
 		204C62161E1046C300B6CE47 /* CoreDataFitnessInfoRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204C62151E1046C300B6CE47 /* CoreDataFitnessInfoRepositoryTests.swift */; };
 		205212FB1E01D3AD00F9A9E7 /* LatestRecordTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205212FA1E01D3AD00F9A9E7 /* LatestRecordTests.swift */; };
 		205E05001F361FBC00046CD0 /* RemoveReadingInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205E04FF1F361FBC00046CD0 /* RemoveReadingInteractor.swift */; };
+		205E05021F36382B00046CD0 /* RemoveReadingPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205E05011F36382B00046CD0 /* RemoveReadingPresenter.swift */; };
 		207955031F03845600F592C6 /* ExperimentsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 207955021F03845600F592C6 /* ExperimentsTests.swift */; };
 		208A52E61F2CDC0600914B7E /* DummyHealthKitRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 208A52E51F2CDC0600914B7E /* DummyHealthKitRepository.swift */; };
 		208A52EB1F2CE1F600914B7E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 208A52ED1F2CE1F600914B7E /* InfoPlist.strings */; };
@@ -125,6 +126,8 @@
 		204C62151E1046C300B6CE47 /* CoreDataFitnessInfoRepositoryTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataFitnessInfoRepositoryTests.swift; sourceTree = "<group>"; };
 		205212FA1E01D3AD00F9A9E7 /* LatestRecordTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = LatestRecordTests.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		205E04FF1F361FBC00046CD0 /* RemoveReadingInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoveReadingInteractor.swift; sourceTree = "<group>"; };
+		205E05011F36382B00046CD0 /* RemoveReadingPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoveReadingPresenter.swift; sourceTree = "<group>"; };
+		205E05031F3640BD00046CD0 /* CoreDataModel_v3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreDataModel_v3.xcdatamodel; sourceTree = "<group>"; };
 		207955021F03845600F592C6 /* ExperimentsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExperimentsTests.swift; sourceTree = "<group>"; };
 		208A52E51F2CDC0600914B7E /* DummyHealthKitRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DummyHealthKitRepository.swift; sourceTree = "<group>"; };
 		208A52E71F2CDFA500914B7E /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Main.strings; sourceTree = "<group>"; };
@@ -329,6 +332,7 @@
 				39F988B01E4B42C6008A1DB6 /* InsightsVP.swift */,
 				20E89E671E130C5C00F03644 /* ShowMetricHistoricalDataVP.swift */,
 				39DE51B01E41798D00DD29CE /* GraphHistoryVP.swift */,
+				205E05011F36382B00046CD0 /* RemoveReadingPresenter.swift */,
 			);
 			name = Presentation;
 			path = Presenters;
@@ -724,6 +728,7 @@
 				39F988AF1E4B4218008A1DB6 /* BodyMetric.swift in Sources */,
 				39F988B11E4B42C6008A1DB6 /* InsightsVP.swift in Sources */,
 				39F988C71E4B4569008A1DB6 /* RecordsStoreUpdates.swift in Sources */,
+				205E05021F36382B00046CD0 /* RemoveReadingPresenter.swift in Sources */,
 				2021420B1E0D248900BAF444 /* CoreDataModel.xcdatamodeld in Sources */,
 				2021420F1E0D27FD00BAF444 /* CoreDataFitnessInfo.swift in Sources */,
 				20A54AF91F100D4400FE879D /* Interactor.swift in Sources */,
@@ -996,6 +1001,7 @@
 		202142091E0D248900BAF444 /* CoreDataModel.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				205E05031F3640BD00046CD0 /* CoreDataModel_v3.xcdatamodel */,
 				20F0BC171E16E86E00695F2A /* CoreDataModel_v2.xcdatamodel */,
 				2021420A1E0D248900BAF444 /* CoreDataModel.xcdatamodel */,
 			);
