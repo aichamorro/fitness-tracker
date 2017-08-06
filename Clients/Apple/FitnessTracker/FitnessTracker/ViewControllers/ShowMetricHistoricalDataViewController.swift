@@ -89,6 +89,20 @@ final class ShowMetricHistoricalDataViewController: UIViewController {
         self.graphView.reloadData()
     }
 
+    func reloadGraphData(value: Int? = nil) {
+        let selectedIndex: Int = value ?? graphVisualizationSegmentControl.selectedSegmentIndex
+
+        switch selectedIndex {
+        case 0: self.showCurrentWeekInGraph()
+        case 1: self.showLastSevenDaysInGraph()
+        case 2: self.showLastMontInGraph()
+        case 3: self.showLastThreeMonthsInGraph()
+        case 4: self.showLastYearInGraph()
+        default: fatalError()
+        }
+
+    }
+
     override func viewDidLoad() {
         dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .medium
@@ -106,14 +120,7 @@ final class ShowMetricHistoricalDataViewController: UIViewController {
             .bindNext { [weak self] value in
                 guard let `self` = self else { return }
 
-                switch value {
-                case 0: self.showCurrentWeekInGraph()
-                case 1: self.showLastSevenDaysInGraph()
-                case 2: self.showLastMontInGraph()
-                case 3: self.showLastThreeMonthsInGraph()
-                case 4: self.showLastYearInGraph()
-                    default: fatalError()
-                }
+                self.reloadGraphData(value: value)
             }.addDisposableTo(disposeBag)
 
         rx_didReceiveGraphData
@@ -178,6 +185,10 @@ extension ShowMetricHistoricalDataViewController: IMetricGraphView, IMetricHisto
                 break
             }
         }
+    }
+
+    func reload() {
+        reloadGraphData()
     }
 }
 

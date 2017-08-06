@@ -48,8 +48,8 @@ extension IFitnessInfo {
 
 // MARK: Presenter
 
-typealias IMetricHistoryPresenter = (IFindAllRecords, IMetricHistoryView, DisposeBag) -> Void
-let MetricHistoryPresenter: IMetricHistoryPresenter = { interactor, view, disposeBag in
+typealias IMetricHistoryPresenter = (IFindAllRecords, IRecordStoreUpdate, IMetricHistoryView, DisposeBag) -> Void
+let MetricHistoryPresenter: IMetricHistoryPresenter = { interactor, onStoreUpdated, view, disposeBag in
     view.rx_loadHistoricData
         .bindTo(interactor.rx_input)
         .addDisposableTo(disposeBag)
@@ -60,8 +60,14 @@ let MetricHistoryPresenter: IMetricHistoryPresenter = { interactor, view, dispos
             if records.isEmpty {
                 view.showNoHistoricalDataWarning()
             }
-
+        }).bindNext {
+            view.rx_metricData.onNext($0)
             view.update()
-        }).bindTo(view.rx_metricData)
+        }
+        .addDisposableTo(disposeBag)
+
+    onStoreUpdated
+        .rx_didUpdate
+        .bindTo(interactor.rx_input)
         .addDisposableTo(disposeBag)
 }

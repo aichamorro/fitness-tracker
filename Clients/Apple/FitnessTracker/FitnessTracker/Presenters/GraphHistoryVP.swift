@@ -13,6 +13,8 @@ protocol IMetricGraphView {
     var rx_loadLatestRecords: Observable<Date> { get }
     var rx_graphData: AnyObserver<[IFitnessInfo]> { get }
     var selectedMetric: BodyMetric { get }
+
+    func reload()
 }
 
 private extension Int {
@@ -21,8 +23,8 @@ private extension Int {
     }
 }
 
-typealias IMetricGraphPresenter = (IFindRecordsInInterval, IMetricGraphView, DisposeBag) -> Void
-let MetricGraphPresenter: IMetricGraphPresenter = { (interactor, view, disposeBag) in
+typealias IMetricGraphPresenter = (IFindRecordsInInterval, IRecordStoreUpdate, IMetricGraphView, DisposeBag) -> Void
+let MetricGraphPresenter: IMetricGraphPresenter = { (interactor, onRecordStoreUpdate, view, disposeBag) in
     interactor.rx_output
         .bindTo(view.rx_graphData)
         .addDisposableTo(disposeBag)
@@ -35,4 +37,10 @@ let MetricGraphPresenter: IMetricGraphPresenter = { (interactor, view, disposeBa
             return (from, to)
         }.bindTo(interactor.rx_input)
         .addDisposableTo(disposeBag)
+
+    onRecordStoreUpdate
+        .rx_didUpdate
+        .subscribe(onNext: {
+            view.reload()
+        }).addDisposableTo(disposeBag)
 }

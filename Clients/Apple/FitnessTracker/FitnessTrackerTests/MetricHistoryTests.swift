@@ -74,6 +74,7 @@ class MetricHistoryTests: QuickSpec {
                 var view: FakeMetricHistoryView!
                 var repository: IFitnessInfoRepository!
                 var interactor: IFindAllRecords!
+                var recordUpdates: IRecordStoreUpdate!
                 var disposeBag: DisposeBag!
 
                 beforeEach {
@@ -82,7 +83,8 @@ class MetricHistoryTests: QuickSpec {
                     let coreDataEngine = CoreDataEngineImpl(managedObjectContext: SetUpInMemoryManagedObjectContext())
                     repository = CoreDataFitnessInfoRepository(coreDataEngine: coreDataEngine)
                     interactor = FindAllRecords(repository: repository)
-                    MetricHistoryPresenter(interactor, view, disposeBag)
+                    recordUpdates = RecordStoreUpdate(repository: repository)
+                    MetricHistoryPresenter(interactor, recordUpdates, view, disposeBag)
                 }
 
                 afterEach {
