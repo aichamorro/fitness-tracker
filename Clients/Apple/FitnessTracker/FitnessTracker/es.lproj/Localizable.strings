@@ -14,6 +14,18 @@
 "historical-data.errors.no-data" = "No se encontraron datos para %@";
 
 /* No comment provided by engineer. */
+"historical-data.remove-warning.title" = "Atención";
+
+/* No comment provided by engineer. */
+"historical-data.remove-warning.message" = "Esta medición se eliminará también de las otras métricas. ¿Desea continuar?";
+
+/* No comment provided by engineer. */
+"historical-data.remove-warning.yes" = "Si";
+
+/* No comment provided by engineer. */
+"historical-data.remove-warning.no" = "No";
+
+/* No comment provided by engineer. */
 "insights.title" = "Tendencias";
 
 /* No comment provided by engineer. */
@@ -84,4 +96,3 @@
 
 /* No comment provided by engineer. */
 "records.latest.title" = "Última medición";
-
