@@ -26,8 +26,8 @@ private extension Int {
 typealias IMetricGraphPresenter = (IFindRecordsInInterval, IRecordStoreUpdate, IMetricGraphView, DisposeBag) -> Void
 let MetricGraphPresenter: IMetricGraphPresenter = { (interactor, onRecordStoreUpdate, view, disposeBag) in
     interactor.rx_output
-        .bindTo(view.rx_graphData)
-        .addDisposableTo(disposeBag)
+        .bind(to: view.rx_graphData)
+        .disposed(by: disposeBag)
 
     view.rx_loadLatestRecords
         .map {
@@ -35,12 +35,12 @@ let MetricGraphPresenter: IMetricGraphPresenter = { (interactor, onRecordStoreUp
             let to = Calendar.current.endOfToday
 
             return (from, to)
-        }.bindTo(interactor.rx_input)
-        .addDisposableTo(disposeBag)
+        }.bind(to: interactor.rx_input)
+        .disposed(by: disposeBag)
 
     onRecordStoreUpdate
         .rx_didUpdate
         .subscribe(onNext: {
             view.reload()
-        }).addDisposableTo(disposeBag)
+        }).disposed(by: disposeBag)
 }

@@ -16,6 +16,6 @@ protocol RemoveReadingView {
 typealias RemoveReadingPresenter = (RemoveReadingInteractor, RemoveReadingView, DisposeBag) -> Void
 let RemoveReadingPresenterImpl: RemoveReadingPresenter = { removeReading, removeReadingView, disposeBag in
     removeReadingView.rx_removeReading
-        .bindTo(removeReading.rx_input)
-        .addDisposableTo(disposeBag)
+        .bind(to: removeReading.rx_input)
+        .disposed(by: disposeBag)
 }

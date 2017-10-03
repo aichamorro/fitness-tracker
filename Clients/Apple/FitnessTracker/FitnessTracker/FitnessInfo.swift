@@ -132,7 +132,7 @@ extension BMIRating {
 }
 
 fileprivate typealias BMIClassification = (Double) -> BMIRating
-fileprivate let DefaultBMIClassification: BMIClassification = { bmi in
+private let DefaultBMIClassification: BMIClassification = { bmi in
     switch bmi {
     case 0..<18.5: return .underweight
     case 18.5..<25.0: return .healthyweight

@@ -126,7 +126,7 @@ extension IFitnessInfoRepository {
         for record in records {
             self.rx_save(record)
                 .subscribe(onNext: { result.append($0) }, onError: { error = $0 })
-                .addDisposableTo(disposeBag)
+                .disposed(by: disposeBag)
         }
 
         return error != nil ? Observable.error(error!) : Observable.just(result)
