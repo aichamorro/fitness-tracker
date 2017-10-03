@@ -10,7 +10,7 @@ PODS:
   - RxTest (4.0.0-beta.1):
     - RxSwift (~> 4.0.0-beta.1)
   - SwiftLint (0.22.0)
-  - UIGraphView (1.0.0)
+  - UIGraphView (1.1.0)
 
 DEPENDENCIES:
   - Nimble (~> 7.0.2)
@@ -35,7 +35,7 @@ SPEC CHECKSUMS:
   RxSwift: 29f07e0e72cc5b40f146c64cc520ea6a6a0c73e9
   RxTest: 56fcfdb52108edb20eea5ed662a3cdd6c6f55b3f
   SwiftLint: 1134786caedd2caab0560d2f36b76414a5a56808
-  UIGraphView: 5a9c1d595cbd2c5e5a2d5b1689058866dafa2e56
+  UIGraphView: f14eaa12c8382a537d98e4aabf82aff38e09b42b
 
 PODFILE CHECKSUM: f07a5843e9b873488a8498989df72001c43dc880
 

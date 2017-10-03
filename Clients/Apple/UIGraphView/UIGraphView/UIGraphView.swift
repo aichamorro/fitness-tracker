@@ -41,7 +41,7 @@ final public class UIGraphView: UIView {
     fileprivate var dataMapper: UIGraphViewValuesIterator?
     var verticalMinValue: NSString!
     var verticalMaxValue: NSString!
-    var textAttributes: [String:Any]!
+    var textAttributes: [NSAttributedStringKey:Any]!
     
     weak public var datasource: UIGraphViewDataSource? {
         didSet {
@@ -62,7 +62,7 @@ final public class UIGraphView: UIView {
             fatalError("The datasource provided, does not produce the expected data: number of horizontal and vertical items are different")
         }
         
-        guard let horizontalRange = data.horizontal.range, let verticalRange = data.vertical.range else {
+        guard let _ = data.horizontal.range, let verticalRange = data.vertical.range else {
             verticalMaxValue = ""
             verticalMinValue = ""
             
@@ -82,9 +82,9 @@ final public class UIGraphView: UIView {
         textStyle.alignment = .center
         
         textAttributes = [
-            NSFontAttributeName: font,
-            NSParagraphStyleAttributeName: textStyle,
-            NSForegroundColorAttributeName: UIColor.white.withAlphaComponent(0.8)]
+            NSAttributedStringKey.font: font,
+            NSAttributedStringKey.paragraphStyle: textStyle,
+            NSAttributedStringKey.foregroundColor: UIColor.white.withAlphaComponent(0.8)]
         
         setNeedsDisplay()
     }
