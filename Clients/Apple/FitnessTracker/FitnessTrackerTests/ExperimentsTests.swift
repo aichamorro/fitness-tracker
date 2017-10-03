@@ -10,9 +10,9 @@ import Nimble
 import Quick
 
 class ExperimentsTests: QuickSpec {
+    // swiftlint:disable function_body_length
     override func spec() {
         describe("As user, I would like to be able to create moments") {
-
         }
     }
 }

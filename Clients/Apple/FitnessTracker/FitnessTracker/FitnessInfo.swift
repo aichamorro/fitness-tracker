@@ -48,7 +48,11 @@ func ==<T: IFitnessInfo>(lhs: T, rhs: T) -> Bool {
     return true
 }
 
+typealias FitnessInfoIdGenerator = () -> Int
+let DefaultFitnessInfoIdGenerator = { return Int(Date().timeIntervalSince1970) }
+
 struct FitnessInfo: IFitnessInfo {
+    let id: Int
     let weight: Double
     let height: UInt
     let bodyFatPercentage: Double
@@ -56,7 +60,9 @@ struct FitnessInfo: IFitnessInfo {
     let waterPercentage: Double
     let date: NSDate?
 
-    init(weight: Double, height: UInt, bodyFatPercentage: Double, musclePercentage: Double, waterPercentage: Double, date: NSDate? = nil) {
+    init(weight: Double, height: UInt, bodyFatPercentage: Double, musclePercentage: Double, waterPercentage: Double,
+        date: NSDate? = nil, idGenerator: FitnessInfoIdGenerator = DefaultFitnessInfoIdGenerator) {
+        self.id = idGenerator()
         self.weight = weight
         self.height = height
         self.bodyFatPercentage = bodyFatPercentage

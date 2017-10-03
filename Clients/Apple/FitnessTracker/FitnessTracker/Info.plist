@@ -2,12 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSHealthUpdateUsageDescription</key>
-	<string>Writes your body measurments in HealthKit so the data can be used by other apps</string>
-	<key>NSHealthShareUsageDescription</key>
-	<string>Reads your body measurements in HealthKit so it can use data added from other apps</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
+	<key>CFBundleDisplayName</key>
+	<string>Honest Fit</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -21,9 +19,13 @@
 	<key>CFBundleShortVersionString</key>
 	<string>0.1</string>
 	<key>CFBundleVersion</key>
-	<string>2</string>
+	<string>3</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSHealthShareUsageDescription</key>
+	<string>Reads your body measurements in HealthKit so it can use data added from other apps</string>
+	<key>NSHealthUpdateUsageDescription</key>
+	<string>Writes your body measurments in HealthKit so the data can be used by other apps</string>
 	<key>UIApplicationShortcutItems</key>
 	<array>
 		<dict>
@@ -38,6 +40,7 @@
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>
+		<string>healthkit</string>
 	</array>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>

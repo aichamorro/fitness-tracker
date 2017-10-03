@@ -66,7 +66,7 @@ class NewRecordTests: QuickSpec {
 
                     let managedObjectContext = SetUpInMemoryManagedObjectContext()
                     let coreDataEngine = CoreDataEngineImpl(managedObjectContext: managedObjectContext)
-                    repository = CoreDataInfoRepository(coreDataEngine: coreDataEngine)
+                    repository = CoreDataFitnessInfoRepository(coreDataEngine: coreDataEngine)
                     newRecordInteractor = CreateNewRecord(repository: repository, healthKitRepository: DummyHealthKitRepository())
                     recordStoreUpdates = RecordStoreUpdate(repository: repository)
                     latestRecordInteractor = FindLatestRecord(repository: repository)
@@ -190,7 +190,7 @@ class NewRecordTests: QuickSpec {
 
                 beforeEach {
                     let coreDataEngine = CoreDataEngineImpl(managedObjectContext: SetUpInMemoryManagedObjectContext())
-                    repository = CoreDataInfoRepository(coreDataEngine: coreDataEngine)
+                    repository = CoreDataFitnessInfoRepository(coreDataEngine: coreDataEngine)
                     healthKitRepository = FakeHealthKitRepository()
                     interactor = CreateNewRecord(repository: repository, healthKitRepository: healthKitRepository)
                     disposeBag = DisposeBag()
