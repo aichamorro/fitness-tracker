@@ -1,24 +1,24 @@
 PODS:
-  - Nimble (5.1.1)
-  - Quick (1.0.0)
-  - R.swift (3.3.0):
-    - R.swift.Library (~> 3.0.2)
-  - R.swift.Library (3.0.2)
-  - RxCocoa (3.0.1):
-    - RxSwift (~> 3.0)
-  - RxSwift (3.0.1)
-  - RxTest (3.0.1):
-    - RxSwift (~> 3.0)
-  - SwiftLint (0.20.0)
+  - Nimble (7.0.2)
+  - Quick (1.2.0)
+  - R.swift (4.0.0):
+    - R.swift.Library (~> 4.0.0)
+  - R.swift.Library (4.0.0)
+  - RxCocoa (4.0.0-beta.1):
+    - RxSwift (~> 4.0.0-beta.1)
+  - RxSwift (4.0.0-beta.1)
+  - RxTest (4.0.0-beta.1):
+    - RxSwift (~> 4.0.0-beta.1)
+  - SwiftLint (0.22.0)
   - UIGraphView (1.0.0)
 
 DEPENDENCIES:
-  - Nimble
-  - Quick
+  - Nimble (~> 7.0.2)
+  - Quick (~> 1.2.0)
   - R.swift
-  - RxCocoa
-  - RxSwift
-  - RxTest
+  - RxCocoa (= 4.0.0-beta.1)
+  - RxSwift (= 4.0.0-beta.1)
+  - RxTest (= 4.0.0-beta.1)
   - SwiftLint
   - UIGraphView (from `../`)
 
@@ -27,16 +27,16 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  Nimble: 415e3aa3267e7bc2c96b05fa814ddea7bb686a29
-  Quick: 8024e4a47e6cc03a9d5245ef0948264fc6d27cff
-  R.swift: bde9704d50ff36820f49e266bc88ef545e1e9b36
-  R.swift.Library: fbdec16c9802ad104fc1ba53415dc190e6ec5c73
-  RxCocoa: 15a52fc590dcc700cb4a690a633b5c5184ce3a78
-  RxSwift: af5680055c4ad04480189c52d28385b1029493a6
-  RxTest: 9867e6f3c435af30fbdb44b6d8ec30b78c40b515
-  SwiftLint: 3f7543509c931d1291395335f34e245d3919b7f2
+  Nimble: bfe1f814edabba69ff145cb1283e04ed636a67f2
+  Quick: 58d203b1c5e27fff7229c4c1ae445ad7069a7a08
+  R.swift: d6a5ec2f55a8441dc0ed9f1f8b37d7d11ae85c66
+  R.swift.Library: c3af34921024333546e23b70e70d0b4e0cffca75
+  RxCocoa: ca6cc0f4453145d90002d80df8f9c83dd8fb7338
+  RxSwift: 29f07e0e72cc5b40f146c64cc520ea6a6a0c73e9
+  RxTest: 56fcfdb52108edb20eea5ed662a3cdd6c6f55b3f
+  SwiftLint: 1134786caedd2caab0560d2f36b76414a5a56808
   UIGraphView: 5a9c1d595cbd2c5e5a2d5b1689058866dafa2e56
 
-PODFILE CHECKSUM: 79cb7c441d7b2bf419bb04bd13b2deaf5ff1c5d6
+PODFILE CHECKSUM: f07a5843e9b873488a8498989df72001c43dc880
 
 COCOAPODS: 1.2.1

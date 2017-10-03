@@ -18,7 +18,7 @@ class LatestRecordViewController: UITableViewController {
     fileprivate let viewDidLoadSubject = PublishSubject<Void>()
     internal var viewModel = LatestRecordViewModel.empty {
         didSet {
-            self.needsRefreshSubject.onNext()
+            self.needsRefreshSubject.onNext(())
             self.tableView.reloadData()
         }
     }
@@ -35,10 +35,10 @@ class LatestRecordViewController: UITableViewController {
                                                                  target: self,
                                                                  action: #selector(createNewRecord(sender:)))
 
-        viewDidLoadSubject.onNext()
+        viewDidLoadSubject.onNext(())
     }
 
-    func createNewRecord(sender: Any?) {
+    @objc func createNewRecord(sender: Any?) {
         router.addRecordEntry().presentModally(in: self, animated: true)
     }
 }

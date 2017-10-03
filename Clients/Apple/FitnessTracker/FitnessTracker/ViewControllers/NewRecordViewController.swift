@@ -47,7 +47,7 @@ final class NewRecordViewController: UIViewController {
             guard let `self` = self else { return }
 
             self.saveSubject.asObserver().onNext(self.viewModel)
-        }).addDisposableTo(disposeBag)
+        }).disposed(by: disposeBag)
 
         let toggleCalibrationsFieldsVisibility: (Bool) -> Void = { [weak self] in
             guard let `self` = self else { return }
@@ -62,10 +62,10 @@ final class NewRecordViewController: UIViewController {
         calibrationInfoSwitch.rx.value.asObservable()
             .do(onNext: toggleCalibrationsFieldsVisibility)
             .flatMap { return Observable.just(!$0) }
-            .bindTo(calibrationFields.rx.isHidden)
-            .addDisposableTo(disposeBag)
+            .bind(to: calibrationFields.rx.isHidden)
+            .disposed(by: disposeBag)
 
-        viewDidLoadSubject.onNext()
+        viewDidLoadSubject.onNext(())
     }
 }
 

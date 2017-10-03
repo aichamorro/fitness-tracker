@@ -117,11 +117,11 @@ final class ShowMetricHistoricalDataViewController: UIViewController {
 
         graphVisualizationSegmentControl.rx.value
             .asObservable()
-            .bindNext { [weak self] value in
+            .bind { [weak self] value in
                 guard let `self` = self else { return }
 
                 self.reloadGraphData(value: value)
-            }.addDisposableTo(disposeBag)
+            }.disposed(by: disposeBag)
 
         rx_didReceiveGraphData
             .asObservable()
@@ -131,10 +131,10 @@ final class ShowMetricHistoricalDataViewController: UIViewController {
                 self.graphData = self.graphDataAdapter(data)
             }).subscribe (onNext: { [weak self] _ in
                 self?.graphView.reloadData()
-            }).addDisposableTo(disposeBag)
+            }).disposed(by: disposeBag)
 
         showCurrentWeekInGraph()
-        rx_loadHistoricDataSubject.onNext()
+        rx_loadHistoricDataSubject.onNext(())
     }
 
     private func showCurrentWeekInGraph() {

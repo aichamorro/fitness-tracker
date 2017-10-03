@@ -57,7 +57,7 @@ final class CoreDataFitnessInfoRepository: IFitnessInfoRepository {
     }
 
     private func didUpdate() {
-        rx_updatedSubject.onNext()
+        rx_updatedSubject.onNext(())
     }
 
     @discardableResult func save(_ record: IFitnessInfo) throws -> IFitnessInfo {

@@ -27,28 +27,28 @@ typealias INewRecordPresenter =
 let NewRecordPresenter: INewRecordPresenter = { latestRecordInteractor, insertNewRecordInteractor, view, disposeBag in
     let loadLatestResult: () -> Void = {
         latestRecordInteractor.rx_output
-            .bindNext(mapFitnessInfoToView(view: view))
-            .addDisposableTo(disposeBag)
+            .bind(onNext: mapFitnessInfoToView(view: view))
+            .disposed(by: disposeBag)
 
-        latestRecordInteractor.rx_input.onNext()
+        latestRecordInteractor.rx_input.onNext(())
     }
 
     view.rx_viewDidLoad
         .subscribe(onNext: { loadLatestResult() })
-        .addDisposableTo(disposeBag)
+        .disposed(by: disposeBag)
 
     insertNewRecordInteractor
         .rx_output
         .do(onNext: { _ in loadLatestResult() })
         .subscribe { _ in view.dismiss() }
-        .addDisposableTo(disposeBag)
+        .disposed(by: disposeBag)
 
     view.rx_actionSave
         .flatMap {
             Observable.just(record(applyingCalibration: view.calibrationFix, to: $0))
         }.flatMap(mapViewModelToFitnessInfo)
-        .bindTo(insertNewRecordInteractor.rx_input)
-        .addDisposableTo(disposeBag)
+        .bind(to: insertNewRecordInteractor.rx_input)
+        .disposed(by: disposeBag)
 }
 
 // MARK: Maps

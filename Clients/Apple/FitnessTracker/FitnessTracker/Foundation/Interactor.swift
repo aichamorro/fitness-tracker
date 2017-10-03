@@ -44,7 +44,7 @@ public class AnyInteractor<InElementType, OutElementType>: InteractorType {
                         self.rx_outputSubject.onNext(result)
                     }, onError: { error in
                         self.rx_outputSubject.onError(error)
-                    }).addDisposableTo(self.disposeBag)
+                    }).disposed(by: self.disposeBag)
             default:
                 // NOTE: Interactors shouldn't receive onCompleted or onError
                 break

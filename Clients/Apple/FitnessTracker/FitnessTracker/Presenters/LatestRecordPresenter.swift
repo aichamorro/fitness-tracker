@@ -14,12 +14,12 @@ let LatestRecordPresenter: ILatestRecordPresenter = { interactor, storeUpdates, 
 
     interactor.rx_output
         .map { LatestRecordViewModel.from(fitnessInfo: $0) }
-        .bindTo(view.rx_viewModel)
-        .addDisposableTo(disposeBag)
+        .bind(to: view.rx_viewModel)
+        .disposed(by: disposeBag)
 
     view.rx_viewDidLoad
-        .bindTo(interactor.rx_input)
-        .addDisposableTo(disposeBag)
+        .bind(to: interactor.rx_input)
+        .disposed(by: disposeBag)
 
     view.rx_didSelectMetric
         .subscribe(onNext: { metric in
@@ -27,14 +27,14 @@ let LatestRecordPresenter: ILatestRecordPresenter = { interactor, storeUpdates, 
             let rootViewController = tabController.viewControllers?.first as? UINavigationController else { fatalError() }
 
             router.showMetricHistoricData(metric: metric).push(in: rootViewController)
-        }).addDisposableTo(disposeBag)
+        }).disposed(by: disposeBag)
 
     interactor.rx_output
         .map { LatestRecordViewModel.from(fitnessInfo: $0) }
-        .bindTo(view.rx_viewModel)
-        .addDisposableTo(disposeBag)
+        .bind(to: view.rx_viewModel)
+        .disposed(by: disposeBag)
 
     storeUpdates.rx_didUpdate
-        .bindTo(interactor.rx_input)
-        .addDisposableTo(disposeBag)
+        .bind(to: interactor.rx_input)
+        .disposed(by: disposeBag)
 }

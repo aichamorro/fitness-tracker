@@ -52,10 +52,10 @@ let InsightsPresenter: IInsightsPresenter = { interactor, recordStoreUpdate, vie
 
     interactor.rx_output
         .flatMap(mapInsights)
-        .bindTo(view.rx_insights)
-        .addDisposableTo(disposeBag)
+        .bind(to: view.rx_insights)
+        .disposed(by: disposeBag)
 
     recordStoreUpdate.rx_didUpdate
-        .bindTo(interactor.rx_input)
-        .addDisposableTo(disposeBag)
+        .bind(to: interactor.rx_input)
+        .disposed(by: disposeBag)
 }

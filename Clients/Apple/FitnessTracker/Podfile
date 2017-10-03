@@ -6,16 +6,16 @@ target 'FitnessTracker' do
   use_frameworks!
 
   # Pods for FitnessTracker
-  pod 'RxSwift'
+  pod 'RxSwift', '4.0.0-beta.1'
+  pod 'RxCocoa', '4.0.0-beta.1'
   pod 'R.swift'
   pod 'SwiftLint'
-  pod 'RxCocoa'
   pod 'UIGraphView', :path => '../'
   
   target 'FitnessTrackerTests' do
-    pod 'Quick'
-    pod 'Nimble'
-    pod 'RxTest'
+    pod 'Quick', '~> 1.2.0'
+    pod 'Nimble', '~> 7.0.2'
+    pod 'RxTest', '4.0.0-beta.1'
   end
 end
 

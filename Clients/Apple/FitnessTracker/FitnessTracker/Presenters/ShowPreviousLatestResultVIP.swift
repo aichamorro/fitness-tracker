@@ -18,10 +18,10 @@ typealias IShowPreviousLatestResultPresenter = (IFindPreviousLatestRecord, IShow
 let LatestResultsComparisonPresenter: IShowPreviousLatestResultPresenter = { interactor, view, disposeBag in
     interactor.rx_output
         .map { info in LatestRecordViewModel.from(fitnessInfo: info) }
-        .bindTo(view.rx_comparisonViewModel)
-        .addDisposableTo(disposeBag)
+        .bind(to: view.rx_comparisonViewModel)
+        .disposed(by: disposeBag)
 
     view.rx_needsRefresh
-        .bindTo(interactor.rx_input)
-        .addDisposableTo(disposeBag)
+        .bind(to: interactor.rx_input)
+        .disposed(by: disposeBag)
 }
